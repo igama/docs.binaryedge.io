@@ -1,0 +1,39 @@
+# Docs information
+site_name: BinaryEdge API Documentation
+copyright: 'Copyright &copy; 2018 BinaryEdge'
+
+# Nav bar
+nav:
+    - Home: index.md
+    - API V1: api-v1.md
+    - API V2: api-v2.md
+    - Search Parameters:
+      - Host Search: search.md
+      - Image Search: image-search.md
+    - HTTP Status Messages: errors.md
+    - Event Details:
+      - Modules: modules.md
+      - Torrent Data: torrent.md
+      - Sinkhole Data: sinkhole.md
+
+
+# Google Analytics
+google_analytics:
+  - 'UA-58215930-10'
+  - 'auto'
+
+# Theme
+theme:
+  name: 'material'
+  palette:
+    primary: 'red'
+    accent: 'red'
+  logo: 'images/logo.png'
+  favicon: 'images/favicon.ico'
+
+# Extra
+extra_css:
+- 'stylesheets/extra.css'
+extra_javascript:
+- 'javascripts/extra.js'
+
