@@ -1,5 +1,9 @@
 # API V1 Documentation
 
+
+    If you are using app.binaryedge.io -> Use API-V2
+
+
 To get access, please get in touch with <info@binaryedge.io>.
 
 **Base URL** : https://api.binaryedge.io/v1/
@@ -73,6 +77,11 @@ Note: all requests are identified by Job ID and are shown in the stream window.
         * [GET /v1/query/image/<image_id>?(options)](#get-v1queryimageimage_idoptions)
         * [GET /v1/query/image/search?(options)](#get-v1queryimagesearchoptions)
         * [GET /v1/query/image/search?similar=<image_id>](#get-v1queryimagesearchsimilarimage_id)
+
+    * [Dataleaks](#dataleaks)
+        * [GET /v1/dataleaks/check](#get-v1dataleakscheck)
+        * [GET /v1/dataleaks/organization](#get-v1dataleaksorganization)
+        * [GET /v1/dataleaks/leaks](#get-v1dataleaksleaks)
 
 ## Data Stream
 
@@ -820,6 +829,10 @@ $ curl https://api.binaryedge.io/v1/query/image/search\?ip\=120.XXX.XXX.XXX  -H 
 Query for a list of remote desktops that are similar to another remote desktop.
 Note: This option cannot be used together with the previous ones.
 
+Available options:
+
+* similar: Image ID of the image you wish to compare
+
 ```
 $ curl https://api.binaryedge.io/v1/query/image/search\?similar\=f1b0a311af803ea73ac48adce2378f58adce2378f5  -H 'X-Token:InsertYourClientToken'
 ```
@@ -855,6 +868,108 @@ $ curl https://api.binaryedge.io/v1/query/image/search\?similar\=f1b0a311af803ea
   ]
 }
 ```
+
+### Dataleaks
+
+#### GET /v1/dataleaks/check
+
+Get all dataleaks for a given email.
+
+```
+$ curl https://api.binaryedge.io/v1/dataleaks/check/user@example.com -H 'X-Token:InsertYourClientToken'
+```
+
+##### Response
+
+```json
+{
+   "total_records":19,
+   "events":[
+      "antipublic",
+      "ashleymadison",
+      "breachcompilation",
+      "cannabis",
+      "customerslive",
+      "dropbox",
+      "exploitin",
+      "fling",
+      "imesh",
+      "lastfm",
+      "linkedin",
+      "mate1",
+      "neopets",
+      "pastebin",
+      "rsboards",
+      "tianya",
+      "torrentinvites",
+      "tumblr",
+      "vk"
+   ]
+}
+```
+
+#### GET /v1/dataleaks/organization
+
+Get all dataleaks for a given organization (domain).
+
+Available options:
+
+* pagesize: Maximum number of results to return per page
+    * pagesize=100
+* page: Page number of the results
+    * page=1
+* csv: Return results in CSV format
+    * csv=1
+* jsonl: Return results in JSON lines format
+    * jsonl=1
+
+```
+$ curl https://api.binaryedge.io/v1/dataleaks/organization/example.com -H 'X-Token:InsertYourClientToken'
+```
+
+##### Response
+
+```json
+{
+  "events": [
+    {
+      "user": "user",
+      "leak": "ashleymadison"
+    }
+  ],
+  "total_records": 1
+}
+```
+
+#### GET /v1/dataleaks/leaks
+
+Get all available information about the dataleaks
+
+Available options:
+
+* leak: Return information about a specific leak (all leaks if not specified)
+
+```
+$ curl https://api.binaryedge.io/v1/dataleaks/leaks?leak=ashleymadison -H 'X-Token:InsertYourClientToken'
+```
+
+##### Response
+
+```json
+{  
+   "ashleymadison":{  
+      "name":"ashleymadison",
+      "techname":"ashleymadison",
+      "year":"2015",
+      "description":"Ashley Madison is a canadian online dating service for married/ commited people.",
+      "label":"Adult",
+      "data":"email addresses, passwords, usernames, dates of birth, names, payment history, phone numbers, physical addresses, website activity",
+      "logo":"https://s3-eu-west-1.amazonaws.com/be-resources/dataleaks/ashleymadison.jpg",
+      "fullname":"Ashley Madison"
+   }
+}
+```
+
 
 ### FAQ
 

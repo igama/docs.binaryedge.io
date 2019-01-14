@@ -26,6 +26,11 @@ The API provides access to that scanning platform, for your own usage, along wit
 
 ## FAQ
 
+**Q: What can I get with 1 credit?**
+
+**A:** 1 credit corresponds to one unit of work, such as a single page of a query, a result for a single IP address, etc. In the case of an API endpoint that allows for CIDRs (paid subscriptions only), 1 credit corresponds to each target that was found, so if you request a /24 (256 targets) and only 200 have results, then 200 credits will be taken from your subscription.
+
+
 **Q: How to get support?**
 
 **A:** Send an email to support@binaryedge.io describing your issue/question.
@@ -58,3 +63,5 @@ You can sign up for our Slack Community where we are hoping to bring together th
 
 - [Security Rating](https://securityrating.io/ "Security Rating")
 - [Python Lib pybinaryedge](https://pypi.org/project/pybinaryedge/ "python pybinaryedge")
+- [R Lib BinaryEdge](https://github.com/balgan/rbinaryedge) "R Package Binaryedge"
+- [Maltego Local Transform](https://github.com/Te-k/binaryedge-maltego-local-transform) "Maltego Local Transform

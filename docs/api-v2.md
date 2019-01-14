@@ -6,8 +6,8 @@
 
 **Key Header** : X-Key
 
-```
-$ curl https://api.binaryedge.io/v2/<endpoint> -H 'X-Key:XXXXXXXX'
+```shell
+curl https://api.binaryedge.io/v2/<endpoint> -H "X-Key:API_KEY"
 ```
 
 ## Query
@@ -18,11 +18,17 @@ $ curl https://api.binaryedge.io/v2/<endpoint> -H 'X-Key:XXXXXXXX'
 
 Details about an Host. List of recent events for the specified host, including details of exposed ports and services.
 
+**Note**: Querying CIDRs is available for paid subscriptions only. When using CIDR, the number of credits that will be spent correspond to the number of targets that returned results. Example: a request for a /24 (256 targets) in which only 200 targets have results, will decrement 200 credits.
+
 *Parameters*
 
-* target: [String] target IP address 
+* target: [String] target IP address or CIDR up to /24
 
 *Output*
+
+```shell
+curl https://api.binaryedge.io/v2/query/ip/xxx.xxx.xxx.xxx -H "X-Key:API_KEY"
+```
 
 ```json
 {
@@ -120,6 +126,10 @@ List of events for the specified host, with events for each time that:
 
 *Output*
 
+```shell
+curl https://api.binaryedge.io/v2/query/ip/historical/xxx.xxx.xxx.xxx -H "X-Key:API_KEY"
+```
+
 ```json
 {
     "total": 4,
@@ -207,6 +217,10 @@ Events based on a Query. List of recent events for the given query, including de
 
 *Output*
 
+```shell
+curl https://api.binaryedge.io/v2/query/search?query="name:ldap%20AND%20ip:xxx.xxx.xxx.xxx" -H "X-Key:API_KEY"
+```
+
 ```json
 {
     "query":"name:ldap AND ip:xxx.xxx.xxx.xxx",
@@ -229,8 +243,13 @@ Details about Remote Desktops found on an Host. List of screenshots and details 
 *Parameters*
 
 * target: [String] target IP address 
+* page: [Int] Optional. Default 1
 
 *Output*
+
+```shell
+curl https://api.binaryedge.io/v2/query/image/ip/xxx.xxx.xxx.xxx -H "X-Key:API_KEY"
+```
 
 ```json
 {
@@ -282,6 +301,10 @@ Remote Desktops based on a Query. List of screenshots and details extracted from
 
 *Output*
 
+```shell
+curl https://api.binaryedge.io/v2/query/image/search?query="ip:xxx.xxx.xxx.xxx AND country:BE" -H "X-Key:API_KEY"
+```
+
 ```json
 {
    "pagesize":20,
@@ -327,6 +350,10 @@ Get the list of possible tags for the images.
 
 *Output*
 
+```shell
+curl https://api.binaryedge.io/v2/query/image/tags -H "X-Key:API_KEY"
+```
+
 ```json
 ["rdp", "vnc", "has_faces", "x11", "windows", "mobile"]
 ```
@@ -342,6 +369,10 @@ Details about torrents transferred by an Host. List of recent torrent events for
 * target: [String] target IP address 
 
 *Output*
+
+```shell
+curl https://api.binaryedge.io/v2/query/torrent/ip/xxx.xxx.xxx.xxx -H "X-Key:API_KEY"
+```
 
 ```json
 {
@@ -394,11 +425,17 @@ Details about torrents transferred by an Host, with data up to 6 months.
 
 List of torrent events for the specified host, with events for each time that a new transfer was detected on the DHT. See [Torrent Data](torrent.md) for more details.
 
+**Note**: Available for paid subscriptions only.
+
 *Parameters*
 
 * target: [String] target IP address 
 
 *Output*
+
+```shell
+curl https://api.binaryedge.io/v2/query/torrent/historical/xxx.xxx.xxx.xxx -H "X-Key:API_KEY"
+```
 
 ```json
 {
@@ -487,17 +524,25 @@ Allows you to search across multiple data breaches to see if any of your email a
 
 #### /v2/query/dataleaks/email/{email}
 
+Verify how many dataleaks affected an specific email address.
+
+**Note**: Available for paid subscriptions only.
+
 *Parameters*
 
 * email: [String] Verify which dataleaks affect the target email.
 
 *Output*
 
+```shell
+curl https://api.binaryedge.io/v2/query/dataleaks/email/user@example.com -H "X-Key:API_KEY"
+```
+
 ```json
 {
-	"total": 18,
-	"events": ["antipublic", "ashleymadison", "breachcompilation", "cannabis", "dropbox", "exploitin", "fling", "imesh", "lastfm", "linkedin", "mate1", "neopets", "pastebin", "rsboards", "tianya", "torrentinvites", "tumblr", "vk"],
-	"query": "user@example.com"
+  "total": 18,
+  "events": ["antipublic", "ashleymadison", "breachcompilation", "cannabis", "dropbox", "exploitin", "fling", "imesh", "lastfm", "linkedin", "mate1", "neopets", "pastebin", "rsboards", "tianya", "torrentinvites", "tumblr", "vk"],
+  "query": "user@example.com"
 }
 ```
 
@@ -507,11 +552,17 @@ Verify how may emails are affected by dataleaks for a specific domain. We don't 
 
 For example, searching for the domain 'example.com' returns {"leak":"linkedin", "count":805}, this means there are 805 accounts with an example.com email on the Linkedin dump.
 
+**Note**: Available for paid subscriptions only.
+
 *Parameters*
 
 * domain: [String] Verify which dataleaks affect the target domain.
 
 *Output*
+
+```shell
+curl https://api.binaryedge.io/v2/query/dataleaks/organization/example.com -H "X-Key:API_KEY"
+```
 
 ```json
 {
@@ -599,38 +650,42 @@ Get the list of dataleaks our platform keeps track.
 
 *Output*
 
+```shell
+curl https://api.binaryedge.io/v2/query/dataleaks/info -H "X-Key:API_KEY"
+```
+
 ```json
 {
-	"sktorrent": {
-		"label": "Downloads",
-		"description": "SKTorrent is a torrent tracking site.",
-		"techname": "sktorrent",
-		"logo": "https://s3-eu-west-1.amazonaws.com/be-resources/dataleaks/sktorrent.png",
-		"data": "usernames, email addresses, passwords",
-		"year": "2016",
-		"name": "sktorrent",
-		"fullname": "SKTorrent"
-	},
-	"samsclub": {
-		"label": "Unverified",
-		"description": "Sam's Club is an american chain of wholesale clubs owned by Walmart.",
-		"techname": "samsclub",
-		"logo": "https://s3-eu-west-1.amazonaws.com/be-resources/dataleaks/samsclub.jpg",
-		"data": "email addresses",
-		"year": "2016",
-		"name": "samsclub",
-		"fullname": "Sam's Club"
-	},
-	"yandex": {
-		"label": "Technology",
-		"description": "Yandex is a technology company that provides the largest search engine in Russia.",
-		"techname": "yandex",
-		"logo": "https://s3-eu-west-1.amazonaws.com/be-resources/dataleaks/yandex.png",
-		"data": "email addresses, passwords",
-		"year": "2014",
-		"name": "yandex",
-		"fullname": "Yandex"
-	},
+  "sktorrent": {
+    "label": "Downloads",
+    "description": "SKTorrent is a torrent tracking site.",
+    "techname": "sktorrent",
+    "logo": "https://s3-eu-west-1.amazonaws.com/be-resources/dataleaks/sktorrent.png",
+    "data": "usernames, email addresses, passwords",
+    "year": "2016",
+    "name": "sktorrent",
+    "fullname": "SKTorrent"
+  },
+  "samsclub": {
+    "label": "Unverified",
+    "description": "Sam's Club is an american chain of wholesale clubs owned by Walmart.",
+    "techname": "samsclub",
+    "logo": "https://s3-eu-west-1.amazonaws.com/be-resources/dataleaks/samsclub.jpg",
+    "data": "email addresses",
+    "year": "2016",
+    "name": "samsclub",
+    "fullname": "Sam's Club"
+  },
+  "yandex": {
+    "label": "Technology",
+    "description": "Yandex is a technology company that provides the largest search engine in Russia.",
+    "techname": "yandex",
+    "logo": "https://s3-eu-west-1.amazonaws.com/be-resources/dataleaks/yandex.png",
+    "data": "email addresses, passwords",
+    "year": "2014",
+    "name": "yandex",
+    "fullname": "Yandex"
+  },
     ...
 }
 ```
@@ -639,15 +694,21 @@ Get the list of dataleaks our platform keeps track.
 
 #### /v2/query/score/ip/{target}
 
-IP Risk Score. Scoring is based on all information found on our databases regarding an IP and refers to the level of exposure of a target, i.e, the higher the score, the greater the risk exposure. 
+IP Risk Score. Scoring is based on all information found on our databases regarding an IP and refers to the level of exposure of a target, i.e, the higher the score, the greater the risk of exposure. 
 
 More details about scoring can be found on [https://github.com/binaryedge/ratemyip-openframework/blob/master/ip-score.md](https://github.com/binaryedge/ratemyip-openframework/blob/master/ip-score.md).
+
+**Note**: Available for paid subscriptions only.
 
 *Parameters*
 
 * target: [String] target IP address 
 
 *Output*
+
+```shell
+curl https://api.binaryedge.io/v2/query/score/ip/xxx.xxx.xxx.xxx -H "X-Key:API_KEY"
+```
 
 ```json
 {
@@ -1372,5 +1433,148 @@ More details about scoring can be found on [https://github.com/binaryedge/ratemy
     }
   },
   "ip_address": "xxx.xxx.xxx.xxx"
+}
+```
+
+
+### Domains (Beta)
+
+What is exposed via DNS? What subdomains belong to a Domain? What domains are served by IP X?
+
+#### /v2/query/domains/subdomain/{target}
+
+Return list of subdomains known from the target domains
+
+*Parameters*
+
+* target: [String] Domain you want to get list of known subdomains.
+* page: [Int] Optional. Default 1
+
+*Output*
+
+```shell
+curl https://api.binaryedge.io/v2/query/domains/subdomain/example.com -H "X-Key:API_KEY"
+```
+
+```json
+{
+  "query": "root:example.com",
+  "page": 1,
+  "pagesize": 100,
+  "total": 6308,
+  "events": ["m.example.com", "startup.antichat.example.com", "anandop1.example.com", "vladimirbezz3.example.com"]
+}
+```
+
+#### /v2/query/domains/dns/{target}
+
+Return list of known DNS results for the target domain.
+
+Possible types of records currently available:
+* A
+* AAAA
+* NS
+* MX
+
+**Note**: Available for paid subscriptions only.
+
+*Parameters*
+
+* target: [String] Domain you want to get DNS related data.
+* page: [Int] Optional. Default 1
+
+*Output*
+
+```shell
+curl https://api.binaryedge.io/v2/query/domains/dns/example.com -H "X-Key:API_KEY"
+```
+
+```json
+{
+  "query": "root:example.com",
+  "page": 1,
+  "pagesize": 100,
+  "total": 6308,
+  "events": [{
+    "A": ["92.63.97.42"],
+    "updated_at": "2018-09-22T04:53:21.082802",
+    "domain": "startup.antichat.example.com",
+    "root": "example.com"
+  }, {
+    "A": ["93.184.216.34"],
+    "MX": ["example.com"],
+    "NS": ["ns1.example.com", "ns2.example.com"],
+    "updated_at": "2018-12-10T13:20:16.854174",
+    "domain": "example.com",
+    "root": "example.com",
+  }, {
+    "A": ["91.235.136.112"],
+    "updated_at": "2018-09-22T04:14:29.031596",
+    "domain": "vladimirbezz3.example.com",
+    "root": "example.com"
+  }, {
+    "A": ["93.179.68.6"],
+    "updated_at": "2018-09-22T03:51:36.852124",
+    "domain": "i.seeva.example.com",
+    "root": "example.com"
+  }]
+}
+```
+
+#### /v2/query/domains/ip/{target}
+
+Return records that have the specified IP address in their A or AAAA records.
+
+**Note**: Available for paid subscriptions only.
+
+*Parameters*
+
+* target: [IP] IP you want to verify, can be IPV4 or IPV6
+* page: [Int] Optional. Default 1
+
+*Output*
+
+```shell
+curl https://api.binaryedge.io/v2/query/domains/ip/8.8.8.8 -H "X-Key:API_KEY"
+```
+
+```json
+{
+  "query": "A:\"8.8.8.8\"",
+  "page": 1,
+  "pagesize": 100,
+  "total": 726,
+  "events": [{
+    "A": ["8.8.8.8"],
+    "updated_at": "2018-06-08T20:51:30.676063",
+    "NS": ["ns1058.ui-dns.org", "ns1062.ui-dns.com", "ns1068.ui-dns.biz", "ns1096.ui-dns.de"],
+    "domain": "aeroway.co.uk",
+    "root": "aeroway.co.uk",
+    "MX": ["mx00.1and1.co.uk", "mx01.1and1.co.uk"]
+  }, {
+    "A": ["8.8.8.8"],
+    "updated_at": "2018-06-08T20:53:30.348620",
+    "NS": ["f1g1ns1.dnspod.net", "f1g1ns2.dnspod.net"],
+    "domain": "84168800.com",
+    "root": "84168800.com"
+  }, {
+    "A": ["8.8.8.8"],
+    "updated_at": "2018-06-08T20:53:32.450310",
+    "NS": ["f1g1ns1.dnspod.net", "f1g1ns2.dnspod.net"],
+    "domain": "84169911.com",
+    "root": "84169911.com"
+  }, {
+    "A": ["8.8.8.8"],
+    "updated_at": "2018-06-08T20:53:32.508761",
+    "NS": ["f1g1ns1.dnspod.net", "f1g1ns2.dnspod.net"],
+    "domain": "84163311.com",
+    "root": "84163311.com"
+  }, {
+    "A": ["8.8.8.8"],
+    "updated_at": "2018-06-08T20:53:32.540496",
+    "NS": ["f1g1ns1.dnspod.net", "f1g1ns2.dnspod.net"],
+    "domain": "00888416.com",
+    "root": "00888416.com"
+  }]
 }
 ```
