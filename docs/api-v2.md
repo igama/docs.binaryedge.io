@@ -236,7 +236,7 @@ curl https://api.binaryedge.io/v2/query/search?query="name:ldap%20AND%20ip:xxx.x
 
 #### /v2/query/search/stats 
 
-Statistics of the events based on a Query. Statistics of recent events for the given query. Can be used with specific parameters and/or full-text search.
+Statistics of recent events for the given query. Can be used with specific parameters and/or full-text search.
 
 *Parameters*
 
