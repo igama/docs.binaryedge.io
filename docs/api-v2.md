@@ -234,6 +234,67 @@ curl https://api.binaryedge.io/v2/query/search?query="name:ldap%20AND%20ip:xxx.x
 }
 ```
 
+#### /v2/query/search/stats 
+
+Statistics of the events based on a Query. Statistics of recent events for the given query. Can be used with specific parameters and/or full-text search.
+
+*Parameters*
+
+* query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](search.md) for details on what parameters can be used.
+* type: [String] Type of statistic we want to obtain. Possible types include: _ports_, _products_, _versions_, _tags_, _services_, _countries_, _asn_.
+* page: [Int] Optional. Default 1
+
+*Output*
+
+```shell
+curl https://api.binaryedge.io/v2/query/search/stats?query="name:ldap%20AND%20ip:xxx.xxx.xxx.xxx"&type:ports -H "X-Key:API_KEY"
+```
+
+```json
+[
+    {
+        "key": "80/tcp",
+        "doc_count": 4467584
+    },
+    {
+        "key": "22/tcp",
+        "doc_count": 4244020
+    },
+    {
+        "key": "53/tcp",
+        "doc_count": 3566098
+    },
+    {
+        "key": "443/tcp",
+        "doc_count": 3478298
+    },
+    {
+        "key": "21/tcp",
+        "doc_count": 2726635
+    },
+    {
+        "key": "3389/tcp",
+        "doc_count": 2303493
+    },
+    {
+        "key": "1900/tcp",
+        "doc_count": 2172479
+    },
+    {
+        "key": "123/tcp",
+        "doc_count": 2111621
+    },
+    {
+        "key": "23/tcp",
+        "doc_count": 1988782
+    },
+    {
+        "key": "8000",
+        "doc_count": 1931731
+    }
+]
+```
+
 ### Image
 
 #### /v2/query/image/ip/{ip}
