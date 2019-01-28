@@ -1,6 +1,12 @@
 # API V2 Documentation
 
-**For use with [https://app.binaryedge.io](https://app.binaryedge.io)**
+- - -
+
+    API V2 - For Free, Starter and Business accounts. 
+
+**Get Access via [https://app.binaryedge.io](https://app.binaryedge.io)**
+
+- - -
 
 **Base URL** : https://api.binaryedge.io/v2/
 
