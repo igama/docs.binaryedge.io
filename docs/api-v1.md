@@ -1,10 +1,13 @@
-# API V1 Documentation
+# API V1 - Enterprise - Documentation
 
+- - -
 
+    This API is for Enterprise Accounts only.
+    To get access, please get in touch with <info@binaryedge.io>.
+    
     If you are using app.binaryedge.io -> Use API-V2
 
-
-To get access, please get in touch with <info@binaryedge.io>.
+- - -
 
 **Base URL** : https://api.binaryedge.io/v1/
 

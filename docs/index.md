@@ -11,7 +11,7 @@ The API provides access to that scanning platform, for your own usage, along wit
 ## Sections
 
 - API Documentation
-    - [API V1](api-v1.md "api-v1")
+    - [API V1 - Enterprise Only](api-v1.md "api-v1")
     - [API V2](api-v2.md "api-v2")
     - [Search Parameters](search.md "search")
         - [Host Search](search.md "search")
