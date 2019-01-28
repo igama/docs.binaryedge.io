@@ -219,7 +219,7 @@ Events based on a Query. List of recent events for the given query, including de
 *Parameters*
 
 * query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](search.md) for details on what parameters can be used.
-* page: [Int] Optional. Default 1
+* page: [Int] Optional. Default 1, Maximum: 500 (10,000 results)
 
 *Output*
 
@@ -247,8 +247,8 @@ Statistics of recent events for the given query. Can be used with specific param
 *Parameters*
 
 * query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](search.md) for details on what parameters can be used.
-* type: [String] Type of statistic we want to obtain. Possible types include: _ports_, _products_, _versions_, _tags_, _services_, _countries_, _asn_.
-* page: [Int] Optional. Default 1
+* type: [String] Type of statistic we want to obtain. Possible types include:
+    * _ports_, _products_, _versions_, _tags_, _services_, _countries_, _asn_.
 
 *Output*
 
@@ -364,7 +364,7 @@ Remote Desktops based on a Query. List of screenshots and details extracted from
 *Parameters*
 
 * query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](image-search.md) for details on what parameters can be used.
-* page: [Int] Optional. Default 1
+* page: [Int] Optional. Default 1, Maximum: 500 (10,000 results)
 
 *Output*
 
@@ -1515,7 +1515,7 @@ Return list of subdomains known from the target domains
 *Parameters*
 
 * target: [String] Domain you want to get list of known subdomains.
-* page: [Int] Optional. Default 1
+* page: [Int] Optional. Default 1, Maximum: 500 (10,000 results)
 
 *Output*
 
@@ -1597,7 +1597,7 @@ Return records that have the specified IP address in their A or AAAA records.
 *Parameters*
 
 * target: [IP] IP you want to verify, can be IPV4 or IPV6
-* page: [Int] Optional. Default 1
+* page: [Int] Optional. Default 1, Maximum: 500 (10,000 results)
 
 *Output*
 
