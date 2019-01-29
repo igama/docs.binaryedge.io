@@ -186,6 +186,8 @@ Search for Heartbleed.
 
 **Free Text**: not specifying a field will search on the full records, which can include other information not stated above.
 
-**Conditionals**: the following conditionals are available: NOT, AND, OR. Must be UPPERCASE.
+**Conditionals**: the following conditionals are available: NOT, AND, OR. Must be UPPERCASE. You can also use the minus sign (-) as a replacement for the NOT conditional.
 
 **String fields caveat**: if the string is expected to have spaces or some kind of punctuation in the middle, instead of querying _field:value_ try instead _field.keyword:"value"_. The first one will search for any occurrence of any of the words in _value_, while the second one will search for an exact match of the string.
+
+**Field existence or omission**: you can search for records that have a specific field by using _\_exists\_:field_. Conversely, for records missing a field it would be _NOT \_exists\_:field_.

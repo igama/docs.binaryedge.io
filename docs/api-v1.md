@@ -13,8 +13,8 @@
 
 **Key Header** : X-Token
 
-```
-$ curl https://api.binaryedge.io/v1/<endpoint> -H 'X-Token:XXXXXXXX'
+```shell
+curl 'https://api.binaryedge.io/v1/<endpoint>' -H 'X-Token:XXXXXXXX'
 ```
 
 ## How to use BinaryEdge’s API
@@ -26,8 +26,8 @@ Note: all requests are identified by Job ID and are shown in the stream window.
 
 |   | Input                                                                                                                                                                                                                                                                                                   | Output                                                    |
 |---|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
-| 1 | Connect to Data Stream <br> `$ curl https://stream.api.binaryedge.io/v1/stream -H "X-Token:InsertYourClientToken" `                                                                                                                                                                                                                                     | (data stream)                                             |
-| 2 | Request a Scan Task <br> `$ curl https://api.binaryedge.io/v1/tasks -d '{"type":"scan", "description": "InsertYourDescriptionHere", "options":[{"targets":["InsertAnIPAddress/IPNetwork"], "ports":[{"port":InsertPort, "protocol": "tcp or udp", "modules": ["InsertModule"]}]}]}' -v -H "X-Token:InsertYourClientToken"` | {"stream_url":"stream URL", "job_id":"Job ID"}             |
+| 1 | Connect to Data Stream <br> `curl 'https://stream.api.binaryedge.io/v1/stream' -H 'X-Token:InsertYourClientToken' `                                                                                                                                                                                                                                     | (data stream)                                             |
+| 2 | Request a Scan Task <br> `curl 'https://api.binaryedge.io/v1/tasks' -d '{"type":"scan", "description": "InsertYourDescriptionHere", "options":[{"targets":["InsertAnIPAddress/IPNetwork"], "ports":[{"port":InsertPort, "protocol": "tcp or udp", "modules": ["InsertModule"]}]}]}' -v -H 'X-Token:InsertYourClientToken'` | {"stream_url":"stream URL", "job_id":"Job ID"}             |
 
 
 ## Index
@@ -140,8 +140,8 @@ Retrieve a list of the latest requested jobs. This includes:
 * "job_id": ID of the requested job;
 * "options": Job configuration options.
 
-```
-$ curl https://api.binaryedge.io/v1/tasks -H "X-Token:InsertYourClientToken"
+```shell
+curl 'https://api.binaryedge.io/v1/tasks' -H 'X-Token:InsertYourClientToken'
 
 HTTP/1.1 200 OK
 
@@ -158,16 +158,16 @@ Parameters:
 * "description": Add your own description of the job. Can be a empty string, i.e. "";
 * "options": Configuration Options for the job, array of JSON objects. One Job can have multiple options.
 
-```
-$ curl https://api.binaryedge.io/v1/tasks -d '{"type":"scan", "description": "InsertYourDescriptionHere", "options":[{"targets":["InsertAnIPAddress/IPNetwork"], "ports":[{"port":InsertPort, "protocol": "tcp or udp", "modules": ["InsertModule"]}]}]}' -v -H "X-Token:InsertYourClientToken"
+```shell
+curl 'https://api.binaryedge.io/v1/tasks' -d '{"type":"scan", "description": "InsertYourDescriptionHere", "options":[{"targets":["InsertAnIPAddress/IPNetwork"], "ports":[{"port":InsertPort, "protocol": "tcp or udp", "modules": ["InsertModule"]}]}]}' -H 'X-Token:InsertYourClientToken'
 ```
 
 ### POST /v1/tasks/job_id/revoke - Revoke Job
 
 To cancel a requested job:
 
-```
-$ curl -XPOST https://api.binaryedge.io/v1/tasks/<JOB_ID>/revoke -H  "X-Token:InsertYourClientToken"
+```shell
+curl -XPOST 'https://api.binaryedge.io/v1/tasks/<JOB_ID>/revoke' -H  'X-Token:InsertYourClientToken'
 
 HTTP/1.1 200 OK
 {"message": "Job revoked"}
@@ -177,8 +177,8 @@ HTTP/1.1 200 OK
 
 To retrieve the results from a previously requested scan job, you can replay the stream with this endpoint.
 
-```
-$ curl https://stream.api.binaryedge.io/v1/replay/<JOB_ID> -H "X-Token:InsertYourClientToken"
+```shell
+curl 'https://stream.api.binaryedge.io/v1/replay/<JOB_ID>' -H 'X-Token:InsertYourClientToken'
 
 HTTP/1.1 200 OK
 <Stream results from request job>
@@ -192,8 +192,8 @@ In order for you to know the status of your jobs we provide information in 2 dis
 
 To check the current status of a Requested job:
 
-```
-$ curl https://api.binaryedge.io/v1/tasks/<job_id>/status -H "X-Token:InsertYourClientToken"
+```shell
+curl 'https://api.binaryedge.io/v1/tasks/<JOB_ID>/status' -H 'X-Token:InsertYourClientToken'
 
 HTTP/1.1 200 OK
 {"status":"<STATUS>"}
@@ -397,8 +397,8 @@ Available options:
 * Target Range, e.g.:
     * /v1/query/historical/210.1.1.X-210.1.1.Y
 
-```
-$ curl -v https://api.binaryedge.io/v1/query/historical/222.208.xxx.xxx -H 'X-Token:InsertYourClientToken'
+```shell
+curl 'https://api.binaryedge.io/v1/query/historical/222.208.xxx.xxx' -H 'X-Token:InsertYourClientToken'
 ```
 
 ##### Response
@@ -443,8 +443,8 @@ Available options:
 * Target Range, e.g.:
     * /v1/query/latest/210.1.1.X-210.1.1.Y
 
-```
-$ curl -v https://api.binaryedge.io/v1/query/latest/222.208.xxx.xxx -H 'X-Token:InsertYourClientToken'
+```shell
+curl 'https://api.binaryedge.io/v1/query/latest/222.208.xxx.xxx' -H 'X-Token:InsertYourClientToken'
 ```
 
 ##### Response
@@ -489,8 +489,8 @@ Available options:
 * Target Range, e.g.:
     * /v1/query/torrent/210.1.1.X-210.1.1.Y
 
-```
-$ curl -v https://api.binaryedge.io/v1/query/torrent/222.208.xxx.xxx -H 'X-Token:InsertYourClientToken'
+```shell
+curl 'https://api.binaryedge.io/v1/query/torrent/222.208.xxx.xxx' -H 'X-Token:InsertYourClientToken'
 ```
 
 ##### Response
@@ -532,8 +532,8 @@ Available options:
 * Target Range, e.g.:
     * /v1/query/torrent/latest/210.1.1.X-210.1.1.Y
 
-```
-$ curl -v https://api.binaryedge.io/v1/query/torrent/latest/222.208.xxx.xxx -H 'X-Token:InsertYourClientToken'
+```shell
+curl 'https://api.binaryedge.io/v1/query/torrent/latest/222.208.xxx.xxx' -H 'X-Token:InsertYourClientToken'
 ```
 
 ##### Response
@@ -566,16 +566,16 @@ $ curl -v https://api.binaryedge.io/v1/query/torrent/latest/222.208.xxx.xxx -H '
 
 Query our data, using our Text Search Engine.
 
-```
-$ curl -v https://api.binaryedge.io/v1/query/search\?query\="mysql" -H 'X-Token:InsertYourClientToken'
+```shell
+curl 'https://api.binaryedge.io/v1/query/search?query=mysql' -H 'X-Token:InsertYourClientToken'
 ```
 
 Or, you can use some filters:
 
 For all available options go to [Search Parameters](search.md):
 
-```
-$ curl -v https://api.binaryedge.io/v1/query/search\?query\="product:mysql%20AND%20country:ES" -H 'X-Token:InsertYourClientToken'
+```shell
+curl 'https://api.binaryedge.io/v1/query/search?query=product:mysql%20AND%20country:ES' -H 'X-Token:InsertYourClientToken'
 ```
 
 ### Remote Desktop Query
@@ -601,8 +601,8 @@ Available options:
 * ocr: if present, shows an additional "words" field, which is a list of words obtains via our OCR process, e.g.:
     * ocr=1
 
-```
-$ curl -v https://api.binaryedge.io/v1/query/image/ip/XXX.XXX.XXX.XXX?ocr=1 -H 'X-Token:InsertYourClientToken'
+```shell
+curl 'https://api.binaryedge.io/v1/query/image/ip/XXX.XXX.XXX.XXX?ocr=1' -H 'X-Token:InsertYourClientToken'
 ```
 
 ##### Response
@@ -664,8 +664,8 @@ Available options:
 * page: Page number of the results
     * page=1
 
-```
-$ curl -v https://api.binaryedge.io/v1/query/image -H 'X-Token:InsertYourClientToken'
+```shell
+curl 'https://api.binaryedge.io/v1/query/image' -H 'X-Token:InsertYourClientToken'
 ```
 
 ##### Response
@@ -715,8 +715,8 @@ Available options:
 * ocr: if present, shows an additional "words" field, which is a list of words obtains via our OCR process, e.g.:
     * ocr=1
 
-```
-$ curl -v https://api.binaryedge.io/v1/query/image/f1b0a311af803ea73ac48adce2378f58adce2378f5?ocr=1 -H 'X-Token:InsertYourClientToken'
+```shell
+curl 'https://api.binaryedge.io/v1/query/image/f1b0a311af803ea73ac48adce2378f58adce2378f5?ocr=1' -H 'X-Token:InsertYourClientToken'
 ```
 
 ##### Response
@@ -788,8 +788,8 @@ Available options:
 * page: Page number of the results
     * page=1
 
-```
-$ curl https://api.binaryedge.io/v1/query/image/search\?ip\=120.XXX.XXX.XXX  -H 'X-Token:InsertYourClientToken'
+```shell
+curl 'https://api.binaryedge.io/v1/query/image/search?ip=120.XXX.XXX.XXX'  -H 'X-Token:InsertYourClientToken'
 ```
 
 ##### Response
@@ -836,8 +836,8 @@ Available options:
 
 * similar: Image ID of the image you wish to compare
 
-```
-$ curl https://api.binaryedge.io/v1/query/image/search\?similar\=f1b0a311af803ea73ac48adce2378f58adce2378f5  -H 'X-Token:InsertYourClientToken'
+```shell
+curl 'https://api.binaryedge.io/v1/query/image/search?similar=f1b0a311af803ea73ac48adce2378f58adce2378f5' -H 'X-Token:InsertYourClientToken'
 ```
 
 ##### Response
@@ -878,8 +878,8 @@ $ curl https://api.binaryedge.io/v1/query/image/search\?similar\=f1b0a311af803ea
 
 Get all dataleaks for a given email.
 
-```
-$ curl https://api.binaryedge.io/v1/dataleaks/check/user@example.com -H 'X-Token:InsertYourClientToken'
+```shell
+curl 'https://api.binaryedge.io/v1/dataleaks/check/user@example.com' -H 'X-Token:InsertYourClientToken'
 ```
 
 ##### Response
@@ -926,8 +926,8 @@ Available options:
 * jsonl: Return results in JSON lines format
     * jsonl=1
 
-```
-$ curl https://api.binaryedge.io/v1/dataleaks/organization/example.com -H 'X-Token:InsertYourClientToken'
+```shell
+curl 'https://api.binaryedge.io/v1/dataleaks/organization/example.com' -H 'X-Token:InsertYourClientToken'
 ```
 
 ##### Response
@@ -952,8 +952,8 @@ Available options:
 
 * leak: Return information about a specific leak (all leaks if not specified)
 
-```
-$ curl https://api.binaryedge.io/v1/dataleaks/leaks?leak=ashleymadison -H 'X-Token:InsertYourClientToken'
+```shell
+curl 'https://api.binaryedge.io/v1/dataleaks/leaks?leak=ashleymadison' -H 'X-Token:InsertYourClientToken'
 ```
 
 ##### Response
@@ -986,9 +986,9 @@ $ curl https://api.binaryedge.io/v1/dataleaks/leaks?leak=ashleymadison -H 'X-Tok
 **A:** The stream outputs to STDOUT, allowing you to consume it in different ways. For example:
 
 - Direct the stream to a file:
-    - `curl https://stream.api.binaryedge.io/v1/stream -H "X-Token:InsertYourClientToken" > file.txt`
+    - `curl 'https://stream.api.binaryedge.io/v1/stream' -H 'X-Token:InsertYourClientToken' > file.txt`
 - Pipe the stream to a custom application you developed to process it:
-    - `curl https://stream.api.binaryedge.io/v1/stream -H "X-Token:InsertYourClientToken" | application_name `
+    - `curl 'https://stream.api.binaryedge.io/v1/stream' -H 'X-Token:InsertYourClientToken' | application_name `
 
 
 **Q: What should I do if I get a error 500?**

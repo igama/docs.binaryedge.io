@@ -13,7 +13,7 @@
 **Key Header** : X-Key
 
 ```shell
-curl https://api.binaryedge.io/v2/<endpoint> -H "X-Key:API_KEY"
+curl 'https://api.binaryedge.io/v2/<endpoint>' -H 'X-Key:API_KEY'
 ```
 
 ## Query
@@ -33,7 +33,7 @@ Details about an Host. List of recent events for the specified host, including d
 *Output*
 
 ```shell
-curl https://api.binaryedge.io/v2/query/ip/xxx.xxx.xxx.xxx -H "X-Key:API_KEY"
+curl 'https://api.binaryedge.io/v2/query/ip/xxx.xxx.xxx.xxx' -H 'X-Key:API_KEY'
 ```
 
 ```json
@@ -133,7 +133,7 @@ List of events for the specified host, with events for each time that:
 *Output*
 
 ```shell
-curl https://api.binaryedge.io/v2/query/ip/historical/xxx.xxx.xxx.xxx -H "X-Key:API_KEY"
+curl 'https://api.binaryedge.io/v2/query/ip/historical/xxx.xxx.xxx.xxx' -H 'X-Key:API_KEY'
 ```
 
 ```json
@@ -224,7 +224,7 @@ Events based on a Query. List of recent events for the given query, including de
 *Output*
 
 ```shell
-curl https://api.binaryedge.io/v2/query/search?query="name:ldap%20AND%20ip:xxx.xxx.xxx.xxx" -H "X-Key:API_KEY"
+curl 'https://api.binaryedge.io/v2/query/search?query=name:ldap%20AND%20ip:xxx.xxx.xxx.xxx' -H 'X-Key:API_KEY'
 ```
 
 ```json
@@ -253,7 +253,7 @@ Statistics of recent events for the given query. Can be used with specific param
 *Output*
 
 ```shell
-curl https://api.binaryedge.io/v2/query/search/stats?query="name:ldap%20AND%20ip:xxx.xxx.xxx.xxx"&type:ports -H "X-Key:API_KEY"
+curl 'https://api.binaryedge.io/v2/query/search/stats?query=name:ldap%20AND%20ip:xxx.xxx.xxx.xxx&type:ports' -H 'X-Key:API_KEY'
 ```
 
 ```json
@@ -315,7 +315,7 @@ Details about Remote Desktops found on an Host. List of screenshots and details 
 *Output*
 
 ```shell
-curl https://api.binaryedge.io/v2/query/image/ip/xxx.xxx.xxx.xxx -H "X-Key:API_KEY"
+curl 'https://api.binaryedge.io/v2/query/image/ip/xxx.xxx.xxx.xxx' -H 'X-Key:API_KEY'
 ```
 
 ```json
@@ -369,7 +369,7 @@ Remote Desktops based on a Query. List of screenshots and details extracted from
 *Output*
 
 ```shell
-curl https://api.binaryedge.io/v2/query/image/search?query="ip:xxx.xxx.xxx.xxx AND country:BE" -H "X-Key:API_KEY"
+curl 'https://api.binaryedge.io/v2/query/image/search?query=ip:xxx.xxx.xxx.xxx%20AND%20country:BE' -H 'X-Key:API_KEY'
 ```
 
 ```json
@@ -418,7 +418,7 @@ Get the list of possible tags for the images.
 *Output*
 
 ```shell
-curl https://api.binaryedge.io/v2/query/image/tags -H "X-Key:API_KEY"
+curl 'https://api.binaryedge.io/v2/query/image/tags' -H 'X-Key:API_KEY'
 ```
 
 ```json
@@ -438,7 +438,7 @@ Details about torrents transferred by an Host. List of recent torrent events for
 *Output*
 
 ```shell
-curl https://api.binaryedge.io/v2/query/torrent/ip/xxx.xxx.xxx.xxx -H "X-Key:API_KEY"
+curl 'https://api.binaryedge.io/v2/query/torrent/ip/xxx.xxx.xxx.xxx' -H 'X-Key:API_KEY'
 ```
 
 ```json
@@ -501,7 +501,7 @@ List of torrent events for the specified host, with events for each time that a 
 *Output*
 
 ```shell
-curl https://api.binaryedge.io/v2/query/torrent/historical/xxx.xxx.xxx.xxx -H "X-Key:API_KEY"
+curl 'https://api.binaryedge.io/v2/query/torrent/historical/xxx.xxx.xxx.xxx' -H 'X-Key:API_KEY'
 ```
 
 ```json
@@ -602,7 +602,7 @@ Verify how many dataleaks affected an specific email address.
 *Output*
 
 ```shell
-curl https://api.binaryedge.io/v2/query/dataleaks/email/user@example.com -H "X-Key:API_KEY"
+curl 'https://api.binaryedge.io/v2/query/dataleaks/email/user@example.com' -H 'X-Key:API_KEY'
 ```
 
 ```json
@@ -628,7 +628,7 @@ For example, searching for the domain 'example.com' returns {"leak":"linkedin", 
 *Output*
 
 ```shell
-curl https://api.binaryedge.io/v2/query/dataleaks/organization/example.com -H "X-Key:API_KEY"
+curl 'https://api.binaryedge.io/v2/query/dataleaks/organization/example.com' -H 'X-Key:API_KEY'
 ```
 
 ```json
@@ -718,7 +718,7 @@ Get the list of dataleaks our platform keeps track.
 *Output*
 
 ```shell
-curl https://api.binaryedge.io/v2/query/dataleaks/info -H "X-Key:API_KEY"
+curl 'https://api.binaryedge.io/v2/query/dataleaks/info' -H 'X-Key:API_KEY'
 ```
 
 ```json
@@ -774,7 +774,7 @@ More details about scoring can be found on [https://github.com/binaryedge/ratemy
 *Output*
 
 ```shell
-curl https://api.binaryedge.io/v2/query/score/ip/xxx.xxx.xxx.xxx -H "X-Key:API_KEY"
+curl 'https://api.binaryedge.io/v2/query/score/ip/xxx.xxx.xxx.xxx' -H 'X-Key:API_KEY'
 ```
 
 ```json
@@ -1520,7 +1520,7 @@ Return list of subdomains known from the target domains
 *Output*
 
 ```shell
-curl https://api.binaryedge.io/v2/query/domains/subdomain/example.com -H "X-Key:API_KEY"
+curl 'https://api.binaryedge.io/v2/query/domains/subdomain/example.com' -H 'X-Key:API_KEY'
 ```
 
 ```json
@@ -1553,7 +1553,7 @@ Possible types of records currently available:
 *Output*
 
 ```shell
-curl https://api.binaryedge.io/v2/query/domains/dns/example.com -H "X-Key:API_KEY"
+curl 'https://api.binaryedge.io/v2/query/domains/dns/example.com' -H 'X-Key:API_KEY'
 ```
 
 ```json
@@ -1602,7 +1602,7 @@ Return records that have the specified IP address in their A or AAAA records.
 *Output*
 
 ```shell
-curl https://api.binaryedge.io/v2/query/domains/ip/8.8.8.8 -H "X-Key:API_KEY"
+curl 'https://api.binaryedge.io/v2/query/domains/ip/8.8.8.8' -H 'X-Key:API_KEY'
 ```
 
 ```json
