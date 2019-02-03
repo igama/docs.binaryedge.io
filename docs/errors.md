@@ -7,7 +7,7 @@ HTTP/1.1 400 Bad Request
 {
     "status": 400,
     "title": "Bad Request",
-    "message": "Parameters with wrong format/type or ill-defined, please review your query"
+    "message": "Bad Parameter. Please review your query and try again."
 }
 ```
 
@@ -19,7 +19,7 @@ HTTP/1.1 401 Unauthorized
 {
     "status": 401,
     "title": "Unauthorized",
-    "message": "Could not validate token, please review your token"
+    "message": "Could not validate token. Please review your token and try again."
 }
 ```
 
@@ -30,7 +30,7 @@ Accessing a page that does not exist:
 {
     "status": 404,
     "title": "Not Found",
-    "message": "Page not found"
+    "message": "Page not found."
 }
 ```
 
