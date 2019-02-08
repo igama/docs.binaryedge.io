@@ -1711,7 +1711,7 @@ Events based on a Query. List of recent events for the given query, including de
 
 *Parameters*
 
-* query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](search.md) for details on what parameters can be used.
+* query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](sensors-search.md) for details on what parameters can be used.
 * page: [Int] Optional. Default 1, Maximum: 500 (10,000 results)
 
 *Output*
@@ -1779,7 +1779,7 @@ Statistics of events for the given query. Can be used with specific parameters a
 
 *Parameters*
 
-* query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](search.md) for details on what parameters can be used.
+* query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](sensors-search.md) for details on what parameters can be used.
 * type: [String] Type of statistic we want to obtain. Possible types include:
     * _ports_, _tags_, _countries_, _asn_, _ips_, _payloads_, _http_path_.
 * days: [Integer] Number of days to get the stats for. For example days=1 for the last day of data.

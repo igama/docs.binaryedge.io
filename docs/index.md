@@ -16,6 +16,7 @@ The API provides access to that scanning platform, for your own usage, along wit
     - [Search Parameters](search.md "search")
         - [Host Search](search.md "search")
         - [Image Search](image-search.md "image-search")
+        - [Sensors Search](sensors-search.md "sensors-search")
     - [HTTP Status Messages](errors.md "errors")
     - Event Details
         - [Modules](modules.md "modules")
