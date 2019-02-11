@@ -1504,7 +1504,7 @@ curl 'https://api.binaryedge.io/v2/query/score/ip/xxx.xxx.xxx.xxx' -H 'X-Key:API
 ```
 
 
-### Domains (Beta)
+### Domains
 
 What is exposed via DNS? What subdomains belong to a Domain? What domains are served by IP X?
 
