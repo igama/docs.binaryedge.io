@@ -10,6 +10,7 @@ nav:
     - Search Parameters:
       - Host Search: search.md
       - Image Search: image-search.md
+      - Sensors Search: sensors-search.md
     - HTTP Status Messages: errors.md
     - Event Details:
       - Modules: modules.md
