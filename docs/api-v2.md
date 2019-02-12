@@ -1646,6 +1646,54 @@ curl 'https://api.binaryedge.io/v2/query/domains/ip/8.8.8.8' -H 'X-Key:API_KEY'
 }
 ```
 
+#### /v2/query/domains/search
+
+List of Domains/DNS data based on a Query.  Can be used with specific parameters and/or full-text search. Possible types of records currently available:
+
+* A
+* AAAA
+* NS
+* MX
+* CNAME
+* TXT
+
+*Parameters*
+
+* query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events.
+* page: [Int] Optional. Default 1, Maximum: 500 (10,000 results)
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v2/query/domains/search?query=A:127.0.01' -H 'X-Key:API_KEY'
+```
+
+```json
+{
+  "query": "A:127.0.0.1",
+  "page": 1,
+  "pagesize": 100,
+  "total": 176685,
+  "events": [{
+    "A": ["127.0.0.1"],
+    "updated_at": "2018-06-08T20:32:57.002881",
+    "NS": ["ns3jkl.name.com", "ns4qxz.name.com", "ns2knz.name.com", "ns1ksz.name.com"],
+    "domain": "heathynurseway.co.uk",
+    "root": "heathynurseway.co.uk",
+    "MX": ["mail.emailgoodbye.me"]
+  }, {
+    "A": ["127.0.0.1"],
+    "updated_at": "2018-06-08T20:29:19.612334",
+    "NS": ["ns1.antagus.de", "ns2.antagus.de"],
+    "domain": "vit.press",
+    "root": "vit.press",
+    "MX": ["mail.vit.press"]
+  },
+  (...)
+  ]
+}
+```
+
 ### Sensors
 
 #### /v2/query/sensors/ip/{target}
