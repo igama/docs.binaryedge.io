@@ -394,8 +394,6 @@ Available options:
     * /v1/query/historical/210.1.1.X
 * Target CIDR, e.g.:
     * /v1/query/historical/210.1.1.X/24
-* Target Range, e.g.:
-    * /v1/query/historical/210.1.1.X-210.1.1.Y
 
 ```shell
 curl 'https://api.binaryedge.io/v1/query/historical/222.208.xxx.xxx' -H 'X-Token:InsertYourClientToken'
@@ -440,8 +438,6 @@ Available options:
     * /v1/query/latest/210.1.1.X
 * Target CIDR, e.g.:
     * /v1/query/latest/210.1.1.X/24
-* Target Range, e.g.:
-    * /v1/query/latest/210.1.1.X-210.1.1.Y
 
 ```shell
 curl 'https://api.binaryedge.io/v1/query/latest/222.208.xxx.xxx' -H 'X-Token:InsertYourClientToken'
@@ -486,8 +482,6 @@ Available options:
     * /v1/query/torrent/210.1.1.X
 * Target CIDR, e.g.:
     * /v1/query/torrent/210.1.1.X/24
-* Target Range, e.g.:
-    * /v1/query/torrent/210.1.1.X-210.1.1.Y
 
 ```shell
 curl 'https://api.binaryedge.io/v1/query/torrent/222.208.xxx.xxx' -H 'X-Token:InsertYourClientToken'
@@ -529,8 +523,6 @@ Available options:
     * /v1/query/torrent/latest/210.1.1.X
 * Target CIDR, e.g.:
     * /v1/query/torrent/latest/210.1.1.X/24
-* Target Range, e.g.:
-    * /v1/query/torrent/latest/210.1.1.X-210.1.1.Y
 
 ```shell
 curl 'https://api.binaryedge.io/v1/query/torrent/latest/222.208.xxx.xxx' -H 'X-Token:InsertYourClientToken'

@@ -1538,6 +1538,7 @@ curl 'https://api.binaryedge.io/v2/query/domains/subdomain/example.com' -H 'X-Ke
 Return list of known DNS results for the target domain.
 
 Possible types of records currently available:
+
 * A
 * AAAA
 * NS
@@ -1829,7 +1830,7 @@ Statistics of events for the given query. Can be used with specific parameters a
 
 * query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](sensors-search.md) for details on what parameters can be used.
 * type: [String] Type of statistic we want to obtain. Possible types include:
-    * _ports_, _tags_, _countries_, _asn_, _ips_, _payloads_, _http_path_.
+    * _ports_, _tags_, _countries_, _asn_, _ips_, _payloads_, _http\_path_.
 * days: [Integer] Number of days to get the stats for. For example days=1 for the last day of data.
     * Max: 60 (default)
 

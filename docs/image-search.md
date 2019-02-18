@@ -32,10 +32,24 @@ Search by ASN.
 
     e.g. asn:4812
 
+### as_name: (string)
+Search by AS name. 
+
+    e.g. as_name:amazon
+
 ### tags: (string)
 Search by tags. Can be mobile, rdp, vnc, windows, x11.
 
     e.g. tags:mobile
+
+Can be:
+
+* rdp
+* windows
+* vnc
+* has_faces
+* x11
+* mobile
 
 ### words: (string)
 Search by words found by OCR.
@@ -60,7 +74,9 @@ Search by image width (supports ranges).
 ### ts: (date)
 Search by timestamp.
 
-    e.g. ts:[2018-09-01 TO 2018-10-01]
+    e.g.
+        ts:[2018-09-01 TO 2018-10-01]
+        ts:2018-09-01
 
 
 ## Notes

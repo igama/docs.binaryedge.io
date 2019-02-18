@@ -50,10 +50,25 @@ Search by tags. Can be ICS, MALWARE, DATABASE, WEBSERVER, IOT, CAMERA. Tag list 
 
     e.g. tag:IOT
 
+Can be:
+
+* WEBSERVER
+* DATABASE
+* IOT
+* DEVICES
+* CAMERA
+* WEBCAM
+* BUSYBOX
+* GAMES
+* ICS
+* SHELL
+
 ### created_at: (date)
 Search by created_at.
 
-    e.g. created_at:[2018-09-01 TO 2018-10-01]
+    e.g.
+        created_at:[2018-09-01 TO 2018-10-01]
+        created_at:2018-09-01
 
 
 ## Service-Simple
