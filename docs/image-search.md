@@ -42,17 +42,17 @@ Search by tags. Can be mobile, rdp, vnc, windows, x11.
 
     e.g. tags:mobile
 
-Can be:
+#### Available tags:
 
-* rdp
-* windows
-* vnc
-* has_faces
-* x11
-* mobile
+* RDP
+* WINDOWS
+* VNC
+* HAS_FACES
+* X11
+* MOBILE
 
 ### words: (string)
-Search by words found by OCR.
+Search by text found by OCR.
 
     e.g. words:alarm
 
@@ -85,6 +85,8 @@ Search by timestamp.
 
 **Conditionals**: the following conditionals are available: NOT, AND, OR. Must be UPPERCASE. You can also use the minus sign (-) as a replacement for the NOT conditional.
 
-**String fields caveat**: if the string is expected to have spaces or some kind of punctuation in the middle, instead of querying _field:value_ try instead _field.keyword:"value"_. The first one will search for any occurrence of any of the words in _value_, while the second one will search for an exact match of the string.
+**Comparison**: you can use comparison operators on number fields. E.g. _field:>100.
+
+**String fields caveat**: if the string is expected to have spaces, some kind of punctuation in the middle, or special symbols, instead of querying _field:value_ try _field:"value"_. You can also try instead _field.keyword:"value"_. The first one will search for any occurrence of any of the words in _value_, while the second one will search for an exact match of the string.
 
 **Field existence or omission**: you can search for records that have a specific field by using _\_exists\_:field_. Conversely, for records missing a field it would be _NOT \_exists\_:field_.

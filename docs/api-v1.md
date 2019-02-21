@@ -624,16 +624,7 @@ curl 'https://api.binaryedge.io/v1/query/image/ip/XXX.XXX.XXX.XXX?ocr=1' -H 'X-T
         ]
       },
       "tags": [
-        "vnc"
-      ],
-      "words": [
-        "show",
-        "results",
-        "user",
-        "mediline",
-        "logged",
-        "out",
-        "userlevel"
+        "VNC"
       ],
       "height": 800,
       "port": 5900,
@@ -734,16 +725,7 @@ curl 'https://api.binaryedge.io/v1/query/image/f1b0a311af803ea73ac48adce2378f58a
     ]
   },
   "tags": [
-    "vnc"
-  ],
-  "words": [
-    "show",
-    "results",
-    "user",
-    "mediline",
-    "logged",
-    "out",
-    "userlevel"
+    "VNC"
   ],
   "height": 800,
   "port": 5900,

@@ -328,7 +328,7 @@ curl 'https://api.binaryedge.io/v2/query/image/ip/xxx.xxx.xxx.xxx' -H 'X-Key:API
       {
          "thumb":"https://d3f9qnon04ymh2.cloudfront.net/993cad4bb78fc0fa3e8f5f1d07311af802ea73ac48b6143c6286ae54df.jpg",
          "tags":[
-            "vnc"
+            "VNC"
          ],
          "ts":1536345753000,
          "port":5900,
@@ -382,7 +382,7 @@ curl 'https://api.binaryedge.io/v2/query/image/search?query=ip:xxx.xxx.xxx.xxx%2
       {
          "thumb":"https://d3f9qnon04ymh2.cloudfront.net/993cad4bb78fc0fa3e8f5f1d07311af802ea73ac48b6143c6286ae54df.jpg",
          "tags":[
-            "vnc"
+            "VNC"
          ],
          "ts":1536345753000,
          "port":5900,
@@ -422,7 +422,7 @@ curl 'https://api.binaryedge.io/v2/query/image/tags' -H 'X-Key:API_KEY'
 ```
 
 ```json
-["rdp", "vnc", "has_faces", "x11", "windows", "mobile"]
+["RDP", "VNC", "HAS_FACES", "X11", "WINDOWS", "MOBILE"]
 ```
 
 ### Torrent
