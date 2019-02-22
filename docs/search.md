@@ -50,7 +50,7 @@ Search by tags. Can be ICS, MALWARE, DATABASE, WEBSERVER, IOT, CAMERA. Tag list 
 
     e.g. tag:IOT
 
-#### Available tags:
+#### Available tags
 
 * WEBSERVER
 * DATABASE

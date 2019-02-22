@@ -42,7 +42,7 @@ Search by tags. Can be mobile, rdp, vnc, windows, x11.
 
     e.g. tags:mobile
 
-#### Available tags:
+#### Available tags
 
 * RDP
 * WINDOWS
