@@ -4,7 +4,7 @@
 
     API V2 - For Free, Starter and Business accounts. 
 
-**Get Access via [https://app.binaryedge.io](https://app.binaryedge.io)**
+    Get Access via [https://app.binaryedge.io](https://app.binaryedge.io)
 
 - - -
 

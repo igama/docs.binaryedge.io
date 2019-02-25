@@ -1,6 +1,8 @@
 # Host Search Parameters
 
-The API has endpoints for querying our data in which you can use free text search together with one or more of the following filters:
+The API has endpoints for querying our data in which you can use free text search together with one or more of the filters listed below.
+
+**NOTE** : Although free text search without specifying fields is available, it is processed differently from searching on specific fields. For better results, always specify search fields.
 
 
 ## General Fields

@@ -1,6 +1,9 @@
 # Sensors Search Parameters
 
-The API has endpoints for querying our data in which you can use free text search together with one or more of the following filters:
+The API has endpoints for querying our data in which you can use free text search together with one or more of the filters listed below.
+
+**NOTE** : Although free text search without specifying fields is available, it is processed differently from searching on specific fields. For better results, always specify search fields.
+
 
 ## Fields
 
@@ -92,6 +95,7 @@ Search by tags.
 * UBIQUITI_SCANNER
 * SCADA_SCANNER
 * CODESYS_SCANNER
+* MODBUS_SCANNER
 * UPNP_SCANNER
 * JABBER_SCANNER
 * FTP_SCANNER
@@ -102,9 +106,14 @@ Search by tags.
 * CISCO_SMART_INSTALL
 * ETHEREUM_NODE_SCANNER
 * CRYPTOCURRENCY_SCANNER
+* MICROSOFT_SQL_SERVER
 * CVE-2017-17215
 * CVE-2018-14933
 * CVE-2018-15716
+* HUAWEI_HG532_SCANNER
+* NUUO_NVR_SCANNER
+* ZTE_F460_SCANNER
+* ZTE_F660_SCANNER
 * NETSYSTEMS
 * CENSYS
 * SHODAN

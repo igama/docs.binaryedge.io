@@ -2,10 +2,11 @@
 
 - - -
 
-    This API is for Enterprise Accounts only.
+    API V1 - Enterprise Accounts only.
+    
     To get access, please get in touch with <info@binaryedge.io>.
     
-    If you are using app.binaryedge.io -> Use API-V2
+    If you are using app.binaryedge.io -> Use API V2
 
 - - -
 
