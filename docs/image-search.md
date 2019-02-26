@@ -49,12 +49,12 @@ Search by tags. Can be mobile, rdp, vnc, windows, x11.
 
 #### Available tags
 
-* RDP
-* WINDOWS
-* VNC
 * HAS_FACES
-* X11
 * MOBILE
+* RDP
+* VNC
+* WINDOWS
+* X11
 
 ### words: (string)
 Search by text found by OCR.

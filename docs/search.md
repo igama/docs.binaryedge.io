@@ -54,16 +54,16 @@ Search by tags. Can be ICS, MALWARE, DATABASE, WEBSERVER, IOT, CAMERA. Tag list 
 
 #### Available tags
 
-* WEBSERVER
-* DATABASE
-* IOT
-* DEVICES
-* CAMERA
-* WEBCAM
 * BUSYBOX
+* CAMERA
+* DATABASE
+* DEVICES
 * GAMES
 * ICS
+* IOT
 * SHELL
+* WEBCAM
+* WEBSERVER
 
 ### has_screenshot: (boolean) 
 Search for screenshots, true or false (VNC, RDP or X11 module types only). 
