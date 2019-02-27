@@ -253,7 +253,7 @@ Statistics of recent events for the given query. Can be used with specific param
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v2/query/search/stats?query=name:ldap%20AND%20ip:xxx.xxx.xxx.xxx&type:ports' -H 'X-Key:API_KEY'
+curl 'https://api.binaryedge.io/v2/query/search/stats?query=name:ldap%20AND%20ip:xxx.xxx.xxx.xxx&type=ports' -H 'X-Key:API_KEY'
 ```
 
 ```json
