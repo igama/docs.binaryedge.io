@@ -1837,7 +1837,7 @@ Statistics of events for the given query. Can be used with specific parameters a
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v2/query/sensors/search/stats?query=tags:ssh_scanner&type=ports&type=ports' -H 'X-Key:API_KEY'
+curl 'https://api.binaryedge.io/v2/query/sensors/search/stats?query=tags:ssh_scanner&type=ports' -H 'X-Key:API_KEY'
 ```
 
 ```json
