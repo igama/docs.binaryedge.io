@@ -949,72 +949,925 @@ curl 'https://api.binaryedge.io/v1/dataleaks/leaks?leak=ashleymadison' -H 'X-Tok
 ```
 
 
-### FAQ
+### Risk Score
 
-**Q: What is the sample parameter?**
+#### /v1/query/score/ip/{target}
 
-**A:** The Sample parameter is used to define how many open ports the platform needs to find before stopping the scan. It is useful to test modules and different configurations for each module (that we are adding in the future). This parameter is optional - by default the scan stops only after scanning the entire list of IP addresses and ports.
+IP Risk Score. Scoring is based on all information found on our databases regarding an IP and refers to the level of exposure of a target, i.e, the higher the score, the greater the risk of exposure. 
 
-
-**Q: How can I consume the stream?**
-
-**A:** The stream outputs to STDOUT, allowing you to consume it in different ways. For example:
-
-- Direct the stream to a file:
-    - `curl 'https://stream.api.binaryedge.io/v1/stream' -H 'X-Token:InsertYourClientToken' > file.txt`
-- Pipe the stream to a custom application you developed to process it:
-    - `curl 'https://stream.api.binaryedge.io/v1/stream' -H 'X-Token:InsertYourClientToken' | application_name `
+More details about scoring can be found on [https://github.com/binaryedge/ratemyip-openframework/blob/master/ip-score.md](https://github.com/binaryedge/ratemyip-openframework/blob/master/ip-score.md).
 
 
-**Q: What should I do if I get a error 500?**
+*Parameters*
 
-**A:** In this case, you should contact support@binaryedge.io
+* target: [String] target IP address 
 
+*Output*
 
-**Q: How do I scan multiple hosts with one request?**
-
-**A:**
-
+```shell
+curl 'https://api.binaryedge.io/v1/query/score/ip/xxx.xxx.xxx.xxx' -H 'X-Token:API_KEY'
 ```
-options: [{
-   "targets": [array of cidrs (string)],
-   "ports": [{
-       "port": int,
-       "modules": [array of module names (string)],
-       "sample": int
-   }]
-}]
-```
-
-Example:
 
 ```json
 {
-   "type": "scan",
-   "description": "test a bunch of networks",
-   "options": [
-       {
-         "targets": ["xxx.xxx.x.x/xx","xxx.xxx.x.x/xx"],
-         "ports": [{
-            "port": 995,
-            "modules": ["service"]
-           },
-           {
-            "port": 22,
-            "modules": ["ssh"]
-           }]
-       }, {
-         "targets": ["xxx.xxx.x.x/xx"],
-         "ports": [{
-            "port": 5900,
-            "modules": ["vnc"]
-         }]
-       }
-     ]
+  "normalized_ip_score": 97.1,
+  "normalized_ip_score_detailed": {
+    "cve": 100,
+    "attack_surface": 100,
+    "encryption": 100,
+    "rms": 100,
+    "storage": 100,
+    "web": 100,
+    "torrents": 0
+  },
+  "ip_score_detailed": {
+    "cve": 3,
+    "attack_surface": 2,
+    "encryption": 6,
+    "rms": 10,
+    "storage": 10,
+    "web": 3,
+    "torrents": 0
+  },
+  "results_detailed": {
+    "ports": {
+      "open": [
+        4991,
+        6666,
+        22,
+        443,
+        3389,
+        5901,
+        23,
+        80,
+        1883,
+        27017,
+        6379,
+        11211,
+        9200,
+        21,
+        8080,
+        25,
+        3306
+      ],
+      "score": 17
+    },
+    "cve": {
+      "result": [
+        {
+          "port": 4991,
+          "cve": [
+            {
+              "cpe": "cpe:/a:igor_sysoev:nginx:1.2.6",
+              "cve_list": [
+                {
+                  "cve": "CVE-2013-2070",
+                  "cvss": 5.8
+                },
+                {
+                  "cve": "CVE-2013-4547",
+                  "cvss": 7.5
+                },
+                {
+                  "cve": "CVE-2014-3616",
+                  "cvss": 4.3
+                },
+                {
+                  "cve": "CVE-2016-1247",
+                  "cvss": 7.2
+                },
+                {
+                  "cve": "CVE-2016-0742",
+                  "cvss": 5
+                },
+                {
+                  "cve": "CVE-2016-0746",
+                  "cvss": 7.5
+                },
+                {
+                  "cve": "CVE-2016-0747",
+                  "cvss": 5
+                },
+                {
+                  "cve": "CVE-2016-4450",
+                  "cvss": 5
+                }
+              ],
+              "score": 47.3
+            }
+          ],
+          "score": 47.3
+        },
+        {
+          "port": 6666,
+          "cve": {
+            "product": "Postgres-XC",
+            "version": "1.1",
+            "cve_list": [],
+            "score": 0
+          },
+          "score": 0
+        },
+        {
+          "port": 6666,
+          "cve": [
+            {
+              "cpe": "cpe:/a:mysql:mysql:5.5.18.1",
+              "cve_list": [
+                {
+                  "cve": "CVE-2005-1274",
+                  "cvss": 10
+                },
+                {
+                  "cve": "CVE-2005-0081",
+                  "cvss": 5
+                },
+                {
+                  "cve": "CVE-2005-0082",
+                  "cvss": 5
+                },
+                {
+                  "cve": "CVE-2005-0684",
+                  "cvss": 10
+                },
+                {
+                  "cve": "CVE-2012-2750",
+                  "cvss": 10
+                },
+                {
+                  "cve": "CVE-2012-4414",
+                  "cvss": 6.5
+                },
+                {
+                  "cve": "CVE-2011-2262",
+                  "cvss": 5
+                },
+                {
+                  "cve": "CVE-2012-0112",
+                  "cvss": 3.5
+                },
+                {
+                  "cve": "CVE-2012-0113",
+                  "cvss": 5.5
+                },
+                {
+                  "cve": "CVE-2012-0115",
+                  "cvss": 4
+                },
+                {
+                  "cve": "CVE-2012-0116",
+                  "cvss": 4.9
+                },
+                {
+                  "cve": "CVE-2012-0117",
+                  "cvss": 3.5
+                },
+                {
+                  "cve": "CVE-2012-0118",
+                  "cvss": 4.9
+                },
+                {
+                  "cve": "CVE-2012-0119",
+                  "cvss": 4
+                },
+                {
+                  "cve": "CVE-2012-0120",
+                  "cvss": 4
+                },
+                {
+                  "cve": "CVE-2012-0553",
+                  "cvss": 7.5
+                },
+                {
+                  "cve": "CVE-2012-2102",
+                  "cvss": 3.5
+                },
+                {
+                  "cve": "CVE-2012-2122",
+                  "cvss": 5.1
+                },
+                {
+                  "cve": "CVE-2012-2749",
+                  "cvss": 4
+                },
+                {
+                  "cve": "CVE-2013-1492",
+                  "cvss": 7.5
+                },
+                {
+                  "cve": "CVE-2015-3152",
+                  "cvss": 4.3
+                },
+                {
+                  "cve": "CVE-2016-0610",
+                  "cvss": 3.5
+                },
+                {
+                  "cve": "CVE-2016-0616",
+                  "cvss": 4
+                },
+                {
+                  "cve": "CVE-2013-5807",
+                  "cvss": 4.9
+                },
+                {
+                  "cve": "CVE-2016-6664",
+                  "cvss": 6.9
+                },
+                {
+                  "cve": "CVE-2004-0931",
+                  "cvss": 5
+                },
+                {
+                  "cve": "CVE-2017-3302",
+                  "cvss": 5
+                },
+                {
+                  "cve": "CVE-2016-7412",
+                  "cvss": 6.8
+                },
+                {
+                  "cve": "CVE-2012-5627",
+                  "cvss": 4
+                },
+                {
+                  "cve": "CVE-2014-0001",
+                  "cvss": 7.5
+                },
+                {
+                  "cve": "CVE-2016-6662",
+                  "cvss": 10
+                },
+                {
+                  "cve": "CVE-2009-4833",
+                  "cvss": 5.8
+                },
+                {
+                  "cve": "CVE-2012-0485",
+                  "cvss": 4
+                },
+                {
+                  "cve": "CVE-2012-0486",
+                  "cvss": 5
+                },
+                {
+                  "cve": "CVE-2012-0487",
+                  "cvss": 4
+                },
+                {
+                  "cve": "CVE-2012-0488",
+                  "cvss": 4
+                },
+                {
+                  "cve": "CVE-2012-0489",
+                  "cvss": 4
+                },
+                {
+                  "cve": "CVE-2012-0491",
+                  "cvss": 4
+                },
+                {
+                  "cve": "CVE-2012-0492",
+                  "cvss": 2.1
+                },
+                {
+                  "cve": "CVE-2012-0493",
+                  "cvss": 2.1
+                },
+                {
+                  "cve": "CVE-2012-0494",
+                  "cvss": 1.7
+                },
+                {
+                  "cve": "CVE-2012-0495",
+                  "cvss": 4
+                },
+                {
+                  "cve": "CVE-2012-0496",
+                  "cvss": 4.3
+                },
+                {
+                  "cve": "CVE-2012-5611",
+                  "cvss": 6.5
+                },
+                {
+                  "cve": "CVE-2012-5612",
+                  "cvss": 6.5
+                },
+                {
+                  "cve": "CVE-2016-6663",
+                  "cvss": 4.4
+                },
+                {
+                  "cve": "CVE-2005-1636",
+                  "cvss": 4.6
+                }
+              ],
+              "score": 242.3
+            }
+          ],
+          "score": 242.3
+        },
+        {
+          "port": 8080,
+          "cve": [
+            {
+              "cpe": "cpe:/a:indy:httpd:13.2.3.2235",
+              "cve_list": [],
+              "score": 0
+            }
+          ],
+          "score": 0
+        },
+        {
+          "port": 25,
+          "cve": {
+            "cpe": [
+              "cpe:/a:postfix:postfix"
+            ],
+            "cve_list": "no_version_provided",
+            "score": 0
+          },
+          "score": 0
+        },
+        {
+          "port": 3306,
+          "cve": [
+            {
+              "cpe": "cpe:/a:mysql:mysql:5.5.47-mariadb",
+              "cve_list": [
+                {
+                  "cve": "CVE-2005-1274",
+                  "cvss": 10
+                },
+                {
+                  "cve": "CVE-2005-0081",
+                  "cvss": 5
+                },
+                {
+                  "cve": "CVE-2005-0082",
+                  "cvss": 5
+                },
+                {
+                  "cve": "CVE-2005-0684",
+                  "cvss": 10
+                },
+                {
+                  "cve": "CVE-2011-2262",
+                  "cvss": 5
+                },
+                {
+                  "cve": "CVE-2012-0112",
+                  "cvss": 3.5
+                },
+                {
+                  "cve": "CVE-2012-0113",
+                  "cvss": 5.5
+                },
+                {
+                  "cve": "CVE-2012-0115",
+                  "cvss": 4
+                },
+                {
+                  "cve": "CVE-2012-0116",
+                  "cvss": 4.9
+                },
+                {
+                  "cve": "CVE-2012-0117",
+                  "cvss": 3.5
+                },
+                {
+                  "cve": "CVE-2012-0118",
+                  "cvss": 4.9
+                },
+                {
+                  "cve": "CVE-2012-0119",
+                  "cvss": 4
+                },
+                {
+                  "cve": "CVE-2012-0120",
+                  "cvss": 4
+                },
+                {
+                  "cve": "CVE-2015-3152",
+                  "cvss": 4.3
+                },
+                {
+                  "cve": "CVE-2016-0610",
+                  "cvss": 3.5
+                },
+                {
+                  "cve": "CVE-2016-6664",
+                  "cvss": 6.9
+                },
+                {
+                  "cve": "CVE-2004-0931",
+                  "cvss": 5
+                },
+                {
+                  "cve": "CVE-2017-3302",
+                  "cvss": 5
+                },
+                {
+                  "cve": "CVE-2016-7412",
+                  "cvss": 6.8
+                },
+                {
+                  "cve": "CVE-2016-6662",
+                  "cvss": 10
+                },
+                {
+                  "cve": "CVE-2009-4833",
+                  "cvss": 5.8
+                },
+                {
+                  "cve": "CVE-2012-0485",
+                  "cvss": 4
+                },
+                {
+                  "cve": "CVE-2012-0486",
+                  "cvss": 5
+                },
+                {
+                  "cve": "CVE-2012-0487",
+                  "cvss": 4
+                },
+                {
+                  "cve": "CVE-2012-0488",
+                  "cvss": 4
+                },
+                {
+                  "cve": "CVE-2012-0489",
+                  "cvss": 4
+                },
+                {
+                  "cve": "CVE-2012-0491",
+                  "cvss": 4
+                },
+                {
+                  "cve": "CVE-2012-0492",
+                  "cvss": 2.1
+                },
+                {
+                  "cve": "CVE-2012-0493",
+                  "cvss": 2.1
+                },
+                {
+                  "cve": "CVE-2012-0494",
+                  "cvss": 1.7
+                },
+                {
+                  "cve": "CVE-2012-0495",
+                  "cvss": 4
+                },
+                {
+                  "cve": "CVE-2012-0496",
+                  "cvss": 4.3
+                },
+                {
+                  "cve": "CVE-2016-6663",
+                  "cvss": 4.4
+                },
+                {
+                  "cve": "CVE-2005-1636",
+                  "cvss": 4.6
+                }
+              ],
+              "score": 164.8
+            }
+          ],
+          "score": 164.8
+        }
+      ],
+      "score": 454.40000000000003
+    },
+    "ssh": {
+      "result": [
+        {
+          "port": 22,
+          "algorithms": {
+            "mac": [
+              {
+                "mac": "hmac-sha1-96",
+                "score": 2
+              },
+              {
+                "mac": "hmac-sha1",
+                "score": 2
+              },
+              {
+                "mac": "hmac-md5",
+                "score": 2
+              }
+            ],
+            "key_exchange": [
+              {
+                "kex": "diffie-hellman-group1-sha1",
+                "score": 2
+              }
+            ],
+            "encryption": [
+              {
+                "enc": "aes128-cbc",
+                "score": 0
+              },
+              {
+                "enc": "3des-cbc",
+                "score": 2
+              },
+              {
+                "enc": "aes256-cbc",
+                "score": 0
+              }
+            ]
+          },
+          "keys": [
+            {
+              "fingerprint": "b7:d7:10:fd:b8:fb:91:2b:5e:a8:01:b2:03:e3:10:4f",
+              "key_length": {
+                "length": 1024,
+                "score": 2
+              },
+              "debian_key": {
+                "found": false,
+                "score": 0
+              }
+            }
+          ],
+          "score": 12
+        }
+      ],
+      "score": 12
+    },
+    "rms": {
+      "result": [
+        {
+          "port": 3389,
+          "rms": "rdp",
+          "score": 8
+        },
+        {
+          "port": 5901,
+          "rms": "vnc",
+          "score": 10
+        },
+        {
+          "port": 23,
+          "rms": "telnet",
+          "score": 8
+        }
+      ],
+      "score": 26
+    },
+    "ssl": {
+      "result": [
+        {
+          "port": 443,
+          "heartbleed": {
+            "heartbleed": true,
+            "score": 10
+          },
+          "ccs": {
+            "ccs": true,
+            "score": 6
+          },
+          "crime": {
+            "crime": true,
+            "score": 6
+          },
+          "renegotiation": {
+            "renegotiation": true,
+            "score": 6
+          },
+          "ocsp": {
+            "ocsp": true,
+            "score": 3
+          },
+          "no_certificates": {
+            "no_certificates": false,
+            "score": 0
+          },
+          "leaf_certificate": {
+            "sha1_fingerprint": "c0e750b485ed9250f93f684bb1a87d37bec843b8",
+            "issuer": "Huawei",
+            "subject": "Huawei",
+            "validity": {
+              "date": "2016-07-14 09:48:15",
+              "status": "expired",
+              "score": 4
+            },
+            "signature": {
+              "signature": "sha1WithRSAEncryption",
+              "score": 5
+            },
+            "self_signed": {
+              "self_signed": "single-certificate",
+              "score": 5
+            }
+          },
+          "other_certificates": [],
+          "ciphers": [
+            {
+              "drown": true,
+              "score": 6
+            },
+            {
+              "poodle": true,
+              "score": 6
+            },
+            {
+              "logjam": false,
+              "score": 0
+            }
+          ],
+          "score": 52
+        }
+      ],
+      "score": 52
+    },
+    "wec": {
+      "result": [
+        {
+          "port": 25,
+          "service": "smtp",
+          "score": 6
+        }
+      ],
+      "score": 6
+    },
+    "ftp": {
+      "result": [
+        {
+          "port": 21,
+          "service": "ftp",
+          "score": 6
+        }
+      ],
+      "score": 6
+    },
+    "http": {
+      "result": [
+        {
+          "port": 4991,
+          "service": "http",
+          "score": 6
+        },
+        {
+          "port": 8080,
+          "service": "http",
+          "score": 6
+        }
+      ],
+      "score": 12
+    },
+    "storage": {
+      "result": [
+        {
+          "port": 6666,
+          "product": "postgres",
+          "score": 4
+        },
+        {
+          "port": 6666,
+          "product": "mysql",
+          "score": 4
+        },
+        {
+          "port": 1883,
+          "product": "mqtt",
+          "connected": true,
+          "score": 10
+        },
+        {
+          "port": 27017,
+          "product": "mongodb",
+          "connected": true,
+          "score": 10
+        },
+        {
+          "port": 6379,
+          "product": "redis",
+          "connected": true,
+          "score": 10
+        },
+        {
+          "port": 11211,
+          "product": "memcached",
+          "connected": true,
+          "score": 10
+        },
+        {
+          "port": 9200,
+          "product": "elasticsearch",
+          "connected": true,
+          "score": 10
+        },
+        {
+          "port": 3306,
+          "product": "mysql",
+          "score": 4
+        }
+      ],
+      "score": 62
+    },
+    "web": {
+      "result": [
+        {
+          "port": 80,
+          "headers": true,
+          "score": 3
+        }
+      ],
+      "score": 3
+    },
+    "torrents": {
+      "result": [
+        {
+          "torrents": false,
+          "score": 0
+        }
+      ],
+      "score": 0
+    }
+  },
+  "ip_address": "xxx.xxx.xxx.xxx"
 }
 ```
 
-### NEW
+#### /v1/query/cve/{target}
+
+Get list of CVEs that migh affect a specific IP.
+
+*Parameters*
+
+* target: [String] target IP address 
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v1/query/cve/xxx.xxx.xxx.xxx' -H 'X-Token:API_KEY'
+```
+
+```json
+{
+  "query": "xxx.xxx.xxx.xxx",
+  "events": {
+    "ip": "xxx.xxx.xxx.xxx",
+    "ports": [11, 15, 21, 25, 79, 80, 111, 119, 143, 3389, 6000, 8080],
+    "results": [{
+      "port": 111,
+      "cpe": [],
+      "ts": 1550723598503,
+      "cves": []
+    }, {
+      "port": 11,
+      "cpe": [],
+      "ts": 1550713541527,
+      "cves": []
+    }, {
+      "port": 6000,
+      "cpe": [],
+      "ts": 1549215405492,
+      "cves": []
+    }, {
+      "port": 25,
+      "cpe": [],
+      "ts": 1551649814882,
+      "cves": []
+    }, {
+      "port": 79,
+      "cpe": [],
+      "ts": 1550042997176,
+      "cves": []
+    }, {
+      "port": 8080,
+      "cpe": ["cpe:/a:apache:http_server:2.4.7"],
+      "ts": 1551779143688,
+      "cves": [{
+        "cve": "CVE-2018-17199",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2018-1312",
+        "cvss": 6.8
+      }, {
+        "cve": "CVE-2018-1283",
+        "cvss": 3.5
+      }, {
+        "cve": "CVE-2017-9798",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2017-9788",
+        "cvss": 6.4
+      }, {
+        "cve": "CVE-2017-7679",
+        "cvss": 7.5
+      }, {
+        "cve": "CVE-2017-15715",
+        "cvss": 6.8
+      }, {
+        "cve": "CVE-2017-15710",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2016-8743",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2016-8612",
+        "cvss": 3.3
+      }, {
+        "cve": "CVE-2016-4975",
+        "cvss": 4.3
+      }, {
+        "cve": "CVE-2016-2161",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2016-0736",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2015-3185",
+        "cvss": 4.3
+      }, {
+        "cve": "CVE-2015-3184",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2014-8109",
+        "cvss": 4.3
+      }, {
+        "cve": "CVE-2014-3523",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2014-0231",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2014-0226",
+        "cvss": 6.8
+      }, {
+        "cve": "CVE-2014-0118",
+        "cvss": 4.3
+      }, {
+        "cve": "CVE-2014-0117",
+        "cvss": 4.3
+      }, {
+        "cve": "CVE-2014-0098",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2013-6438",
+        "cvss": 5.0
+      }]
+    }, {
+      "port": 3389,
+      "cpe": [],
+      "ts": 1551348878536,
+      "cves": []
+    }, {
+      "port": 15,
+      "cpe": [],
+      "ts": 1549108048510,
+      "cves": []
+    }, {
+      "port": 143,
+      "cpe": [],
+      "ts": 1549566728724,
+      "cves": []
+    }, {
+      "port": 80,
+      "cpe": ["cpe:/a:igor_sysoev:nginx:1.4.6"],
+      "ts": 1550250446832,
+      "cves": [{
+        "cve": "CVE-2019-7401",
+        "cvss": 7.5
+      }, {
+        "cve": "CVE-2016-4450",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2016-0747",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2016-0746",
+        "cvss": 7.5
+      }, {
+        "cve": "CVE-2016-0742",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2014-3616",
+        "cvss": 4.3
+      }, {
+        "cve": "CVE-2014-0133",
+        "cvss": 5.1
+      }]
+    }, {
+      "port": 21,
+      "cpe": [],
+      "ts": 1550642140211,
+      "cves": []
+    }, {
+      "port": 119,
+      "cpe": [],
+      "ts": 1550377835750,
+      "cves": []
+    }]
+  }
+}
+```
 
 ### Domains
 
@@ -1369,4 +2222,70 @@ curl 'https://api.binaryedge.io/v1/query/sensors/search/stats?query=tags:ssh_sca
     "key": "23/tcp",
     "doc_count": 1552
 }]
+```
+
+
+### FAQ
+
+**Q: What is the sample parameter?**
+
+**A:** The Sample parameter is used to define how many open ports the platform needs to find before stopping the scan. It is useful to test modules and different configurations for each module (that we are adding in the future). This parameter is optional - by default the scan stops only after scanning the entire list of IP addresses and ports.
+
+
+**Q: How can I consume the stream?**
+
+**A:** The stream outputs to STDOUT, allowing you to consume it in different ways. For example:
+
+- Direct the stream to a file:
+    - `curl 'https://stream.api.binaryedge.io/v1/stream' -H 'X-Token:InsertYourClientToken' > file.txt`
+- Pipe the stream to a custom application you developed to process it:
+    - `curl 'https://stream.api.binaryedge.io/v1/stream' -H 'X-Token:InsertYourClientToken' | application_name `
+
+
+**Q: What should I do if I get a error 500?**
+
+**A:** In this case, you should contact support@binaryedge.io
+
+
+**Q: How do I scan multiple hosts with one request?**
+
+**A:**
+
+```
+options: [{
+   "targets": [array of cidrs (string)],
+   "ports": [{
+       "port": int,
+       "modules": [array of module names (string)],
+       "sample": int
+   }]
+}]
+```
+
+Example:
+
+```json
+{
+   "type": "scan",
+   "description": "test a bunch of networks",
+   "options": [
+       {
+         "targets": ["xxx.xxx.x.x/xx","xxx.xxx.x.x/xx"],
+         "ports": [{
+            "port": 995,
+            "modules": ["service"]
+           },
+           {
+            "port": 22,
+            "modules": ["ssh"]
+           }]
+       }, {
+         "targets": ["xxx.xxx.x.x/xx"],
+         "ports": [{
+            "port": 5900,
+            "modules": ["vnc"]
+         }]
+       }
+     ]
+}
 ```

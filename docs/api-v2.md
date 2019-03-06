@@ -1503,6 +1503,183 @@ curl 'https://api.binaryedge.io/v2/query/score/ip/xxx.xxx.xxx.xxx' -H 'X-Key:API
 }
 ```
 
+#### /v2/query/cve/{target}
+
+Get list of CVEs that migh affect a specific IP.
+
+**Note**: Available for paid subscriptions only.
+
+*Parameters*
+
+* target: [String] target IP address 
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v2/query/cve/xxx.xxx.xxx.xxx' -H 'X-Key:API_KEY'
+```
+
+```json
+{
+  "query": "xxx.xxx.xxx.xxx",
+  "events": {
+    "ip": "xxx.xxx.xxx.xxx",
+    "ports": [11, 15, 21, 25, 79, 80, 111, 119, 143, 3389, 6000, 8080],
+    "results": [{
+      "port": 111,
+      "cpe": [],
+      "ts": 1550723598503,
+      "cves": []
+    }, {
+      "port": 11,
+      "cpe": [],
+      "ts": 1550713541527,
+      "cves": []
+    }, {
+      "port": 6000,
+      "cpe": [],
+      "ts": 1549215405492,
+      "cves": []
+    }, {
+      "port": 25,
+      "cpe": [],
+      "ts": 1551649814882,
+      "cves": []
+    }, {
+      "port": 79,
+      "cpe": [],
+      "ts": 1550042997176,
+      "cves": []
+    }, {
+      "port": 8080,
+      "cpe": ["cpe:/a:apache:http_server:2.4.7"],
+      "ts": 1551779143688,
+      "cves": [{
+        "cve": "CVE-2018-17199",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2018-1312",
+        "cvss": 6.8
+      }, {
+        "cve": "CVE-2018-1283",
+        "cvss": 3.5
+      }, {
+        "cve": "CVE-2017-9798",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2017-9788",
+        "cvss": 6.4
+      }, {
+        "cve": "CVE-2017-7679",
+        "cvss": 7.5
+      }, {
+        "cve": "CVE-2017-15715",
+        "cvss": 6.8
+      }, {
+        "cve": "CVE-2017-15710",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2016-8743",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2016-8612",
+        "cvss": 3.3
+      }, {
+        "cve": "CVE-2016-4975",
+        "cvss": 4.3
+      }, {
+        "cve": "CVE-2016-2161",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2016-0736",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2015-3185",
+        "cvss": 4.3
+      }, {
+        "cve": "CVE-2015-3184",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2014-8109",
+        "cvss": 4.3
+      }, {
+        "cve": "CVE-2014-3523",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2014-0231",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2014-0226",
+        "cvss": 6.8
+      }, {
+        "cve": "CVE-2014-0118",
+        "cvss": 4.3
+      }, {
+        "cve": "CVE-2014-0117",
+        "cvss": 4.3
+      }, {
+        "cve": "CVE-2014-0098",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2013-6438",
+        "cvss": 5.0
+      }]
+    }, {
+      "port": 3389,
+      "cpe": [],
+      "ts": 1551348878536,
+      "cves": []
+    }, {
+      "port": 15,
+      "cpe": [],
+      "ts": 1549108048510,
+      "cves": []
+    }, {
+      "port": 143,
+      "cpe": [],
+      "ts": 1549566728724,
+      "cves": []
+    }, {
+      "port": 80,
+      "cpe": ["cpe:/a:igor_sysoev:nginx:1.4.6"],
+      "ts": 1550250446832,
+      "cves": [{
+        "cve": "CVE-2019-7401",
+        "cvss": 7.5
+      }, {
+        "cve": "CVE-2016-4450",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2016-0747",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2016-0746",
+        "cvss": 7.5
+      }, {
+        "cve": "CVE-2016-0742",
+        "cvss": 5.0
+      }, {
+        "cve": "CVE-2014-3616",
+        "cvss": 4.3
+      }, {
+        "cve": "CVE-2014-0133",
+        "cvss": 5.1
+      }]
+    }, {
+      "port": 21,
+      "cpe": [],
+      "ts": 1550642140211,
+      "cves": []
+    }, {
+      "port": 119,
+      "cpe": [],
+      "ts": 1550377835750,
+      "cves": []
+    }]
+  }
+}
+```
+
 
 ### Domains
 
