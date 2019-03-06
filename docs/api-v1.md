@@ -1694,7 +1694,7 @@ curl 'https://api.binaryedge.io/v1/query/score/ip/xxx.xxx.xxx.xxx' -H 'X-Token:A
 }
 ```
 
-#### /v1/query/cve/{target}
+#### /v1/query/cve/ip/{target}
 
 Get list of CVEs that migh affect a specific IP.
 
@@ -1705,7 +1705,7 @@ Get list of CVEs that migh affect a specific IP.
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/cve/xxx.xxx.xxx.xxx' -H 'X-Token:API_KEY'
+curl 'https://api.binaryedge.io/v1/query/cve/ip/xxx.xxx.xxx.xxx' -H 'X-Token:API_KEY'
 ```
 
 ```json
