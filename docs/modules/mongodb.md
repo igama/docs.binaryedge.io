@@ -111,68 +111,68 @@ The event does not always follow the same schema; it changes according to the Mo
 *Variables description from https://docs.mongodb.com/manual/*
 
 * serverInfo
-  * version - a string that conveys version information about the mongod instance
-  * gitVersion - the commit identifier that identifies the state of the code used to build the mongod.
-  * OpenSSLVersion - an embedded document describing the version of OpenSSL that mongod was built with, as well as the version of OpenSSL that mongod is currently using.
-  * sysInfo - a string that holds information about the operating system, hostname, kernel, date, and Boost version used to compile the mongod. (Deprecated since version 3.2.)
-  * versionArray - an array that conveys version information about the mongod instance
-  * loaderFlags - the flags passed to the loader that loads the mongod
-  * compilerFlags - the flags passed to the compiler that builds the mongod binary
-  * allocator - the memory allocator that mongod uses. By default this is tcmalloc
-  * javascriptEngine - A string that reports the JavaScript engine used in the mongod instance
-  * bits - reflects the target processor architecture of the mongod binary
-  * debug - boolean. true when built with debugging options.
-  * maxBsonObjectSize - reports the Maximum BSON Document Size
-  * targetMinOS - minimum version of the OS where this build of mongodb runs
-  * modules - a list of add-on modules that mongod was built with
-  * openSSL - an embedded document describing the version of OpenSSL that mongod was built with, as well as the version of OpenSSL that mongod is currently using. Note: this field contains similar information as the OpenSSLVersion field, whether one or the other appears on the results, depends on the mongodb version
-    * running - version of openSSL running
-    * compiled - version of openSSL compiled
-  * buildEnvironment - an embedded document containing various debugging information about the mongod build environment
-    * distMod
-    * distarch
-    * cc
-    * ccflags
-    * cxx
-    * cxxflags
-    * linkflags
-    * target_arch
-    * target_os
-  * storageEngines - list of storage engines being zsed
-  * ok - this value determines the success of the serverInfo commands. 1 indicates success
+    * version - a string that conveys version information about the mongod instance
+    * gitVersion - the commit identifier that identifies the state of the code used to build the mongod.
+    * OpenSSLVersion - an embedded document describing the version of OpenSSL that mongod was built with, as well as the version of OpenSSL that mongod is currently using.
+    * sysInfo - a string that holds information about the operating system, hostname, kernel, date, and Boost version used to compile the mongod. (Deprecated since version 3.2.)
+    * versionArray - an array that conveys version information about the mongod instance
+    * loaderFlags - the flags passed to the loader that loads the mongod
+    * compilerFlags - the flags passed to the compiler that builds the mongod binary
+    * allocator - the memory allocator that mongod uses. By default this is tcmalloc
+    * javascriptEngine - A string that reports the JavaScript engine used in the mongod instance
+    * bits - reflects the target processor architecture of the mongod binary
+    * debug - boolean. true when built with debugging options.
+    * maxBsonObjectSize - reports the Maximum BSON Document Size
+    * targetMinOS - minimum version of the OS where this build of mongodb runs
+    * modules - a list of add-on modules that mongod was built with
+    * openSSL - an embedded document describing the version of OpenSSL that mongod was built with, as well as the version of OpenSSL that mongod is currently using. Note: this field contains similar information as the OpenSSLVersion field, whether one or the other appears on the results, depends on the mongodb version
+        * running - version of openSSL running
+        * compiled - version of openSSL compiled
+    * buildEnvironment - an embedded document containing various debugging information about the mongod build environment
+        * distMod
+        * distarch
+        * cc
+        * ccflags
+        * cxx
+        * cxxflags
+        * linkflags
+        * target_arch
+        * target_os
+    * storageEngines - list of storage engines being zsed
+    * ok - this value determines the success of the serverInfo commands. 1 indicates success
 
 * listDatabases -
-  * database - array of documents, one document for each database
-    * name - name of the database
-    * sizeOnDisk -  total size of the database file on disk in bytes
-    * empty - this field specifying whether the database has any data
-    * stats - returns a variety of storage statistics for a given collection
-      * db - name of the database
-      * collections - number of collections in the database
-      * objects - number of documents in the database
-      * avgObjSize - the average size of an object in the collection
-      * dataSize - total size of all documents stored in this database
-      * storageSize - the total amount of storage allocated to this collection for document storage
-      * numExtents - the total number of contiguously allocated data file regions.
-      * indexes - the number of indexes on the collection
-      * indexSize -  key and size of every existing index on the collection
-      * fileSize - total size of storage files used for this database (represents the overall storage footprint for this database on disk)
-      * nsSizeMB - the total size of the namespace files
-      * extentFreeList - free space
-        * num - number of extents in the freelist
-        * totalSize -  total size of the extents on the freelist
-      * dataFileVersion - document that contains information about the on-disk format of the data files for the database.
-        * major - the major version number for the on-disk format of the data files for the database
-        * minor - the minor version number for the on-disk format of the data files for the database
-    * collections - list of collections (includes their name and options)
-      * name - name of the collection
-      * options
-        * capped - True if it's a fixed-sized collection that automatically overwrites its oldest entries when it reaches its maximum size
-        * size - maximum size of the capped collection in bytes
-        * autoIndexId - creates an index automatically if it's "true"
-    * totalSize - sum of all the sizeOnDisk fields.
-    * totalSizeMb - totalSize in megabytes
-    * ok - this value determines the success of the listDatabases commands. 1 indicates success
+    * database - array of documents, one document for each database
+        * name - name of the database
+        * sizeOnDisk -  total size of the database file on disk in bytes
+        * empty - this field specifying whether the database has any data
+        * stats - returns a variety of storage statistics for a given collection
+            * db - name of the database
+            * collections - number of collections in the database
+            * objects - number of documents in the database
+            * avgObjSize - the average size of an object in the collection
+            * dataSize - total size of all documents stored in this database
+            * storageSize - the total amount of storage allocated to this collection for document storage
+            * numExtents - the total number of contiguously allocated data file regions.
+            * indexes - the number of indexes on the collection
+            * indexSize -  key and size of every existing index on the collection
+            * fileSize - total size of storage files used for this database (represents the overall storage footprint for this database on disk)
+            * nsSizeMB - the total size of the namespace files
+            * extentFreeList - free space
+                * num - number of extents in the freelist
+                * totalSize -  total size of the extents on the freelist
+            * dataFileVersion - document that contains information about the on-disk format of the data files for the database.
+                * major - the major version number for the on-disk format of the data files for the database
+                * minor - the minor version number for the on-disk format of the data files for the database
+      * collections - list of collections (includes their name and options)
+          * name - name of the collection
+          * options
+              * capped - True if it's a fixed-sized collection that automatically overwrites its oldest entries when it reaches its maximum size
+              * size - maximum size of the capped collection in bytes
+              * autoIndexId - creates an index automatically if it's "true"
+      * totalSize - sum of all the sizeOnDisk fields.
+      * totalSizeMb - totalSize in megabytes
+      * ok - this value determines the success of the listDatabases commands. 1 indicates success
 
 
 ## MongoDB Event Examples

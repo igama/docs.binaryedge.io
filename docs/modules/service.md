@@ -56,22 +56,22 @@ These are optional parameters that can alter the behaviour of the module. These 
 This module provides the following data (if available):
 
 * **state**: Information regarding the state of the port
-  * **state**: State of the port
-  * **reason**: Reason for the state definition
-  * **reason_ttl**: TTL for the reason
+    * **state**: State of the port
+    * **reason**: Reason for the state definition
+    * **reason_ttl**: TTL for the reason
 * **service**: Information regarding the service that is likely to be running on the target
-  * **name**: Type of service that is running
-  * **product**: Product designation (and Vendor)
-  * **version**: Application version number
-  * **devicetype**: Type of device running the service
-  * **ostype**: Operating system running the service
-  * **hostname**: Hostname (if any) offered by the service
-  * **extrainfo**: Extra information extracted, can be an OS, version of a framework, etc
-  * **cpe**: List of Common Platform Enumeration tags, if available
+    * **name**: Type of service that is running
+    * **product**: Product designation (and Vendor)
+    * **version**: Application version number
+    * **devicetype**: Type of device running the service
+    * **ostype**: Operating system running the service
+    * **hostname**: Hostname (if any) offered by the service
+    * **extrainfo**: Extra information extracted, can be an OS, version of a framework, etc
+    * **cpe**: List of Common Platform Enumeration tags, if available
 * **scripts**: Extra information obtained by a set of scripts (results vary with the service found)
-  * **id**: Identifier of the script that generated the information
-  * **output**: Raw output of the script
-  * **results**: Formatted output of the script (format may vary)
+    * **id**: Identifier of the script that generated the information
+    * **output**: Raw output of the script
+    * **results**: Formatted output of the script (format may vary)
 
 ## Service Event Example
 

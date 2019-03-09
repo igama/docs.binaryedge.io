@@ -546,17 +546,22 @@ curl 'https://api.binaryedge.io/v1/query/search?query=product:mysql%20AND%20coun
 
 Details about Remote Desktops found on an Host. List of screenshots and details extracted from them for the specified host, with data up to 2 months. This includes the following information:
 
-* ip: string, target address where the screenshot was taken;
-* port: integer, target port where the service was running;
-* ts: integer, timestamp of when the screenshot was taken;
-* geoip: object, geographical information;
-* has_faces: boolean, whether faces were detected or not;
-* n_faces: integer, Number of faces detected on the image;
-* tags: list of string, tags automatically attributed by our process;
-* height: integer;
-* width: integer;
-* url: String, URL to download image;
-* thumb: SString, URL to download image thumbnail;
+* ip: [string] target address where the screenshot was taken
+* port: [int] target port where the service was running
+* ts: [int] timestamp of when the screenshot was taken
+* geoip: [object] geographical information
+    * city_name: [string] city name of the target
+    * country_name: [string] country name of the target
+    * country_code: [string] 2-letter country code of the target
+* asn: [int] AS number of the target
+* as_name: [string] AS name of the target
+* has_faces: [boolean] whether faces were detected or not
+* n_faces: [int] number of faces detected on the image
+* tags: [string] tags automatically attributed when processing
+* height: [int]
+* width: [int]
+* url: [string] URL to download image
+* thumb: [string] URL to download image thumbnail
 
 *Parameters*
 
@@ -651,17 +656,22 @@ curl 'https://api.binaryedge.io/v1/query/image' -H 'X-Token:InsertYourClientToke
 
 Details about a specific Remote Desktop. This includes the following information:
 
-* ip: string, target address where the screenshot was taken;
-* port: integer, target port where the service was running;
-* ts: integer, timestamp of when the screenshot was taken;
-* geoip: object, geographical information;
-* has_faces: boolean, whether faces were detected or not;
-* n_faces: integer, Number of faces detected on the image;
-* tags: list of string, tags automatically attributed by our process;
-* height: integer;
-* width: integer;
-* url: String, URL to download image;
-* thumb: SString, URL to download image thumbnail;
+* ip: [string] target address where the screenshot was taken
+* port: [int] target port where the service was running
+* ts: [int] timestamp of when the screenshot was taken
+* geoip: [object] geographical information
+    * city_name: [string] city name of the target
+    * country_name: [string] country name of the target
+    * country_code: [string] 2-letter country code of the target
+* asn: [int] AS number of the target
+* as_name: [string] AS name of the target
+* has_faces: [boolean] whether faces were detected or not
+* n_faces: [int] number of faces detected on the image
+* tags: [string] tags automatically attributed when processing
+* height: [int]
+* width: [int]
+* url: [string] URL to download image
+* thumb: [string] URL to download image thumbnail
 
 *Parameters*
 

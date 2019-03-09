@@ -15,9 +15,9 @@ curl -v -L https://api.binaryedge.io/v1/tasks -d '{"type":"scan", "options":[{"t
 
 These are optional parameters that can alter the behaviour of the module. These options can be inserted into the "config" object on the request.
 
-  * sni - Set HTTPS Server Name Indication
+* sni - Set HTTPS Server Name Indication
     * "config":{"sni":"google.com"}
-  * ssl_mode - Disable the cipher tests
+* ssl_mode - Disable the cipher tests
     * "config":{"ssl_mode":"fast"}
 
 ## Schema
@@ -204,99 +204,99 @@ These are optional parameters that can alter the behaviour of the module. These 
 ### Contents of the fields:
 
 * truststores - a set of truststores to be used for certificate validation
-  * is_certificate_trusted - whether the certificate chain is trusted when using supplied the trust_store
-  * trust_store - the trust store used for validation
-    * name - the human-readable name of the trust store
-    * version - the human-readable version or date of the trust store
-  * verify_string - the string returned by OpenSSL's validation function
-* ciphers - the result of running a CipherSuiteScanCommand on a specific server. Note: independently of the type of cipher and cipher_list, they all have the same fields. So, in order to simplify, we will only describe one of each
-  * sslv2 / sslv3 / tlsv1 / tlsv1_1 / tlsv1_2 - versions of the ssl
-    * errored_cipher_list - the list of cipher suites supported that triggered an unexpected error during the TLS handshake with the server
-    * preferred_cipher - the server's preferred cipher suite among all the cipher suites supported, null if the server follows the client's preference or if none of the tool's cipher suites are supported by the server
-    * accepted_cipher_list - the list of cipher suites supported by both the tool and the server
-      * is_anonymous - true if the cipher suite is an anonymous cipher suite (ie. no server authentication)
-      * openssl_name - the cipher suite's RFC name
-      * post_handshake_response - the server's response after completing the SSL/TLS handshake and sending a request, based on the TlsWrappedProtocolEnum set for this server. For example, this will contain an HTTP response when scanning an HTTPS server with TlsWrappedProtocolEnum.HTTPS as the tls_wrapped_protocol
-      * dh_info - additional details about the Diffie Helmann parameters for DH and ECDH cipher suites, null if the cipher suite is not DH or ECDH
-      * key_size - the key size of the cipher suite's algorithm in bits
-* vulnerabilities - information about SSL vulnerabilities
-  * openssl_ccs - test the server(s) for the OpenSSL CCS injection vulnerability
-    * is_vulnerable_to_ccs_injection - true if the server is vulnerable to OpenSSL's CCS injection issue
-  * heartbleed - test the server(s) for the OpenSSL Heartbleed vulnerability
-    * is_vulnerable_to_heartbleed - True if the server is vulnerable to the Heartbleed attack
-  * renegotiation - test the server(s) for client-initiated renegotiation and secure renegotiation support
-    * accepts_client_renegotiation - true if the server honors client-initiated renegotiation attempts
-    * supports_secure_renegotiation - true if the server supports secure renegotiation
-  * compression - test the server(s) for Zlib compression support
-    * supports_compression - true if the server supports compression
-    * compression_name - name of the compression used
-  * fallback - test the server(s) for support of the TLS_FALLBACK_SCSV cipher suite which prevents downgrade attacks
-    * supports_fallback_scsv - true if the server supports the TLS_FALLBACK_SCSV mechanism to block downgrade
-* cert_info - verify the validity of the server(s) certificate(s) against various trust stores (Mozilla, Apple, etc.), and check for OCSP stapling support
-  * error_message - an error message in case that the certificate couldn't be parsed correctly
-  * ocsp_response - the OCSP response returned by the server, null if no response was sent by the server
-  * has_anchor_in_certificate_chain - true if the server included the anchor/root certificate in the chain it send back to clients, null if the verified chain could not be built or no HPKP header was returned
-  * has_sha1_in_certificate_chain - true if any of the leaf or intermediate certificates are signed using the SHA-1 algorithm, null if the verified chain could not be built or no HPKP header was returned
-  * is_certificate_chain_order_valid - true if the order of the certificate chain is valid
-  * is_leaf_certificate_ev - true if the leaf certificate is Extended Validation according to Mozilla
-  * is_ocsp_response_trusted - true if the OCSP response is trusted using the Mozilla trust store, null if no OCSP response was sent by the server
-  * certificate_chain - the certificate chain sent by the server; index 0 is the leaf certificate
-    * as_dict
-      * extensions - contains the target's certificate extensions information
-      * serialNumber - the certificate serial number
-      * subject - subject contains the target's certificate subject information
-        * commonName - common name of the subject
-        * localityName - locality of the subject
-        * organizationName - organization name of the subject
-        * organizationalUnitName - organizational unit name of the subject
-        * countryName - country of the subject
-        * stateOrProvinceName - state or province of the subject
-      * subjectPublicKeyInfo - contains information about the public key stored in the certificate
-        * publicKeyAlgorithm - algorithm used to create the public key
-        * publicKeySize - size of the public key
-        * publicKey - contains the target public key
-          * curve - curve algorithm used (for Elliptic Curve keys)
-          * pub - contains the target public key (for Elliptic Curve keys)
-          * modulus - returns the value of attribute modulus (for RSA keys)
-          * exponent - returns the value of attribute exponent (for RSA keys)
-      * validity -  contains the target's certificate validity
-        * notAfter - expiration date of the certificate
-        * notBefore - date from which the certificate is valid
-      * version - the certificate SSL version
-      * issuer - contains the target's certificate issuer information
-        * commonName - common name of the issuer
-        * localityName - locality of the issuer
-        * organizationName - organization name of the issuer
-        * organiationalUnitName - organizational name of the issuer
-        * countryName - country of the issuer
-        * stateOrProvinceName - stae or province of the issuer
-      * signatureAlgorithm - the certificate signature algorithm
-      * signatureValue - the certificate signature
-    * sha1_fingerprint - the SHA1 fingerprint of the certificate
-    * hpkp_pin - a generated HTTP Public Key Pinning hash for a given certificate (https://tools.ietf.org/html/rfc7469); not to be confused with an extracted HPKP header
-    * as_pem - the certificate in PEM format
-  * verified_certificate_chain - certificate chain after validation using the successful_trust_store; all the fields are the same as certificate_chain
-  * successful_trust_store - the first trust store successfully used for validation; used afterwards to verify the certificate chain and the OSCP response
-    * name - the human-readable name of the trust store
-    * version - the human-readable version or date of the trust store
-  * path_validation_result_list - the list of attempts at validating the server's certificate chain path using the trust stores packaged (Mozilla, Apple, etc.), the first element of this list becomes the value of successful_trust_store
     * is_certificate_trusted - whether the certificate chain is trusted when using supplied the trust_store
     * trust_store - the trust store used for validation
-      * name - the human-readable name of the trust store
-      * version - the human-readable version or date of the trust store
+        * name - the human-readable name of the trust store
+        * version - the human-readable version or date of the trust store
     * verify_string - the string returned by OpenSSL's validation function
+* ciphers - the result of running a CipherSuiteScanCommand on a specific server. Note: independently of the type of cipher and cipher_list, they all have the same fields. So, in order to simplify, we will only describe one of each
+    * sslv2 / sslv3 / tlsv1 / tlsv1_1 / tlsv1_2 - versions of the ssl
+        * errored_cipher_list - the list of cipher suites supported that triggered an unexpected error during the TLS handshake with the server
+        * preferred_cipher - the server's preferred cipher suite among all the cipher suites supported, null if the server follows the client's preference or if none of the tool's cipher suites are supported by the server
+        * accepted_cipher_list - the list of cipher suites supported by both the tool and the server
+            * is_anonymous - true if the cipher suite is an anonymous cipher suite (ie. no server authentication)
+            * openssl_name - the cipher suite's RFC name
+            * post_handshake_response - the server's response after completing the SSL/TLS handshake and sending a request, based on the TlsWrappedProtocolEnum set for this server. For example, this will contain an HTTP response when scanning an HTTPS server with TlsWrappedProtocolEnum.HTTPS as the tls_wrapped_protocol
+            * dh_info - additional details about the Diffie Helmann parameters for DH and ECDH cipher suites, null if the cipher suite is not DH or ECDH
+            * key_size - the key size of the cipher suite's algorithm in bits
+* vulnerabilities - information about SSL vulnerabilities
+    * openssl_ccs - test the server(s) for the OpenSSL CCS injection vulnerability
+        * is_vulnerable_to_ccs_injection - true if the server is vulnerable to OpenSSL's CCS injection issue
+    * heartbleed - test the server(s) for the OpenSSL Heartbleed vulnerability
+        * is_vulnerable_to_heartbleed - True if the server is vulnerable to the Heartbleed attack
+    * renegotiation - test the server(s) for client-initiated renegotiation and secure renegotiation support
+        * accepts_client_renegotiation - true if the server honors client-initiated renegotiation attempts
+        * supports_secure_renegotiation - true if the server supports secure renegotiation
+    * compression - test the server(s) for Zlib compression support
+        * supports_compression - true if the server supports compression
+        * compression_name - name of the compression used
+    * fallback - test the server(s) for support of the TLS_FALLBACK_SCSV cipher suite which prevents downgrade attacks
+        * supports_fallback_scsv - true if the server supports the TLS_FALLBACK_SCSV mechanism to block downgrade
+* cert_info - verify the validity of the server(s) certificate(s) against various trust stores (Mozilla, Apple, etc.), and check for OCSP stapling support
+    * error_message - an error message in case that the certificate couldn't be parsed correctly
+    * ocsp_response - the OCSP response returned by the server, null if no response was sent by the server
+    * has_anchor_in_certificate_chain - true if the server included the anchor/root certificate in the chain it send back to clients, null if the verified chain could not be built or no HPKP header was returned
+    * has_sha1_in_certificate_chain - true if any of the leaf or intermediate certificates are signed using the SHA-1 algorithm, null if the verified chain could not be built or no HPKP header was returned
+    * is_certificate_chain_order_valid - true if the order of the certificate chain is valid
+    * is_leaf_certificate_ev - true if the leaf certificate is Extended Validation according to Mozilla
+    * is_ocsp_response_trusted - true if the OCSP response is trusted using the Mozilla trust store, null if no OCSP response was sent by the server
+    * certificate_chain - the certificate chain sent by the server; index 0 is the leaf certificate
+        * as_dict
+            * extensions - contains the target's certificate extensions information
+            * serialNumber - the certificate serial number
+            * subject - subject contains the target's certificate subject information
+                * commonName - common name of the subject
+                * localityName - locality of the subject
+                * organizationName - organization name of the subject
+                * organizationalUnitName - organizational unit name of the subject
+                * countryName - country of the subject
+                * stateOrProvinceName - state or province of the subject
+            * subjectPublicKeyInfo - contains information about the public key stored in the certificate
+                * publicKeyAlgorithm - algorithm used to create the public key
+                * publicKeySize - size of the public key
+                * publicKey - contains the target public key
+                    * curve - curve algorithm used (for Elliptic Curve keys)
+                    * pub - contains the target public key (for Elliptic Curve keys)
+                    * modulus - returns the value of attribute modulus (for RSA keys)
+                    * exponent - returns the value of attribute exponent (for RSA keys)
+            * validity -  contains the target's certificate validity
+                * notAfter - expiration date of the certificate
+                * notBefore - date from which the certificate is valid
+            * version - the certificate SSL version
+            * issuer - contains the target's certificate issuer information
+                * commonName - common name of the issuer
+                * localityName - locality of the issuer
+                * organizationName - organization name of the issuer
+                * organiationalUnitName - organizational name of the issuer
+                * countryName - country of the issuer
+                * stateOrProvinceName - stae or province of the issuer
+            * signatureAlgorithm - the certificate signature algorithm
+            * signatureValue - the certificate signature
+        * sha1_fingerprint - the SHA1 fingerprint of the certificate
+        * hpkp_pin - a generated HTTP Public Key Pinning hash for a given certificate (https://tools.ietf.org/html/rfc7469); not to be confused with an extracted HPKP header
+        * as_pem - the certificate in PEM format
+    * verified_certificate_chain - certificate chain after validation using the successful_trust_store; all the fields are the same as certificate_chain
+    * successful_trust_store - the first trust store successfully used for validation; used afterwards to verify the certificate chain and the OSCP response
+        * name - the human-readable name of the trust store
+        * version - the human-readable version or date of the trust store
+    * path_validation_result_list - the list of attempts at validating the server's certificate chain path using the trust stores packaged (Mozilla, Apple, etc.), the first element of this list becomes the value of successful_trust_store
+        * is_certificate_trusted - whether the certificate chain is trusted when using supplied the trust_store
+        * trust_store - the trust store used for validation
+            * name - the human-readable name of the trust store
+            * version - the human-readable version or date of the trust store
+        * verify_string - the string returned by OpenSSL's validation function
 * server_info - the server against which the command was run
-  * ssl_cipher_supported - one of the ssl ciphers supported by the server
-  * hostname - the server's hostname
-  * client_auth_requirement(_string) - does the server require the client to be authenticated
-  * highest_ssl_version_supported(_string) - the highest version of ssl supported for connections
-  * port - the server's TLS port number. If not supplied, the default port number for the specified `tls_wrapped_protocol` will be used
-  * http_tunneling_settings - settings defined for http tunnel
-  * ip_address - the server's IP address. If not supplied, a DNS lookup for the specified `hostname` will be performed. If `http_tunneling_settings` is specified, `ip_address` cannot be supplied as the HTTP proxy will be responsible for looking up and connecting to the server to be scanned.
-  * client_auth_credentials - The client certificate and private key needed to perform mutual authentication with the server. If not supplied, will attempt to connect to the server without performing mutual authentication
-  * tls_wrapped_protocol(_string) - the protocol wrapped in TLS that the server expects. It allows to figure out how to establish a (Start)TLS connection to the server and what kind of "hello" message (SMTP, XMPP, etc.) to send to the server after the handshake was completed. If not supplied, standard TLS will be used.
-  * xmpp_to_hostname - the hostname to set within the `to` attribute of the XMPP stream. If not supplied, the specified `hostname` will be used. Should only be set if the supplied `tls_wrapped_protocol` is an XMPP protocol
-  * tls_server_name_indication - the hostname to set within the Server Name Indication TLS extension. If not supplied, the specified `hostname` will be used
+    * ssl_cipher_supported - one of the ssl ciphers supported by the server
+    * hostname - the server's hostname
+    * client_auth_requirement(_string) - does the server require the client to be authenticated
+    * highest_ssl_version_supported(_string) - the highest version of ssl supported for connections
+    * port - the server's TLS port number. If not supplied, the default port number for the specified `tls_wrapped_protocol` will be used
+    * http_tunneling_settings - settings defined for http tunnel
+    * ip_address - the server's IP address. If not supplied, a DNS lookup for the specified `hostname` will be performed. If `http_tunneling_settings` is specified, `ip_address` cannot be supplied as the HTTP proxy will be responsible for looking up and connecting to the server to be scanned.
+    * client_auth_credentials - The client certificate and private key needed to perform mutual authentication with the server. If not supplied, will attempt to connect to the server without performing mutual authentication
+    * tls_wrapped_protocol(_string) - the protocol wrapped in TLS that the server expects. It allows to figure out how to establish a (Start)TLS connection to the server and what kind of "hello" message (SMTP, XMPP, etc.) to send to the server after the handshake was completed. If not supplied, standard TLS will be used.
+    * xmpp_to_hostname - the hostname to set within the `to` attribute of the XMPP stream. If not supplied, the specified `hostname` will be used. Should only be set if the supplied `tls_wrapped_protocol` is an XMPP protocol
+    * tls_server_name_indication - the hostname to set within the Server Name Indication TLS extension. If not supplied, the specified `hostname` will be used
 
 
 ## SSL Event Example

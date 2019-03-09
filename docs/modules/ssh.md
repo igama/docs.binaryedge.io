@@ -45,19 +45,19 @@ curl -v -L https://api.binaryedge.io/v1/tasks -d '{"type":"scan", "options":[{"t
 
 ### Contents of the fields:
 
-  * **cyphers** - Array with the cyphers found on the target server, may be empty if the server takes too long to respond.
+* **cyphers** - Array with the cyphers found on the target server, may be empty if the server takes too long to respond.
     * cypher - Name of the cypher
 		* key - Public Key
 		* fingerprint - Fingerprint of the key
 		* length - Length of the key
-  * **algorithms** - Supported Algorithms that the target server reports.
+* **algorithms** - Supported Algorithms that the target server reports.
     * kex - Key Exchange Algorithms
 		* server_host_key - Server Host Key Signature Algorithms
 		* encryption - Encryption Algorithms
 		* mac - Message Authentication Code Algorithms
 		* compression - Compressiom Algorithms
-  * **banner** - Server response identifying service.
-  * **hassh** - Network fingerprinting standard which can be used to identify specific Client and Server SSH implementations. See https://github.com/salesforce/hassh for details.
+* **banner** - Server response identifying service.
+* **hassh** - Network fingerprinting standard which can be used to identify specific Client and Server SSH implementations. See https://github.com/salesforce/hassh for details.
     * hassh - MD5 fingerprint based on the algorithms supported by the server.
     * hassh_algorithms - String used to generate the MD5 fingerprint, containing the algorithms supported by the server.
 

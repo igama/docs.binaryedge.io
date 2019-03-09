@@ -31,12 +31,12 @@ curl -v -L https://api.binaryedge.io/v1/tasks -d '{"type":"scan", "options":[{"t
 
 ### Contents of the fields:
 
-  * title - Title returned by the VNC server
-  * width - Width of the screen
-  * height - Height of the screen
-  * version - Version of the VNC Protocol
-  * link - URL link to the screenshot
-  * msg - Warning sent by the server, for example, "Too many security failures".
+* title - Title returned by the VNC server
+* width - Width of the screen
+* height - Height of the screen
+* version - Version of the VNC Protocol
+* link - URL link to the screenshot
+* msg - Warning sent by the server, for example, "Too many security failures".
 
 ## VNC Event Example
 

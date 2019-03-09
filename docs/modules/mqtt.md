@@ -35,14 +35,14 @@ curl -v -L https://api.binaryedge.io/v1/tasks -d '{"type":"scan", "options":[{"t
 
 ### Contents of the fields:
 
-  * connected - True if was able to connect
-  * auth - Auth enabled?
-  * messages - Collected Messages
-  * topics - Topics found
-  * num_events - Number of seen events
-  * num_topics - Number of seen topics
-  * bytes_captured - Bytes captured
-  * connack - MQTT Connack packet (http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html#_Toc398718033)
+* connected - True if was able to connect
+* auth - Auth enabled?
+* messages - Collected Messages
+* topics - Topics found
+* num_events - Number of seen events
+* num_topics - Number of seen topics
+* bytes_captured - Bytes captured
+* connack - MQTT Connack packet (http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html#_Toc398718033)
 
 ## MQTT Event Example
 
