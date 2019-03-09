@@ -303,6 +303,11 @@ Search by HTTP Server header.
 
     e.g. http.server:apache
 
+### sha256: (string)
+Search by SHA256 hash of the body.
+
+    e.g. http.sha256:"066fe13daa5b3416bece7fe09dbf718135908c61f967627a097c3119af0dfa05"
+
 ### statusCode: (int)
 Search by HTTP status code.
 
