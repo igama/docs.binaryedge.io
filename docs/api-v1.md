@@ -91,7 +91,7 @@ Note: all requests are identified by Job ID and are shown in the stream window.
 
     * [Risk Score](#risk-score)
         * [/v1/query/score/ip/{target}](#v1queryscoreiptarget)
-        * [/v1/query/cve/{target}](#v1querycvetarget)
+        * [/v1/query/cve/ip/{target}](#v1querycveiptarget)
 
     * [Domains](#domains)
         * [/v1/query/domains/subdomain/{target}](#v1querydomainssubdomaintarget)
@@ -1738,7 +1738,7 @@ curl 'https://api.binaryedge.io/v1/query/score/ip/xxx.xxx.xxx.xxx' -H 'X-Token:I
 }
 ```
 
-#### /v1/query/cve/{target}
+#### /v1/query/cve/ip/{target}
 
 Get list of CVEs that migh affect a specific IP.
 
@@ -1749,7 +1749,7 @@ Get list of CVEs that migh affect a specific IP.
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/cve/xxx.xxx.xxx.xxx' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/query/cve/ip/xxx.xxx.xxx.xxx' -H 'X-Token:InsertYourClientToken'
 ```
 
 ```json
