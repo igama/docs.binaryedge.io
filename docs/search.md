@@ -321,7 +321,7 @@ Search by HTTP title.
 
 ## MongoDB
 
-#### Available search fields:
+#### Available search fields
 
 * mongodb.ismaster (boolean)
 * mongodb.listDatabases (string)
@@ -334,7 +334,7 @@ Search by HTTP title.
 
 ## ElasticSearch
 
-#### Available search fields:
+#### Available search fields
 
 * elasticsearch.attributes.attr.rack (string)
 * elasticsearch.attributes.aws_availability_zone (string)
@@ -435,7 +435,7 @@ Search by HTTP title.
 
 ## Redis
 
-#### Available search fields:
+#### Available search fields
 
 * redis.active_defrag_hits (string)
 * redis.active_defrag_key_hits (string)
@@ -726,7 +726,7 @@ Search by HTTP title.
 
 ## Memcached
 
-#### Available search fields:
+#### Available search fields
 
 * memcached.accepting_conns (int)
 * memcached.app_impl_used (string)

@@ -387,20 +387,23 @@ Check each module's detailed documentation for the available configurations.
 
 #### GET /v1/query/historical - Historical IP Data Endpoint
 
-Access our historical database. This will provide with all the raw events regarding an IP
+Details about an Host, with data up to 6 months.
 
-Available options:
+List of events for the specified host, with events for each time that:
 
-* Target IP, e.g.:
-    * /v1/query/historical/210.1.1.X
-* Target CIDR, e.g.:
-    * /v1/query/historical/210.1.1.X/24
+- A port was detected open
+- A service was found running
+- Other modules were successfully executed 
+
+*Parameters*
+
+* target: [String] target IP address or CIDR up to /24
+
+*Output*
 
 ```shell
 curl 'https://api.binaryedge.io/v1/query/historical/222.208.xxx.xxx' -H 'X-Token:InsertYourClientToken'
 ```
-
-##### Response
 
 ```json
 {
@@ -431,20 +434,17 @@ curl 'https://api.binaryedge.io/v1/query/historical/222.208.xxx.xxx' -H 'X-Token
 
 #### GET /v1/query/latest - Latest IP Data Endpoint
 
-Access our historical database. This will provide with the latest raw events regarding an IP
+Details about an Host. List of recent events for the specified host, including details of exposed ports and services.
 
-Available options:
+*Parameters*
 
-* Target IP, e.g.:
-    * /v1/query/latest/210.1.1.X
-* Target CIDR, e.g.:
-    * /v1/query/latest/210.1.1.X/24
+* target: [String] target IP address or CIDR up to /24
+
+*Output*
 
 ```shell
 curl 'https://api.binaryedge.io/v1/query/latest/222.208.xxx.xxx' -H 'X-Token:InsertYourClientToken'
 ```
-
-##### Response
 
 ```json
 {
@@ -473,109 +473,60 @@ curl 'https://api.binaryedge.io/v1/query/latest/222.208.xxx.xxx' -H 'X-Token:Ins
 }
 ```
 
-#### GET /v1/query/torrent - Torrent IP Data Endpoint
-
-Access our historical database. This will provide with raw events related with torrent activity regarding an IP
-
-Available options:
-
-* Target IP, e.g.:
-    * /v1/query/torrent/210.1.1.X
-* Target CIDR, e.g.:
-    * /v1/query/torrent/210.1.1.X/24
-
-```shell
-curl 'https://api.binaryedge.io/v1/query/torrent/222.208.xxx.xxx' -H 'X-Token:InsertYourClientToken'
-```
-
-##### Response
-
-```json
-{
-  "origin":{  
-    "type":"peer",
-    "module":"torrent",
-    "ts":1491827676263
-  },
-  "node":{  
-    "ip":"219.88.xxx.xxx",
-    "port":25923
-  },
-  "peer":{  
-    "ip":"222.208.xxx.xxx",
-    "port":30236
-  },
-  "torrent":{  
-    "infohash":"cbe45addbb48c07ef6451bd3bee326d5cd82538f",
-    "name":"NCIS Los Angeles S08E20 HDTV x264-LOL EZTV",
-    "source":"EZTV",
-    "category":"TV Show"
-  }
-}
-```
-
-#### GET /v1/query/torrent/latest - Latest Torrent IP Data Endpoint
-
-Access our historical database. This will provide with latest raw events related with torrent activity regarding an IP
-
-Available options:
-
-* Target IP, e.g.:
-    * /v1/query/torrent/latest/210.1.1.X
-* Target CIDR, e.g.:
-    * /v1/query/torrent/latest/210.1.1.X/24
-
-```shell
-curl 'https://api.binaryedge.io/v1/query/torrent/latest/222.208.xxx.xxx' -H 'X-Token:InsertYourClientToken'
-```
-
-##### Response
-
-```json
-{
-  "origin":{  
-    "type":"peer",
-    "module":"torrent",
-    "ts":1491827676263
-  },
-  "node":{  
-    "ip":"219.88.xxx.xxx",
-    "port":25923
-  },
-  "peer":{  
-    "ip":"222.208.xxx.xxx",
-    "port":30236
-  },
-  "torrent":{  
-    "infohash":"cbe45addbb48c07ef6451bd3bee326d5cd82538f",
-    "name":"NCIS Los Angeles S08E20 HDTV x264-LOL EZTV",
-    "source":"EZTV",
-    "category":"TV Show"
-  }
-}
-```
-
 #### GET /v1/query/search - Full-Text Search 
 
-Query our data, using our Text Search Engine.
+Events based on a Query. List of recent events for the given query, including details of exposed ports and services. Can be used with specific parameters and/or full-text search.
 
-```shell
-curl 'https://api.binaryedge.io/v1/query/search?query=mysql' -H 'X-Token:InsertYourClientToken'
-```
+*Parameters*
 
-Or, you can use some filters:
+* query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](search.md) for details on what parameters can be used.
+* page: [Int] Optional. Default 1
+* pagesize: [Int] Optional. Default 100
 
-For all available options go to [Search Parameters](search.md):
+*Output*
 
 ```shell
 curl 'https://api.binaryedge.io/v1/query/search?query=product:mysql%20AND%20country:ES' -H 'X-Token:InsertYourClientToken'
 ```
 
-### Remote Desktop Query
+```json
+{
+  "origin": {
+    "type": "service-simple", 
+    "ts": 1552128473582, 
+    "module": "grabber", 
+    "port": 37188, 
+    "country": "uk", 
+    "ip": "xxx.xxx.xxx.xxx"
+  }, 
+  "target": {
+    "ip": "xxx.xxx.xxx.xxx", 
+    "protocol": "tcp", 
+    "port": 9100
+  }, 
+  "result": {
+    "data": {
+      "state": {
+        "state": "open"
+      }, 
+      "service": {
+        "version": "5.0.45-community-nt", 
+        "cpe": ["cpe:/a:mysql:mysql:5.0.45-community-nt"], 
+        "name": "mysql", 
+        "banner": "A\\x00\\x00\\x00\\n5.0.45-community-nt\\x00\\xe0\\x14\\x00\\x00jEZrR\"QS\\x00,\\xa2\\x08\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00/,0Msz,gFdFr\\x00", 
+        "method": "probe_matching", 
+        "product": "MySQL"
+      }
+    }
+  }
+}
+```
+
+### Image
 
 #### GET /v1/query/image/ip
 
-Query details about remote desktops that were detected by BinaryEdge for a specific IP. This includes the following information:
+Details about Remote Desktops found on an Host. List of screenshots and details extracted from them for the specified host, with data up to 2 months. This includes the following information:
 
 * ip: string, target address where the screenshot was taken;
 * port: integer, target port where the service was running;
@@ -589,16 +540,18 @@ Query details about remote desktops that were detected by BinaryEdge for a speci
 * url: String, URL to download image;
 * thumb: SString, URL to download image thumbnail;
 
-Available options:
+*Parameters*
 
-* ocr: if present, shows an additional "words" field, which is a list of words obtains via our OCR process, e.g.:
-    * ocr=1
+* target: [String] target IP address or CIDR up to /24
+* ocr: [any] if present, shows an additional "words" field, which is a list of words obtained via OCR
+* page: [Int] Optional. Default 1
+* pagesize: [Int] Optional. Default 100
+
+*Output*
 
 ```shell
 curl 'https://api.binaryedge.io/v1/query/image/ip/XXX.XXX.XXX.XXX?ocr=1' -H 'X-Token:InsertYourClientToken'
 ```
-
-##### Response
 
 ```json
 {
@@ -639,20 +592,18 @@ curl 'https://api.binaryedge.io/v1/query/image/ip/XXX.XXX.XXX.XXX?ocr=1' -H 'X-T
 
 #### GET /v1/query/image
 
-Query for a list of remote desktops found (latest first).
+List of Remote Desktops found (latest first).
 
-Available options:
+*Parameters*
 
-* pagesize: Maximum number of results to return per page
-    * pagesize=100
-* page: Page number of the results
-    * page=1
+* page: [int] Optional. Default 1
+* pagesize: [int] Optional. Default 100
+
+*Output*
 
 ```shell
 curl 'https://api.binaryedge.io/v1/query/image' -H 'X-Token:InsertYourClientToken'
 ```
-
-##### Response
 
 ```json
 {
@@ -680,7 +631,7 @@ curl 'https://api.binaryedge.io/v1/query/image' -H 'X-Token:InsertYourClientToke
 
 #### GET /v1/query/image
 
-Query details about remote desktops that were detected by BinaryEdge. This includes the following information:
+Details about a specific Remote Desktop. This includes the following information:
 
 * ip: string, target address where the screenshot was taken;
 * port: integer, target port where the service was running;
@@ -694,16 +645,15 @@ Query details about remote desktops that were detected by BinaryEdge. This inclu
 * url: String, URL to download image;
 * thumb: SString, URL to download image thumbnail;
 
-Available options:
+*Parameters*
 
-* ocr: if present, shows an additional "words" field, which is a list of words obtains via our OCR process, e.g.:
-    * ocr=1
+* ocr: [any] if present, shows an additional "words" field, which is a list of words obtained via OCR
+
+*Output*
 
 ```shell
 curl 'https://api.binaryedge.io/v1/query/image/f1b0a311af803ea73ac48adce2378f58adce2378f5?ocr=1' -H 'X-Token:InsertYourClientToken'
 ```
-
-##### Response
 
 ```json
 {
@@ -738,36 +688,19 @@ curl 'https://api.binaryedge.io/v1/query/image/f1b0a311af803ea73ac48adce2378f58a
 
 #### GET /v1/query/image/search
 
-Query for a list of remote desktops according to certain filters.
+List of Remote Desktops based on a Query. Can be used with specific parameters and/or full-text search.
 
-Available options:
+*Parameters*
 
-* ip: IP, CIDR or Range you want to target, e.g.:
-    * ip=127.0.0.1
-* port: Port number /range you want to target, e.g.:
-    * port=5900
-* country: Search images from a certain country, e.g.:
-    * country=pt
-* tag: Search images that contain a tag, e.g.:
-    * tag=has_faces
-    * tag=mobile
-* word: Search images that contain a word, e.g.:
-    * word=microsoft
-    * word=credit+card
-* from: Start date (or meaningful string) of the timerange you want to retrieve images from, e.g.:
-    * from=2015-01-01
-* to: End date (or meaningful string) of the timerange you want to retrieve images from, e.g.:
-    * to=2018-01-01
-* pagesize: Maximum number of results to return per page
-    * pagesize=100
-* page: Page number of the results
-    * page=1
+* query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](image-search.md) for details on what parameters can be used.
+* page: [Int] Optional. Default 1
+* pagesize: [Int] Optional. Default 100
+
+*Output*
 
 ```shell
 curl 'https://api.binaryedge.io/v1/query/image/search?ip=120.XXX.XXX.XXX'  -H 'X-Token:InsertYourClientToken'
 ```
-
-##### Response
 
 ```json
 {
@@ -804,18 +737,18 @@ curl 'https://api.binaryedge.io/v1/query/image/search?ip=120.XXX.XXX.XXX'  -H 'X
 
 #### GET /v1/query/image/search
 
-Query for a list of remote desktops that are similar to another remote desktop.
+List of Remote Desktops that are similar to another Remote Desktop.
 Note: This option cannot be used together with the previous ones.
 
-Available options:
+*Parameters*
 
 * similar: Image ID of the image you wish to compare
+
+*Output*
 
 ```shell
 curl 'https://api.binaryedge.io/v1/query/image/search?similar=f1b0a311af803ea73ac48adce2378f58adce2378f5' -H 'X-Token:InsertYourClientToken'
 ```
-
-##### Response
 
 ```json
 {
@@ -847,17 +780,103 @@ curl 'https://api.binaryedge.io/v1/query/image/search?similar=f1b0a311af803ea73a
 }
 ```
 
+### Torrent
+
+#### GET /v1/query/torrent - Torrent IP Data Endpoint
+
+Details about torrents transferred by an Host, with data up to 6 months.
+
+List of torrent events for the specified host, with events for each time that a new transfer was detected on the DHT. See [Torrent Data](torrent.md) for more details.
+
+*Parameters*
+
+* target: [String] target IP address or CIDR up to /24
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v1/query/torrent/222.208.xxx.xxx' -H 'X-Token:InsertYourClientToken'
+```
+
+```json
+{
+  "origin":{  
+    "type":"peer",
+    "module":"torrent",
+    "ts":1491827676263
+  },
+  "node":{  
+    "ip":"219.88.xxx.xxx",
+    "port":25923
+  },
+  "peer":{  
+    "ip":"222.208.xxx.xxx",
+    "port":30236
+  },
+  "torrent":{  
+    "infohash":"cbe45addbb48c07ef6451bd3bee326d5cd82538f",
+    "name":"NCIS Los Angeles S08E20 HDTV x264-LOL EZTV",
+    "source":"EZTV",
+    "category":"TV Show"
+  }
+}
+```
+
+#### GET /v1/query/torrent/latest - Latest Torrent IP Data Endpoint
+
+Details about torrents transferred by an Host. List of recent torrent events for the specified host, including details of the peer and torrent. See [Torrent Data](torrent.md) for more details.
+
+*Parameters*
+
+* target: [String] target IP address or CIDR up to /24
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v1/query/torrent/latest/222.208.xxx.xxx' -H 'X-Token:InsertYourClientToken'
+```
+
+```json
+{
+  "origin":{  
+    "type":"peer",
+    "module":"torrent",
+    "ts":1491827676263
+  },
+  "node":{  
+    "ip":"219.88.xxx.xxx",
+    "port":25923
+  },
+  "peer":{  
+    "ip":"222.208.xxx.xxx",
+    "port":30236
+  },
+  "torrent":{  
+    "infohash":"cbe45addbb48c07ef6451bd3bee326d5cd82538f",
+    "name":"NCIS Los Angeles S08E20 HDTV x264-LOL EZTV",
+    "source":"EZTV",
+    "category":"TV Show"
+  }
+}
+```
+
 ### Dataleaks
+
+Allows you to search across multiple data breaches to see if any of your email addresses has been compromised. If you are affected, we recommend you change your password on the respective services.
 
 #### GET /v1/dataleaks/check
 
-Get all dataleaks for a given email.
+Verify how many dataleaks affected an specific email address.
+
+*Parameters*
+
+* email: [String] Verify which dataleaks affect the target email.
+
+*Output*
 
 ```shell
 curl 'https://api.binaryedge.io/v1/dataleaks/check/user@example.com' -H 'X-Token:InsertYourClientToken'
 ```
-
-##### Response
 
 ```json
 {
@@ -888,24 +907,21 @@ curl 'https://api.binaryedge.io/v1/dataleaks/check/user@example.com' -H 'X-Token
 
 #### GET /v1/dataleaks/organization
 
-Get all dataleaks for a given organization (domain).
+Verify how many emails are affected by dataleaks for a specific domain.
 
-Available options:
+*Parameters*
 
-* pagesize: Maximum number of results to return per page
-    * pagesize=100
-* page: Page number of the results
-    * page=1
-* csv: Return results in CSV format
-    * csv=1
-* jsonl: Return results in JSON lines format
-    * jsonl=1
+* domain: [String] Verify which dataleaks affect the target domain
+* csv: [any] if present, return results in CSV format
+* jsonl: [any] if present, return results in JSON lines format
+* page: [Int] Optional. Default 1
+* pagesize: [Int] Optional. Default 100
+
+*Output*
 
 ```shell
 curl 'https://api.binaryedge.io/v1/dataleaks/organization/example.com' -H 'X-Token:InsertYourClientToken'
 ```
-
-##### Response
 
 ```json
 {
@@ -921,17 +937,17 @@ curl 'https://api.binaryedge.io/v1/dataleaks/organization/example.com' -H 'X-Tok
 
 #### GET /v1/dataleaks/leaks
 
-Get all available information about the dataleaks
+Get all available information about the dataleaks our platform keeps track.
 
-Available options:
+*Parameters*
 
-* leak: Return information about a specific leak (all leaks if not specified)
+* leak: [String] if present, return information about a specific leak (all leaks if not specified)
+
+*Output*
 
 ```shell
 curl 'https://api.binaryedge.io/v1/dataleaks/leaks?leak=ashleymadison' -H 'X-Token:InsertYourClientToken'
 ```
-
-##### Response
 
 ```json
 {  
@@ -957,7 +973,6 @@ IP Risk Score. Scoring is based on all information found on our databases regard
 
 More details about scoring can be found on [https://github.com/binaryedge/ratemyip-openframework/blob/master/ip-score.md](https://github.com/binaryedge/ratemyip-openframework/blob/master/ip-score.md).
 
-
 *Parameters*
 
 * target: [String] target IP address 
@@ -965,7 +980,7 @@ More details about scoring can be found on [https://github.com/binaryedge/ratemy
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/score/ip/xxx.xxx.xxx.xxx' -H 'X-Token:API_KEY'
+curl 'https://api.binaryedge.io/v1/query/score/ip/xxx.xxx.xxx.xxx' -H 'X-Token:InsertYourClientToken'
 ```
 
 ```json
@@ -1705,7 +1720,7 @@ Get list of CVEs that migh affect a specific IP.
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/cve/xxx.xxx.xxx.xxx' -H 'X-Token:API_KEY'
+curl 'https://api.binaryedge.io/v1/query/cve/xxx.xxx.xxx.xxx' -H 'X-Token:InsertYourClientToken'
 ```
 
 ```json
@@ -1880,12 +1895,13 @@ Return list of subdomains known from the target domains
 *Parameters*
 
 * target: [String] Domain you want to get list of known subdomains.
-* page: [Int] Optional. Default 1, Maximum: 500 (10,000 results)
+* page: [Int] Optional. Default 1
+* pagesize: [Int] Optional. Default 100
 
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/domains/subdomain/example.com' -H 'X-Token:API_KEY'
+curl 'https://api.binaryedge.io/v1/query/domains/subdomain/example.com' -H 'X-Token:InsertYourClientToken'
 ```
 
 ```json
@@ -1909,17 +1925,16 @@ Possible types of records currently available:
 * NS
 * MX
 
-**Note**: Available for paid subscriptions only.
-
 *Parameters*
 
 * target: [String] Domain you want to get DNS related data.
 * page: [Int] Optional. Default 1
+* pagesize: [Int] Optional. Default 100
 
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/domains/dns/example.com' -H 'X-Token:API_KEY'
+curl 'https://api.binaryedge.io/v1/query/domains/dns/example.com' -H 'X-Token:InsertYourClientToken'
 ```
 
 ```json
@@ -1958,17 +1973,16 @@ curl 'https://api.binaryedge.io/v1/query/domains/dns/example.com' -H 'X-Token:AP
 
 Return records that have the specified IP address in their A or AAAA records.
 
-**Note**: Available for paid subscriptions only.
-
 *Parameters*
 
-* target: [IP] IP you want to verify, can be IPV4 or IPV6
-* page: [Int] Optional. Default 1, Maximum: 500 (10,000 results)
+* target: [String] target IP address or CIDR up to /24, supports IPV4 or IPV6
+* page: [Int] Optional. Default 1
+* pagesize: [Int] Optional. Default 100
 
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/domains/ip/8.8.8.8' -H 'X-Token:API_KEY'
+curl 'https://api.binaryedge.io/v1/query/domains/ip/8.8.8.8' -H 'X-Token:InsertYourClientToken'
 ```
 
 ```json
@@ -2026,12 +2040,13 @@ List of Domains/DNS data based on a Query.  Can be used with specific parameters
 *Parameters*
 
 * query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events.
-* page: [Int] Optional. Default 1, Maximum: 500 (10,000 results)
+* page: [Int] Optional. Default 1
+* pagesize: [Int] Optional. Default 100
 
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/domains/search?query=A:127.0.01' -H 'X-Token:API_KEY'
+curl 'https://api.binaryedge.io/v1/query/domains/search?query=A:127.0.0.1' -H 'X-Token:InsertYourClientToken'
 ```
 
 ```json
@@ -2066,8 +2081,6 @@ curl 'https://api.binaryedge.io/v1/query/domains/search?query=A:127.0.01' -H 'X-
 
 Details about an Scanner. List of recent events form the specified host, including details of scanned ports, payloads and tags.
 
-**Note**: Querying CIDRs is available for paid subscriptions only. When using CIDR, the number of credits that will be spent correspond to the number of targets that returned results. Example: a request for a /24 (256 targets) in which only 200 targets have results, will decrement 200 credits.
-
 *Parameters*
 
 * target: [String] target IP address or CIDR up to /24
@@ -2075,7 +2088,7 @@ Details about an Scanner. List of recent events form the specified host, includi
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/sensors/ip/xxx.xxx.xxx.xxx' -H 'X-Token:API_KEY'
+curl 'https://api.binaryedge.io/v1/query/sensors/ip/xxx.xxx.xxx.xxx' -H 'X-Token:InsertYourClientToken'
 ```
 
 ```json
@@ -2126,12 +2139,13 @@ Events based on a Query. List of recent events for the given query, including de
 *Parameters*
 
 * query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](sensors-search.md) for details on what parameters can be used.
-* page: [Int] Optional. Default 1, Maximum: 500 (10,000 results)
+* page: [Int] Optional. Default 1
+* pagesize: [Int] Optional. Default 100
 
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/sensors/search?query=tags:ssh_scanner' -H 'X-Token:API_KEY'
+curl 'https://api.binaryedge.io/v1/query/sensors/search?query=tags:ssh_scanner' -H 'X-Token:InsertYourClientToken'
 ```
 
 ```json
@@ -2202,7 +2216,7 @@ Statistics of events for the given query. Can be used with specific parameters a
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/sensors/search/stats?query=tags:ssh_scanner&type=ports' -H 'X-Token:API_KEY'
+curl 'https://api.binaryedge.io/v1/query/sensors/search/stats?query=tags:ssh_scanner&type=ports' -H 'X-Token:InsertYourClientToken'
 ```
 
 ```json
@@ -2223,7 +2237,6 @@ curl 'https://api.binaryedge.io/v1/query/sensors/search/stats?query=tags:ssh_sca
     "doc_count": 1552
 }]
 ```
-
 
 ### FAQ
 
