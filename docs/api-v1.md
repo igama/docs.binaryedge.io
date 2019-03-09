@@ -69,23 +69,41 @@ Note: all requests are identified by Job ID and are shown in the stream window.
 * [Configurations](#configurations)
 
 * [Query Endpoints](#query-endpoints)
-    * [Historical Query](#historical-query)
-        * [GET /v1/query/historical](#get-v1queryhistorical---historical-ip-data-endpoint)
-        * [GET /v1/query/latest](#get-v1querylatest---latest-ip-data-endpoint)
-        * [GET /v1/query/torrent](#get-v1querytorrent---torrent-ip-data-endpoint)
-        * [GET /v1/query/search](#get-v1querysearch---full-text-search)
+    * [Host](#host)
+        * [/v1/query/historical/{target}](#v1queryhistoricaltarget)
+        * [/v1/query/latest/{target}](#v1querylatesttarget)
+        * [/v1/query/search](#v1querysearch)
 
-    * [Remote Desktop Query](#remote-desktop-query)
-        * [GET /v1/query/image/ip/<ip>(options)](#get-v1queryimageipoptions)
-        * [GET /v1/query/image](#get-v1queryimage)
-        * [GET /v1/query/image/<image_id>?(options)](#get-v1queryimageimage_idoptions)
-        * [GET /v1/query/image/search?(options)](#get-v1queryimagesearchoptions)
-        * [GET /v1/query/image/search?similar=<image_id>](#get-v1queryimagesearchsimilarimage_id)
+    * [Image](#image)
+        * [/v1/query/image/ip/{target}](#v1queryimageiptarget)
+        * [/v1/query/image](#v1queryimage)
+        * [/v1/query/image/{image_id}](#v1queryimageimage_id)
+        * [/v1/query/image/search](#v1queryimagesearchoptions)
+
+    * [Torrent](#torrent)
+        * [/v1/query/torrent/{target}](#v1querytorrenttarget)
+        * [/v1/query/torrent/latest/{target}](#v1querytorrentlatesttarget)
 
     * [Dataleaks](#dataleaks)
-        * [GET /v1/dataleaks/check](#get-v1dataleakscheck)
-        * [GET /v1/dataleaks/organization](#get-v1dataleaksorganization)
-        * [GET /v1/dataleaks/leaks](#get-v1dataleaksleaks)
+        * [/v1/dataleaks/check/{email}](#get-v1dataleakscheckemail)
+        * [/v1/dataleaks/organization/{domain}](#get-v1dataleaksorganizationdomain)
+        * [/v1/dataleaks/leaks](#get-v1dataleaksleaks)
+
+    * [Risk Score](#risk-score)
+        * [/v1/query/score/ip/{target}](#v1queryscoreiptarget)
+        * [/v1/query/cve/{target}](#v1querycvetarget)
+
+    * [Domains](#domains)
+        * [/v1/query/domains/subdomain/{target}](#v1querydomainssubdomaintarget)
+        * [/v1/query/domains/dns/{target}](#v1querydomainsdnstarget)
+        * [/v1/query/domains/ip/{target}](#v1querydomainsiptarget)
+        * [/v1/query/domains/search](#v1querydomainssearch)
+
+    * [Sensors](#sensors)
+        * [/v1/query/sensors/ip/{target}](#v1querysensorsiptarget)
+        * [/v1/query/sensors/search](#v1querysensorssearch)
+        * [/v1/query/sensors/search/stats](#v1querysensorssearchstats)
+
 
 ## Data Stream
 
@@ -383,9 +401,9 @@ Check each module's detailed documentation for the available configurations.
 
 ## Query Endpoints
 
-### Historical Query
+### Host
 
-#### GET /v1/query/historical - Historical IP Data Endpoint
+#### /v1/query/historical/{target}
 
 Details about an Host, with data up to 6 months.
 
@@ -432,7 +450,7 @@ curl 'https://api.binaryedge.io/v1/query/historical/222.208.xxx.xxx' -H 'X-Token
 }
 ```
 
-#### GET /v1/query/latest - Latest IP Data Endpoint
+#### /v1/query/latest/{target}
 
 Details about an Host. List of recent events for the specified host, including details of exposed ports and services.
 
@@ -473,7 +491,7 @@ curl 'https://api.binaryedge.io/v1/query/latest/222.208.xxx.xxx' -H 'X-Token:Ins
 }
 ```
 
-#### GET /v1/query/search - Full-Text Search 
+#### /v1/query/search
 
 Events based on a Query. List of recent events for the given query, including details of exposed ports and services. Can be used with specific parameters and/or full-text search.
 
@@ -524,7 +542,7 @@ curl 'https://api.binaryedge.io/v1/query/search?query=product:mysql%20AND%20coun
 
 ### Image
 
-#### GET /v1/query/image/ip
+#### /v1/query/image/ip/{target}
 
 Details about Remote Desktops found on an Host. List of screenshots and details extracted from them for the specified host, with data up to 2 months. This includes the following information:
 
@@ -590,7 +608,7 @@ curl 'https://api.binaryedge.io/v1/query/image/ip/XXX.XXX.XXX.XXX?ocr=1' -H 'X-T
 }
 ```
 
-#### GET /v1/query/image
+#### /v1/query/image
 
 List of Remote Desktops found (latest first).
 
@@ -629,7 +647,7 @@ curl 'https://api.binaryedge.io/v1/query/image' -H 'X-Token:InsertYourClientToke
 }
 ```
 
-#### GET /v1/query/image
+#### /v1/query/image/{image_id}
 
 Details about a specific Remote Desktop. This includes the following information:
 
@@ -647,6 +665,7 @@ Details about a specific Remote Desktop. This includes the following information
 
 *Parameters*
 
+* image_id: [string] image ID of the image you want the details from
 * ocr: [any] if present, shows an additional "words" field, which is a list of words obtained via OCR
 
 *Output*
@@ -686,7 +705,7 @@ curl 'https://api.binaryedge.io/v1/query/image/f1b0a311af803ea73ac48adce2378f58a
 }
 ```
 
-#### GET /v1/query/image/search
+#### /v1/query/image/search
 
 List of Remote Desktops based on a Query. Can be used with specific parameters and/or full-text search.
 
@@ -735,7 +754,7 @@ curl 'https://api.binaryedge.io/v1/query/image/search?ip=120.XXX.XXX.XXX'  -H 'X
 }
 ```
 
-#### GET /v1/query/image/search
+#### /v1/query/image/search
 
 List of Remote Desktops that are similar to another Remote Desktop.
 Note: This option cannot be used together with the previous ones.
@@ -782,7 +801,7 @@ curl 'https://api.binaryedge.io/v1/query/image/search?similar=f1b0a311af803ea73a
 
 ### Torrent
 
-#### GET /v1/query/torrent - Torrent IP Data Endpoint
+#### /v1/query/torrent/{target}
 
 Details about torrents transferred by an Host, with data up to 6 months.
 
@@ -822,7 +841,7 @@ curl 'https://api.binaryedge.io/v1/query/torrent/222.208.xxx.xxx' -H 'X-Token:In
 }
 ```
 
-#### GET /v1/query/torrent/latest - Latest Torrent IP Data Endpoint
+#### /v1/query/torrent/latest/{target}
 
 Details about torrents transferred by an Host. List of recent torrent events for the specified host, including details of the peer and torrent. See [Torrent Data](torrent.md) for more details.
 
@@ -864,7 +883,7 @@ curl 'https://api.binaryedge.io/v1/query/torrent/latest/222.208.xxx.xxx' -H 'X-T
 
 Allows you to search across multiple data breaches to see if any of your email addresses has been compromised. If you are affected, we recommend you change your password on the respective services.
 
-#### GET /v1/dataleaks/check
+#### /v1/dataleaks/check/{email}
 
 Verify how many dataleaks affected an specific email address.
 
@@ -905,7 +924,7 @@ curl 'https://api.binaryedge.io/v1/dataleaks/check/user@example.com' -H 'X-Token
 }
 ```
 
-#### GET /v1/dataleaks/organization
+#### /v1/dataleaks/organization/{domain}
 
 Verify how many emails are affected by dataleaks for a specific domain.
 
@@ -935,7 +954,7 @@ curl 'https://api.binaryedge.io/v1/dataleaks/organization/example.com' -H 'X-Tok
 }
 ```
 
-#### GET /v1/dataleaks/leaks
+#### /v1/dataleaks/leaks
 
 Get all available information about the dataleaks our platform keeps track.
 
