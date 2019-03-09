@@ -12,11 +12,11 @@ curl -v -L https://api.binaryedge.io/v1/tasks -d '{"type":"scan", "options":[{"t
 
 These are optional parameters that can alter the behaviour of the module. These options can be inserted into the "config" object on the request.
 
-  * prioritize_probes - List of probe names to prioritize
+* prioritize_probes - List of probe names to prioritize
     * "config":{"prioritize_probes":"SIPOptions, GetRequest, SSLSessionReq, NULL, HTTPOptions, RTSPRequest"}
-  * custom_probes - List of custom probes to use
+* custom_probes - List of custom probes to use
     * "config":{"custom_probes":"GET / HTTP/1.0\r\n\r\n,OPTIONS / HTTP/1.0\r\n\r\n"}
-  * probe_rarity - Rarity level of probes used (light/probable/default/all)
+* probe_rarity - Rarity level of probes used (light/probable/default/all)
     * "config":{"probe_rarity":"all"}
 
 ## Schema
@@ -53,26 +53,26 @@ These are optional parameters that can alter the behaviour of the module. These 
 This module provides the following data (if available):
 
 * **state**: Information regarding the state of the connection to the target
-  * **state**: State of the connection to the target. Possible values for this field are:
-    * **open**: The connection was established, data was sent and the target returned any response
-    * **open|filtered**: The connection was established, data was sent, but the target did not respond
-    * **closed**: The connection was not established.
+    * **state**: State of the connection to the target. Possible values for this field are:
+        * **open**: The connection was established, data was sent and the target returned any response
+        * **open|filtered**: The connection was established, data was sent, but the target did not respond
+        * **closed**: The connection was not established.
 
 * **service**: Information regarding the service that is likely to be running on the target
-  * **name**: Type of service that is running
-  * **product**: Product designation (and Vendor)
-  * **version**: Application version number
-  * **device**: Type of device running the service
-  * **ostype**: Operating system running the service
-  * **hostname**: Hostname (if any) offered by the service
-  * **extrainfo**: Extra information extracted, can be an OS, version of a framework, etc
-  * **cpe**: List of Common Platform Enumeration tags, if available
-  * **banner**: Server response from which information was extracted
-  * **method**: Method used to match or extract information from server responses. Possible values for this field are:
-    * **probe_matching**: Server responses matched one of the expected responses for the probes that were sent
-    * **probe_extraction**: Customized information extraction, used when server responses do not match expected responses, but have relevant information
-    * **probe_matching/probe_extraction**: It's a mix of the previous methods, used when simple matching with expected responses does not return sufficient information
-    * **table_default**: No information was obtained, hence the resulting service name is simply a speculation given the port number
+    * **name**: Type of service that is running
+    * **product**: Product designation (and Vendor)
+    * **version**: Application version number
+    * **device**: Type of device running the service
+    * **ostype**: Operating system running the service
+    * **hostname**: Hostname (if any) offered by the service
+    * **extrainfo**: Extra information extracted, can be an OS, version of a framework, etc
+    * **cpe**: List of Common Platform Enumeration tags, if available
+    * **banner**: Server response from which information was extracted
+    * **method**: Method used to match or extract information from server responses. Possible values for this field are:
+        * **probe_matching**: Server responses matched one of the expected responses for the probes that were sent
+        * **probe_extraction**: Customized information extraction, used when server responses do not match expected responses, but have relevant information
+        * **probe_matching/probe_extraction**: It's a mix of the previous methods, used when simple matching with expected responses does not return sufficient information
+        * **table_default**: No information was obtained, hence the resulting service name is simply a speculation given the port number
 
 ## Service Simple Event Example
 

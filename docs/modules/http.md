@@ -12,15 +12,15 @@ curl -v -L https://api.binaryedge.io/v1/tasks -d '{"type":"scan", "options":[{"t
 
 These are optional parameters that can alter the behaviour of the module. These options can be inserted into the "config" object on the request.
 
-  * http_path - Set HTTP path
+* http_path - Set HTTP path
     * "config":{"http_path":"/robots.txt"}
-  * http_method - Set HTTP method
+* http_method - Set HTTP method
     * "config":{"http_method":"PROPFIND"}
-  * user_agent - Change HTTP User Agent
+* user_agent - Change HTTP User Agent
     * "config":{"user_agent":"Mozilla /5.0 (Compatible MSIE 9.0;Windows NT 6.1;WOW64; Trident/5.0)"}
-  * host_header - Change HTTP Host header
+* host_header - Change HTTP Host header
     * "config":{"host_header":"www.w3.org"}
-  * custom_http_header - Set a custom HTTP header
+* custom_http_header - Set a custom HTTP header
     * "config":{"custom_http_header": "X-Forwarded-Host: en.wikipedia.org"}
 
 ## HTTPS Request Example
@@ -33,17 +33,17 @@ curl -v -L https://api.binaryedge.io/v1/tasks -d '{"type":"scan", "options":[{"t
 
 These are optional parameters that can alter the behaviour of the module. These options can be inserted into the "config" object on the request.
 
-  * http_path - Set HTTP path
+* http_path - Set HTTP path
     * "config":{"http_path":"/robots.txt"}
-  * http_method - Set HTTP method
+* http_method - Set HTTP method
     * "config":{"http_method":"PROPFIND"}
-  * user_agent - Change HTTP User Agent
+* user_agent - Change HTTP User Agent
     * "config":{"user_agent":"Mozilla /5.0 (Compatible MSIE 9.0;Windows NT 6.1;WOW64; Trident/5.0)"}
-  * host_header - Change HTTP Host header
+* host_header - Change HTTP Host header
     * "config":{"host_header":"www.w3.org"}
-  * custom_http_header - Set a custom HTTP header
+* custom_http_header - Set a custom HTTP header
     * "config":{"custom_http_header": "X-Forwarded-Host: en.wikipedia.org"}
-  * sni - Set HTTPS Server Name Indication
+* sni - Set HTTPS Server Name Indication
     * "config":{"sni":"google.com"}
 
 ## Schema
@@ -83,17 +83,17 @@ These are optional parameters that can alter the behaviour of the module. These 
 
 ### Contents of the fields:
 
-  * request - Request made by the module
+* request - Request made by the module
   	* url - Requested URL
   	* headers - Headers used in the request
-  * response - Response from server
-	* body - HTML body response
-	* httpVersion - HTTP version
-	* statusCode - HTTP response status code
-	* statusMeessage - HTTP status message
-	* headers - HTTP headers (if found)
-	* href - Final href found (after redirects if the case)
-	* redirects - List of redirects followed
+* response - Response from server
+* body - HTML body response
+* httpVersion - HTTP version
+* statusCode - HTTP response status code
+* statusMeessage - HTTP status message
+* headers - HTTP headers (if found)
+* href - Final href found (after redirects if the case)
+* redirects - List of redirects followed
 		* statusCode - Redirect status code
 		* redirectUri - Redirect location
 

@@ -107,93 +107,101 @@ curl -v -L https://api.binaryedge.io/v1/tasks -d '{"type":"scan", "options":[{"t
 *Variables description from https://redis.io/commands/INFO*
 
 **Server** - General information about the Redis server
-  * redis_version - version of the redis server
-  * redis_git_sha1 - Git SHA1
-  * redis_git_dirty - Git dirty flag
-  * redis_build_id - build ID of the build of redis in use
-  * redis_mode - type of redis server
-  * os - operative system
-  * arch_bits - architecture (32 or 64 bits)
-  * multiplexing_api - event loop mechanism used by Redis
-  * gcc_version - version of the GCC compiler used to compile the Redis server
-  * process_id - PID of the server process
-  * run_id - random value identifying the Redis server (to be used by Sentinel and Cluster)
-  * tcp_port - TCP/IP listen port
-  * uptime_in_seconds - number of seconds since Redis server start
-  * uptime_in_days - same value expressed in days
-  * hz - redis expiration rate
-  * lru_clock - clock incrementing every minute, for LRU management
-  * config_file - full path of the configuration file
+
+* redis_version - version of the redis server
+* redis_git_sha1 - Git SHA1
+* redis_git_dirty - Git dirty flag
+* redis_build_id - build ID of the build of redis in use
+* redis_mode - type of redis server
+* os - operative system
+* arch_bits - architecture (32 or 64 bits)
+* multiplexing_api - event loop mechanism used by Redis
+* gcc_version - version of the GCC compiler used to compile the Redis server
+* process_id - PID of the server process
+* run_id - random value identifying the Redis server (to be used by Sentinel and Cluster)
+* tcp_port - TCP/IP listen port
+* uptime_in_seconds - number of seconds since Redis server start
+* uptime_in_days - same value expressed in days
+* hz - redis expiration rate
+* lru_clock - clock incrementing every minute, for LRU management
+* config_file - full path of the configuration file
 
 **Clients** - Client connections section
-  * connected_clients - number of client connections (excluding connections from slaves)
-  * client_longest_output_list - longest output list among current client connections
-  * client_biggest_input_buf - biggest input buffer among current client connections
-  * blocked_clients - number of clients pending on a blocking call (BLPOP, BRPOP, BRPOPLPUSH)
+
+* connected_clients - number of client connections (excluding connections from slaves)
+* client_longest_output_list - longest output list among current client connections
+* client_biggest_input_buf - biggest input buffer among current client connections
+* blocked_clients - number of clients pending on a blocking call (BLPOP, BRPOP, BRPOPLPUSH)
 
 **Memory** - Memory consumption related information
-  * used_memory - total number of bytes allocated by Redis using its allocator (either standard libc, jemalloc, or an alternative allocator such as tcmalloc
-  * used_memory_human - human readable representation of previous value (used_memory in MB or GB)
-  * used_memory_rss - number of bytes that Redis allocated as seen by the operating system (a.k.a resident set size). This is the number reported by tools such as top(1) and ps(1)
-  * used_memory_peak - peak memory consumed by Redis (in bytes)
-  * used_memory_peak_human - human readable representation of previous value (used_memory_peak in MB or GB)
-  * used_memory_lua - number of bytes used by the Lua engine
-  * mem_fragmentation_ratio - ratio between used_memory_rss and used_memory
-  * mem_allocator - memory allocator, chosen at compile time
+
+* used_memory - total number of bytes allocated by Redis using its allocator (either standard libc, jemalloc, or an alternative allocator such as tcmalloc
+* used_memory_human - human readable representation of previous value (used_memory in MB or GB)
+* used_memory_rss - number of bytes that Redis allocated as seen by the operating system (a.k.a resident set size). This is the number reported by tools such as top(1) and ps(1)
+* used_memory_peak - peak memory consumed by Redis (in bytes)
+* used_memory_peak_human - human readable representation of previous value (used_memory_peak in MB or GB)
+* used_memory_lua - number of bytes used by the Lua engine
+* mem_fragmentation_ratio - ratio between used_memory_rss and used_memory
+* mem_allocator - memory allocator, chosen at compile time
 
 **Persistence** - RDB and AOF related information
-  * loading - flag indicating if the load of a dump file is on-going
-  * rdb_changes_since_last_save - number of changes since the last dump
-  * rdb_bgsave_in_progress - flag indicating a RDB save is on-going
-  * rdb_last_save_time - epoch-based timestamp of last successful RDB save
-  * rdb_last_bgsave_status - status of the last RDB save operation
-  * rdb_last_bgsave_time_sec - duration of the last RDB save operation in seconds
-  * rdb_current_bgsave_time_sec - duration of the on-going RDB save operation if any
-  * aof_enabled - flag indicating AOF logging is activated
-  * aof_rewrite_in_progress - flag indicating a AOF rewrite operation is on-going
-  * aof_rewrite_scheduled - flag indicating an AOF rewrite operation will be scheduled once the on-going RDB save is complete.
-  * aof_last_rewrite_time_sec - duration of the last AOF rewrite operation in seconds
-  * aof_current_rewrite_time_sec - duration of the on-going AOF rewrite operation if any
-  * aof_last_bgrewrite_status - status of the last AOF rewrite operation
-  * aof_last_write_status - status of the last AOF write operation
+
+* loading - flag indicating if the load of a dump file is on-going
+* rdb_changes_since_last_save - number of changes since the last dump
+* rdb_bgsave_in_progress - flag indicating a RDB save is on-going
+* rdb_last_save_time - epoch-based timestamp of last successful RDB save
+* rdb_last_bgsave_status - status of the last RDB save operation
+* rdb_last_bgsave_time_sec - duration of the last RDB save operation in seconds
+* rdb_current_bgsave_time_sec - duration of the on-going RDB save operation if any
+* aof_enabled - flag indicating AOF logging is activated
+* aof_rewrite_in_progress - flag indicating a AOF rewrite operation is on-going
+* aof_rewrite_scheduled - flag indicating an AOF rewrite operation will be scheduled once the on-going RDB save is complete.
+* aof_last_rewrite_time_sec - duration of the last AOF rewrite operation in seconds
+* aof_current_rewrite_time_sec - duration of the on-going AOF rewrite operation if any
+* aof_last_bgrewrite_status - status of the last AOF rewrite operation
+* aof_last_write_status - status of the last AOF write operation
 
 **Stats** - General statistics
-  * total_connections_received - total number of connections accepted by the server
-  * total_commands_processed - total number of commands processed by the server
-  * instantaneous_ops_per_sec - number of commands processed per second
-  * total_net_input_bytes - total number of bytes inputted
-  * total_net_output_bytes - total number of bytes outputted
-  * instantaneous_input_kbps - total inbound traffic in kilobits per second
-  * instantaneous_output_kbps - total outbound traffic in kilobits per second
-  * rejected_connections - number of connections rejected because of maxclients limit
-  * sync_full - count of the number times slaves have fully synchronized with this master
-  * sync_partial_ok - count of the number of times partial syncs have completed
-  * sync_partial_err - count of the number of times partial syncs have failed to complete
-  * expired_keys - total number of key expiration events
-  * evicted_keys - number of evicted keys due to maxmemory limit
-  * keyspace_hits - number of successful lookup of keys in the main dictionary
-  * keyspace_misses - number of failed lookup of keys in the main dictionary
-  * pubsub_channels - global number of pub/sub channels with client subscriptions
-  * pubsub_patterns - global number of pub/sub pattern with client subscriptions
-  * latest_fork_usec - duration of the latest fork operation in microseconds
+
+* total_connections_received - total number of connections accepted by the server
+* total_commands_processed - total number of commands processed by the server
+* instantaneous_ops_per_sec - number of commands processed per second
+* total_net_input_bytes - total number of bytes inputted
+* total_net_output_bytes - total number of bytes outputted
+* instantaneous_input_kbps - total inbound traffic in kilobits per second
+* instantaneous_output_kbps - total outbound traffic in kilobits per second
+* rejected_connections - number of connections rejected because of maxclients limit
+* sync_full - count of the number times slaves have fully synchronized with this master
+* sync_partial_ok - count of the number of times partial syncs have completed
+* sync_partial_err - count of the number of times partial syncs have failed to complete
+* expired_keys - total number of key expiration events
+* evicted_keys - number of evicted keys due to maxmemory limit
+* keyspace_hits - number of successful lookup of keys in the main dictionary
+* keyspace_misses - number of failed lookup of keys in the main dictionary
+* pubsub_channels - global number of pub/sub channels with client subscriptions
+* pubsub_patterns - global number of pub/sub pattern with client subscriptions
+* latest_fork_usec - duration of the latest fork operation in microseconds
 
 **Replication** - Master/slave replication information
-  * role - value is "master" if the instance is slave of no one, or "slave" if the instance is enslaved to a master. Note that a slave can be master of another slave (daisy chaining)  
-  * connected_slaves - number of connected slaves
-  * master_repl_offset - target offset of master dataset
-  * repl_backlog_active - backlog active?
-  * repl_backlog_size - size of the backlog
-  * repl_backlog_first_byte_offset -  slave replication backlog offset
-  * repl_backlog_histlen - number of messages in the replication backlog
+
+* role - value is "master" if the instance is slave of no one, or "slave" if the instance is enslaved to a master. Note that a slave can be master of another slave (daisy chaining)  
+* connected_slaves - number of connected slaves
+* master_repl_offset - target offset of master dataset
+* repl_backlog_active - backlog active?
+* repl_backlog_size - size of the backlog
+* repl_backlog_first_byte_offset -  slave replication backlog offset
+* repl_backlog_histlen - number of messages in the replication backlog
 
 **CPU** - CPU consumption statistics
-  * used_cpu_sys - system CPU consumed by the Redis server
-  * used_cpu_user - user CPU consumed by the Redis server
-  * used_cpu_sys_children - system CPU consumed by the background processes
-  * used_cpu_user_children - user CPU consumed by the background processes
+
+* used_cpu_sys - system CPU consumed by the Redis server
+* used_cpu_user - user CPU consumed by the Redis server
+* used_cpu_sys_children - system CPU consumed by the background processes
+* used_cpu_user_children - user CPU consumed by the background processes
 
 **Keyspace** - Database related statistics
-  * dbX: database name/ number
+
+* dbX: database name/ number
     * avg_ttl - the average TTL of the keys that have an expiration set
     * expires - number of keys with an expiration set
     * keys - total number of keys in the database

@@ -26,9 +26,9 @@ curl -v -L https://api.binaryedge.io/v1/tasks -d '{"type":"scan", "options":[{"t
 
 ### Contents of the fields:
 
-  * security - Type of RDP security
-  * link - URL link to the screenshot
-  * reason - Reason why the connection was successful or errored.
+* security - Type of RDP security
+* link - URL link to the screenshot
+* reason - Reason why the connection was successful or errored.
 
 ## RDP Event Example
 

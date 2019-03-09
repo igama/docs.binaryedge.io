@@ -12,9 +12,9 @@ curl -v -L https://api.binaryedge.io/v1/tasks -d '{"type":"scan", "options":[{"t
 
 These are optional parameters that can alter the behaviour of the module. These options can be inserted into the "config" object on the request.
 
-  * https - Whether to use HTTPS instead of HTTP
+* https - Whether to use HTTPS instead of HTTP
     * "config":{"https":true}
-  * screenshot - Whether to take a screenshot of the website
+* screenshot - Whether to take a screenshot of the website
     * "config":{"screenshot":true}
 
 ## Schema
@@ -48,16 +48,16 @@ These are optional parameters that can alter the behaviour of the module. These 
 
 ### Contents of the fields:
 
-  * apps - Request made by the module
+* apps - Request made by the module
   	* name - Name of the technology
   	* confidence - Confidence level for the match
     * version - Version of the technology
     * categories - Categories of the technology
-      * name - Name of the category
-      * priority - Priority (importance) of the category
-  * headers - Headers from the web server
-  * html - URL link to the html code of the web page
-  * screenshot - URL link to the screenshot of the web page
+        * name - Name of the category
+        * priority - Priority (importance) of the category
+* headers - Headers from the web server
+* html - URL link to the html code of the web page
+* screenshot - URL link to the screenshot of the web page
 
 ## Web Event Example
 

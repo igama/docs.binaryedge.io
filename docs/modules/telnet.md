@@ -43,11 +43,11 @@ curl -v -L https://api.binaryedge.io/v1/tasks -d '{"type":"scan", "options":[{"t
 
 ### Contents of the fields:
 
-  * banner - Service banner.
-  * will - Indicates the desire to begin performing, or confirmation that you are now performing, the indicated option.
-  * do - Indicates the request that the other party perform, or confirmation that you are expecting the other party to perform, the indicated option.
-  * wont - Indicates the refusal to perform, or continue performing, the indicated option.
-  * dont - Indicates the demand that the other party stop performing, or confirmation that you are no longer expecting the other party to perform, the indicated option.
+* banner - Service banner.
+* will - Indicates the desire to begin performing, or confirmation that you are now performing, the indicated option.
+* do - Indicates the request that the other party perform, or confirmation that you are expecting the other party to perform, the indicated option.
+* wont - Indicates the refusal to perform, or continue performing, the indicated option.
+* dont - Indicates the demand that the other party stop performing, or confirmation that you are no longer expecting the other party to perform, the indicated option.
 
 More information at: https://tools.ietf.org/html/rfc854
 

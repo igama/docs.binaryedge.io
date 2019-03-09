@@ -122,6 +122,7 @@ curl 'https://api.binaryedge.io/v2/query/ip/xxx.xxx.xxx.xxx' -H 'X-Key:API_KEY'
 Details about an Host, with data up to 6 months.
 
 List of events for the specified host, with events for each time that:
+
 - A port was detected open
 - A service was found running
 - Other modules were successfully executed 
@@ -615,7 +616,7 @@ curl 'https://api.binaryedge.io/v2/query/dataleaks/email/user@example.com' -H 'X
 
 #### /v2/query/dataleaks/organization/{domain}
 
-Verify how may emails are affected by dataleaks for a specific domain. We don't provide the list of affected emails.
+Verify how many emails are affected by dataleaks for a specific domain. We don't provide the list of affected emails.
 
 For example, searching for the domain 'example.com' returns {"leak":"linkedin", "count":805}, this means there are 805 accounts with an example.com email on the Linkedin dump.
 
@@ -713,7 +714,7 @@ curl 'https://api.binaryedge.io/v2/query/dataleaks/organization/example.com' -H 
 
 #### /v2/query/dataleaks/info
 
-Get the list of dataleaks our platform keeps track.
+Get all available information about the dataleaks our platform keeps track.
 
 *Output*
 
@@ -1680,7 +1681,6 @@ curl 'https://api.binaryedge.io/v2/query/cve/ip/xxx.xxx.xxx.xxx' -H 'X-Key:API_K
 }
 ```
 
-
 ### Domains
 
 What is exposed via DNS? What subdomains belong to a Domain? What domains are served by IP X?
@@ -1726,7 +1726,7 @@ Possible types of records currently available:
 *Parameters*
 
 * target: [String] Domain you want to get DNS related data.
-* page: [Int] Optional. Default 1
+* page: [Int] Optional. Default 1, Maximum: 500 (10,000 results)
 
 *Output*
 
@@ -1774,7 +1774,7 @@ Return records that have the specified IP address in their A or AAAA records.
 
 *Parameters*
 
-* target: [IP] IP you want to verify, can be IPV4 or IPV6
+* target: [IP] target IP address, supports IPV4 or IPV6
 * page: [Int] Optional. Default 1, Maximum: 500 (10,000 results)
 
 *Output*
@@ -1843,7 +1843,7 @@ List of Domains/DNS data based on a Query.  Can be used with specific parameters
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v2/query/domains/search?query=A:127.0.01' -H 'X-Key:API_KEY'
+curl 'https://api.binaryedge.io/v2/query/domains/search?query=A:127.0.0.1' -H 'X-Key:API_KEY'
 ```
 
 ```json
