@@ -47,6 +47,11 @@ Search by ASN.
 
     e.g. asn:4812
 
+### as_name: (string)
+Search by AS name. 
+
+    e.g. as_name:amazon
+
 ### tag: (string)
 Search by tags. Can be ICS, MALWARE, DATABASE, WEBSERVER, IOT, CAMERA. Tag list and matches are constantly being updated.
 
