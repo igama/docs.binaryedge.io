@@ -231,7 +231,7 @@ Search by highest SSL version supported.
     e.g. ssl.server_info.highest_ssl_version_supported_string:TLSV1
 
 ### ssl_cipher_supported: (string)
-Search by SSH cypher supported.
+Search by SSL cypher supported.
 
     e.g. ssl.server_info.ssl_cipher_supported:"AES256-SHA"
 
