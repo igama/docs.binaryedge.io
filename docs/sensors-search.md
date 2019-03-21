@@ -53,7 +53,7 @@ Search by tags.
     e.g. tags:NMAP_SCANNER
 
 #### Available tags
-[Sensors Available Tags](search-tags.md)
+[Sensors Available Tags](sensors-tags.md)
 
 ### created_at: (date)
 Search by timestamp.

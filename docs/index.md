@@ -13,13 +13,13 @@ The API provides access to that scanning platform, for your own usage, along wit
 - API Documentation
     - [API V1 - Enterprise Only](api-v1.md "api-v1")
     - [API V2](api-v2.md "api-v2")
-    - [Search Parameters](search.md "search")
+    - [Search Parameters]()
         - [Host Search](search.md "search")
         - [Image Search](image-search.md "image-search")
         - [Sensors Search](sensors-search.md "sensors-search")
-            - [Sensors Tags](sensors-tags.md "sensors-tags")
+        - [Sensors Tags](sensors-tags.md "sensors-tags")
     - [HTTP Status Messages](errors.md "errors")
-    - Event Details
+    - [Event Details]()
         - [Modules](modules.md "modules")
         - [Torrent Data](torrent.md "torrents")
         - [Sinkhole Data](sinkhole.md "sinkhole")
