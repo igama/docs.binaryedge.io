@@ -13,17 +13,17 @@
 * BOTNET - Known botnet traffic 
 * CENSYS - https://censys.io/
 * CISCO_LINKSYS_SCANNER - Scanning for vulnerabilities associated with Cisco or Linksys
-* CISCO_SMART_INSTALL - Scanning for cisco smart install
-* CODESYS_SCANNER - Scanning for codesys protocol typically used in SCADA environments
-* CRYPTOCURRENCY_SCANNER - Scanning for cryptocurrency api or exposed nodes
-* CVE-2017-17215 - uawei HG532 with some customized versions has a remote code execution vulnerability
+* CISCO_SMART_INSTALL - Scanning for Cisco Smart Install
+* CODESYS_SCANNER - Scanning for Codesys protocol, typically used in SCADA environments
+* CRYPTOCURRENCY_SCANNER - Scanning for cryptocurrency API or exposed nodes
+* CVE-2017-17215 - Huawei HG532 with some customized versions has a remote code execution vulnerability
 * DICT_SCANNER - Dictionary Network Protocol
-* DLINK_SCANNER - Scanning for Dlink vulnerabilities
+* DLINK_SCANNER - Scanning for DLink vulnerabilities
 * DRUPAL_SCANNER - Scanning for Drupal framework vulnerabilities
 * DUCKDUCKBOT - https://duckduckgo.com/
-* ELASTICSEARCH_SCANNER - Scanning for exposed elasticsearch databases
+* ELASTICSEARCH_SCANNER - Scanning for exposed Elasticsearch databases
 * EMAIL_SCANNER - Scanning for known email protocols
-* EMOTET - The Emotet banking Trojan was first identified by security researchers in 2014.
+* EMOTET - The Emotet banking Trojan was first identified by security researchers in 2014
 * EOS_NODE_SCANNER - Scanning for EOS Blockchain nodes
 * ETHEREUM_NODE_SCANNER - Scanning for Ethereum Blockchain nodes
 * EXABOT - Exabot is a web scraper for Exalead https://www.exalead.com
@@ -44,7 +44,7 @@
 * HUAWEI_HG532_SCANNER - Scanning for vulnerabilities associated with the Huawei HG532 Router
 * INTERNET_CENSUS - Internet wide scanner actor seemly associated with Bitsight
 * IPFIRE_EXPLOIT - Scanning for IPFire router software exploits
-* IS_ARCHIVER - The internet Archive https://archive.org/
+* IS_ARCHIVER - The Internet Archive https://archive.org/
 * JABBER_SCANNER - Scanning for the Jabber protocol
 * JANUARY - January Malware https://bitninja.io/blog/2018/12/28/goodbye-peppa-hello-january?PageSpeed=noscript
 * JAVA_SCANNER - Scanning for JRMI endpoints 
@@ -68,7 +68,7 @@
 * PRINTER_SCANNER - Scanning for exposed printers 
 * PROJECT25499 - Internet Wide Scanning http://project25499.com/
 * PUTTY_CLIENT - SSH Connections using Putty Client 
-* QUADMETRICS - quadmetrics.com
+* QUADMETRICS - https://quadmetrics.com/
 * RABBITMQ_SCANNER - Scanning for RabbitMQ Protocol
 * RADWARE_SCANNER - https://www.radware.com/
 * RAPID7 - https://www.rapid7.com/
@@ -92,7 +92,7 @@
 * SOURCE_ENGINE - Valve Source Engine - Games
 * SSH_SCANNER - Valid SSH connections
 * SSL_SCANNER - Valid SSL Connections
-* TOR - Tor JA3 signature
+* TOR - Tor node
 * TOR_SCANNER - Scanning for the Tor Protocol
 * TRICKBOT - Trickbot Malware
 * UBIQUITI_SCANNER - Scanning for Ubiquiti devices 

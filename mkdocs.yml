@@ -8,14 +8,15 @@ nav:
     - API V1 (Enterprise): api-v1.md
     - API V2: api-v2.md
     - Search Parameters:
-      - Host Search: search.md
-      - Image Search: image-search.md
-      - Sensors Search: sensors-search.md
+        - Host Search: search.md
+        - Image Search: image-search.md
+        - Sensors Search: sensors-search.md
+            - Sensors Tags: sensors-tags.md
     - HTTP Status Messages: errors.md
     - Event Details:
-      - Modules: modules.md
-      - Torrent Data: torrent.md
-      - Sinkhole Data: sinkhole.md
+        - Modules: modules.md
+        - Torrent Data: torrent.md
+        - Sinkhole Data: sinkhole.md
 
 
 # Google Analytics
