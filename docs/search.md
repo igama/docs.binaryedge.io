@@ -197,6 +197,21 @@ Search by SSH cyphers.
 
     e.g. ssh.cyphers:"ssh-rsa"
 
+### fingerprint: (string)
+Search by SSH fingerprints.
+
+    e.g. ssh.fingerprint:"c0:76:ed:4a:b6:85:7f:cb:b8:ff:20:ac:fc:a9:aa:fb, e9:d6:05:d1:a2:55:76:aa:bb:d8:18:15:ac:b9:01:4b"
+
+### hassh: (string)
+Search by HASSH hash.
+
+    e.g. ssh.hassh:0f5053d1cc689128b6db47f340f3285f
+
+### hassh_algorithms: (string)
+Search by HASSH algorithms string.
+
+    e.g. ssh.hassh_algorithms:"diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1,aes128-ctr,aes192-ctr,aes256-ctr,arcfour256,arcfour128,aes128-cbc,3des-cbc,blowfish-cbc,cast128-cbc,aes192-cbc,aes256-cbc,arcfour,rijndael-cbc@lysator.liu.se,hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-sha2-256,hmac-sha2-512,hmac-ripemd160,hmac-ripemd160@openssh.com,hmac-sha1-96,hmac-md5-96,none,zlib@openssh.com"
+
 
 ## SSL
 
