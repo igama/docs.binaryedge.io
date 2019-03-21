@@ -11,7 +11,7 @@ nav:
         - Host Search: search.md
         - Image Search: image-search.md
         - Sensors Search: sensors-search.md
-            - Sensors Tags: sensors-tags.md
+        - Sensors Tags: sensors-tags.md
     - HTTP Status Messages: errors.md
     - Event Details:
         - Modules: modules.md
