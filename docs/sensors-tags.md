@@ -21,6 +21,7 @@
 * CVE-2017-17215 - Huawei HG532 with some customized versions has a remote code execution vulnerability
 * DICT_SCANNER - Dictionary Network Protocol
 * DLINK_SCANNER - Scanning for DLink vulnerabilities
+* DNS_SCANNER
 * DRIDEX - Dridex also known as Bugat and Cridex is a form of malware that specializes in stealing bank credentials
 * DRUPAL_SCANNER - Scanning for Drupal framework vulnerabilities
 * DUCKDUCKBOT - https://duckduckgo.com/
@@ -73,6 +74,7 @@
 * PHPMYADMIN - Scanning for PHPMyAdmin panels 
 * PRINTER_SCANNER - Scanning for exposed printers 
 * PROJECT25499 - Internet Wide Scanning http://project25499.com/
+* PROXY_SCANNER
 * PUTTY_CLIENT - SSH Connections using Putty Client 
 * QUADMETRICS - https://quadmetrics.com/
 * RABBITMQ_SCANNER - Scanning for RabbitMQ Protocol
