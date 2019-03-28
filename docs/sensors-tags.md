@@ -57,6 +57,7 @@
 * HTTP_CRAWLER - HTTP Crawler
 * HTTP_SCANNER - Scanning for HTTP Services
 * HUAWEI_HG532_SCANNER - Scanning for vulnerabilities associated with the Huawei HG532 Router
+* ICMP_ECHO_REQUEST
 * INTERNET_CENSUS - Internet wide scanner actor seemly associated with Bitsight
 * INTERNET_TTL
 * INTRINSEC
@@ -126,6 +127,7 @@
 * STANFORD_UNIVERSITY
 * STRETCHOID
 * TALAIA
+* TCP_SYN
 * TOFSEE - Backdoor.Tofsee is capable of making changes to the settings on affected systems and stealing information from them. Once executed, it is capable of tracking users online activities, opening affected systems for infiltration to steal personal information and credentials, and changing browser and DNS settings.
 * TOR - Tor node
 * TOR_SCANNER - Scanning for the Tor Protocol
