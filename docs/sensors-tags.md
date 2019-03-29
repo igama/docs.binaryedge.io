@@ -134,6 +134,7 @@
 * TORRENTLOCKER - TorrentLocker is a ransomware trojan targeting Microsoft Windows. TorrentLocker scans the system for programs and files, and conceals the contents through AES encryption leaving ransom instructions to the victim on what has to be done, and how to pay the decryption ransom
 * TRICKBOT - Trickbot Malware
 * TROLDESH - Ransom.Troldesh is a Trojan horse that encrypts files on the compromised computer and asks the user to pay in order to decrypt them. It may also download potentially malicious files. 
+* UNIFI_SCANNER
 * UBIQUITI_SCANNER - Scanning for Ubiquiti devices 
 * UNIVERSITY_BERKELEY
 * UNIVERSITY_BROWN
