@@ -2,7 +2,18 @@
 
 The API has endpoints for querying our data in which you can use free text search together with one or more of the filters listed below.
 
-**NOTE** : Although free text search without specifying fields is available, it is processed differently from searching on specific fields. For better results, always specify search fields.
+
+## Notes
+
+**Free Text**: not specifying a field will search on the full records, which can include other information not stated above. Although free text search without specifying fields is available, it is processed differently from searching on specific fields. For better results, always specify search fields.
+
+**Conditionals**: the following conditionals are available: NOT, AND, OR. Must be UPPERCASE. You can also use the minus sign (-) as a replacement for the NOT conditional.
+
+**Comparison**: you can use comparison operators on number fields. E.g. _field:>100.
+
+**String fields caveat**: if the string is expected to have spaces, some kind of punctuation in the middle, or special symbols, instead of querying _field:value_ try _field:"value"_. You can also try instead _field.keyword:"value"_. The first one will search for any occurrence of any of the words in _value_, while the second one will search for an exact match of the string.
+
+**Field existence or omission**: you can search for records that have a specific field by using _\_exists\_:field_. Conversely, for records missing a field it would be _NOT \_exists\_:field_.
 
 
 ## Fields
@@ -111,16 +122,3 @@ Search by JA3 hash.
 Search by JA3 string.
 
     e.g. extra.ssl.ja3:"771,49200-49196-49192-49188-49172-49162-165-163-161-159-107-106-105-104-57-56-55-54-136-135-134-133-49202-49198-49194-49190-49167-49157-157-61-53-132-141-49199-49195-49191-49187-49171-49161-164-162-160-158-103-64-63-62-51-50-49-48-154-153-152-151-69-68-67-66-49201-49197-49193-49189-49166-49156-156-60-47-150-65-140-49169-49159-49164-49154-5-4-138-255,0-11-10-35-13-15-21,23-25-28-27-24-26-22-14-13-11-12-9-10,0-1-2"
-
-
-## Notes
-
-**Free Text**: not specifying a field will search on the full records, which can include other information not stated above.
-
-**Conditionals**: the following conditionals are available: NOT, AND, OR. Must be UPPERCASE. You can also use the minus sign (-) as a replacement for the NOT conditional.
-
-**Comparison**: you can use comparison operators on number fields. E.g. _field:>100.
-
-**String fields caveat**: if the string is expected to have spaces, some kind of punctuation in the middle, or special symbols, instead of querying _field:value_ try _field:"value"_. You can also try instead _field.keyword:"value"_. The first one will search for any occurrence of any of the words in _value_, while the second one will search for an exact match of the string.
-
-**Field existence or omission**: you can search for records that have a specific field by using _\_exists\_:field_. Conversely, for records missing a field it would be _NOT \_exists\_:field_.

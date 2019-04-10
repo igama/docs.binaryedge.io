@@ -2,7 +2,18 @@
 
 The API has endpoints for querying our data in which you can use free text search together with one or more of the filters listed below.
 
-**NOTE** : Although free text search without specifying fields is available, it is processed differently from searching on specific fields. For better results, always specify search fields.
+
+## Notes
+
+**Free Text**: not specifying a field will search on the full records, which can include other information not stated below. Although free text search without specifying fields is available, it is processed differently from searching on specific fields. For better results, always specify search fields.
+
+**Conditionals**: the following conditionals are available: NOT, AND, OR. Must be UPPERCASE. You can also use the minus sign (-) as a replacement for the NOT conditional.
+
+**Comparison**: you can use comparison operators on number fields. E.g. _field:>100.
+
+**String fields caveat**: if the string is expected to have spaces, some kind of punctuation in the middle, or special symbols, instead of querying _field:value_ try _field:"value"_. You can also try instead _field.keyword:"value"_. The first one will search for any occurrence of any of the words in _value_, while the second one will search for an exact match of the string.
+
+**Field existence or omission**: you can search for records that have a specific field by using _\_exists\_:field_. Conversely, for records missing a field it would be _NOT \_exists\_:field_.
 
 
 ## General Fields
@@ -215,20 +226,62 @@ Search by HASSH algorithms string.
 
 ## SSL
 
-### issuer_names: (string)
-Search by Certificate Issuer Name.
+### cert.serial: (string)
+Search by leaf certificate's Serial Number.
 
-    e.g. ssl.cert_info_summary.issuer_names:symantec
+    e.g. ssl.cert.serial:160000708D70A2A4CB63ABA1C700000000708D
 
-### subject_dns: (string)
-Search by Certificate Subject DNS.
+### cert.sha1_fingerprint: (string)
+Search by leaf certificate's SHA1 fingerprint.
 
-    e.g. ssl.cert_info_summary.subject_dns:facebook
+    e.g. ssl.cert.sha1_fingerprint:3ab0b1c27f746fd90c34f0d6a960cf73a4229de8
 
-### subject_names: (string)
-Search by Certificate Subject Name.
+### cert.not_after: (date)
+Search by leaf certificate's expiration date.
 
-    e.g. ssl.cert_info_summary.subject_names:facebook
+    e.g. ssl.cert.not_after:[2018-12-01 TO 2019-01-01]
+         ssl.cert.not_after:2019-01-01
+
+### cert.not_before: (date)
+Search by leaf certificate's creation date.
+
+    e.g. ssl.cert.not_before:[2018-12-01 TO 2019-01-01]
+         ssl.cert.not_after:2019-01-01
+
+### cert.issuer.commonName: (string)
+Search by leaf certificate issuer's Common Name.
+
+    e.g. ssl.cert.issuer.commonName:microsoft
+
+### cert.issuer.organizationName: (string)
+Search by leaf certificate issuer's Organization Name.
+
+    e.g. ssl.cert.issuer.organizationName:microsoft
+
+### cert.issuer_names: (string)
+Search by leaf certificate issuer's names (commonName, organizationName combined).
+
+    e.g. ssl.cert.issuer_names:kubernetes
+
+### cert.subject.commonName: (string)
+Search by leaf certificate subject's Common Name.
+
+    e.g. ssl.cert.subject.commonName:microsoft
+
+### cert.subject.organizationName: (string)
+Search by leaf certificate subject's Organization Name.
+
+    e.g. ssl.cert.subject.organizationName:microsoft
+
+### cert.subject_names: (string)
+Search by leaf certificate subject's names (commonName, organizationName combined).
+
+    e.g. ssl.cert.subject_names:kubernetes
+
+### cert.subject_dns: (string)
+Search by leaf certificate subject's DNS (if available).
+
+    e.g. ssl.cert.subject_dns:azure
 
 ### ciphers: (string)
 Search by ciphers.
@@ -469,16 +522,3 @@ Search by HTTP title.
 * memcached.total_items (int)
 * memcached.uptime (int)
 * memcached.version (string)
-
-
-## Notes
-
-**Free Text**: not specifying a field will search on the full records, which can include other information not stated above.
-
-**Conditionals**: the following conditionals are available: NOT, AND, OR. Must be UPPERCASE. You can also use the minus sign (-) as a replacement for the NOT conditional.
-
-**Comparison**: you can use comparison operators on number fields. E.g. _field:>100.
-
-**String fields caveat**: if the string is expected to have spaces, some kind of punctuation in the middle, or special symbols, instead of querying _field:value_ try _field:"value"_. You can also try instead _field.keyword:"value"_. The first one will search for any occurrence of any of the words in _value_, while the second one will search for an exact match of the string.
-
-**Field existence or omission**: you can search for records that have a specific field by using _\_exists\_:field_. Conversely, for records missing a field it would be _NOT \_exists\_:field_.
