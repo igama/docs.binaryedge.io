@@ -246,7 +246,7 @@ Search by leaf certificate's expiration date.
 Search by leaf certificate's creation date.
 
     e.g. ssl.cert.not_before:[2018-12-01 TO 2019-01-01]
-         ssl.cert.not_after:2019-01-01
+         ssl.cert.not_before:2019-01-01
 
 ### cert.issuer.commonName: (string)
 Search by leaf certificate issuer's Common Name.
