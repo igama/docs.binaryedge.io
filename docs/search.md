@@ -396,6 +396,11 @@ Search by HTTP title.
 
     e.g. http.title:amazon
 
+### body: (string)
+Search by HTTP body.
+
+    e.g. http.body:bitcoin
+
 
 ## MongoDB
 
