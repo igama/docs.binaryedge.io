@@ -91,6 +91,7 @@
  | NUUO_NVR_SCANNER | Scanning for Nuuo CCTV Cameras | 
  | ONYPHE | Internet Wide scanner https://www.onyphe.io/ | 
  | ORACLE_TNS_SCANNER | Scanning for Oracle Databases exposing the TNS endpoint | 
+ | ORACLE_WEBLOGIC | Scanning for Oracle Weblogic Servers | 
  | PEPPA | Peppa malware | 
  | PHPMYADMIN | Scanning for PHPMyAdmin panels  | 
  | PRINTER_SCANNER | Scanning for exposed printers | 
