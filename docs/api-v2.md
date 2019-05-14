@@ -16,6 +16,22 @@
 curl 'https://api.binaryedge.io/v2/<endpoint>' -H 'X-Key:API_KEY'
 ```
 
+## User
+
+#### /v2/user/subscription
+
+Return details about your current subscription package.
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v2/user/subscription' -H 'X-Key:API_KEY'
+```
+
+```json
+{"subscription":{"name":"Starter"},"end_date":"2019-06-17","requests_left":4942,"requests_plan":5000}
+```
+
 ## Query
 
 ### Host
