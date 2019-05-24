@@ -18,53 +18,20 @@ The API has endpoints for querying our data in which you can use free text searc
 
 ## Fields
 
-### ip: (string) 
-Search by IP address or CIDR. 
+### as_name: (string)
+Search by AS name. 
 
-    e.g ip:"192.168.1.1/24" or ip:192.168.1.1
-
-### port: (int) 
-Search by target port number. 
-    
-    e.g. port:80
-
-### payload: (string) 
-Search in the payloads for a specific string
-    
-    e.g. payload:wget
-
-### country: (string) 
-Search using ISO2 Country Codes. 
-    
-    e.g. country:ES
-
-### geoip.country_name: (string) 
-Search using country names. 
-    
-    e.g. geoip.country_name:spain
-
-### geoip.city_name: (string) 
-Search using city names. 
-    
-    e.g. geoip.city_name:madrid
+    e.g. as_name:amazon
 
 ### asn: (int)
 Search by ASN. 
 
     e.g. asn:4812
 
-### as_name: (string)
-Search by AS name. 
-
-    e.g. as_name:amazon
-
-### tags: (string)
-Search by tags.
-
-    e.g. tags:NMAP_SCANNER
-
-#### Available tags
-[Sensors Available Tags](sensors-tags.md)
+### country: (string) 
+Search using ISO2 Country Codes. 
+    
+    e.g. country:ES
 
 ### created_at: (date)
 Search by timestamp.
@@ -72,6 +39,36 @@ Search by timestamp.
     e.g.
         created_at:[2018-09-01 TO 2018-10-01]
         created_at:2018-09-01
+
+### ip: (string) 
+Search by IP address or CIDR. 
+
+    e.g ip:"192.168.1.1/24" or ip:192.168.1.1
+
+### geoip.city_name: (string) 
+Search using city names. 
+    
+    e.g. geoip.city_name:madrid
+
+### geoip.country_name: (string) 
+Search using country names. 
+    
+    e.g. geoip.country_name:spain
+
+### payload: (string) 
+Search in the payloads for a specific string
+    
+    e.g. payload:wget
+
+### port: (int) 
+Search by target port number. 
+    
+    e.g. port:80
+
+### protocol: (string)
+Search by protocol. Can be TCP, UDP or ICMP. 
+    
+    e.g. protocol:tcp
 
 ### rdns: (string)
 Search by RDNS.
@@ -83,25 +80,33 @@ Search by RDNS root.
 
     e.g. rdns_parent:unwiredbb.net
 
-### extra.http.path: (string)
-Search by HTTP path.
+### tags: (string)
+Search by tags.
 
-    e.g. extra.http.path:"/index.html"
+    e.g. tags:NMAP_SCANNER
 
-### extra.http.method: (string)
-Search by HTTP method.
+#### Available tags
+[Sensors Available Tags](sensors-tags.md)
 
-    e.g. extra.http.path:POST
+### extra.ssh.description: (string)
+Search by SSH identification string.
+
+    e.g. extra.ssh.description:dropbear
 
 ### extra.http.headersFull: (string)
 Search by HTTP headers:
 
     e.g. extra.http.headersFull:google
 
-### extra.ssh.description: (string)
-Search by SSH identification string.
+### extra.http.method: (string)
+Search by HTTP method.
 
-    e.g. extra.ssh.description:dropbear
+    e.g. extra.http.path:POST
+
+### extra.http.path: (string)
+Search by HTTP path.
+
+    e.g. extra.http.path:"/index.html"
 
 ### extra.ssh.hassh: (string)
 Search by HASSH hash.
@@ -113,12 +118,12 @@ Search by HASSH algorithms string.
 
     e.g. extra.ssh.hassh_algorithms:"diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1;aes128-ctr,aes192-ctr,aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-cbc,aes128-cbc,blowfish-cbc,arcfour128,arcfour,cast128-cbc,3des-cbc;hmac-sha1,hmac-sha1-96,hmac-md5,hmac-md5-96,hmac-ripemd160,hmac-ripemd160@openssh.com;none"
 
-### extra.ssl.ja3_digest: (string)
-Search by JA3 hash.
-
-    e.g. extra.ssl.ja3_digest:85ceddf7e8f7ad69d40c81c05e0fde96
-
 ### extra.ssl.ja3: (string)
 Search by JA3 string.
 
     e.g. extra.ssl.ja3:"771,49200-49196-49192-49188-49172-49162-165-163-161-159-107-106-105-104-57-56-55-54-136-135-134-133-49202-49198-49194-49190-49167-49157-157-61-53-132-141-49199-49195-49191-49187-49171-49161-164-162-160-158-103-64-63-62-51-50-49-48-154-153-152-151-69-68-67-66-49201-49197-49193-49189-49166-49156-156-60-47-150-65-140-49169-49159-49164-49154-5-4-138-255,0-11-10-35-13-15-21,23-25-28-27-24-26-22-14-13-11-12-9-10,0-1-2"
+
+### extra.ssl.ja3_digest: (string)
+Search by JA3 hash.
+
+    e.g. extra.ssl.ja3_digest:85ceddf7e8f7ad69d40c81c05e0fde96

@@ -18,10 +18,47 @@ The API has endpoints for querying our data in which you can use free text searc
 
 ## General Fields
 
+### as_name: (string)
+Search by AS name. 
+
+    e.g. as_name:amazon
+
+### asn: (int)
+Search by ASN. 
+
+    e.g. asn:4812
+
+### country: (string) 
+Search using ISO2 Country Codes. 
+    
+    e.g. country:ES
+
+### created_at: (date)
+Search by created_at.
+
+    e.g.
+        created_at:[2018-09-01 TO 2018-10-01]
+        created_at:2018-09-01
+
 ### ip: (string) 
 Search by IP address or CIDR. 
 
     e.g ip:"192.168.1.1/24" or ip:192.168.1.1
+
+### geoip.city_name: (string) 
+Search using city names. 
+    
+    e.g. geoip.city_name:madrid
+
+### geoip.country_name: (string) 
+Search using country names. 
+    
+    e.g. geoip.country_name:spain
+
+### has_screenshot: (boolean) 
+Search for screenshots, true or false (VNC, RDP or X11 module types only). 
+
+    e.g. has_screenshot:true
 
 ### port: (int) 
 Search by port number. 
@@ -37,31 +74,6 @@ Search by protocol. Can be TCP or UDP.
 Search by event type. Can be service-simple (the default service identification module), ssl, ssh, vnc, rdp, x11, mongodb, memcached, elasticsearch, redis.
 
     e.g. type:ssl
-
-### country: (string) 
-Search using ISO2 Country Codes. 
-    
-    e.g. country:ES
-
-### geoip.country_name: (string) 
-Search using country names. 
-    
-    e.g. geoip.country_name:spain
-
-### geoip.city_name: (string) 
-Search using city names. 
-    
-    e.g. geoip.city_name:madrid
-
-### asn: (int)
-Search by ASN. 
-
-    e.g. asn:4812
-
-### as_name: (string)
-Search by AS name. 
-
-    e.g. as_name:amazon
 
 ### tag: (string)
 Search by tags. Can be ICS, MALWARE, DATABASE, WEBSERVER, IOT, CAMERA. Tag list and matches are constantly being updated.
@@ -81,35 +93,13 @@ Search by tags. Can be ICS, MALWARE, DATABASE, WEBSERVER, IOT, CAMERA. Tag list 
 * WEBCAM
 * WEBSERVER
 
-### has_screenshot: (boolean) 
-Search for screenshots, true or false (VNC, RDP or X11 module types only). 
-
-    e.g. has_screenshot:true
-
-### created_at: (date)
-Search by created_at.
-
-    e.g.
-        created_at:[2018-09-01 TO 2018-10-01]
-        created_at:2018-09-01
-
 
 ## Service-Simple
 
-### name: (string) 
-Search by service names.
+### banner: (string) 
+Search by banner.
     
-    e.g. service:http
-
-### product: (string) 
-Search by product names. 
-    
-    e.g. product:nginx
-
-### version: (string) 
-Search by product versions. Better used together with product.
-    
-    e.g. version:1.1.0
+    e.g. banner:admin
 
 ### cpe: (string) 
 Search by CPE.
@@ -126,15 +116,26 @@ Search by extra info (can include information such as build, extensions, OS, etc
 
     e.g. extrainfo:"PHP/5.4.19"
 
+### name: (string) 
+Search by service names.
+    
+    e.g. service:http
+
 ### ostype: (string)
 Search by OS type.
 
     e.g. ostype:Windows
 
-### banner: (string) 
-Search by banner.
+### product: (string) 
+Search by product names. 
     
-    e.g. banner:admin
+    e.g. product:nginx
+
+### version: (string) 
+Search by product versions. Better used together with product.
+    
+    e.g. version:1.1.0
+
 
 ## VNC
 
@@ -162,6 +163,7 @@ Search by VNC version:
 Search by VNC width:
 
     e.g. vnc.width:1024
+
 
 ## RDP
 
@@ -226,15 +228,20 @@ Search by HASSH algorithms string.
 
 ## SSL
 
-### cert.serial: (string)
-Search by leaf certificate's Serial Number.
+### cert.issuer.commonName: (string)
+Search by leaf certificate issuer's Common Name.
 
-    e.g. ssl.cert.serial:160000708D70A2A4CB63ABA1C700000000708D
+    e.g. ssl.cert.issuer.commonName:microsoft
 
-### cert.sha1_fingerprint: (string)
-Search by leaf certificate's SHA1 fingerprint.
+### cert.issuer_names: (string)
+Search by leaf certificate issuer's names (commonName, organizationName combined).
 
-    e.g. ssl.cert.sha1_fingerprint:3ab0b1c27f746fd90c34f0d6a960cf73a4229de8
+    e.g. ssl.cert.issuer_names:kubernetes
+
+### cert.issuer.organizationName: (string)
+Search by leaf certificate issuer's Organization Name.
+
+    e.g. ssl.cert.issuer.organizationName:microsoft
 
 ### cert.not_after: (date)
 Search by leaf certificate's expiration date.
@@ -248,35 +255,30 @@ Search by leaf certificate's creation date.
     e.g. ssl.cert.not_before:[2018-12-01 TO 2019-01-01]
          ssl.cert.not_before:2019-01-01
 
-### cert.issuer.commonName: (string)
-Search by leaf certificate issuer's Common Name.
+### cert.serial: (string)
+Search by leaf certificate's Serial Number.
 
-    e.g. ssl.cert.issuer.commonName:microsoft
+    e.g. ssl.cert.serial:160000708D70A2A4CB63ABA1C700000000708D
 
-### cert.issuer.organizationName: (string)
-Search by leaf certificate issuer's Organization Name.
+### cert.sha1_fingerprint: (string)
+Search by leaf certificate's SHA1 fingerprint.
 
-    e.g. ssl.cert.issuer.organizationName:microsoft
-
-### cert.issuer_names: (string)
-Search by leaf certificate issuer's names (commonName, organizationName combined).
-
-    e.g. ssl.cert.issuer_names:kubernetes
+    e.g. ssl.cert.sha1_fingerprint:3ab0b1c27f746fd90c34f0d6a960cf73a4229de8
 
 ### cert.subject.commonName: (string)
 Search by leaf certificate subject's Common Name.
 
     e.g. ssl.cert.subject.commonName:microsoft
 
-### cert.subject.organizationName: (string)
-Search by leaf certificate subject's Organization Name.
-
-    e.g. ssl.cert.subject.organizationName:microsoft
-
 ### cert.subject_names: (string)
 Search by leaf certificate subject's names (commonName, organizationName combined).
 
     e.g. ssl.cert.subject_names:kubernetes
+
+### cert.subject.organizationName: (string)
+Search by leaf certificate subject's Organization Name.
+
+    e.g. ssl.cert.subject.organizationName:microsoft
 
 ### cert.subject_dns: (string)
 Search by leaf certificate subject's DNS (if available).
@@ -351,6 +353,11 @@ Search for Secure Renegotiation support.
 
 ## HTTP
 
+### body: (string)
+Search by HTTP body.
+
+    e.g. http.body:bitcoin
+
 ### href: (string)
 Search by HTTP href.
 
@@ -395,11 +402,6 @@ Search by HTTP status message.
 Search by HTTP title.
 
     e.g. http.title:amazon
-
-### body: (string)
-Search by HTTP body.
-
-    e.g. http.body:bitcoin
 
 
 ## MongoDB

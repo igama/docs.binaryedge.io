@@ -18,40 +18,72 @@ The API has endpoints for querying our data in which you can use free text searc
 
 ## Fields
 
-### ip: (string) 
-Search by IP address or CIDR. 
+### as_name: (string)
+Search by AS name. 
 
-    e.g ip:"192.168.1.1/24" or ip:192.168.1.1
-
-### port: (int) 
-Search by port number. 
-    
-    e.g. port:80
-
-### country: (string) 
-Search using ISO2 Country Codes. 
-    
-    e.g. country:ES
-
-### geoip.country_name: (string) 
-Search using country names. 
-    
-    e.g. geoip.country_name:spain
-
-### geoip.city_name: (string) 
-Search using city names. 
-    
-    e.g. geoip.city_name:madrid
+    e.g. as_name:amazon
 
 ### asn: (int)
 Search by ASN. 
 
     e.g. asn:4812
 
-### as_name: (string)
-Search by AS name. 
+### created_at: (date)
+Search by timestamp.
 
-    e.g. as_name:amazon
+    e.g.
+        ts:[2018-09-01 TO 2018-10-01]
+        ts:2018-09-01
+
+### country: (string) 
+Search using ISO2 Country Codes. 
+    
+    e.g. country:ES
+
+### ip: (string) 
+Search by IP address or CIDR. 
+
+    e.g ip:"192.168.1.1/24" or ip:192.168.1.1
+
+### geoip.city_name: (string) 
+Search using city names. 
+    
+    e.g. geoip.city_name:madrid
+
+### geoip.country_name: (string) 
+Search using country names. 
+    
+    e.g. geoip.country_name:spain
+
+### port: (int) 
+Search by port number. 
+    
+    e.g. port:80
+
+### protocol: (string)
+Search by protocol. Can be TCP or UDP. 
+    
+    e.g. protocol:tcp
+
+### has_faces: (boolean)
+Search for images with faces detected.
+
+    e.g. has_faces:true
+
+### height: (int)
+Search by image height (supports ranges).
+
+    e.g. height:1024
+
+### rdns: (string)
+Search by RDNS.
+
+    e.g. rdns:static-206-162-231-219.wireless.unwiredbb.net
+
+### rdns_parent: (string)
+Search by RDNS root.
+
+    e.g. rdns_parent:unwiredbb.net
 
 ### tags: (string)
 Search by tags. Can be mobile, rdp, vnc, windows, x11.
@@ -67,29 +99,12 @@ Search by tags. Can be mobile, rdp, vnc, windows, x11.
 * WINDOWS
 * X11
 
-### words: (string)
-Search by text found by OCR.
-
-    e.g. words:alarm
-
-### has_faces: (boolean)
-Search for images with faces detected.
-
-    e.g. has_faces:true
-
-### height: (int)
-Search by image height (supports ranges).
-
-    e.g. height:1024
-
 ### width: (int)
 Search by image width (supports ranges).
 
     e.g. width:768
 
-### ts: (date)
-Search by timestamp.
+### words: (string)
+Search by text found by OCR.
 
-    e.g.
-        ts:[2018-09-01 TO 2018-10-01]
-        ts:2018-09-01
+    e.g. words:alarm
