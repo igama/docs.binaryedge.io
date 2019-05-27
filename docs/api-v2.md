@@ -322,7 +322,7 @@ curl 'https://api.binaryedge.io/v2/query/search/stats?query=name:ldap%20AND%20ip
 
 ### Image
 
-#### /v2/query/image/ip/{ip}
+#### /v2/query/image/ip/{target}
 
 Details about Remote Desktops found on an Host. List of screenshots and details extracted from them for the specified host, including OCR and whether faces were found or not, with data up to 2 months.
 
