@@ -16,6 +16,7 @@
  | BINGBOT | https://www.bing.com/ | 
  | BITSIGHT | Internet wide scanner https://www.bitsight.com/ | 
  | BOTNET | Known botnet traffic | 
+ | BLUEKEEP_SCANNER | Vulnerability affecting RDP protocol (CVE-2019-0708) |
  | CENSYS | Internet wide scanner https://censys.io/ | 
  | CISCO_LINKSYS_SCANNER | Scanning for vulnerabilities associated with Cisco or Linksys | 
  | CISCO_SMART_INSTALL | Scanning for Cisco Smart Install | 
