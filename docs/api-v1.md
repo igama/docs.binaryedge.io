@@ -498,8 +498,6 @@ Events based on a Query. List of recent events for the given query, including de
 *Parameters*
 
 * query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](search.md) for details on what parameters can be used.
-* page: [Int] Optional. Default 1
-* pagesize: [Int] Optional. Default 100
 
 *Output*
 
