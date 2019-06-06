@@ -130,3 +130,6 @@ Extract web information.
 
 ### [x11 module](modules/x11.md "x11")
 Extract x11 screenshot.
+
+### [kubernetes module](modules/kubernetes.md "kubernetes")
+Extract Kubernetes information.
