@@ -2267,6 +2267,30 @@ curl 'https://api.binaryedge.io/v1/query/sensors/search/stats?query=tags:ssh_sca
 }]
 ```
 
+#### /v1/query/sensors/tag/<tag>
+
+Get a list of IPs that have been associated with a specific TAG. See [List of Tags](/sensors-tags)
+
+*Parameters*
+
+* tag: [String] Tag you want to get the list of IPs related to.
+    * example: MALICIOUS
+* days: [Integer] Query Param: Number of days to get the stats for. For example days=1 for the last day of data.
+    * default: 1
+    * Max: 60
+    * Usage: /v1/query/sensors/tag/<tag>?days=2
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v1/query/sensors/tag/MALICIOUS' -H 'X-Token:InsertYourClientToken'
+```
+
+```json
+["1.34.221.87", "1.160.38.189", "1.160.39.129", "1.160.91.241", "1.160.130.56", "1.160.160.98", "1.161.118.167"]
+```
+
+
 ### FAQ
 
 **Q: What is the sample parameter?**
