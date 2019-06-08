@@ -762,7 +762,7 @@ curl 'https://api.binaryedge.io/v1/query/image/search?ip=120.XXX.XXX.XXX'  -H 'X
 }
 ```
 
-#### /v1/query/image/search
+#### /v1/query/image/search/similar
 
 List of Remote Desktops that are similar to another Remote Desktop.
 Note: This option cannot be used together with the previous ones.
@@ -774,7 +774,7 @@ Note: This option cannot be used together with the previous ones.
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/image/search?similar=f1b0a311af803ea73ac48adce2378f58adce2378f5' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/query/image/search/similar?similar=f1b0a311af803ea73ac48adce2378f58adce2378f5' -H 'X-Token:InsertYourClientToken'
 ```
 
 ```json
