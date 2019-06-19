@@ -287,81 +287,7 @@ Recommended for when targeting Domains, with Web and HTTP/HTTPS modules.
 
 ## Supported Modules Types
 
-### 1. elasticsearch
-_Description_: Extract Elasticsearch detailed information.
-
-_Detailed documentation_: [elasticsearch module documentation](modules/elasticsearch.md "elasticsearch")
-
-### 2. http & https
-_Description_: Extract HTTP/HTTPS information, e.g. HTTP headers, HTTP status codes, HTTP body, and redirects information. Follows up to 5 redirects.
-
-_Detailed documentation_: [http & https module documentation](modules/http.md "http")
-
-### 3. memcached
-_Description_: Extract Memcached detailed information.
-
-_Detailed documentation_: [memcached module documentation](modules/memcached.md "memcached")
-
-### 4. mongodb
-_Description_: Extract MongoDB detailed information.
-
-_Detailed documentation_: [mongodb module documentation](modules/mongodb.md "mongodb")
-
-### 5. mqtt
-_Description_: Grab MQTT information, including messages and topics.
-
-_Detailed documentation_: [mqtt module documentation](modules/mqtt.md "mqtt")
-
-### 6. rdp
-_Description_: Extract RDP details and screenshot.
-
-_Detailed documentation_: [rdp module documentation](modules/rdp.md "rdp")
-
-### 7. redis
-_Description_: Extract Redis detailed information.
-
-_Detailed documentation_: [redis module documentation](modules/redis.md "redis")
-
-### 8. service
-_Description_: Extract detailed product specific information, e.g. product name, version, headers, scripts. If you just want product name and version, consider using the faster "service-simple".
-
-_Detailed documentation_: [service module documentation](modules/service.md "service")
-
-### 9. service-simple
-_Description_: Extract basic product specific information, e.g. product name, version. This module is much faster than "service", since it returns less information.
-
-_Detailed documentation_: [service-simple module documentation](modules/service-simple.md "service-simple")
-
-### 10. ssh
-
-_Description_: Extract SSH details, e.g. key and algorithms for SSH servers.
-
-_Detailed documentation_: [ssh module documentation](modules/ssh.md "ssh")
-
-### 11. ssl
-_Description_: Extract SSL details e.g. type of encryption.
-
-_Detailed documentation_: [ssl module documentation](modules/ssl.md "ssl")
-
-### 12. telnet
-_Description_: Extract Telnet information, e.g. Will, Do, Don't Won't commands.
-
-_Detailed documentation_: [telnet module documentation](modules/telnet.md "telnet")
-
-### 13. vnc
-_Description_: Extract VNC details and screenshot.
-
-_Detailed documentation_: [vnc module documentation](modules/vnc.md "vnc")
-
-### 14. web
-_Description_: Extract Web technologies information and headers.
-
-_Detailed documentation_: [web module documentation](modules/web.md "web")
-
-### 15. x11
-_Description_: Extract x11 screenshot.
-
-_Detailed documentation_: [x11 module documentation](modules/x11.md "x11")
+See [List of Modules](modules.md).
 
 ### *Custom Modules*
 Note: If you want a custom-made module, please contact BinaryEdge.
@@ -2269,16 +2195,15 @@ curl 'https://api.binaryedge.io/v1/query/sensors/search/stats?query=tags:ssh_sca
 
 #### /v1/query/sensors/tag/<tag>
 
-Get a list of IPs that have been associated with a specific TAG. See [List of Tags](/sensors-tags)
+Get a list of IPs that have been associated with a specific TAG. See [List of Tags](sensors-tags.md)
 
 *Parameters*
 
 * tag: [String] Tag you want to get the list of IPs related to.
     * example: MALICIOUS
 * days: [Integer] Query Param: Number of days to get the stats for. For example days=1 for the last day of data.
-    * default: 1
+    * Default: 1
     * Max: 60
-    * Usage: /v1/query/sensors/tag/<tag>?days=2
 
 *Output*
 
@@ -2287,7 +2212,7 @@ curl 'https://api.binaryedge.io/v1/query/sensors/tag/MALICIOUS' -H 'X-Token:Inse
 ```
 
 ```json
-["1.34.221.87", "1.160.38.189", "1.160.39.129", "1.160.91.241", "1.160.130.56", "1.160.160.98", "1.161.118.167"]
+  ["1.34.221.87", "1.160.38.189", "1.160.39.129", "1.160.91.241", "1.160.130.56", "1.160.160.98", "1.161.118.167"]
 ```
 
 
