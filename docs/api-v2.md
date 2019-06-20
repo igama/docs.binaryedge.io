@@ -143,6 +143,8 @@ List of events for the specified host, with events for each time that:
 - A service was found running
 - Other modules were successfully executed 
 
+**Note**: Available for paid subscriptions only.
+
 *Parameters*
 
 * target: [String] target IP address 
