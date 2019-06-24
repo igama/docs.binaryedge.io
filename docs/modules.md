@@ -67,118 +67,69 @@ Details of the fields:
 
 ## Modules
 
-Below are all the modules available for scanning on the platform. All modules support _hostnames_, _IPv4 addresses_ and _IPv6 addresses_. These modules are the same modules that feed our Host database.
 
-### amqp 
+### [service-simple module](modules/service-simple.md "service-simple")
+Our main module for Service Identification. Extract basic product specific information, e.g. product name, version. This module is much faster than "service", since it returns less information.
 
-See [More Info](modules/amqp.md "amqp")
 
-### cassandra 
+### [elasticsearch module](modules/elasticsearch.md "elasticsearch") 
+Extract Elasticsearch detailed information.
 
-See [More Info](modules/cassandra.md "cassandra")
 
-### elasticsearch 
+### [http & https module](modules/http.md "http")
+Extract HTTP/HTTPS information, e.g. HTTP headers, HTTP status codes, HTTP body, and redirect information. Follows up to 5 redirects.
 
-See [More Info](modules/elasticsearch.md "elasticsearch")
 
-### ftp
+### [memcached module](modules/memcached.md "memcached")
+Extract Memcached detailed information.
 
-See [More Info](modules/ftp.md "ftp")
 
-### http 
+### [mongodb module](modules/mongodb.md "mongodb")
+Extract MongoDB detailed information.
 
-See [More Info](modules/http.md "http")
 
-### https
+### [mqtt module](modules/mqtt.md "mqtt")
+Grab MQTT information, including messages and topics.
 
-See [More Info](modules/https.md "https")
 
-### http-request
+### [rdp module](modules/rdp.md "rdp")
+Extract RDP details and screenshot.
 
-See [More Info](modules/http-request.md "http-request")
 
-### kubernetes
+### [redis module](modules/redis.md "redis")
+Extract Redis detailed information.
 
-See [More Info](modules/kubernetes.md "kubernetes")
 
-### memcached 
+### [service module](modules/service.md "service")
+Extract detailed product specific information, e.g. product name, version, headers, scripts. If you just want product name and version, consider using the faster "service-simple".
 
-See [More Info](modules/memcached.md "memcached")
 
-### mongodb 
+### [ssh module](modules/ssh.md "ssh")
+Extract SSH details, e.g. key and algorithms for SSH servers.
 
-See [More Info](modules/mongodb.md "mongodb")
 
-### mqtt 
+### [ssl module](modules/ssl.md "ssl")
+Extract SSL details e.g. type of encryption.
 
-See [More Info](modules/mqtt.md "mqtt")
 
-### mqttinfo
+### [sslv2 module](modules/sslv2.md "sslv2")
+Extract SSL details (Version 2).
 
-See [More Info](modules/mqttinfo.md "mqttinfo")
 
-### rdp 
+### [telnet module](modules/telnet.md "telnet")
+Extract Telnet information, e.g. Will, Do, Don't Won't commands.
 
-See [More Info](modules/rdp.md "rdp")
 
-### redis 
+### [vnc module](modules/vnc.md "vnc")
+Extract VNC details and screenshot.
 
-See [More Info](modules/redis.md "redis")
 
-### rethinkdb 
+### [web module](modules/web.md "web")
+Extract web information.
 
-See [More Info](modules/rethinkdb.md "rethinkdb")
 
-### rsync
+### [x11 module](modules/x11.md "x11")
+Extract x11 screenshot.
 
-See [More Info](modules/rsync.md "rsync")
-
-### service
-
-See [More Info](modules/service.md "service")
-
-### service-simple
-
-See [More Info](modules/service-simple.md "service-simple")
-
-### socks
-
-See [More Info](modules/socks.md "socks")
-
-### ssh
-
-See [More Info](modules/ssh.md "ssh")
-
-### ssl
-
-**DEPRECATED**
-
-See [More Info](modules/ssl.md "ssl")
-
-### sslv2
-
-See [More Info](modules/sslv2.md "sslv2")
-
-### telnet
-
-See [More Info](modules/telnet.md "telnet")
-
-### vnc 
-
-See [More Info](modules/vnc.md "vnc")
-
-### web
-
-See [More Info](modules/web.md "web")
-
-### websocket
-
-The Websocket module attempts to connect to a Websocket server and extract a banner.
-
-See [More Info](modules/websocket.md "websocket")
-
-### x11 
-
-The X11 module attempts to connect to a X11 server and extract relevant information as well as take a screenshot of the display.
-
-See [More Info](modules/x11.md "x11")
+### [kubernetes module](modules/kubernetes.md "kubernetes")
+Extract Kubernetes information.
