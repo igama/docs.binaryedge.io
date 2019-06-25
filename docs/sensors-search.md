@@ -88,15 +88,20 @@ Search by tags.
 #### Available tags
 [Sensors Available Tags](sensors-tags.md)
 
-### extra.ssh.description: (string)
-Search by SSH identification string.
+### extra.http.header_order: (string)
+Search by HTTP header order fingerprint string.
 
-    e.g. extra.ssh.description:dropbear
+    e.g. extra.http.header_order:"user_agent,host,connection"
 
-### extra.http.headersFull: (string)
-Search by HTTP headers:
+### extra.http.header_order_hash: (string)
+Search by HTTP header order fingerprint hash.
 
-    e.g. extra.http.headersFull:google
+    e.g. extra.http.header_order_hash:"ea54a5e969c426b7815aa5540ab4dd93"
+
+### extra.http.headers.all: (string)
+Search by HTTP headers.
+
+    e.g. extra.http.headers.all:google
 
 ### extra.http.method: (string)
 Search by HTTP method.
@@ -107,6 +112,11 @@ Search by HTTP method.
 Search by HTTP path.
 
     e.g. extra.http.path:"/index.html"
+
+### extra.ssh.description: (string)
+Search by SSH identification string.
+
+    e.g. extra.ssh.description:dropbear
 
 ### extra.ssh.hassh: (string)
 Search by HASSH hash.

@@ -137,40 +137,68 @@ Search by product versions. Better used together with product.
     e.g. version:1.1.0
 
 
-## VNC
-
-### auth_enabled: (boolean)
-Search by whether VNC has auth enabled or not:
-
-    e.g. vnc.auth_enabled:false
-
-### height: (int)
-Search by VNC height:
-
-    e.g. vnc.height:768
-
-### title: (string)
-Search by VNC title:
-
-    e.g. vnc.title:android
-
-### version: (string)
-Search by VNC version:
-
-    e.g. vnc.version:"3.8"
-
-### width: (int)
-Search by VNC width:
-
-    e.g. vnc.width:1024
-
-
 ## RDP
 
 ### security: (string)
 Search by RDP security detected.
 
     e.g. rdp.security:NLA
+
+
+## VNC
+
+### auth_enabled: (boolean)
+Search by whether VNC has auth enabled or not.
+
+    e.g. vnc.auth_enabled:false
+
+### height: (int)
+Search by VNC height.
+
+    e.g. vnc.height:768
+
+### title: (string)
+Search by VNC title.
+
+    e.g. vnc.title:android
+
+### version: (string)
+Search by VNC version.
+
+    e.g. vnc.version:"3.8"
+
+### width: (int)
+Search by VNC width.
+
+    e.g. vnc.width:1024
+
+
+## X11
+
+### height: (int)
+Search by X11 height.
+
+    e.g. x11.height:768
+
+### vendor: (string)
+Search by X11 vendor.
+
+    e.g. x11.vendor:"The X.Org Foundation"
+
+### vendor_release: (string)
+Search by X11 vendor release.
+
+    e.g. x11.vendor_release:"10706000"
+
+### version: (string)
+Search by X11 version.
+
+    e.g. x11.version:"11.0"
+
+### width: (int)
+Search by X11 width.
+
+    e.g. x11.width:1024
 
 
 ## SSH
@@ -300,6 +328,16 @@ Search by highest SSL version supported.
 
     e.g. ssl.server_info.highest_ssl_version_supported_string:TLSV1
 
+### ja3: (string)
+Search by JA3 fingerprint string:
+
+    e.g. ssl.server_info.ja3:"771,159,0-65281-35"
+
+### ja3_digest: (string)
+Search by JA3 fingerprint hash:
+
+    e.g. ssl.server_info.ja3_digest:"8a17b6c8d5c6e1711cb236cc77aaa388"
+
 ### ssl_cipher_supported: (string)
 Search by SSL cypher supported.
 
@@ -344,6 +382,11 @@ Search for OpenSSL CCS injection.
 Search for Renegotiation support.
 
     e.g. ssl.vulnerabilities.renegotiation.accepts_client_renegotiation:true
+
+### robot_result_enum: (string)
+Search for ROBOT.
+
+    e.g. ssl.vulnerabilities.robot.robot_result_enum:NOT_VULNERABLE_NO_ORACLE
 
 ### supports_secure_renegotiation: (boolean)
 Search for Secure Renegotiation support.
@@ -404,6 +447,80 @@ Search by HTTP title.
     e.g. http.title:amazon
 
 
+## MQTT
+
+### auth: (boolean)
+Search by whether MQTT has auth enabled or not.
+
+    e.g. mqtt.auth:false
+
+### num_topics: (int)
+Search by MQTT number of topics.
+
+    e.g. mqtt.num_topics:10
+
+### messages: (string)
+Search by MQTT messages.
+
+    e.g. mqtt.messages:sms
+
+### protocol: (string)
+Search by MQTT protocol (mqtt or mqtts).
+
+    e.g. mqtt.protocol:mqtts
+
+### version: (string)
+Search by MQTT protocol version (4 or 5).
+
+    e.g. mqtt.version:4
+
+### topics: (string)
+Search by MQTT topics.
+
+    e.g. mqtt.topics:sms
+
+
+## Kubernetes
+
+### auth_required: (boolean)
+Search by whether Kubernates has auth enabled or not.
+
+    e.g. kubernetes.auth_required:false
+
+### pods_names: (string)
+Search by Kubernetes pods names.
+
+    e.g. kubernetes.pods_names:credit
+
+
+## RSYNC
+
+### banner: (string)
+Search by RSYNC banner.
+
+    e.g. rsync.banner:confidential
+
+### modules.module: (string)
+Search by RSYNC module name.
+
+    e.g. rsync.modules.module:release
+
+### modules.status: (string)
+Search by RSYNC module status.
+
+    e.g. rsync.modules.status:"@RSYNCD:OK"
+
+### status: (string)
+Search by RSYNC status.
+
+    e.g. rsync.status:public
+
+### version: (string)
+Search by RSYNC version.
+
+    e.g. rsync.version:"31.0"
+
+
 ## MongoDB
 
 #### Available search fields
@@ -451,6 +568,24 @@ Search by HTTP title.
 * elasticsearch.size_in_bytes (int)
 * elasticsearch.total_indexing_buffer (int)
 * elasticsearch.version (string)
+
+
+## Cassandra
+
+#### Available search fields
+
+* cassandra.cluster (string)
+* cassandra.cluster_name (string)
+* cassandra.dse (boolean)
+* cassandra.dse_version (string)
+* cassandra.cql_version (string)
+* cassandra.datacenter (string)
+* cassandra.keyspaces (string)
+* cassandra.keyspaces_names (string)
+* cassandra.rack (string)
+* cassandra.version (string)
+* cassandra.table_names (string)
+* cassandra.thrift_version (string)
 
 
 ## Redis

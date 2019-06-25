@@ -50,23 +50,10 @@ Note: all requests are identified by Job ID and are shown in the stream window.
             * [2. grab](#2-grab)
 
 * [Supported Modules](#supported-modules-types)
-    * [1. elasticsearch](#1-elasticsearch)
-    * [2. http & https](#2-http--https)
-    * [3. memcached](#3-memcached)
-    * [4. mongodb](#4-mongodb)
-    * [5. mqtt](#5-mqtt)
-    * [6. rdp](#6-rdp)
-    * [7. redis](#7-redis)
-    * [8. service](#8-service)
-    * [9. service-simple](#9-service-simple)
-    * [10. ssh](#10-ssh)
-    * [11. ssl](#11-ssl)
-    * [12. telnet](#12-telnet)
-    * [13. vnc](#13-vnc)
-    * [14. web](#14-web)
-    * [15. x11](#15-x11)
+    * [Custom Modules](#custom-modules)
 
 * [Configurations](#configurations)
+    * [Available configurations](#available-configurations)
 
 * [Query Endpoints](#query-endpoints)
     * [Host](#host)
@@ -287,9 +274,9 @@ Recommended for when targeting Domains, with Web and HTTP/HTTPS modules.
 
 ## Supported Modules Types
 
-See [List of Modules](modules.md).
+See [List of Modules](modules.md) for a list of all available modules and their descriptions.
 
-### *Custom Modules*
+### Custom Modules
 Note: If you want a custom-made module, please contact BinaryEdge.
 
 ## Configurations
@@ -322,7 +309,7 @@ Example:
 
 ### Available configurations
 
-Check each module's detailed documentation for the available configurations.
+Check each module's detailed documentation for the available configurations. See [List of Modules](modules.md).
 
 
 ## Query Endpoints
