@@ -548,17 +548,18 @@ Search by RSYNC version.
 * elasticsearch.build_type (string)
 * elasticsearch.cluster_name (string)
 * elasticsearch.cluster_nodes (int)
-* elasticsearch.docs (int)
 * elasticsearch.hostname (string)
-* elasticsearch.indices (string)
+* elasticsearch.name (string)
+* elasticsearch.node_name (string)
+* elasticsearch.version (string)
+* elasticsearch.docs (int, number of documents)
+* elasticsearch.indices (string, name of indices)
 * elasticsearch.indices_raw (string)
 * elasticsearch.jvm.version (string)
 * elasticsearch.jvm.vm_name (string)
 * elasticsearch.jvm.vm_vendor (string)
 * elasticsearch.jvm.vm_version (string)
 * elasticsearch.modules (string)
-* elasticsearch.name (string)
-* elasticsearch.node_name (string)
 * elasticsearch.os.arch (string)
 * elasticsearch.os.cpu.model (string)
 * elasticsearch.os.cpu.vendor (string)
@@ -571,7 +572,6 @@ Search by RSYNC version.
 * elasticsearch.settings (string)
 * elasticsearch.size_in_bytes (int)
 * elasticsearch.total_indexing_buffer (int)
-* elasticsearch.version (string)
 
 
 ## Cassandra
@@ -580,17 +580,16 @@ Search by RSYNC version.
 
 * cassandra.cluster (string)
 * cassandra.cluster_name (string)
+* cassandra.datacenter (string)
 * cassandra.dse (boolean)
 * cassandra.dse_version (string)
 * cassandra.cql_version (string)
-* cassandra.datacenter (string)
-* cassandra.keyspaces (string)
-* cassandra.keyspaces_names (string)
 * cassandra.rack (string)
 * cassandra.version (string)
-* cassandra.table_names (string)
 * cassandra.thrift_version (string)
-
+* cassandra.keyspaces (string)
+* cassandra.keyspace_names (string)
+* cassandra.table_names (string)
 
 ## Redis
 
