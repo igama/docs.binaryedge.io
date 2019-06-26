@@ -159,7 +159,7 @@ See [More Info](modules/web.md "web")
 
 ### Protocols
 
-### ssl
+#### ssl
 
 **DEPRECATED**
 
@@ -167,7 +167,7 @@ The SSL module attempts to connect to an SSL-wrapped server and extract (and par
 
 See [More Info](modules/ssl.md "ssl")
 
-### sslv2
+#### sslv2
 
 The SSLv2 module attempts to connect to an SSL-wrapped server and extract (and parse) certificate chains, ciphers and vulnerabilities. It is an upgraded version of the _ssl_ module, and includes extra updates and features not available previously.
 
