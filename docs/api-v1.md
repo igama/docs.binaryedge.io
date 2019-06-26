@@ -28,7 +28,7 @@ Note: all requests are identified by Job ID and are shown in the stream window.
 |   | Input                                                                                                                                                                                                                                                                                                   | Output                                                    |
 |---|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
 | 1 | Connect to Data Stream <br> `curl 'https://stream.api.binaryedge.io/v1/stream' -H 'X-Token:InsertYourClientToken' `                                                                                                                                                                                                                                     | (data stream)                                             |
-| 2 | Request a Scan Task <br> `curl 'https://api.binaryedge.io/v1/tasks' -d '{"type":"scan", "description": "InsertYourDescriptionHere", "options":[{"targets":["InsertAnIPAddress/IPNetwork"], "ports":[{"port":InsertPort, "protocol": "tcp or udp", "modules": ["InsertModule"]}]}]}' -v -H 'X-Token:InsertYourClientToken'` | {"stream_url":"stream URL", "job_id":"Job ID"}             |
+| 2 | Request a Scan Task <br> `curl 'https://api.binaryedge.io/v1/tasks' -d '{"type":"scan", "description": "InsertYourDescriptionHere", "options":[{"targets":["InsertIPAddress/IPNetwork/ASN/CountryCode"], "ports":[{"port":"InsertPort/PortRange", "protocol": "tcp/udp", "modules": ["InsertModule"], "config": {"InsertConfigKey", "InsertConfigValue"}, "sample": "InsertSampleSize"}]}]}' -v -H 'X-Token:InsertYourClientToken'` | {"stream_url":"stream URL", "job_id":"Job ID"}             |
 
 
 ## Index
@@ -136,6 +136,7 @@ See [Sinkhole Data](sinkhole.md) for details.
 
 Retrieve a list of the latest requested jobs. This includes:
 
+* "description": Description of the job, as specified on the request;
 * "status": Status of the job. Where status can be:
     * "requested": Job was requested successfully;
     * "revoked": Job was revoked by user;
@@ -165,7 +166,7 @@ Parameters:
 * "options": Configuration Options for the job, array of JSON objects. One Job can have multiple options.
 
 ```shell
-curl 'https://api.binaryedge.io/v1/tasks' -d '{"type":"scan", "description": "InsertYourDescriptionHere", "options":[{"targets":["InsertAnIPAddress/IPNetwork"], "ports":[{"port":InsertPort, "protocol": "tcp or udp", "modules": ["InsertModule"]}]}]}' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/tasks' -d '{"type":"scan", "description": "InsertYourDescriptionHere", "options":[{"targets":["InsertIPAddress/IPNetwork/ASN/CountryCode"], "ports":[{"port":"InsertPort/PortRange", "protocol": "tcp/udp", "modules": ["InsertModule"]}]}]}' -H 'X-Token:InsertYourClientToken'
 ```
 
 ### POST /v1/tasks/job_id/revoke - Revoke Job
