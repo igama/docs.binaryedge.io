@@ -67,69 +67,136 @@ Details of the fields:
 
 ## Modules
 
+Below are all the modules available for scanning on the platform. All modules support _hostnames_, _IPv4 addresses_ and _IPv6 addresses_. These modules are the same modules that feed our Host database.
 
-### [service-simple module](modules/service-simple.md "service-simple")
-Our main module for Service Identification. Extract basic product specific information, e.g. product name, version. This module is much faster than "service", since it returns less information.
+### Service Identification
 
+#### service-simple
 
-### [elasticsearch module](modules/elasticsearch.md "elasticsearch") 
-Extract Elasticsearch detailed information.
+The Service-Simple module attempts to connect to a remote server and identify service / product information by sending various payloads and analysing how the server responds. This module is much faster than the _service_ module, since it doesn't perform any more actions than this. For more details, use the _service_module.
 
+See [More Info](modules/service-simple.md "service-simple")
 
-### [http & https module](modules/http.md "http")
-Extract HTTP/HTTPS information, e.g. HTTP headers, HTTP status codes, HTTP body, and redirect information. Follows up to 5 redirects.
+#### service
 
+The Service module attempts to connect to a remote server and identify service / product information by sending various payloads and analysing how the server responds as well as extract other available service information such as headers or hostnames if available. For simple service identification, consider using the faster _service-simple_ module.
 
-### [memcached module](modules/memcached.md "memcached")
-Extract Memcached detailed information.
+See [More Info](modules/service.md "service")
 
+### Remote Desktop
 
-### [mongodb module](modules/mongodb.md "mongodb")
-Extract MongoDB detailed information.
+#### rdp 
 
+The RDP module attempts to connect to a RDP server and take a screenshot of the display as well as extract the security level used, if any.
 
-### [mqtt module](modules/mqtt.md "mqtt")
-Grab MQTT information, including messages and topics.
+See [More Info](modules/rdp.md "rdp")
 
+#### vnc 
 
-### [rdp module](modules/rdp.md "rdp")
-Extract RDP details and screenshot.
+The VNC module attempts to connect to a VNC server and take a screenshot of the display as well as extract relevant information.
 
+See [More Info](modules/vnc.md "vnc")
 
-### [redis module](modules/redis.md "redis")
-Extract Redis detailed information.
+#### x11 
 
+The X11 module attempts to connect to a X11 server and take a screenshot of the display as well as extract relevant information.
 
-### [service module](modules/service.md "service")
-Extract detailed product specific information, e.g. product name, version, headers, scripts. If you just want product name and version, consider using the faster "service-simple".
+See [More Info](modules/x11.md "x11")
 
+### Databases
 
-### [ssh module](modules/ssh.md "ssh")
-Extract SSH details, e.g. key and algorithms for SSH servers.
+#### cassandra 
 
+The Cassandra module attempts to connect to a Cassandra server via client driver connection and extract cluster metadata as well as a list of keyspaces and respective tables.
 
-### [ssl module](modules/ssl.md "ssl")
-Extract SSL details e.g. type of encryption.
+See [More Info](modules/cassandra.md "cassandra")
 
+#### elasticsearch 
 
-### [sslv2 module](modules/sslv2.md "sslv2")
-Extract SSL details (Version 2).
+The Elasticsearch module attempts to connect to an Elasticsearch server via REST API and extract cluster metadata and stats as well as a list of indices.
 
+See [More Info](modules/elasticsearch.md "elasticsearch")
 
-### [telnet module](modules/telnet.md "telnet")
-Extract Telnet information, e.g. Will, Do, Don't Won't commands.
+#### memcached 
 
+The Memcached module attempts to connect to a Memcached server via client driver connection and extract server stats.
 
-### [vnc module](modules/vnc.md "vnc")
-Extract VNC details and screenshot.
+See [More Info](modules/memcached.md "memcached")
 
+#### mongodb 
 
-### [web module](modules/web.md "web")
-Extract web information.
+The MongoDB module attempts to connect to a MongoDB server via client driver connection and extract server metadata as well as a list of databases and respective collections.
 
+See [More Info](modules/mongodb.md "mongodb")
 
-### [x11 module](modules/x11.md "x11")
-Extract x11 screenshot.
+#### redis 
 
-### [kubernetes module](modules/kubernetes.md "kubernetes")
-Extract Kubernetes information.
+The Redis module attempts to connect to a Redis server via client driver connection and extract server metadata.
+
+See [More Info](modules/redis.md "redis")
+
+### Message Queues
+
+#### mqtt 
+
+The MQTT module attempts to connect to a MQTT server and extract a few seconds of passing messages to determine active topics.
+
+See [More Info](modules/mqtt.md "mqtt")
+
+### HTTP / Web
+
+#### http / https
+
+The HTTP/HTTPS modules attempt to connect to an HTTP server and extract HTTP headers, redirects, page title and HTML source code.
+
+See [More Info](modules/http.md "http")
+
+#### web
+
+The Web module attempts to connect to an HTTP server and extract the web technologies being used, as well as headers, source code and take a screenshot of the web page.
+
+See [More Info](modules/web.md "web")
+
+### Protocols
+
+### ssl
+
+The SSL module attempts to connect to an SSL-wrapped server and extract (and parse) certificate chains, ciphers and vulnerabilities.
+
+**DEPRECATED**
+
+See [More Info](modules/ssl.md "ssl")
+
+### sslv2
+
+The SSLv2 module attempts to connect to an SSL-wrapped server and extract (and parse) certificate chains, ciphers and vulnerabilities. It is an upgraded version of the _ssl_ module, and includes extra updates and features not available previously.
+
+See [More Info](modules/sslv2.md "sslv2")
+
+### Services
+
+#### rsync
+
+The RSYNC module attempts to connect to an RSYNC server anonymously and list the available modules (list the contents at the root directory).
+
+See [More Info](modules/rsync.md "rsync")
+
+#### ssh
+
+The SSH module attempts to connect to a SSH server and extract all the algorithms supported by the server.
+
+See [More Info](modules/ssh.md "ssh")
+
+#### telnet
+
+The Telnet module attempts to connect to a server by opening a connection and extracting the initial payload, if any.
+
+See [More Info](modules/telnet.md "telnet")
+
+### Containers
+
+#### kubernetes
+
+The Kubernetes module attempts to connect to a Kubernetes server via REST API and extract a list of pods and their respective metadata.
+
+See [More Info](modules/kubernetes.md "kubernetes")
