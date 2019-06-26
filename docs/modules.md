@@ -161,9 +161,9 @@ See [More Info](modules/web.md "web")
 
 ### ssl
 
-The SSL module attempts to connect to an SSL-wrapped server and extract (and parse) certificate chains, ciphers and vulnerabilities.
-
 **DEPRECATED**
+
+The SSL module attempts to connect to an SSL-wrapped server and extract (and parse) certificate chains, ciphers and vulnerabilities.
 
 See [More Info](modules/ssl.md "ssl")
 
