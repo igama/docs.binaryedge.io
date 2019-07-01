@@ -18,6 +18,11 @@
 curl 'https://api.binaryedge.io/v1/<endpoint>' -H 'X-Token:XXXXXXXX'
 ```
 
+## Swagger Definition
+
+You can download the Swagger OpenApi specification file : [v1.yaml](/swagger/v1.yaml). You can use this this Postman or any other client tool.
+
+
 ## How to use BinaryEdge’s API
 
 <p align="center"><img src ="https://dl.dropboxusercontent.com/s/sgwwkchh59nrhgk/how_to_use_api_2.png?dl=0" /></p>

