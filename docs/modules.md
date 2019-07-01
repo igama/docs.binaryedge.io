@@ -67,7 +67,7 @@ Details of the fields:
 
 ## Modules
 
-Below are all the modules available for scanning on the platform. All modules support _hostnames_, _IPv4 addresses_ and _IPv6 addresses_. These modules are the same modules that feed our Host database.
+Below are all the modules available for scanning on the platform. All modules support _hostnames_, _IPv4 addresses_. _IPv6_ support is also available, but experimental. These modules are the same modules that feed our Host database.
 
 ### Service Identification
 
@@ -102,6 +102,12 @@ See [More Info](modules/vnc.md "vnc")
 The X11 module attempts to connect to a X11 server and take a screenshot of the display as well as extract relevant information.
 
 See [More Info](modules/x11.md "x11")
+
+#### bluekeep
+
+The Bluekeep module attempts to determine if an RDP server is vulnerable to the Bluekeep vulnerability.
+
+See [More Info](modules/bluekeep.md "bluekeep")
 
 ### Databases
 
