@@ -18,7 +18,7 @@ curl 'https://api.binaryedge.io/v2/<endpoint>' -H 'X-Key:API_KEY'
 
 ## Swagger Definition
 
-You can download the Swagger OpenApi specification file : [v2.yaml](/swagger/v2.yaml). You can use this this Postman or any other client tool.
+You can download the Swagger OpenApi specification file : [v2.yaml](/swagger/v2.yaml). You can use this with Postman or any other client tool.
 
 ## User
 
