@@ -149,6 +149,8 @@ List of events for the specified host, with events for each time that:
 
 **Note**: Available for paid subscriptions only.
 
+* 1 IP = 1 credit
+
 *Parameters*
 
 * target: [String] target IP address 
@@ -239,7 +241,9 @@ curl 'https://api.binaryedge.io/v2/query/ip/historical/xxx.xxx.xxx.xxx' -H 'X-Ke
 
 Events based on a Query. List of recent events for the given query, including details of exposed ports and services. Can be used with specific parameters and/or full-text search.
 
-*Parameters*
+* 1 page/request = 1 credit
+
+*Query Parameters*
 
 * query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](search.md) for details on what parameters can be used.
 * page: [Int] Optional. Default 1, Maximum: 500 (10,000 results)
