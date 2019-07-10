@@ -84,6 +84,11 @@ Search by RDNS root.
 
     e.g. rdns_parent:unwiredbb.net
 
+### sha256: (string)
+Search by the payload's SHA256 hash.
+
+    e.g. sha256:"db64d98c3a5a540e667f40764a58dfca0df6627a0e34e7d0e8daae097476772d"
+
 ### tags: (string)
 Search by tags.
 
