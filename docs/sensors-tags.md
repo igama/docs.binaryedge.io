@@ -27,6 +27,7 @@
  | CORBA_SCANNER | The Common Object Request Broker Architecture is a standard defined by the Object Management Group designed to facilitate the communication of systems that are deployed on diverse platforms. |
  | CRIMINALIP | Internet wide scanner http://security.criminalip.com/ |
  | CRYPTOCURRENCY_SCANNER | Scanning for cryptocurrency API or exposed nodes |
+ | CVE-2017-12615 | Apache Tomcat 7.0.0 to 7.0.79 has a remote code execution vulnerability |
  | CVE-2017-17215 | Huawei HG532 with some customized versions has a remote code execution vulnerability |
  | CYBERGREEN | The CyberGreen Institute is a global non-profit and collaborative organization conducting activities focused on helping to improve the health of the global Cyber Ecosystem. |
  | CYMRU | http://www.team-cymru.com |
@@ -88,6 +89,7 @@
  | MEMCACHED_SCANNER | Scanning for exposed memcached endpoints | 
  | MICROSOFT_SQL_SERVER | Scanning for exposed Microsoft SQL server | 
  | MINERPOOL | www.minerpool.net |
+ | MIRAI | Mirai-family botnet |
  | MODBUS_SCANNER | Scanning for the SCADA protocol modbus | 
  | MONGODB_SCANNER | Scanning for exposed mongoDB databases | 
  | NETCRAFT | Netcraft is an Internet services company based in Bath, Somerset, England. https://www.netcraft.com/ |
@@ -137,6 +139,7 @@
  | STRETCHOID | http://stretchoid.com/ Stetchoid is a platform that helps identify an organization's online services. |
  | TALAIA | https://www.talaia.io/ A highly scalable, NetFlow/IPFIX based big-data platform that is designed for network operators taking complex decisions |
  | TCP_SYN | SYN packet received |
+ | THINK_PHP | Exploitation of ThinkPHP vulnerability |
  | TOFSEE | Backdoor.Tofsee is capable of making changes to the settings on affected systems and stealing information from them. Once executed, it is capable of tracking users online activities, opening affected systems for infiltration to steal personal information and credentials, and changing browser and DNS settings. | 
  | TOR | Tor node | 
  | TOR_SCANNER | Scanning for the Tor Protocol | 
