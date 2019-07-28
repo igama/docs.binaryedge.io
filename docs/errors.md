@@ -27,6 +27,7 @@ HTTP/1.1 401 Unauthorized
 Accessing a page that does not exist:
 
 ```
+HTTP/1.1 404 Not Found
 {
     "status": 404,
     "title": "Not Found",
