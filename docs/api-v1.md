@@ -45,11 +45,11 @@ Note: all requests are identified by Job ID and are shown in the stream window.
     * [4. sinkhole](#4-sinkhole)
 
 * [Tasks](#tasks)
-    * [GET /v1/tasks - List Requested Jobs](#get-v1tasks---list-requested-jobs)
-    * [POST /v1/tasks - Create Job](#post-v1tasks---create-job)
-    * [GET /v1/tasks/job_id/stats - Job Stats](#get-v1tasksjob_idstats---job-stats)
-    * [POST /v1/tasks/job_id/revoke - Job Revoke](#post-v1tasksjob_idrevoke---job-revoke)
-    * [GET /v1/replay/job_id - Replay Job](#get-v1replayjob_id---replay-job)
+    * [GET /v1/tasks - List Requested Jobs](#get-v1tasks-list-requested-jobs)
+    * [POST /v1/tasks - Create Job](#post-v1tasks-create-job)
+    * [GET /v1/tasks/job_id/stats - Job Stats](#get-v1tasksjob_idstats-job-stats)
+    * [POST /v1/tasks/job_id/revoke - Job Revoke](#post-v1tasksjob_idrevoke-job-revoke)
+    * [GET /v1/replay/job_id - Replay Job](#get-v1replayjob_id-replay-job)
 
 * [Job Status](#job-status)
 
