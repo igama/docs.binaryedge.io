@@ -259,10 +259,59 @@ curl 'https://api.binaryedge.io/v2/query/search?query=name:ldap%20AND%20ip:xxx.x
     "query":"name:ldap AND ip:xxx.xxx.xxx.xxx",
     "total": 2,
     "page": 1,
-    "pagesize": 50,
+    "pagesize": 20,
     "events": [
-        {"origin":{"type":"service-simple","module":"grabber","country":"uk","ts":1535985193912,"ip":"xxx.xxx.xxx.xxx","port":48872},"target":{"ip":"xxx.xxx.xxx.xxx","port":389,"protocol":"tcp"},"result":{"data":{"service":{"name":"ldap","method":"table_default"},"state":{"state":"open|filtered"}}}},
-        {"origin":{"type":"service-simple","module":"grabber","country":"us","ts":1535985193942,"ip":"xxx.xxx.xxx.xxx","port":38226},"target":{"ip":"xxx.xxx.xxx.xxx","port":389,"protocol":"tcp"},"result":{"data":{"service":{"name":"ldap","method":"table_default"},"state":{"state":"open|filtered"}}}}
+        {
+            "origin":{
+                "type":"service-simple",
+                "module":"grabber",
+                "country":"uk",
+                "ts":1535985193912,
+                "ip":"xxx.xxx.xxx.xxx",
+                "port":48872
+            },
+            "target":{
+                "ip":"xxx.xxx.xxx.xxx",
+                "port":389,"protocol":"tcp"
+            },
+            "result":{
+                "data":{
+                    "service":{
+                        "name":"ldap",
+                        "method":"table_default"
+                    },
+                    "state":{
+                        "state":"open|filtered"
+                    }
+                }
+            }
+        },
+        {
+            "origin":{
+                "type":"service-simple",
+                "module":"grabber",
+                "country":"us",
+                "ts":1535985193942,
+                "ip":"xxx.xxx.xxx.xxx",
+                "port":38226
+            },
+            "target":{
+                "ip":"xxx.xxx.xxx.xxx",
+                "port":389,
+                "protocol":"tcp"
+            },
+            "result":{
+                "data":{
+                    "service":{
+                        "name":"ldap",
+                        "method":"table_default"
+                    },
+                    "state":{
+                        "state":"open|filtered"
+                    }
+                }
+            }
+        }
     ] 
 }
 ```
@@ -612,6 +661,121 @@ curl 'https://api.binaryedge.io/v2/query/torrent/historical/xxx.xxx.xxx.xxx' -H 
       }
    ]
 }
+```
+
+#### /v2/query/torrent/search
+
+Events based on a Query. List of recent events for the given query, including details of the peer and torrent. Can be used with specific parameters and/or full-text search.
+
+*Parameters*
+
+* query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](torrents-search.md) for details on what parameters can be used.
+* page: [Int] Optional. Default 1, Maximum: 500 (10,000 results)
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v2/query/torrent/search?query=category:video' -H 'X-Key:API_KEY'
+```
+
+```json
+{
+    "query":"category:video",
+    "page":1,
+    "pagesize":20,
+    "total":3149612,
+    "events":[
+        {
+            "origin":{
+                "type":"peer",
+                "module":"torrent",
+                "ts":1565166671255
+            },
+            "node":{
+                "ip":"xxx.xxx.xxx.xxx",
+                "port":2949
+            },
+            "peer":{
+                "ip":"xxx.xxx.xxx.xxx",
+                "port":6881
+            },
+            "torrent":{
+                "infohash":"d5380fcda66b48fb8b521d5c3b5e61b91c94775e",
+                "name":"Britain's Best Back Gardens Series",
+                "source":"ThePirateBay",
+                "category":"Video",
+                "subcategory":"TV shows"
+            }
+        },
+        {
+            "origin":{
+                "type":"peer",
+                "module":"torrent",
+                "ts":1565166671242
+            },
+            "node":{
+                "ip":"xxx.xxx.xxx.xxx",
+                "port":8999
+            },
+            "peer":{
+                "ip":"xxx.xxx.xxx.xxx",
+                "port":24279
+            },
+            "torrent":{
+                "infohash":"d5380fcda66b48fb8b521d5c3b5e61b91c94775e",
+                "name":"Britain's Best Back Gardens Series",
+                "source":"ThePirateBay",
+                "category":"Video",
+                "subcategory":"TV shows"
+            }
+        }
+    ]
+}
+```
+
+#### /v2/query/torrent/search/stats
+
+Statistics of events for the given query. Can be used with specific parameters and/or full-text search.
+
+*Parameters*
+
+* query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](torrents-search.md) for details on what parameters can be used.
+* type: [String] Type of statistic we want to obtain. Possible types include:
+    * _ports_, _countries_, _asn_, _ips_, _rdns_, _categories_, _names_.
+* days: [Integer] Number of days to get the stats for. For example days=1 for the last day of data.
+    * Max: 90 (default)
+* order: [String] Whether to sort descendently or ascendently to get the top.
+    * _desc_, _asc_
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v2/query/torrent/search/stats?query=category:video&type=ports' -H 'X-Key:API_KEY'
+```
+
+```json
+[
+    {
+        "key":1,
+        "doc_count":168056
+    },
+    {
+        "key":8999,
+        "doc_count":133738
+    },
+    {
+        "key":6881,
+        "doc_count":91512
+    },
+    {
+        "key":51413,
+        "doc_count":58998
+    },
+    {
+        "key":1200,
+        "doc_count":35127
+    }
+]
 ```
 
 ### Dataleaks
@@ -2048,22 +2212,28 @@ curl 'https://api.binaryedge.io/v2/query/sensors/search/stats?query=tags:ssh_sca
 ```
 
 ```json
-[{
-    "key": "22/tcp",
-    "doc_count": 1102752
-}, {
-    "key": "2222/tcp",
-    "doc_count": 8149
-}, {
-    "key": "222/tcp",
-    "doc_count": 1970
-}, {
-    "key": "4000/tcp",
-    "doc_count": 1962
-}, {
-    "key": "23/tcp",
-    "doc_count": 1552
-}]
+[
+    {
+        "key": "22/tcp",
+        "doc_count": 1102752
+    },
+    {
+        "key": "2222/tcp",
+        "doc_count": 8149
+    },
+    {
+        "key": "222/tcp",
+        "doc_count": 1970
+    },
+    {
+        "key": "4000/tcp",
+        "doc_count": 1962
+    },
+    {
+        "key": "23/tcp",
+        "doc_count": 1552
+    }
+]
 ```
 
 #### /v2/query/sensors/tag/<tag>

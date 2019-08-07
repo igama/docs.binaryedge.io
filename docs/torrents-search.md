@@ -49,6 +49,11 @@ Search by timestamp.
         created_at:[2018-09-01 TO 2018-10-01]
         created_at:2018-09-01
 
+### infohash: (string) 
+Search by torrent infohash. 
+
+    e.g infohash:d5380fcda66b48fb8b521d5c3b5e61b91c94775e
+
 ### ip: (string) 
 Search by IP address or CIDR. 
 
