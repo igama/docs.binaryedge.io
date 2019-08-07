@@ -46,13 +46,16 @@ Note: all requests are identified by Job ID and are shown in the stream window.
 
 * [Tasks](#tasks)
     * [GET /v1/tasks - List Requested Jobs](#get-v1tasks---list-requested-jobs)
-        * [POST /v1/tasks - Create Job](#post-v1tasks---create-scan-job)
-        * [POST /v1/tasks/job_id/revoke - Job Revoke](#post-v1tasksjob_idrevoke---revoke-job)
-        * [GET /v1/replay/job_id - Replay Job](#get-v1replayjob_id---replay-job)
-        * [Job Status](#job-status)
-        * [Supported Types](#supported-job-types)
-            * [1. scan](#1-scan)
-            * [2. grab](#2-grab)
+    * [POST /v1/tasks - Create Job](#post-v1tasks---create-job)
+    * [GET /v1/tasks/job_id/stats - Job Stats](#get-v1tasksjob_idstats---job-stats)
+    * [POST /v1/tasks/job_id/revoke - Job Revoke](#post-v1tasksjob_idrevoke---job-revoke)
+    * [GET /v1/replay/job_id - Replay Job](#get-v1replayjob_id---replay-job)
+
+* [Job Status](#job-status)
+
+* [Supported Types](#supported-job-types)
+    * [1. scan](#1-scan)
+    * [2. grab](#2-grab)
 
 * [Supported Modules](#supported-modules-types)
     * [Custom Modules](#custom-modules)
@@ -65,16 +68,21 @@ Note: all requests are identified by Job ID and are shown in the stream window.
         * [/v1/query/historical/{target}](#v1queryhistoricaltarget)
         * [/v1/query/latest/{target}](#v1querylatesttarget)
         * [/v1/query/search](#v1querysearch)
+        * [/v1/query/search/stats](#v1querysearchstats)
 
     * [Image](#image)
         * [/v1/query/image/ip/{target}](#v1queryimageiptarget)
         * [/v1/query/image](#v1queryimage)
         * [/v1/query/image/{image_id}](#v1queryimageimage_id)
-        * [/v1/query/image/search](#v1queryimagesearchoptions)
+        * [/v1/query/image/search](#v1queryimagesearch)
+        * [/v1/query/image/search/stats](#v1queryimagesearchstats)
+        * [/v1/query/image/search/similar](#v1queryimagesearchsimilar)
 
     * [Torrent](#torrent)
-        * [/v1/query/torrent/{target}](#v1querytorrenttarget)
+        * [/v1/query/torrent/historical/{target}](#v1querytorrenthistoricaltarget)
         * [/v1/query/torrent/latest/{target}](#v1querytorrentlatesttarget)
+        * [/v1/query/torrent/search](#v1querytorrentsearch)
+        * [/v1/query/torrent/search/stats](#v1querytorrentsearchstats)
 
     * [Dataleaks](#dataleaks)
         * [/v1/dataleaks/check/{email}](#get-v1dataleakscheckemail)
@@ -160,7 +168,7 @@ HTTP/1.1 200 OK
 [{"status": "Success", "requested_at": "2017-04-10T17:44:58.636681+00:00", "description": "Job Description 1", "finished_at": "2017-04-10T17:47:46.534544+00:00", "options": [{"targets": ["xxx.xxx.xxx.xxx"], "ports": [{"modules": ["service", "service-simple", "ssh"], "port": "80,8080"}]}], "job_id": "32637b98-8f01-46eb-a1f7-3eaee18ab1d5"}, {"status": "Success", "requested_at": "2017-04-10T17:39:53.066632+00:00", "description": "Test web", "finished_at": "2017-04-10T17:41:57.919141+00:00", "options": [{"targets": ["example.org"], "ports": [{"config": {"https": true}, "modules": ["web"], "port": 443}]}], "job_id": "73364d62-d768-4dbd-9947-aba2a453dfb7"}]
 ```
 
-### POST /v1/tasks - Create Scan Job
+### POST /v1/tasks - Create Job
 
 Create a On-Demand Job. You can specify your own targets, ports, modules and configurations.
 
@@ -174,7 +182,32 @@ Parameters:
 curl 'https://api.binaryedge.io/v1/tasks' -d '{"type":"scan", "description": "InsertYourDescriptionHere", "options":[{"targets":["InsertIPAddress/IPNetwork/ASN/CountryCode"], "ports":[{"port":"InsertPort/PortRange", "protocol": "tcp/udp", "modules": ["InsertModule"]}]}]}' -H 'X-Token:InsertYourClientToken'
 ```
 
-### POST /v1/tasks/job_id/revoke - Revoke Job
+### GET /v1/tasks/job_id/stats - Job Stats
+
+Retrieve statistics about a previously requested scan job. This includes:
+
+* "status": Status of the job. Where status can be:
+    * "requested": Job was requested successfully;
+    * "revoked": Job was revoked by user;
+    * "success": Job completed successfully;
+    * "failed": Job completed, but did not finish.
+* "number_results": Number of events returned.
+* "open_ports": Number of open ports detected.
+* "ports": List of open ports detected.
+* "targets": Number of targets that responded.
+* "grabbers": Grabber specific statistics.
+    * "type": Grabber type.
+    * "port": Port number.
+    * "count": Number of events for a specific grabber type and port number.
+
+```shell
+curl 'https://api.binaryedge.io/v1/tasks/<JOB_ID>/stats' -H 'X-Token:InsertYourClientToken'
+
+HTTP/1.1 200 OK
+{"stats":"<STATS>"}
+```
+
+### POST /v1/tasks/job_id/revoke - Job Revoke
 
 To cancel a requested job:
 
@@ -457,6 +490,50 @@ curl 'https://api.binaryedge.io/v1/query/search?query=product:mysql%20AND%20coun
 }
 ```
 
+#### /v1/query/search/stats 
+
+Statistics of recent events for the given query. Can be used with specific parameters and/or full-text search.
+
+*Parameters*
+
+* query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](search.md) for details on what parameters can be used.
+* type: [String] Type of statistic we want to obtain. Possible types include:
+    * _ports_, _products_, _versions_, _tags_, _services_, _countries_, _asn_.
+* order: [String] Whether to sort descendently or ascendently to get the top.
+    * _desc_, _asc_
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v1/query/search/stats?query=product:mysql%20AND%20country:ES&type=ports' -H 'X-Key:InsertYourClientToken'
+```
+
+```json
+[
+    {
+        "key": "3306/tcp", 
+        "doc_count": 42761
+    }, 
+    {
+        "key": "102/tcp", 
+        "doc_count": 5
+    }, 
+    {
+        "key": "1234/tcp", 
+        "doc_count": 5
+    }, 
+    {
+        "key": "1911/tcp", 
+        "doc_count": 5
+    }, 
+    {
+        "key": "5001/tcp", 
+        "doc_count": 5
+    }
+]
+```
+
+
 ### Image
 
 #### /v1/query/image/ip/{target}
@@ -681,6 +758,49 @@ curl 'https://api.binaryedge.io/v1/query/image/search?ip=120.XXX.XXX.XXX'  -H 'X
 }
 ```
 
+#### /v1/query/image/search/stats 
+
+Statistics of recent events for the given query. Can be used with specific parameters and/or full-text search.
+
+*Parameters*
+
+* query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](image-search.md) for details on what parameters can be used.
+* type: [String] Type of statistic we want to obtain. Possible types include:
+    * _ports_, _words_, _tags_, _countries_, _asn_, _rdns_.
+* order: [String] Whether to sort descendently or ascendently to get the top.
+    * _desc_, _asc_
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v1/query/image/search/stats?query=tags:rdp%20AND%20country:ES&type=ports' -H 'X-Key:InsertYourClientToken'
+```
+
+```json
+[
+    {
+        "key": "3389/tcp", 
+        "doc_count": 161165
+    }, 
+    {
+        "key": "3388/tcp", 
+        "doc_count": 4755
+    }, 
+    {
+        "key": "80/tcp", 
+        "doc_count": 122
+    }, 
+    {
+        "key": "3386/tcp", 
+        "doc_count": 121
+    }, 
+    {
+        "key": "443/tcp", 
+        "doc_count": 109
+    }
+]
+```
+
 #### /v1/query/image/search/similar
 
 List of Remote Desktops that are similar to another Remote Desktop.
@@ -726,9 +846,14 @@ curl 'https://api.binaryedge.io/v1/query/image/search/similar?similar=f1b0a311af
 }
 ```
 
+
 ### Torrent
 
 #### /v1/query/torrent/{target}
+
+**DEPRECATED**
+
+#### /v1/query/torrent/historical/{target}
 
 Details about torrents transferred by an Host, with data up to 6 months.
 
@@ -805,6 +930,123 @@ curl 'https://api.binaryedge.io/v1/query/torrent/latest/222.208.xxx.xxx' -H 'X-T
   }
 }
 ```
+
+#### /v1/query/torrent/search
+
+Events based on a Query. List of recent events for the given query, including details of the peer and torrent. Can be used with specific parameters and/or full-text search.
+
+*Parameters*
+
+* query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](torrents-search.md) for details on what parameters can be used.
+* page: [Int] Optional. Default 1, Maximum: 500 (10,000 results)
+* pagesize: [Int] Optional. Default 100
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v1/query/torrent/search?query=category:video' -H 'X-Key:InsertYourClientToken'
+```
+
+```json
+{
+    "query":"category:video",
+    "page":1,
+    "pagesize":20,
+    "total":3149612,
+    "events":[
+        {
+            "origin":{
+                "type":"peer",
+                "module":"torrent",
+                "ts":1565166671255
+            },
+            "node":{
+                "ip":"xxx.xxx.xxx.xxx",
+                "port":2949
+            },
+            "peer":{
+                "ip":"xxx.xxx.xxx.xxx",
+                "port":6881
+            },
+            "torrent":{
+                "infohash":"d5380fcda66b48fb8b521d5c3b5e61b91c94775e",
+                "name":"Britain's Best Back Gardens Series",
+                "source":"ThePirateBay",
+                "category":"Video",
+                "subcategory":"TV shows"
+            }
+        },
+        {
+            "origin":{
+                "type":"peer",
+                "module":"torrent",
+                "ts":1565166671242
+            },
+            "node":{
+                "ip":"xxx.xxx.xxx.xxx",
+                "port":8999
+            },
+            "peer":{
+                "ip":"xxx.xxx.xxx.xxx",
+                "port":24279
+            },
+            "torrent":{
+                "infohash":"d5380fcda66b48fb8b521d5c3b5e61b91c94775e",
+                "name":"Britain's Best Back Gardens Series",
+                "source":"ThePirateBay",
+                "category":"Video",
+                "subcategory":"TV shows"
+            }
+        }
+    ]
+}
+```
+
+#### /v1/query/torrent/search/stats
+
+Statistics of events for the given query. Can be used with specific parameters and/or full-text search.
+
+*Parameters*
+
+* query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](torrents-search.md) for details on what parameters can be used.
+* type: [String] Type of statistic we want to obtain. Possible types include:
+    * _ports_, _countries_, _asn_, _ips_, _rdns_, _categories_, _names_.
+* days: [Integer] Number of days to get the stats for. For example days=1 for the last day of data.
+    * Max: 90 (default)
+* order: [String] Whether to sort descendently or ascendently to get the top.
+    * _desc_, _asc_
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v1/query/torrent/search/stats?query=category:video&type=ports' -H 'X-Key:InsertYourClientToken'
+```
+
+```json
+[
+    {
+        "key":1,
+        "doc_count":168056
+    },
+    {
+        "key":8999,
+        "doc_count":133738
+    },
+    {
+        "key":6881,
+        "doc_count":91512
+    },
+    {
+        "key":51413,
+        "doc_count":58998
+    },
+    {
+        "key":1200,
+        "doc_count":35127
+    }
+]
+```
+
 
 ### Dataleaks
 
@@ -1830,6 +2072,7 @@ curl 'https://api.binaryedge.io/v1/query/cve/ip/xxx.xxx.xxx.xxx' -H 'X-Token:Ins
 }
 ```
 
+
 ### Domains
 
 What is exposed via DNS? What subdomains belong to a Domain? What domains are served by IP X?
@@ -2020,6 +2263,7 @@ curl 'https://api.binaryedge.io/v1/query/domains/search?query=A:127.0.0.1' -H 'X
   ]
 }
 ```
+
 
 ### Sensors
 
