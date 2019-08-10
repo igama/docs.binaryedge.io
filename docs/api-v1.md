@@ -174,7 +174,7 @@ Create a On-Demand Job. You can specify your own targets, ports, modules and con
 
 Parameters:
 
-* "type": "scan" or "grab". Please refer to [Supported Types](#supported-types);
+* "type": "scan" or "grab". Please refer to [Supported Job Types](#supported-job-types);
 * "description": Add your own description of the job. Can be a empty string, i.e. "";
 * "options": Configuration Options for the job, array of JSON objects. One Job can have multiple options.
 
