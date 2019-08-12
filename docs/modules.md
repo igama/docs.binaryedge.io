@@ -67,7 +67,7 @@ Details of the fields:
 
 ## Modules
 
-Below are all the modules available for scanning on the platform. All modules support _hostnames_, _IPv4 addresses_. _IPv6_ support is also available, but experimental. These modules are the same modules that feed our Host database.
+Below are all the modules available for scanning on the platform. All modules support _hostnames_, _IPv4 addresses_ and _IPv6 addresses_. These modules are the same modules that feed our Host database.
 
 ### Service Identification
 
