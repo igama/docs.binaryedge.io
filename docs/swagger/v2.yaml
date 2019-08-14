@@ -266,7 +266,7 @@ paths:
                 query: 'name:ldap AND ip:xxx.xxx.xxx.xxx'
                 total: 2
                 page: 1
-                pagesize: 50
+                pagesize: 20
                 events:
                   - origin:
                       type: service-simple
@@ -718,6 +718,154 @@ paths:
         '404':
           $ref: '#/components/responses/HTTPStatusMessage404'
 
+  /query/torrent/search:
+    get:
+      tags:
+        - Torrent
+      summary: ""
+      description: "Events based on a Query. List of recent events for the given query, including details of the peer and torrent. Can be used with specific parameters and/or full-text search."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: query
+          name: query
+          schema:
+            type: string
+          description: "String used to query our data. If no filters are used, it will perform a full-text search on the entire events.\n See [Search Parameters](https://docs.binaryedge.io/torrents-search/)  for details on what parameters can be used."
+          required: true
+        - in: query
+          name: page
+          description: "Number of the page - Maximum: 500 (10,000 results)"
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 500
+            default: 1
+      
+      responses:
+        '200':
+          description: "Return Torrents results"
+          content:
+            application/json:
+              example:
+                query: 'category:video'
+                page: 1
+                pagesize: 20
+                total: 3149612
+                events:
+                  - origin:
+                      type: peer
+                      module: torrent
+                      ts: 1565166671255
+                    node:
+                      ip: xxx.xxx.xxx.xxx
+                      port: 2949
+                    peer:
+                      ip: xxx.xxx.xxx.xxx
+                      port: 6881
+                    torrent:
+                      infohash: d5380fcda66b48fb8b521d5c3b5e61b91c94775e
+                      name: Britain's Best Back Gardens Series
+                      source: ThePirateBay
+                      category: Video
+                      subcategory: TV shows
+                  - origin:
+                      type: peer
+                      module: torrent
+                      ts: 1565166671242
+                    node:
+                      ip: xxx.xxx.xxx.xxx
+                      port: 8999
+                    peer:
+                      ip: xxx.xxx.xxx.xxx
+                      port: 24279
+                    torrent:
+                      infohash: d5380fcda66b48fb8b521d5c3b5e61b91c94775e
+                      name: Britain's Best Back Gardens Series
+                      source: ThePirateBay
+                      category: Video
+                      subcategory: TV shows
+                
+
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+
+  /query/torrent/search/stats:
+    get:
+      tags:
+        - Torrent
+      summary: ""
+      description: "Statistics of events for the given query. Can be used with specific parameters and/or full-text search."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: query
+          name: query
+          schema:
+            type: string
+          description: "String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](https://docs.binaryedge.io/torrents-search/) for details on what parameters can be used."
+          required: true
+        - in: query
+          name: type
+          schema:
+            type: string
+          description: "Type of statistic we want to obtain. Possible types include:\n\n - ports, tags, countries, asn, ips, payloads, http_path, rdns."
+          required: true
+        - in: query
+          name: days
+          description: "Number of days to get the stats for. For example days=1 for the last day of data."
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 90
+            default: 90
+        - in: query
+          name: order
+          description: "Whether to sort descendently or ascendently to get the top."
+          schema:
+            type: string
+            enum: ["desc", "asc"]
+      
+      responses:
+        '200':
+          description: "Return stats results."
+          content:
+            application/json:
+              example:
+                - key: 1
+                  doc_count: 168056
+                - key: 8999
+                  doc_count: 133738
+                - key: 6881
+                  doc_count: 91512
+                - key: 51413
+                  doc_count: 58998
+                - key: 1200
+                  doc_count: 35127
+        
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+     
   /query/dataleaks/email/{email}:
     get:
       tags:
