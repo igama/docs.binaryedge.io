@@ -49,6 +49,11 @@ Search by IP address or CIDR.
 
     e.g ip:"192.168.1.1/24" or ip:192.168.1.1
 
+### ipv6: (boolean)
+Search for IPv6 results:
+
+    e.g ipv6:true
+
 ### geoip.city_name: (string) 
 Search using city names. 
     
