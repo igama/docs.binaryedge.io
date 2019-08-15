@@ -304,12 +304,16 @@ Meaning of the status fields:
 There are 2 types of requests.
 
 ### 1. scan
-The scan type will request a portscan on the targets and will launch the modules against the detected open ports. It should be used against a large number of targets and its function is to filter responding IPs. Note: scanning only works with IP addresses, not domains.
+The scan type will request a portscan on the targets and will launch the modules against the detected open ports only. It can be used against any number of targets. 
+
+It's highly recommended to use if there is a large number of targets, this way it filters responding IPs before launching modules, which can speed up a job greatly.
+
+Scanning supports both IP addresses and domains, but since portscan will resolve domains and use their IP addresses, some domains' results might only obtainable if you use the _grab_ type directly on them.
 
 ### 2. grab
-The grab type will try to gather information directly from the targets, without portscanning first. Should be used against a small number of targets.
+The grab type will try to gather information directly from the targets, without portscanning first. Should only be used against a small number of targets, since it will launch the modules against all targets without and filtering first.
 
-Recommended for when targeting Domains, with Web and HTTP/HTTPS modules. 
+Recommended mostly for when targeting domains, for instance with HTTP/HTTPS, Web or SSL modules. 
 
 ## Supported Modules Types
 
