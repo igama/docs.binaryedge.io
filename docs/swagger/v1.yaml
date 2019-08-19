@@ -996,6 +996,7 @@ paths:
             maximum: 500
             default: 1
         - in: query
+          name: pagesize
           description: "Number of the results per page - Default: 100"
           schema:
             type: integer
