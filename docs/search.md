@@ -38,7 +38,7 @@ Search using ISO2 Country Codes.
     e.g. country:ES
 
 ### created_at: (date)
-Search by created_at.
+Search by timestamp.
 
     e.g.
         created_at:[2018-09-01 TO 2018-10-01]
@@ -152,6 +152,14 @@ Search by product versions. Better used together with product.
 Search by RDP security detected.
 
     e.g. rdp.security:NLA
+
+
+## Bluekeep
+
+### vulnerable: (boolean)
+Search by whether an RDP server is vulnerable to Bluekeep or not.
+
+    e.g. bluekeep.vulnerable:NLA
 
 
 ## VNC
@@ -530,6 +538,42 @@ Search by RSYNC version.
     e.g. rsync.version:"31.0"
 
 
+## TOR
+
+### exit_node: (boolean)
+Search by whether it is a TOR exit node or not.
+
+    e.g. tor.exit_node:true
+
+### first_seen: (date)
+Search by date of TOR node first seen.
+
+    e.g.
+        tor.first_seen:[2018-09-01 TO 2018-10-01]
+        tor.first_seen:2018-09-01
+
+### hostname: (string)
+Search by hostname running TOR.
+
+    e.g. tor.hostname:"vultr"
+
+### last_seen: (date)
+Search by date of TOR node last seen.
+
+    e.g.
+        tor.last_seen:[2018-09-01 TO 2018-10-01]
+        tor.last_seen:2018-09-01
+
+### platform: (string)
+Search by platform running TOR node.
+
+    e.g. tor.platform:"windows"
+
+### router_name: (string)
+Search by TOR router name.
+
+    e.g. tor.router_name:"xenial"
+
 ## MongoDB
 
 #### Available search fields
@@ -595,6 +639,7 @@ Search by RSYNC version.
 * cassandra.keyspaces (string)
 * cassandra.keyspace_names (string)
 * cassandra.table_names (string)
+
 
 ## Redis
 
@@ -672,3 +717,11 @@ Search by RSYNC version.
 * memcached.total_items (int)
 * memcached.uptime (int)
 * memcached.version (string)
+
+
+## RethinkDB
+
+#### Available search fields
+
+* rethinkdb.database_names (string)
+* rethinkdb.tables_names (string)

@@ -29,6 +29,8 @@
  | CRYPTOCURRENCY_SCANNER | Scanning for cryptocurrency API or exposed nodes |
  | CVE-2017-12615 | Apache Tomcat 7.0.0 to 7.0.79 has a remote code execution vulnerability |
  | CVE-2017-17215 | Huawei HG532 with some customized versions has a remote code execution vulnerability |
+ | CVE-2018-13379 | Some versions of Fortinet FortiOS under SSL VPN web portal allows an unauthenticated attacker to download system files via HTTP resource requests |
+ | CVE-2019-15107 | Command injection vulnerability on Webmin through 1.920 |
  | CYBERGREEN | The CyberGreen Institute is a global non-profit and collaborative organization conducting activities focused on helping to improve the health of the global Cyber Ecosystem. |
  | CYMRU | http://www.team-cymru.com |
  | DICT_SCANNER | Dictionary Network Protocol |

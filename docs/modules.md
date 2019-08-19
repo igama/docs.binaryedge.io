@@ -8,23 +8,18 @@ Details of the fields:
 
 * **origin**: 
     * **client_id**:
-        * Optional
-        * Only on client stream,
-        * Your client ID;
+        * Your client ID. Optional, appears only on the client stream.
     * **job_id**:
-        * Optional
-        * Only on client stream,
-        * Job ID that event is part of;
+        * Job ID that event is part of. Optional, appears only on the client stream.
     * **type**:
-        * Event type, module that produced the event,
-        * Please refer to the next section for details on each module type;
+        * Event type, module that produced the event;
+        * Please refer to the next section for details on each module type.
     * **module**:
         * Either 'portscan' or 'grabber'. Category of the event. Portscan events merely indicate that a port was found open. Grabber events will contain more extracted data such as details of the ip/port/service;
     * **ip**:
         * IP used by the scanner to perform the analysis;
     * **port**:
-        * Port used by the scanner to perform the analysis. Optional, only some modules will provide this information. Currently only provided by "service-simple". We will be working to add more.
-        * Port used by the scanner to perform the analysis;
+        * Port used by the scanner to perform the analysis. Optional, only some modules will provide this information.
     * **ts**:
         * Unix Timestamp in Milliseconds;
     * **country**:
@@ -38,11 +33,11 @@ Details of the fields:
         * Target Protocol used for connection;
 * **result**: 
     * **data**:
-        * Varies according to each different module,
+        * Varies according to each different module;
         * Please refer to the next section for details on each module type.
 
 
-```
+```json
 {
   "origin": {
     "client_id": "string",
@@ -165,17 +160,9 @@ See [More Info](modules/web.md "web")
 
 ### Protocols
 
-#### ssl
-
-**DEPRECATED**
-
-The SSL module attempts to connect to an SSL-wrapped server and extract (and parse) certificate chains, ciphers and vulnerabilities.
-
-See [More Info](modules/ssl.md "ssl")
-
 #### sslv2
 
-The SSLv2 module attempts to connect to an SSL-wrapped server and extract (and parse) certificate chains, ciphers and vulnerabilities. It is an upgraded version of the _ssl_ module, and includes extra updates and features not available previously.
+The SSLv2 module attempts to connect to an SSL-wrapped server and extract (and parse) certificate chains, ciphers and vulnerabilities.
 
 See [More Info](modules/sslv2.md "sslv2")
 

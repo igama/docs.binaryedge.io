@@ -128,21 +128,21 @@ Search by SSH identification string.
     e.g. extra.ssh.description:dropbear
 
 ### extra.ssh.hassh: (string)
-Search by HASSH hash.
+Search by HASSH fingerprint hash.
 
     e.g. extra.ssh.hassh:92674389fa1e47a27ddd8d9b63ecd42b
 
 ### extra.ssh.hassh_algorithms: (string)
-Search by HASSH algorithms string.
+Search by HASSH algorithms fingerprint string.
 
     e.g. extra.ssh.hassh_algorithms:"diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1;aes128-ctr,aes192-ctr,aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-cbc,aes128-cbc,blowfish-cbc,arcfour128,arcfour,cast128-cbc,3des-cbc;hmac-sha1,hmac-sha1-96,hmac-md5,hmac-md5-96,hmac-ripemd160,hmac-ripemd160@openssh.com;none"
 
 ### extra.ssl.ja3: (string)
-Search by JA3 string.
+Search by JA3 fingerprint string.
 
     e.g. extra.ssl.ja3:"771,49200-49196-49192-49188-49172-49162-165-163-161-159-107-106-105-104-57-56-55-54-136-135-134-133-49202-49198-49194-49190-49167-49157-157-61-53-132-141-49199-49195-49191-49187-49171-49161-164-162-160-158-103-64-63-62-51-50-49-48-154-153-152-151-69-68-67-66-49201-49197-49193-49189-49166-49156-156-60-47-150-65-140-49169-49159-49164-49154-5-4-138-255,0-11-10-35-13-15-21,23-25-28-27-24-26-22-14-13-11-12-9-10,0-1-2"
 
 ### extra.ssl.ja3_digest: (string)
-Search by JA3 hash.
+Search by JA3 fingerprint hash.
 
     e.g. extra.ssl.ja3_digest:85ceddf7e8f7ad69d40c81c05e0fde96
