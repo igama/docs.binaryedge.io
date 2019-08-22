@@ -161,5 +161,6 @@
  | YANDEXBOT | https://yandex.com/ | 
  | ZGRAB_SCANNER | Scanner using zgrab software - https://github.com/zmap/zgrab2 | 
  | ZTE_F460_SCANNER | Scanning for ZTE F460 Routers | 
- | ZTE_F660_SCANNER | Scanning for ZTE F660 Routers | 
+ | ZTE_F660_SCANNER | Scanning for ZTE F660 Routers |
+ | WEBMIN | Scanning for Webmin |
  
