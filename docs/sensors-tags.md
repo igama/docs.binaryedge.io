@@ -24,14 +24,15 @@
  | CISCO_SMART_INSTALL | Scanning for Cisco Smart Install | 
  | COCCOC | Cốc Cốc browser is a freeware web browser focused on the Vietnamese market, developed by Vietnamese company Cốc Cốc and based on Chromium open source code |
  | CODESYS_SCANNER | Scanning for Codesys protocol, typically used in SCADA environments |
- | CORBA_SCANNER | The Common Object Request Broker Architecture is a standard defined by the Object Management Group designed to facilitate the communication of systems that are deployed on diverse platforms. |
+ | CORBA_SCANNER | The Common Object Request Broker Architecture is a standard defined by the Object Management Group designed to facilitate the communication of systems that are deployed on diverse platforms |
  | CRIMINALIP | Internet wide scanner http://security.criminalip.com/ |
  | CRYPTOCURRENCY_SCANNER | Scanning for cryptocurrency API or exposed nodes |
  | CVE-2017-12615 | Apache Tomcat 7.0.0 to 7.0.79 has a remote code execution vulnerability |
  | CVE-2017-17215 | Huawei HG532 with some customized versions has a remote code execution vulnerability |
  | CVE-2018-13379 | Some versions of Fortinet FortiOS under SSL VPN web portal allows an unauthenticated attacker to download system files via HTTP resource requests |
+ | CVE-2019-11510 | File reading vulnerability in Pulse Secure Pulse Connect Secure |
  | CVE-2019-15107 | Command injection vulnerability on Webmin through 1.920 |
- | CYBERGREEN | The CyberGreen Institute is a global non-profit and collaborative organization conducting activities focused on helping to improve the health of the global Cyber Ecosystem. |
+ | CYBERGREEN | The CyberGreen Institute is a global non-profit and collaborative organization conducting activities focused on helping to improve the health of the global Cyber Ecosystem |
  | CYMRU | http://www.team-cymru.com |
  | DICT_SCANNER | Dictionary Network Protocol |
  | DLINK_SCANNER | Scanning for DLink vulnerabilities |
