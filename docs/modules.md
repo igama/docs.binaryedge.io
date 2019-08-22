@@ -45,17 +45,17 @@ Details of the fields:
     "country": "string",
     "type": "string",
     "module": "string",
-    "ts": integer,
-    "ip": "string"
-    "port": integer
+    "ts": "int",
+    "ip": "string",
+    "port": "int"
   },
   "target": {
     "ip": "ip",
-    "port": integer,
+    "port": "int",
     "protocol": "string"
   },
   "result": {
-    "data": {(...)}  
+    "data": {}  
   }
 }
 ```
@@ -162,7 +162,7 @@ See [More Info](modules/web.md "web")
 
 #### sslv2
 
-The SSLv2 module attempts to connect to an SSL-wrapped server and extract (and parse) certificate chains, ciphers and vulnerabilities.
+The SSLv2 module attempts to connect to an SSL-wrapped server and extract (and parse) certificate chains, ciphers and vulnerabilities. It is an upgraded version of the _ssl_ module, and includes extra updates and features not available previously.
 
 See [More Info](modules/sslv2.md "sslv2")
 
