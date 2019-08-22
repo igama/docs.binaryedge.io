@@ -96,7 +96,8 @@
  | MODBUS_SCANNER | Scanning for the SCADA protocol modbus | 
  | MONGODB_SCANNER | Scanning for exposed mongoDB databases | 
  | NETCRAFT | Netcraft is an Internet services company based in Bath, Somerset, England. https://www.netcraft.com/ |
- | NETSYSTEMS | http://netsystemsresearch.com | 
+ | NETSYSTEMS | http://netsystemsresearch.com |
+ | NEUTRINO | Neutrino malware | 
  | NMAP_SCANNER | Actor using the NMAP scanner  | 
  | NUUO_NVR_SCANNER | Scanning for Nuuo CCTV Cameras | 
  | ONYPHE | Internet wide scanner https://www.onyphe.io/ | 
