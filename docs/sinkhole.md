@@ -12,26 +12,45 @@ Accessible via:
 
 ```json
 {
-   "origin":{
-      "ip":"string",
-      "port":"int",
-      "asn":"int",
-      "rdns":"string",
-      "rdns_parent":"string",
-      "type":"string",
-      "client_id":"string",
-      "ts":"int"
-   },
-   "target":{
-      "ip":"string",
-      "port":"int",
-      "protocol":"string"
-   },
-   "data":{
-      "payload":"string",
-      "extra":"object",
-      "tags":"list"
-   }
+  "origin":{
+    "ip":"string",
+    "port":"int",
+    "asn":"int",
+    "rdns":"string",
+    "rdns_parent":"string",
+    "type":"string",
+    "client_id":"string",
+    "ts":"int"
+  },
+  "target":{
+    "ip":"string",
+    "port":"int",
+    "protocol":"string"
+  },
+  "data":{
+    "payload":"string",
+    "extra":{
+      "http":{
+        "headers":"string",
+        "header_order":"string",
+        "header_order_hash":"string",
+        "method":"string",
+        "path":"string",
+        "version":"string"
+      },
+      "ssh":{
+        "description":"string",
+        "hassh_algorithms":"string",
+        "hassh":"string"
+      },
+      "ssl":{
+        "description":"string",
+        "ja3":"string",
+        "ja3_digest":"string"
+      }
+    },
+    "tags":"list"
+  }
 }
 ```
 
@@ -54,48 +73,48 @@ Accessible via:
 * **data**: Information about the payload
     * **payload**: Raw data that was sent and captured. No additional processing.
     * **extra**: Data extracted after partially processing the payload.
-      * **http**: Extra fields related to HTTP payload
-         * **headers**: HTTP headers
-         * **header_order**: HTTP header order fingerprint string
-         * **header_order_hash**: HTTP header order fingerprint hash
-         * **method**: HTTP method
-         * **path**: HTTP path
-         * **version**: HTTP protocol version
-      * **ssh**: Extra fields related to SSH payload
-         * **description**: SSH identification string
-         * **hassh_algorithms**: HASSH algorithms fingerprint string
-         * **hassh**: HASSH fingerprint hash
-      * **ssl**: Extra fields related to SSL payload
-         * **description**: 
-         * **ja3**: JA3 fingerprint string
-         * **ja3_digest**: JA3 fingerprint hash
+        * **http**: Extra fields related to HTTP payload
+            * **headers**: HTTP headers
+            * **header_order**: HTTP header order fingerprint string
+            * **header_order_hash**: HTTP header order fingerprint hash
+            * **method**: HTTP method
+            * **path**: HTTP path
+            * **version**: HTTP protocol version
+        * **ssh**: Extra fields related to SSH payload
+            * **description**: SSH identification string
+            * **hassh_algorithms**: HASSH algorithms fingerprint string
+            * **hassh**: HASSH fingerprint hash
+        * **ssl**: Extra fields related to SSL payload
+            * **description**: 
+            * **ja3**: JA3 fingerprint string
+            * **ja3_digest**: JA3 fingerprint hash
     * **tags**: Rule based tagging derived from the payload.
 
 ## Event Example
 
 ```json
 {
-   "origin": {
-      "ip": "51.77.52.90", 
-      "asn": 16276, 
-      "rdns": "ns3138325.ip-51-77-52.eu",
-      "type": "sinkhole", 
-      "client_id": "sinkhole", 
-      "ts": 1550757347864
-   }, 
-   "target": {
-      "ip": "142.93.238.68",
-      "port": 22, 
-      "protocol": "tcp"
-   }, 
-   "data": {
-      "payload": "SSH-2.0-libssh2_1.4.3\\r\\n",
-      "extra": {
-         "ssh": {
-            "description": "SSH-2.0-libssh2_1.4.3"
-         }
-      },
-      "tags": ["SSH_SCANNER"]
-   }
+  "origin": {
+    "ip": "51.77.52.90", 
+    "asn": 16276, 
+    "rdns": "ns3138325.ip-51-77-52.eu",
+    "type": "sinkhole", 
+    "client_id": "sinkhole", 
+    "ts": 1550757347864
+  }, 
+  "target": {
+    "ip": "142.93.238.68",
+    "port": 22, 
+    "protocol": "tcp"
+  }, 
+  "data": {
+    "payload": "SSH-2.0-libssh2_1.4.3\\r\\n",
+    "extra": {
+      "ssh": {
+        "description": "SSH-2.0-libssh2_1.4.3"
+      }
+    },
+    "tags": ["SSH_SCANNER"]
+  }
 }
 ```
