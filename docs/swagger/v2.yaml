@@ -2221,7 +2221,7 @@ paths:
           name: query
           schema:
             type: string
-          description: "String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](https://docs.binaryedge.io/search/) for details on what parameters can be used."
+          description: "String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](https://docs.binaryedge.io/sensors-search/) for details on what parameters can be used."
           required: true
         - in: query
           name: type
