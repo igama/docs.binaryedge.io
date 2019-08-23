@@ -160,6 +160,12 @@ See [More Info](modules/web.md "web")
 
 ### Protocols
 
+#### ssl-simple
+
+The SSL-Simple module attempts to connect to an SSL-wrapped server and extract (and parse) certificate chains. Recommended if you are only interested in certificates, since it is much faster than the _sslv2_ module as it doesn't need to do any additional testing.
+
+See [More Info](modules/ssl-simple.md "ssl-simple")
+
 #### sslv2
 
 The SSLv2 module attempts to connect to an SSL-wrapped server and extract (and parse) certificate chains, ciphers and vulnerabilities. It is an upgraded version of the _ssl_ module, and includes extra updates and features not available previously.
