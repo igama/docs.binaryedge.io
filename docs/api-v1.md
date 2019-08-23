@@ -2323,6 +2323,8 @@ Events based on a Query. List of recent events for the given query, including de
 *Parameters*
 
 * query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](sensors-search.md) for details on what parameters can be used.
+* days: [Integer] Number of days to get the stats for. For example days=1 for the last day of data.
+    * Max: 60 (default)
 * page: [Int] Optional. Default 1
 * pagesize: [Int] Optional. Default 100
 
