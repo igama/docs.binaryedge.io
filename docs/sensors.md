@@ -29,15 +29,15 @@ Event type: sinkhole
 ```json
 {
   "origin": {
-    "ip": "51.77.52.90", 
+    "ip": "xxx.xxx.xxx.xxx", 
     "asn": 16276, 
-    "rdns": "ns3138325.ip-51-77-52.eu",
+    "rdns": "nsxxxxxxxx.ip-xxx-xxx-xxx.eu",
     "type": "sinkhole", 
     "client_id": "sinkhole", 
     "ts": 1550757347864
   }, 
   "target": {
-    "ip": "142.93.238.68",
+    "ip": "xxx.xxx.xxx.xxx",
     "port": 22, 
     "protocol": "tcp"
   }, 
@@ -84,7 +84,7 @@ Event type: sinkhole
             * **hassh_algorithms**: HASSH algorithms fingerprint string
             * **hassh**: HASSH fingerprint hash
         * **ssl**: Extra fields related to SSL payload
-            * **description**: 
+            * **description**: Description of the host if the JA3 is known
             * **ja3**: JA3 fingerprint string
             * **ja3_digest**: JA3 fingerprint hash
     * **tags**: Rule based tagging derived from the payload.
