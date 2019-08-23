@@ -2,7 +2,7 @@ openapi: 3.0.0
 
 info:
   title: "BinaryEdge's API V1 Enterprise"
-  version: "1.0.0"
+  version: "1.0.1"
   description: "[BinaryEdge](https://www.binaryedge.io/) is Cybersecurity/Data Science company that focuses its effort on acquiring, analyzing and classifying internet wide data. We have developed a platform - [40fy](https://app.binaryedge.io/) that allows us and our customers to gather several data points from exposed servers online.\n\n The API provides access to that scanning platform, for your own usage, along with access to our curated databases so that you can do querying and analytics on our worldwide (constantly updated) collected data."
   
 servers:
@@ -71,7 +71,7 @@ paths:
     post:
       tags:
         - Tasks
-      summary: "Create Scan Job"
+      summary: "Create Job"
       description: "Create a On-Demand Job. You can specify your own targets, ports, modules and configurations. \n\n Example to run on console: \n\n ``` curl https://api.binaryedge.io/v1/tasks -d '{\"type\":\"scan\", \"description\": \"InsertYourDescriptionHere\", \"options\":[{\"targets\":[\"InsertAnIPAddress/IPNetwork\"], \"ports\":[{\"port\":InsertPort, \"protocol\": \"tcp or udp\", \"modules\": [\"InsertModule\"]}]}]}' -H \"X-Token:<TOKEN>\"```"
       security:
         - Token: []
@@ -115,7 +115,44 @@ paths:
 
         '404':
           $ref: '#/components/responses/HTTPStatusMessage404'
-    
+          
+  /tasks/{job_id}/stats:
+    get:
+      tags:
+        - Tasks
+      summary: "Job Stats"
+      description: "Retrieve statistics about a previously requested scan job"
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: path
+          name: job_id
+          description: "Job ID"
+          schema:
+            type: string
+          required: true
+      
+      responses:
+        '200':
+          description: "this includes: \n\n \"status\": Status of the job. Where status can be: \n\n + \"requested\": Job was requested successfully; \n\n + \"revoked\": Job was revoked by user; \n\n + \"success\": Job completed successfully; \n\n + \"failed\": Job completed, but did not finish. \n\n\"number_results\": Number of events returned. \n\n\"open_ports\": Number of open ports detected. \n\n\"ports\": List of open ports detected. \n\n\"targets\": Number of targets that responded. \n\n\"grabbers\": Grabber specific statistics. \n\n + \"type\": Grabber type. \n\n + \"port\": Port number. \n\n + \"count\": Number of events for a specific grabber type and port number. \n\n"
+          content:
+            application/json:
+              example:
+                stats: <STATS>
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+  
   /tasks/{job_id}/revoke:
     post:
       tags:
@@ -389,6 +426,64 @@ paths:
         '404':
           $ref: '#/components/responses/HTTPStatusMessage404'
   
+  /query/search/stats:
+    get:
+      tags:
+        - Host
+      summary: ""
+      description: "Statistics of recent events for the given query. Can be used with specific parameters and/or full-text search."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: query
+          name: query
+          schema:
+            type: string
+          description: "String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](https://docs.binaryedge.io/search/) for details on what parameters can be used."
+          required: true
+        - in: query
+          name: type
+          description: "Type of statistic we want to obtain.  Possible types include:\n - ports, products, versions, tags, services, countries, asn."
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: order
+          description: "Whether to sort descendently or ascendently to get the top."
+          schema:
+            type: string
+            enum: ["desc", "asc"]
+      
+      responses:
+        '200':
+          description: "Return stats results."
+          content:
+            application/json:
+              example:
+                - key: 3306/tcp
+                  doc_count: 42761
+                - key: 102/tcp
+                  doc_count: 5
+                - key: 1234/tcp
+                  doc_count: 5
+                - key: 1911/tcp
+                  doc_count: 5
+                - key: 5001/tcp
+                  doc_count: 5
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+     
   /query/image/ip/{target}:
     get:
       tags:
@@ -660,6 +755,64 @@ paths:
         '404':
           $ref: '#/components/responses/HTTPStatusMessage404'
 
+  /query/image/search/stats:
+    get:
+      tags:
+        - Image
+      summary: ""
+      description: "Statistics of recent events for the given query. Can be used with specific parameters and/or full-text search."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: query
+          name: query
+          schema:
+            type: string
+          description: "String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](https://docs.binaryedge.io/image-search/) for details on what parameters can be used."
+          required: true
+        - in: query
+          name: type
+          description: "Type of statistic we want to obtain.  Possible types include:\n - ports, words, tags, countries, asn, rdns."
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: order
+          description: "Whether to sort descendently or ascendently to get the top."
+          schema:
+            type: string
+            enum: ["desc", "asc"]
+      
+      responses:
+        '200':
+          description: "Return stats results."
+          content:
+            application/json:
+              example:
+                - key: 3389/tcp
+                  doc_count: 161165
+                - key: 3388/tcp
+                  doc_count: 4755
+                - key: 80/tcp
+                  doc_count: 122
+                - key: 3386/tcp
+                  doc_count: 121
+                - key: 443/tcp
+                  doc_count: 109
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+     
   /query/image/search/similar:
     get:
       tags:
@@ -764,7 +917,214 @@ paths:
 
         '404':
           $ref: '#/components/responses/HTTPStatusMessage404'
+      
+      "deprecated": true
 
+  /query/torrent/historical/{target}:
+    get:
+      tags:
+        - Torrent
+      summary: ""
+      description: "Details about torrents transferred by an Host, with data up to 6 months.\n\n List of torrent events for the specified host, with events for each time that a new transfer was detected on the DHT. See [Torrent Data](https://docs.binaryedge.io/torrent/) for more details."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: path
+          name: target
+          description: "[String] target IP address or CIDR up to /24"
+          schema:
+            type: string
+          required: true
+      
+      responses:
+        '200':
+          description: "Return Torrent results"
+          content:
+            application/json:
+              example:
+                origin:
+                  type: peer
+                  module: torrent
+                  ts: 1491827676263
+                node:
+                  ip: 219.88.xxx.xxx
+                  port: 25923
+                peer:
+                  ip: 222.208.xxx.xxx
+                  port: 30236
+                torrent:
+                  infohash: cbe45addbb48c07ef6451bd3bee326d5cd82538f
+                  name: NCIS Los Angeles S08E20 HDTV x264-LOL EZTV
+                  source: EZTV
+                  category: TV Show
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+
+  /query/torrent/search:
+    get:
+      tags:
+        - Torrent
+      summary: ""
+      description: "Events based on a Query. List of recent events for the given query, including details of exposed ports and services. Can be used with [specific parameters](https://docs.binaryedge.io/torrents-search/) and/or full-text search."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: query
+          name: query
+          schema:
+            type: string
+          description: "[String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events.\n See [specific parameters](https://docs.binaryedge.io/torrents-search/) for details on what parameters can be used."
+          required: true
+        - in: query
+          name: page
+          description: "Number of the page - Maximum: 500 (10,000 results)"
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 500
+            default: 1
+        - in: query
+          name: pagesize
+          description: "Number of the results per page - Default: 100"
+          schema:
+            type: integer
+            default: 100
+      
+      responses:
+        '200':
+          description: "Return torrents details of that search"
+          content:
+            application/json:
+              example:
+                query: 'category:video'
+                page: 1
+                pagesize: 20
+                total: 3149612
+                events:
+                  - origin:
+                      type: peer
+                      module: torrent
+                      ts: 1565166671255
+                    node:
+                      ip: xxx.xxx.xxx.xxx
+                      port: 2949
+                    peer:
+                      ip: xxx.xxx.xxx.xxx
+                      port: 6881
+                    torrent:
+                      infohash: d5380fcda66b48fb8b521d5c3b5e61b91c94775e
+                      name: Britain's Best Back Gardens Series
+                      source: ThePirateBay
+                      category: Video
+                      subcategory: TV shows
+                  - origin:
+                      type: peer
+                      module: torrent
+                      ts: 1565166671242
+                    node:
+                      ip: xxx.xxx.xxx.xxx
+                      port: 8999
+                    peer:
+                      ip: xxx.xxx.xxx.xxx
+                      port: 24279
+                    torrent:
+                      infohash: d5380fcda66b48fb8b521d5c3b5e61b91c94775e
+                      name: Britain's Best Back Gardens Series
+                      source: ThePirateBay
+                      category: Video
+                      subcategory: TV shows
+                
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+ 
+  /query/torrent/search/stats:
+    get:
+      tags:
+        - Torrent
+      summary: ""
+      description: "Statistics of recent events for the given query. Can be used with specific parameters and/or full-text search."
+      security:
+        - Token: []
+        
+      parameters: 
+        - in: query
+          name: query
+          schema:
+            type: string
+          description: "String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](https://docs.binaryedge.io/torrents-search/) for details on what parameters can be used."
+          required: true
+        - in: query
+          name: type
+          description: "Type of statistic we want to obtain.  Possible types include:\n - ports, countries, asn, ips, rdns, categories, names"
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: days
+          description: "Number of days to get the stats for. For example days=1 for the last day of data."
+          schema:
+            type: integer
+            default: 90
+        - in: query
+          name: order
+          description: "Whether to sort descendently or ascendently to get the top."
+          schema:
+            type: string
+            enum: ["desc", "asc"]
+      
+      responses:
+        '200':
+          description: "Return stats results."
+          content:
+            application/json:
+              example:
+                - key: 1
+                  doc_count: 168056
+                - key: 8999
+                  doc_count: 133738
+                - key: 6881
+                  doc_count: 91512
+                - key: 51413
+                  doc_count: 58998
+                - key: 1200
+                  doc_count: 35127
+                
+        '400':
+          $ref: '#/components/responses/HTTPStatusMessage400'
+                
+        '401':
+          $ref: '#/components/responses/HTTPStatusMessage401'
+
+        '403':
+          $ref: '#/components/responses/HTTPStatusMessage403'
+
+        '404':
+          $ref: '#/components/responses/HTTPStatusMessage404'
+   
+ 
+ 
   /query/torrent/latest/{target}:
     get:
       tags:
@@ -1914,18 +2274,6 @@ paths:
           schema:
             type: string
           required: true
-        - in: query
-          name: page
-          description: "[int] Number of the page"
-          schema:
-            type: integer
-            default: 1
-        - in: query
-          name: pagesize
-          description: "[int] Number of results per page"
-          schema:
-            type: integer
-            default: 100
       
       responses:
         '200':
