@@ -18,13 +18,15 @@ The API provides access to that scanning platform, for your own usage, along wit
         - [Image Search](image-search.md "image-search")
         - [Torrents Search](torrents-search.md "torrents-search")
         - [Sensors Search](sensors-search.md "sensors-search")
-        - [Sensors Tags](sensors-tags.md "sensors-tags")
     - [HTTP Status Messages](errors.md "errors")
-    - [Event Details]()
+    - [Data Formats]()
         - [Modules](modules.md "modules")
         - [Torrent Data](torrent.md "torrents")
-        - [Sinkhole Data](sinkhole.md "sinkhole")
-
+        - [Sensors Data](sensors.md "sensors")
+    - [Sensors (Honeypots)]()
+        - [Sensors Data](sensors.md "sensors")
+        - [Sensors Search](sensors-search.md "sensors-search")
+        - [Sensors Tags](sensors-tags.md "sensors-tags")
  
 
 ## FAQ
