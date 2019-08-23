@@ -2143,6 +2143,14 @@ paths:
           schema:
             type: string
         - in: query
+          name: days
+          description: "Number of days to get the stats for. For example days=1 for the last day of data."
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 60
+            default: 60
+        - in: query
           name: page
           description: "Number of the page - Maximum: 500 (10,000 results)"
           schema:
