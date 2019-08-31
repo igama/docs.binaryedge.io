@@ -41,6 +41,7 @@
  | DRIDEX | Dridex also known as Bugat and Cridex is a form of malware that specializes in stealing bank credentials | 
  | DRUPAL_SCANNER | Scanning for Drupal framework vulnerabilities | 
  | DUCKDUCKBOT | https://duckduckgo.com/ | 
+ | DVR_SCANNER | Scanning for DVR devices |
  | ELASTICSEARCH_SCANNER | Scanning for exposed Elasticsearch databases | 
  | EMAIL_SCANNER | Scanning for known email protocols | 
  | EMOTET | The Emotet banking Trojan was first identified by security researchers in 2014 | 
@@ -58,14 +59,15 @@
  | GOODOR | Scanner for the goodor backdoor | 
  | GOOGLE | www.google.com hosted content |
  | GOOGLEBOT | https://www.google.com/ crawler | 
- | GOOTKIT | Trojan.GootKit is a Trojan horse that steals confidential information. It also opens a back door and downloads additional files on to the compromised computer. | 
- | GOZI | GOZI is a spyware that monitors network traffic. It also gets login credentials stored in browsers and mail applications. | 
+ | GOOTKIT | Trojan.GootKit is a Trojan horse that steals confidential information and also opens a back door and downloads additional files on to the compromised computer | 
+ | GOZI | GOZI is a spyware that monitors network traffic. It also gets login credentials stored in browsers and mail applications | 
  | GPON_ONT_SCANNER | Scanner for GPON Network terminals | 
  | HADOOP_HDFS_SCANNER | Scanning for Hadoop HDFS | 
  | HADOOP_YARN_SCANNER | Scanning for Hadoop Yarn | 
+ | HISILICON_DVR | Scanning fot a remote code execution vulnerability on HiSilicon DVR devices |
  | HNAP_SCANNER | Scanning for HNAP routers | 
  | HTTP_CRAWLER | HTTP Crawler | 
- | HTTP_REFLECTION | Source of event tried to make on of our sensors access something from 3rd party. Potential DDoS |
+ | HTTP_REFLECTION | Source of event tried to make one of our sensors access something from 3rd party, potential DDoS |
  | HTTP_SCANNER | Scanning for HTTP Services | 
  | HUAWEI_HG532_SCANNER | Scanning for vulnerabilities associated with the Huawei HG532 Router | 
  | ICMP_ECHO_REQUEST | Ping event  |
@@ -78,7 +80,7 @@
  | JABBER_SCANNER | Scanning for the Jabber protocol | 
  | JANUARY | January Malware https://bitninja.io/blog/2018/12/28/goodbye-peppa-hello-january?PageSpeed=noscript | 
  | JAVA_SCANNER | Scanning for JRMI endpoints | 
- | JBIFROST | Also called ADWind The Adwind Remote Access Trojan (RAT) is a popular Java-based backdoor capable of infecting Windows, Linux, Mac OS and Android operating systems. Its cross-platform nature, elaborate backdoor features, and relatively cheap price makes it a favourite choice for many cybercriminals today. | 
+ | JBIFROST | Also called ADWind, the Adwind Remote Access Trojan (RAT) is a popular Java-based backdoor capable of infecting Windows, Linux, Mac OS and Android operating systems | 
  | JBOSS_MALWARE | Known Malware of JBOSS framework | 
  | JUNIPER_SCANNER | Scanning for exposed Juniper network devices | 
  | KGUARD_SCANNER | Scanning for Kguard Cameras | 
@@ -91,6 +93,7 @@
  | MASSCAN_SCANNER | Scanner using Masscan |
  | MEMCACHED_SCANNER | Scanning for exposed memcached endpoints | 
  | MICROSOFT_SQL_SERVER | Scanning for exposed Microsoft SQL server | 
+ | MIKROTIK_ROUTEROS | Scanning for a remote shell vulnerability on Mikrotik devices running certain versions of RouterOS |
  | MINERPOOL | www.minerpool.net |
  | MIRAI | Mirai-family botnet |
  | MODBUS_SCANNER | Scanning for the SCADA protocol modbus | 
