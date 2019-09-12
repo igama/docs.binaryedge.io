@@ -19,6 +19,7 @@
  | BLUEKEEP_SCANNER | Vulnerability affecting RDP protocol (CVE-2019-0708) |
  | BLUEKEEP_RDPSCAN | https://github.com/robertdavidgraham/rdpscan |
  | BLUEKEEP_ZEROSUM | https://github.com/zerosum0x0/CVE-2019-0708 |
+ | BUSYBOX_SCANNER | Scanning for BusyBox |
  | CENSYS | Internet wide scanner https://censys.io/ | 
  | CISCO_LINKSYS_SCANNER | Scanning for vulnerabilities associated with Cisco or Linksys | 
  | CISCO_SMART_INSTALL | Scanning for Cisco Smart Install | 
@@ -40,6 +41,7 @@
  | DOMAINTOOLS | https://www.domaintools.com/ |
  | DRIDEX | Dridex also known as Bugat and Cridex is a form of malware that specializes in stealing bank credentials | 
  | DRUPAL_SCANNER | Scanning for Drupal framework vulnerabilities | 
+ | DTLS_SCANNER | Valid DTLS Connections | 
  | DUCKDUCKBOT | https://duckduckgo.com/ | 
  | DVR_SCANNER | Scanning for DVR devices |
  | ELASTICSEARCH_SCANNER | Scanning for exposed Elasticsearch databases | 
@@ -146,6 +148,7 @@
  | STRETCHOID | http://stretchoid.com/ Stetchoid is a platform that helps identify an organization's online services. |
  | TALAIA | https://www.talaia.io/ A highly scalable, NetFlow/IPFIX based big-data platform that is designed for network operators taking complex decisions |
  | TCP_SYN | SYN packet received |
+ | TFTP_SCANNER | Scanner for FTP servers | 
  | THINK_PHP | Exploitation of ThinkPHP vulnerability |
  | TOFSEE | Backdoor.Tofsee is capable of making changes to the settings on affected systems and stealing information from them. Once executed, it is capable of tracking users online activities, opening affected systems for infiltration to steal personal information and credentials, and changing browser and DNS settings. | 
  | TOR | Tor node | 
