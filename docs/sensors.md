@@ -87,6 +87,10 @@ Event type: sinkhole
             * **description**: Description of the host if the JA3 is known
             * **ja3**: JA3 fingerprint string
             * **ja3_digest**: JA3 fingerprint hash
+        * **dtls**: Extra fields related to DTLS payload
+            * **description**: Description of the host if the JA3 is known
+            * **ja3**: JA3 fingerprint string
+            * **ja3_digest**: JA3 fingerprint hash
     * **tags**: Rule based tagging derived from the payload.
 
 
