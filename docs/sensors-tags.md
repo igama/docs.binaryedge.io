@@ -124,6 +124,7 @@
  | RANSOMWARE | General ransomware tag, when we cant classify the family | 
  | RAPID7 | Internet wide scanner https://www.rapid7.com/ | 
  | RDP_SCANNER | Scanning for Remote Desktop Protocols | 
+ | REALTEK_MINIIGD_UPNP | Scanning for Realtek SDK Miniigd UPnP command execution vulnerability |
  | REDIS_SCANNER | Scanning for exposed REDIS databases | 
  | RFB_SCANNER | Scanning for VNC Protocol | 
  | RLOGIN_SCANNER | Scanning for Rlogin protocol | 
