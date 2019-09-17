@@ -78,6 +78,7 @@
  | INTRINSEC | https://intrinsecsecurity.com/ |
  | IPFIRE_EXPLOIT | Scanning for IPFire router software exploits | 
  | IPIP | https://en.ipip.net/ | 
+ | IRC_SCANNER | Scanning for IRC servers |
  | IS_ARCHIVER | The Internet Archive https://archive.org/ | 
  | JABBER_SCANNER | Scanning for the Jabber protocol | 
  | JANUARY | January Malware https://bitninja.io/blog/2018/12/28/goodbye-peppa-hello-january?PageSpeed=noscript | 
@@ -109,6 +110,7 @@
  | OPENPORTSTATS | Internet wide scanner http://openportstats.com/ |
  | ORACLE_TNS_SCANNER | Scanning for Oracle Databases exposing the TNS endpoint | 
  | ORACLE_WEBLOGIC | Scanning for Oracle Weblogic Servers | 
+ | PCWORX_SCANNER | Scanning for PCWorx protocol | 
  | PEPPA | Peppa malware | 
  | PHPMYADMIN | Scanning for PHPMyAdmin panels  | 
  | PRINTER_SCANNER | Scanning for exposed printers | 
