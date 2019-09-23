@@ -79,6 +79,16 @@ Search by protocol. Can be TCP or UDP.
     
     e.g. protocol:tcp
 
+### rdns: (string)
+Search by RDNS.
+
+    e.g. rdns:a23-52-79-104.deploy.static.akamaitechnologies.com
+
+### rdns_parent: (string)
+Search by RDNS root.
+
+    e.g. rdns_parent:akamaitechnologies.com
+
 ### type: (string)
 Search by event type. Can be service-simple (the default service identification module), ssl, ssh, vnc, rdp, x11, mongodb, memcached, elasticsearch, redis.
 
