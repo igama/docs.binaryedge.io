@@ -12,6 +12,7 @@
  | BACKDOOR | Scanning for a known backdoor | 
  | BAIDUSPIDER | http://www.baidu.com/ | 
  | BENIGN | Known and confirmed actor or actions that have been classified by us as non malicious | 
+ | BGP_SCANNER | Scanning for BGP protocol | 
  | BINARYEDGE | Internet wide scanner https://www.binaryedge.io/ | 
  | BINGBOT | https://www.bing.com/ | 
  | BITSIGHT | Internet wide scanner https://www.bitsight.com/ | 
@@ -20,6 +21,7 @@
  | BLUEKEEP_RDPSCAN | https://github.com/robertdavidgraham/rdpscan |
  | BLUEKEEP_ZEROSUM | https://github.com/zerosum0x0/CVE-2019-0708 |
  | BUSYBOX_SCANNER | Scanning for BusyBox |
+ | CASSANDRA_SCANNER | Scanning for Apache Cassandra |
  | CENSYS | Internet wide scanner https://censys.io/ | 
  | CISCO_LINKSYS_SCANNER | Scanning for vulnerabilities associated with Cisco or Linksys | 
  | CISCO_SMART_INSTALL | Scanning for Cisco Smart Install | 
@@ -35,6 +37,7 @@
  | CVE-2019-15107 | Command injection vulnerability on Webmin through 1.920 |
  | CYBERGREEN | The CyberGreen Institute is a global non-profit and collaborative organization conducting activities focused on helping to improve the health of the global Cyber Ecosystem |
  | CYMRU | http://www.team-cymru.com |
+ | DFIND_SCANNER | Scanner using ZmEu vulnerability scanner |
  | DICT_SCANNER | Dictionary Network Protocol |
  | DLINK_SCANNER | Scanning for DLink vulnerabilities |
  | DNS_SCANNER | The Domain Name System is a hierarchical and decentralized naming system for computers, services, or other resources connected to the Internet or a private network |
@@ -72,6 +75,7 @@
  | HTTP_REFLECTION | Source of event tried to make one of our sensors access something from 3rd party, potential DDoS |
  | HTTP_SCANNER | Scanning for HTTP Services | 
  | HUAWEI_HG532_SCANNER | Scanning for vulnerabilities associated with the Huawei HG532 Router | 
+ | IBM_TN3270 | Scanning for IBM TN3270 terminals |
  | ICMP_ECHO_REQUEST | Ping event  |
  | INTERNET_CENSUS | Internet wide scanner actor seemly associated with Bitsight | 
  | INTERNET_TTL | http://www.internettl.org/ |
@@ -104,7 +108,8 @@
  | NETCRAFT | Netcraft is an Internet services company based in Bath, Somerset, England. https://www.netcraft.com/ |
  | NETSYSTEMS | http://netsystemsresearch.com |
  | NEUTRINO | Neutrino malware | 
- | NMAP_SCANNER | Actor using the NMAP scanner  | 
+ | NMAP_SCANNER | Actor using the NMAP scanner | 
+ | NOCTION_IRP | Scanning for Noction IRP BGP software |
  | NUUO_NVR_SCANNER | Scanning for Nuuo CCTV Cameras | 
  | ONYPHE | Internet wide scanner https://www.onyphe.io/ | 
  | OPENPORTSTATS | Internet wide scanner http://openportstats.com/ |
@@ -112,6 +117,7 @@
  | ORACLE_WEBLOGIC | Scanning for Oracle Weblogic Servers | 
  | PCWORX_SCANNER | Scanning for PCWorx protocol | 
  | PEPPA | Peppa malware | 
+ | PHP_FPM | Scanning for PHP FastCGI Process Manager panels  | 
  | PHPMYADMIN | Scanning for PHPMyAdmin panels  | 
  | PRINTER_SCANNER | Scanning for exposed printers | 
  | PROBETHENET | Internet wide scanner http://probethenet.com/ |
@@ -136,6 +142,7 @@
  | RWTH_AACHEN_UNIVERSITY | http://www.rwth-aachen.de  RWTH Aachen University or Rheinisch-Westfälische Technische Hochschule Aachen is a research university located in Aachen, North Rhine-Westphalia, Germany |  
  | SAP_SCANNER | Scanning for SAP Servers | 
  | SCADA_SCANNER | Scanning for SCADA protocols | 
+ | SERIALNUMBERD | Scanning for serialnumberd |
  | SEZNAM | https://www.seznam.cz/ crawler | 
  | SHADOWSERVER | https://www.shadowserver.org/wiki/ scanner | 
  | SHODAN | Internet wide scanner https://www.shodan.io/ | 
@@ -143,6 +150,7 @@
  | SLURP | Slurp bot for Yahoo  | 
  | SMB_SCANNER | Scanner for SMB Protocol often affiliated with exploitation of Microsoft Windows | 
  | SMTP_SCANNER | Scanner for SMTP protocol | 
+ | SOAP_SCANNER | Scanning for software based on SOAP requests |
  | SOGOU | https://www.sogou.com/ | 
  | SOURCE_ENGINE | Valve Source Engine - Games | 
  | SSH_SCANNER | Valid SSH connections | 
@@ -167,11 +175,14 @@
  | UPNP_SCANNER | Scanner for UPNP protocol | 
  | VNC_SCANNER | Scanner for the VNC Protocol | 
  | VTIGERCRM_SCANNER | Scanner for the Vtiger CRM | 
+ | WEBMIN | Scanning for Webmin |
  | WORDPRESS_SCANNER | Scanning for Wordpress | 
+ | WSDISCOVERY_SCANNER | Scanning for Web Services Dynamic Discovery protocol |
  | X11_SCANNER | Scanning for the X11 protocol | 
  | YANDEXBOT | https://yandex.com/ | 
+ | ZENNOLAB_SCANNER | Scanning for Zennolab tools |
  | ZGRAB_SCANNER | Scanner using zgrab software - https://github.com/zmap/zgrab2 | 
+ | ZMEU_SCANNER | Scanner using ZmEu vulnerability scanner |
  | ZTE_F460_SCANNER | Scanning for ZTE F460 Routers | 
  | ZTE_F660_SCANNER | Scanning for ZTE F660 Routers |
- | WEBMIN | Scanning for Webmin |
  
