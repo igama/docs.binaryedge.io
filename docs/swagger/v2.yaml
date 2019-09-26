@@ -244,9 +244,9 @@ paths:
       parameters: 
         - in: query
           name: query
+          description: "String used to query our data. If no filters are used, it will perform a full-text search on the entire events.\n See Search Parameters for details on what parameters can be used."
           schema:
             type: string
-          description: "String used to query our data. If no filters are used, it will perform a full-text search on the entire events.\n See Search Parameters for details on what parameters can be used."
           required: true
         - in: query
           name: page
@@ -256,6 +256,11 @@ paths:
             minimum: 1
             maximum: 500
             default: 1
+        - in: query
+          name: only_ips
+          description: "[Int] Optional. If selected, only output IP addresses, ports and protocols."
+          schema:
+            type: integer
       
       responses:
         '200':
@@ -2158,6 +2163,11 @@ paths:
             minimum: 1
             maximum: 500
             default: 1
+        - in: query
+          name: only_ips
+          description: "[Int] Optional. If selected, only output IP addresses, ports and protocols."
+          schema:
+            type: integer
       
       responses:
         '200':
