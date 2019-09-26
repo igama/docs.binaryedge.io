@@ -2165,7 +2165,7 @@ paths:
             default: 1
         - in: query
           name: only_ips
-          description: "[Int] Optional. If selected, only output IP addresses, ports and protocols."
+          description: "[Int] Optional. If selected, only output origin IP addresses, target ports and protocols."
           schema:
             type: integer
       
