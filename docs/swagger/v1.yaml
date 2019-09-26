@@ -379,10 +379,15 @@ paths:
       parameters: 
         - in: query
           name: query
+          description: "[String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events.\n See [specific parameters](https://docs.binaryedge.io/image-search/) for details on what parameters can be used."
           schema:
             type: string
-          description: "[String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events.\n See [specific parameters](https://docs.binaryedge.io/image-search/) for details on what parameters can be used."
           required: true
+        - in: query
+          name: only_ips
+          description: "[Int] Optional. If selected, only output IP addresses, ports and protocols."
+          schema:
+            type: integer
       
       responses:
         '200':
@@ -2360,6 +2365,11 @@ paths:
           schema:
             type: integer
             default: 100
+        - in: query
+          name: only_ips
+          description: "[Int] Optional. If selected, only output IP addresses, ports and protocols."
+          schema:
+            type: integer
       
       responses:
         '200':
