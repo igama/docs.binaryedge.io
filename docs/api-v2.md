@@ -2138,7 +2138,7 @@ Events based on a Query. List of recent events for the given query, including de
 * days: [Integer] Number of days to get the stats for. For example days=1 for the last day of data.
     * Max: 60 (default)
 * page: [Int] Optional. Default 1, Maximum: 500 (10,000 results)
-* only_ips: [Int] Optional. If selected, only output IP addresses, ports and protocols.
+* only_ips: [Int] Optional. If selected, only output origin IP addresses, target ports and protocols.
 
 *Output*
 
