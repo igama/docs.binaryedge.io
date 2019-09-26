@@ -173,6 +173,7 @@
  | UNIVERSITY_BROWN | https://www.brown.edu/ Brown University is a private Ivy League research university in Providence, Rhode Island | 
  | UNIVERSITY_MICHIGAN | https://umich.edu/ The University of Michigan, often simply referred to as Michigan, is a public research university in Ann Arbor, Michigan. | 
  | UPNP_SCANNER | Scanner for UPNP protocol | 
+ | VBULLETIN_SCANNER | Scanner for vBulletin software | 
  | VNC_SCANNER | Scanner for the VNC Protocol | 
  | VTIGERCRM_SCANNER | Scanner for the Vtiger CRM | 
  | WEBMIN | Scanning for Webmin |
