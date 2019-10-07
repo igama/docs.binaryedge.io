@@ -42,6 +42,7 @@
  | DICT_SCANNER | Dictionary Network Protocol |
  | DLINK_SCANNER | Scanning for DLink vulnerabilities |
  | DNS_SCANNER | The Domain Name System is a hierarchical and decentralized naming system for computers, services, or other resources connected to the Internet or a private network |
+ | DNS_SD_SCANNER | Scanning for DNS Service Discovery |
  | DOMAINTOOLS | https://www.domaintools.com/ |
  | DRIDEX | Dridex also known as Bugat and Cridex is a form of malware that specializes in stealing bank credentials | 
  | DRUPAL_SCANNER | Scanning for Drupal framework vulnerabilities | 
@@ -102,6 +103,7 @@
  | MALICIOUS | Known and confirmed malicious actions | 
  | MALIGN | Known and confirmed malicious actions | 
  | MALWARE | Known and confirmed malware | 
+ | MARBLE_COIN_SCANNER | Scanning for Marble Coin | 
  | MASSCAN_SCANNER | Scanner using Masscan |
  | MEMCACHED_SCANNER | Scanning for exposed memcached endpoints | 
  | MICROSOFT_SQL_SERVER | Scanning for exposed Microsoft SQL server | 
