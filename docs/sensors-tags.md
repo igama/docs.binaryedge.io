@@ -78,6 +78,7 @@
  | HTTP_REFLECTION | Source of event tried to make one of our sensors access something from 3rd party, potential DDoS |
  | HTTP_SCANNER | Scanning for HTTP Services | 
  | HUAWEI_HG532_SCANNER | Scanning for vulnerabilities associated with the Huawei HG532 Router | 
+ | IBM_DB2_SCANNER | Scanning for IBM DB2 databases |
  | IBM_TN3270 | Scanning for IBM TN3270 terminals |
  | ICMP_ECHO_REQUEST | Ping event  |
  | INTERNET_CENSUS | Internet wide scanner actor seemly associated with Bitsight | 
@@ -85,6 +86,7 @@
  | INTRINSEC | https://intrinsecsecurity.com/ |
  | IPFIRE_EXPLOIT | Scanning for IPFire router software exploits | 
  | IPIP | https://en.ipip.net/ | 
+ | IPMI_SCANNER | Scanning for devices using IPMI |
  | IRC_SCANNER | Scanning for IRC servers |
  | IS_ARCHIVER | The Internet Archive https://archive.org/ | 
  | JABBER_SCANNER | Scanning for the Jabber protocol | 
