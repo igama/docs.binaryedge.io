@@ -16,6 +16,7 @@
  | BINARYEDGE | Internet wide scanner https://www.binaryedge.io/ | 
  | BINGBOT | https://www.bing.com/ | 
  | BITSIGHT | Internet wide scanner https://www.bitsight.com/ | 
+ | BITTORRENT_SCANNER | Scanning for Bittorrent protocol | 
  | BOTNET | Known botnet traffic | 
  | BLUEKEEP_SCANNER | Vulnerability affecting RDP protocol (CVE-2019-0708) |
  | BLUEKEEP_RDPSCAN | https://github.com/robertdavidgraham/rdpscan |
@@ -50,6 +51,7 @@
  | ELASTICSEARCH_SCANNER | Scanning for exposed Elasticsearch databases | 
  | EMAIL_SCANNER | Scanning for known email protocols | 
  | EMOTET | The Emotet banking Trojan was first identified by security researchers in 2014 | 
+ | ENTTEC_DMX | Scanning for ENTTEC DMX devices |
  | EOS_NODE_SCANNER | Scanning for EOS Blockchain nodes | 
  | ETHEREUM_NODE_SCANNER | Scanning for Ethereum Blockchain nodes | 
  | EXABOT | Exabot is a web scraper for Exalead https://www.exalead.com | 
@@ -89,9 +91,12 @@
  | JAVA_SCANNER | Scanning for JRMI endpoints | 
  | JBIFROST | Also called ADWind, the Adwind Remote Access Trojan (RAT) is a popular Java-based backdoor capable of infecting Windows, Linux, Mac OS and Android operating systems | 
  | JBOSS_MALWARE | Known Malware of JBOSS framework | 
+ | JDWP_SCANNER | Scanning for Java Debug Wire Protocol |
  | JUNIPER_SCANNER | Scanning for exposed Juniper network devices | 
  | KGUARD_SCANNER | Scanning for Kguard Cameras | 
  | KUDELSKI-NAGRA | Internet wide scanner https://www.nagra.com/ |
+ | LANDESK_SCANNER | Scanning for Landesk software |
+ | LDAP_SCANNER | Scanning for LDAP protocol |
  | LOSEC | Internet wide scanner lo-sec.online |
  | MAIL_RU | Mail.Ru Group, ООО (commonly referred to as Mail.Ru) is a Russian Internet company. |
  | MALICIOUS | Known and confirmed malicious actions | 
@@ -150,12 +155,15 @@
  | SLURP | Slurp bot for Yahoo  | 
  | SMB_SCANNER | Scanner for SMB Protocol often affiliated with exploitation of Microsoft Windows | 
  | SMTP_SCANNER | Scanner for SMTP protocol | 
+ | SNMP_SCANNER | Scanner for SNMP protocol | 
  | SOAP_SCANNER | Scanning for software based on SOAP requests |
+ | SOCKS_SCANNER | Scanning for SOCKS |
  | SOGOU | https://www.sogou.com/ | 
  | SOURCE_ENGINE | Valve Source Engine - Games | 
  | SSH_SCANNER | Valid SSH connections | 
  | SSL_SCANNER | Valid SSL Connections | 
  | STANFORD_UNIVERSITY | https://www.stanford.edu/ Leland Stanford Junior University is a private research university in Stanford, California. |
+ | STRATUM_SCANNER | Scanning for Stratum software |
  | STRETCHOID | http://stretchoid.com/ Stetchoid is a platform that helps identify an organization's online services. |
  | TALAIA | https://www.talaia.io/ A highly scalable, NetFlow/IPFIX based big-data platform that is designed for network operators taking complex decisions |
  | TCP_SYN | SYN packet received |
