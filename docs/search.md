@@ -288,15 +288,15 @@ Search by leaf certificate issuer's Common Name.
 
     e.g. ssl.cert.issuer.commonName:microsoft
 
-### cert.issuer_names: (string)
-Search by leaf certificate issuer's names (commonName, organizationName combined).
-
-    e.g. ssl.cert.issuer_names:kubernetes
-
 ### cert.issuer.organizationName: (string)
 Search by leaf certificate issuer's Organization Name.
 
     e.g. ssl.cert.issuer.organizationName:microsoft
+
+### cert.issuer_names: (string)
+Search by leaf certificate issuer's names (commonName, organizationName combined).
+
+    e.g. ssl.cert.issuer_names:kubernetes
 
 ### cert.not_after: (date)
 Search by leaf certificate's expiration date.
@@ -315,30 +315,91 @@ Search by leaf certificate's Serial Number.
 
     e.g. ssl.cert.serial:160000708D70A2A4CB63ABA1C700000000708D
 
+### cert.signature_algorithm: (string)
+Search by leaf certificate's signature algorithm.
+
+    e.g. ssl.cert.signature_algorithm:sha256_rsa
+
+### cert.signature_value: (string)
+Search by leaf certificate's signature.
+
+    e.g. ssl.cert.signature_value:"	5d:d1:60:d1:57:1f:3f:ba:ed:c1:36:c9:08:fa:7a:8a:53:78:73:5d:93:c9:cc:11:cc:c8:f5:2c:3e:af:aa:12:73:46:1b:99:35:d7:b6:17:1c:ba:19:c0:f0:d1:eb:92:af:60:a4:b8:2d:18:2c:25:43:59:51:a6:74:26:43:73:d9:dd:58:0b:6f:ba:4d:f0:98:82:a1:0a:e3:3b:1d:d4:c7:5e:20:7a:8d:49:55:92:d5:82:f9:85:2d:0b:7e:01:2c:b0:a4:ff:fe:23:25:04:9b:25:46:69:23:4c:33:e7:24:97:2a:13:d4:26:0b:c8:48:30:9d:84:38:aa:bd:fe:e6:42:e6:a0:48:0a:47:f0:18:4c:fb:e3:ce:fd:43:e9:44:ab:85:2f:ba:61:70:a7:a3:9c:a7:93:3b:a5:f5:90:23:4f:20:fb:57:3e:4c:9d:ac:e8:61:b4:ef:30:2a:0a:b6:33:bc:0b:12:f6:85:1a:e4:48:a8:8d:04:5c:b9:49:a0:b8:91:f1:35:3e:a6:bd:7d:06:c1:af:27:ae:78:6a:b7:9e:2b:d1:9e:a9:b3:57:07:0b:6d:14:f1:5d:57:ab:ed:50:c0:f1:7c:17:de:61:be:2e:af:bc:ab:60:c2:f0:ca:21:77:e6:4f:0f:94:25:74:a4:6d:dd:d9:dd:8d:1d"
+
 ### cert.sha1_fingerprint: (string)
 Search by leaf certificate's SHA1 fingerprint.
 
-    e.g. ssl.cert.sha1_fingerprint:3ab0b1c27f746fd90c34f0d6a960cf73a4229de8
+    e.g. ssl.cert.sha1_fingerprint:"4e:aa:aa:fd:d1:d5:b6:7f:e5:a1:f2:df:02:58:11:40:c7:8e:04:73"
+
+### cert.sha256_fingerprint: (string)
+Search by leaf certificate's SHA256 fingerprint.
+
+    e.g. ssl.cert.sha256_fingerprint:"df:4a:62:74:eb:16:18:48:0e:2e:da:41:b1:80:f0:d5:62:69:24:6c:38:2b:08:e5:83:26:52:ca:d5:71:2b:ec"
+
+### cert.spki_subject_fingerprint: (string)
+Search by leaf certificate's SPKI subject fingerprint.
+
+    e.g. ssl.cert.spki_subject_fingerprint:"d0:0f:ae:7c:ae:5d:c8:b9:37:38:fb:b3:5f:6a:24:cc:e9:51:71:ca:ba:21:3f:73:c5:cd:f6:bc:5b:bf:03:1e"
 
 ### cert.subject.commonName: (string)
 Search by leaf certificate subject's Common Name.
 
     e.g. ssl.cert.subject.commonName:microsoft
 
-### cert.subject_names: (string)
-Search by leaf certificate subject's names (commonName, organizationName combined).
-
-    e.g. ssl.cert.subject_names:kubernetes
-
 ### cert.subject.organizationName: (string)
 Search by leaf certificate subject's Organization Name.
 
     e.g. ssl.cert.subject.organizationName:microsoft
 
+### cert.subject_names: (string)
+Search by leaf certificate subject's names (commonName, organizationName combined).
+
+    e.g. ssl.cert.subject_names:kubernetes
+
 ### cert.subject_dns: (string)
 Search by leaf certificate subject's DNS (if available).
 
     e.g. ssl.cert.subject_dns:azure
+
+### cert.extensions.key_usage.*: (boolean)
+Search by leaf certificate key usage extension parameters.
+
+    e.g. ssl.cert.extensions.key_usage.digital_signature:true
+
+#### Example parameters
+
+* crl_sign
+* data_encipherment
+* decipher_only
+* digital_signature
+* encipher_only
+* key_agreement
+* key_cert_sign
+* key_encipherment
+* non_repudiation
+
+### cert.extensions.extended_key_usage.*: (boolean)
+Search by leaf certificate extended key usage extension parameters.
+
+    e.g. ssl.cert.extensions.extended_key_usage.server_auth:true
+
+#### Example parameters
+
+* any_extended_key_usage
+* client_auth
+* code_signing
+* eap_over_lan
+* eap_over_ppp
+* email_protection
+* ipsec_end_system
+* ipsec_ike
+* ipsec_tunnel
+* ipsec_user
+* microsoft_server_gated
+* microsoft_smart_card_logon
+* ocsp_signing
+* pkinit_kpkdc
+* server_auth
+* time_stamping
 
 ### ciphers: (string)
 Search by ciphers.
@@ -410,15 +471,15 @@ Search for Renegotiation support.
 
     e.g. ssl.vulnerabilities.renegotiation.accepts_client_renegotiation:true
 
-### robot_result_enum: (string)
-Search for ROBOT.
-
-    e.g. ssl.vulnerabilities.robot.robot_result_enum:NOT_VULNERABLE_NO_ORACLE
-
 ### supports_secure_renegotiation: (boolean)
 Search for Secure Renegotiation support.
 
     e.g. ssl.vulnerabilities.renegotiation.supports_secure_renegotiation:true
+
+### robot_result_enum: (string)
+Search for ROBOT.
+
+    e.g. ssl.vulnerabilities.robot.robot_result_enum:NOT_VULNERABLE_NO_ORACLE
 
 
 ## HTTP
