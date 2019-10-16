@@ -120,6 +120,7 @@
  | NMAP_SCANNER | Actor using the NMAP scanner | 
  | NOCTION_IRP | Scanning for Noction IRP BGP software |
  | NUUO_NVR_SCANNER | Scanning for Nuuo CCTV Cameras | 
+ | NTP_SCANNER | Scanning for NTP servers |
  | ONYPHE | Internet wide scanner https://www.onyphe.io/ | 
  | OPENPORTSTATS | Internet wide scanner http://openportstats.com/ |
  | ORACLE_TNS_SCANNER | Scanning for Oracle Databases exposing the TNS endpoint | 
@@ -169,7 +170,7 @@
  | STANFORD_UNIVERSITY | https://www.stanford.edu/ Leland Stanford Junior University is a private research university in Stanford, California. |
  | STRATUM_SCANNER | Scanning for Stratum software |
  | STRETCHOID | http://stretchoid.com/ Stetchoid is a platform that helps identify an organization's online services. |
- | SYBASE-ASA-DISCOVER | Scanning for Sybase Anywhere servers on the LAN by sending broadcast discovery messages |
+ | SYBASE_ASA_DISCOVER | Scanning for Sybase Anywhere servers on the LAN by sending broadcast discovery messages |
  | TALAIA | https://www.talaia.io/ A highly scalable, NetFlow/IPFIX based big-data platform that is designed for network operators taking complex decisions |
  | TCP_SYN | SYN packet received |
  | TFTP_SCANNER | Scanner for FTP servers | 
