@@ -128,7 +128,8 @@
  | PCWORX_SCANNER | Scanning for PCWorx protocol | 
  | PEPPA | Peppa malware | 
  | PHP_FPM | Scanning for PHP FastCGI Process Manager panels  | 
- | PHPMYADMIN | Scanning for PHPMyAdmin panels  | 
+ | PHPMYADMIN | Scanning for PHPMyAdmin panels |
+ | POSTGRESQL_SCANNER | Scanning for PostgreSQL servers |
  | PRINTER_SCANNER | Scanning for exposed printers | 
  | PROBETHENET | Internet wide scanner http://probethenet.com/ |
  | PROJECT25499 | Internet wide scanner http://project25499.com/ | 
@@ -189,7 +190,9 @@
  | UPNP_SCANNER | Scanner for UPNP protocol | 
  | VBULLETIN_SCANNER | Scanner for vBulletin software | 
  | VNC_SCANNER | Scanner for the VNC Protocol | 
- | VTIGERCRM_SCANNER | Scanner for the Vtiger CRM | 
+ | VTIGERCRM_SCANNER | Scanner for the Vtiger CRM |
+ | VXWORKS_SCANNER | Scanning for VxWorks systems |
+ | VXWORKS_DOS | VxWorks vulnerability that can cause a Denial of Service |
  | WEBMIN | Scanning for Webmin |
  | WORDPRESS_SCANNER | Scanning for Wordpress | 
  | WSDISCOVERY_SCANNER | Scanning for Web Services Dynamic Discovery protocol |
