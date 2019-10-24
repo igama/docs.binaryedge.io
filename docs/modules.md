@@ -68,7 +68,7 @@ Below are all the modules available for scanning on the platform. All modules su
 
 #### service-simple
 
-The Service-Simple module attempts to connect to a remote server and identify service / product information by sending various payloads and analysing how the server responds. This module is much faster than the _service_ module, since it doesn't perform any more actions than this. For more details, use the _service_module.
+The Service-Simple module attempts to connect to a remote server and identify service / product information by sending various payloads and analysing how the server responds. This module is much faster than the _service_ module, since it doesn't perform any more actions than this. For more details, use the _service_ module.
 
 See [More Info](modules/service-simple.md "service-simple")
 
@@ -77,6 +77,12 @@ See [More Info](modules/service-simple.md "service-simple")
 The Service module attempts to connect to a remote server and identify service / product information by sending various payloads and analysing how the server responds as well as extract other available service information such as headers or hostnames if available. For simple service identification, consider using the faster _service-simple_ module.
 
 See [More Info](modules/service.md "service")
+
+#### malware-simple
+
+The Malware-Simple module attempts to connect to a remote server and identify malware by sending various payloads and analysing how the server responds. It works similarly to the _service-simple_ module except it is entirely focused at identifying malware instead of general service/product information.
+
+See [More Info](modules/malware-simple.md "malware-simple")
 
 ### Remote Desktop
 
@@ -159,6 +165,12 @@ The Web module attempts to connect to an HTTP server and extract the web technol
 See [More Info](modules/web.md "web")
 
 ### Protocols
+
+#### ssl-simple
+
+The SSL-Simple module attempts to connect to an SSL-wrapped server and extract (and parse) certificate chains. Recommended if you are only interested in certificates, since it is much faster than the _sslv2_ module as it doesn't need to do any additional testing.
+
+See [More Info](modules/ssl-simple.md "ssl-simple")
 
 #### sslv2
 
