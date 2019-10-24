@@ -31,6 +31,8 @@
  | CORBA_SCANNER | The Common Object Request Broker Architecture is a standard defined by the Object Management Group designed to facilitate the communication of systems that are deployed on diverse platforms |
  | CRIMINALIP | Internet wide scanner http://security.criminalip.com/ |
  | CRYPTOCURRENCY_SCANNER | Scanning for cryptocurrency API or exposed nodes |
+ | CVE-2012-0152 | The Remote Desktop Protocol service in Microsoft Windows Server 2008 R2 and R2 SP1 and Windows 7 Gold and SP1 allows remote attackers to cause a denial of service via a series of crafted packets |
+ | CVE-2012-0432 | Stack-based buffer overflow in the Novell NCP implementation in NetIQ eDirectory 8.8.7.x before 8.8.7.2 |
  | CVE-2017-12615 | Apache Tomcat 7.0.0 to 7.0.79 has a remote code execution vulnerability |
  | CVE-2017-17215 | Huawei HG532 with some customized versions has a remote code execution vulnerability |
  | CVE-2018-13379 | Some versions of Fortinet FortiOS under SSL VPN web portal allows an unauthenticated attacker to download system files via HTTP resource requests |
@@ -112,6 +114,7 @@
  | MIKROTIK_ROUTEROS | Scanning for a remote shell vulnerability on Mikrotik devices running certain versions of RouterOS |
  | MINERPOOL | www.minerpool.net |
  | MIRAI | Mirai-family botnet |
+ | MNUBOT | MnuBot is a banking trojan discovered by IBM X-Force researchers | 
  | MODBUS_SCANNER | Scanning for the SCADA protocol modbus | 
  | MONGODB_SCANNER | Scanning for exposed mongoDB databases | 
  | NETCRAFT | Netcraft is an Internet services company based in Bath, Somerset, England. https://www.netcraft.com/ |
@@ -119,6 +122,7 @@
  | NEUTRINO | Neutrino malware | 
  | NMAP_SCANNER | Actor using the NMAP scanner | 
  | NOCTION_IRP | Scanning for Noction IRP BGP software |
+ | NOVELL_NCP_SCANNER | Scanning for Novell NetWare Core Protocol |
  | NUUO_NVR_SCANNER | Scanning for Nuuo CCTV Cameras | 
  | NTP_SCANNER | Scanning for NTP servers |
  | ONYPHE | Internet wide scanner https://www.onyphe.io/ | 
@@ -137,9 +141,11 @@
  | PUTTY_CLIENT | SSH Connections using Putty Client | 
  | QUADMETRICS | https://quadmetrics.com/ | 
  | QUEENS_COLLEGE_UNI_NY | https://www.qc.cuny.edu Queens College, City University of New York |
+ | QUIC_SCANNER | Scanning for QUIC protocol |
  | QWANT | https://www.qwant.com/ Qwant, the European search engine that respects your privacy | 
  | RABBITMQ_SCANNER | Scanning for RabbitMQ Protocol | 
- | RADWARE_SCANNER | https://www.radware.com/ | 
+ | RADMIN_SCANNER | Scanning for Radmin software https://www.radmin.com | 
+ | RADWARE_SCANNER | Scanning for Radware software https://www.radware.com/ | 
  | RANSOMWARE | General ransomware tag, when we cant classify the family | 
  | RAPID7 | Internet wide scanner https://www.rapid7.com/ | 
  | RDP_SCANNER | Scanning for Remote Desktop Protocols | 
@@ -181,6 +187,7 @@
  | TOR_SCANNER | Scanning for the Tor Protocol | 
  | TORRENTLOCKER | TorrentLocker is a ransomware trojan targeting Microsoft Windows. TorrentLocker scans the system for programs and files, and conceals the contents through AES encryption leaving ransom instructions to the victim on what has to be done, and how to pay the decryption ransom | 
  | TRICKBOT | Trickbot Malware | 
+ | TROJAN | A trojan horse or trojan is a type of malware that is often disguised as legitimate software | 
  | TROLDESH | Ransom.Troldesh is a Trojan horse that encrypts files on the compromised computer and asks the user to pay in order to decrypt them. It may also download potentially malicious files. | 
  | UNIFI_SCANNER | Scanning for Ubiquiti devices - UNIFI family | 
  | UBIQUITI_SCANNER | Scanning for Ubiquiti devices  | 
@@ -200,6 +207,7 @@
  | YANDEXBOT | https://yandex.com/ | 
  | ZENNOLAB_SCANNER | Scanning for Zennolab tools |
  | ZGRAB_SCANNER | Scanner using zgrab software - https://github.com/zmap/zgrab2 | 
+ | ZMAP_SCANNER | Scanner using zmap software - https://github.com/zmap/zmap | 
  | ZMEU_SCANNER | Scanner using ZmEu vulnerability scanner |
  | ZTE_F460_SCANNER | Scanning for ZTE F460 Routers | 
  | ZTE_F660_SCANNER | Scanning for ZTE F660 Routers |
