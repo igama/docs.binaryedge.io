@@ -115,6 +115,9 @@ Search by tags. Can be ICS, MALWARE, DATABASE, WEBSERVER, IOT, CAMERA. Tag list 
 
 ## Service-Simple
 
+* type:service-simple
+* Our service identification module.
+
 ### banner: (string) 
 Search by banner.
     
