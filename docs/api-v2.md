@@ -516,6 +516,8 @@ curl 'https://api.binaryedge.io/v2/query/image/tags' -H 'X-Key:API_KEY'
 
 #### /v2/query/torrent/ip/{target}
 
+**Note**: Available for paid subscriptions only.
+
 Details about torrents transferred by an Host. List of recent torrent events for the specified host, including details of the peer and torrent. See [Torrent Data](torrent.md) for more details.
 
 *Parameters*
@@ -574,6 +576,8 @@ curl 'https://api.binaryedge.io/v2/query/torrent/ip/xxx.xxx.xxx.xxx' -H 'X-Key:A
 ```
 
 #### /v2/query/torrent/historical/{target}
+
+**Note**: Available for paid subscriptions only.
 
 Details about torrents transferred by an Host, with data up to 6 months.
 
@@ -673,6 +677,8 @@ curl 'https://api.binaryedge.io/v2/query/torrent/historical/xxx.xxx.xxx.xxx' -H 
 ```
 
 #### /v2/query/torrent/search
+
+**Note**: Available for paid subscriptions only.
 
 Events based on a Query. List of recent events for the given query, including details of the peer and torrent. Can be used with specific parameters and/or full-text search.
 
@@ -817,11 +823,11 @@ curl 'https://api.binaryedge.io/v2/query/dataleaks/email/user@example.com' -H 'X
 
 #### /v2/query/dataleaks/organization/{domain}
 
+**Note**: Available for paid subscriptions only.
+
 Verify how many emails are affected by dataleaks for a specific domain. We don't provide the list of affected emails.
 
 For example, searching for the domain 'example.com' returns {"leak":"linkedin", "count":805}, this means there are 805 accounts with an example.com email on the Linkedin dump.
-
-**Note**: Available for paid subscriptions only.
 
 *Parameters*
 
@@ -2074,6 +2080,8 @@ curl 'https://api.binaryedge.io/v2/query/domains/search?query=A:127.0.0.1' -H 'X
 
 #### /v2/query/sensors/ip/{target}
 
+**Note**: Available for paid subscriptions only.
+
 Details about an Scanner. List of recent events form the specified host, including details of scanned ports, payloads and tags.
 
 **Note**: Querying CIDRs is available for paid subscriptions only. When using CIDR, the number of credits that will be spent correspond to the number of targets that returned results. Example: a request for a /24 (256 targets) in which only 200 targets have results, will decrement 200 credits.
@@ -2129,6 +2137,8 @@ curl 'https://api.binaryedge.io/v2/query/sensors/ip/xxx.xxx.xxx.xxx' -H 'X-Key:A
 ```
 
 #### /v2/query/sensors/search
+
+**Note**: Available for paid subscriptions only.
 
 Events based on a Query. List of recent events for the given query, including details of scanned ports, payloads and tags. Can be used with specific parameters and/or full-text search.
 
