@@ -12,25 +12,26 @@ Accessible via:
 
 ```json
 {
-   "origin":{
-      "type":"string",
-      "module":"string",
-      "ts":"int"
-   },
-   "node":{
-      "ip":"string",
-      "port":"int"
-   },
-   "peer":{
-      "ip":"string",
-      "port":"int"
-   },
-   "torrent":{
-      "infohash":"string",
-      "name":"string",
-      "source":"string",
-      "category":"string"
-   }
+  "origin":{
+    "type":"string",
+    "module":"string",
+    "ts":"int"
+  },
+  "node":{
+    "ip":"string",
+    "port":"int"
+  },
+  "peer":{
+    "ip":"string",
+    "port":"int"
+  },
+  "torrent":{
+    "infohash":"string",
+    "name":"string",
+    "source":"string",
+    "category":"string",
+    "subcategory":"string"
+  }
 }
 ```
 
@@ -54,29 +55,31 @@ Accessible via:
     * **name**: Human readable name of the torrent
     * **source**: Source of the torrent (tracker)
     * **category**: Category of the torrent content
+    * **subcategory**: Subategory of the torrent content
 
 ## Event Example
 
 ```json
 {
-   "origin":{
-      "type":"peer",
-      "module":"torrent",
-      "ts":1538666957296
-   },
-   "node":{
-      "ip":"xxx.xxx.xxx.xxx",
-      "port":24357
-   },
-   "peer":{
-      "ip":"xxx.xxx.xxx.xxx",
-      "port":16138
-   },
-   "torrent":{
-      "infohash":"a7e642b455ba9a2984537526d948f1845f8e0dfc",
-      "name":"The Ultimate Fighter S28E06 720p FOX WEB-DL AAC2 0 H 264-BOOP EZTV",
-      "source":"EZTV",
-      "category":"TV Show"
-   }
+  "origin":{
+    "type":"peer",
+    "module":"torrent",
+    "ts":1538666957296
+  },
+  "node":{
+    "ip":"xxx.xxx.xxx.xxx",
+    "port":24357
+  },
+  "peer":{
+    "ip":"xxx.xxx.xxx.xxx",
+    "port":16138
+  },
+  "torrent":{
+    "infohash":"a7e642b455ba9a2984537526d948f1845f8e0dfc",
+    "name":"The Ultimate Fighter S28E06 720p FOX WEB-DL AAC2 0 H 264-BOOP EZTV",
+    "source":"EZTV",
+    "category":"Video",
+    "subcategory":"TV shows"
+  }
 }
 ```

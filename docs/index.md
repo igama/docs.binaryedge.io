@@ -16,14 +16,17 @@ The API provides access to that scanning platform, for your own usage, along wit
     - [Search Parameters]()
         - [Host Search](search.md "search")
         - [Image Search](image-search.md "image-search")
+        - [Torrents Search](torrents-search.md "torrents-search")
         - [Sensors Search](sensors-search.md "sensors-search")
-        - [Sensors Tags](sensors-tags.md "sensors-tags")
     - [HTTP Status Messages](errors.md "errors")
-    - [Event Details]()
+    - [Data Formats]()
         - [Modules](modules.md "modules")
         - [Torrent Data](torrent.md "torrents")
-        - [Sinkhole Data](sinkhole.md "sinkhole")
-
+        - [Sensors Data](sensors.md "sensors")
+    - [Sensors (Honeypots)]()
+        - [Sensors Data](sensors.md "sensors")
+        - [Sensors Search](sensors-search.md "sensors-search")
+        - [Sensors Tags](sensors-tags.md "sensors-tags")
  
 
 ## FAQ
@@ -63,7 +66,8 @@ You can sign up for our Slack Community where we are hoping to bring together th
 
 ## Related Projects
 
-- [Security Rating](https://securityrating.io/ "Security Rating")
-- [Python Lib pybinaryedge](https://pypi.org/project/pybinaryedge/ "python pybinaryedge")
-- [R Lib BinaryEdge](https://github.com/balgan/rbinaryedge) "R Package Binaryedge"
-- [Maltego Local Transform](https://github.com/Te-k/binaryedge-maltego-local-transform) "Maltego Local Transform
+- [Security Rating](https://securityrating.io/)
+- [Python Package pybinaryedge](https://pypi.org/project/pybinaryedge/)
+- [R Package BinaryEdge](https://github.com/balgan/rbinaryedge)
+- [Ruby Gem BinaryEdge](https://github.com/ninoseki/binaryedge-rb)
+- [Maltego Local Transform](https://github.com/Te-k/binaryedge-maltego-local-transform)

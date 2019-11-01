@@ -11,7 +11,6 @@ HTTP/1.1 400 Bad Request
 }
 ```
 
-
 Sending an invalid Token:
 
 ```
@@ -23,18 +22,6 @@ HTTP/1.1 401 Unauthorized
 }
 ```
 
-
-Accessing a page that does not exist:
-
-```
-{
-    "status": 404,
-    "title": "Not Found",
-    "message": "Page not found."
-}
-```
-
-
 Accessing a feature you don't have permissions:
 
 ```
@@ -43,5 +30,16 @@ HTTP/1.1 403 Forbidden
     "status": 403,
     "title": "Forbidden",
     "message": "Your plan doesn't allow you to access this resource."
+}
+```
+
+Accessing a page that does not exist:
+
+```
+HTTP/1.1 404 Not Found
+{
+    "status": 404,
+    "title": "Not Found",
+    "message": "Page not found."
 }
 ```

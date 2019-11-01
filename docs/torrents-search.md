@@ -1,4 +1,4 @@
-# Image Search Parameters
+# Torrents Search Parameters
 
 The API has endpoints for querying our data in which you can use free text search together with one or more of the filters listed below.
 
@@ -32,27 +32,32 @@ Search by ASN.
 
     e.g. asn:4812
 
-### created_at: (date)
-Search by timestamp.
+### category: (string)
+Search by torrent category.
 
-    e.g.
-        ts:[2018-09-01 TO 2018-10-01]
-        ts:2018-09-01
+    e.g. category:video
 
 ### country: (string) 
 Search using ISO2 Country Codes. 
     
     e.g. country:ES
 
+### created_at: (date)
+Search by timestamp.
+
+    e.g.
+        created_at:[2018-09-01 TO 2018-10-01]
+        created_at:2018-09-01
+
+### infohash: (string) 
+Search by torrent infohash. 
+
+    e.g infohash:d5380fcda66b48fb8b521d5c3b5e61b91c94775e
+
 ### ip: (string) 
 Search by IP address or CIDR. 
 
     e.g ip:"192.168.1.1/24" or ip:192.168.1.1
-
-### ipv6: (boolean)
-Search for IPv6 results:
-
-    e.g ipv6:true
 
 ### geoip.city_name: (string) 
 Search using city names. 
@@ -69,21 +74,6 @@ Search by port number.
     
     e.g. port:80
 
-### protocol: (string)
-Search by protocol. Can be TCP or UDP. 
-    
-    e.g. protocol:tcp
-
-### has_faces: (boolean)
-Search for images with faces detected.
-
-    e.g. has_faces:true
-
-### height: (int)
-Search by image height (supports ranges).
-
-    e.g. height:1024
-
 ### rdns: (string)
 Search by RDNS.
 
@@ -94,26 +84,12 @@ Search by RDNS root.
 
     e.g. rdns_parent:unwiredbb.net
 
-### tags: (string)
-Search by tags. Can be mobile, rdp, vnc, windows, x11.
+### source: (string)
+Search by torrent source.
 
-    e.g. tags:mobile
+    e.g. source:thepiratebay
 
-#### Available tags
+### subcategory: (string)
+Search by torrent subcategory.
 
-* HAS_FACES
-* MOBILE
-* RDP
-* VNC
-* WINDOWS
-* X11
-
-### width: (int)
-Search by image width (supports ranges).
-
-    e.g. width:768
-
-### words: (string)
-Search by text found by OCR.
-
-    e.g. words:alarm
+    e.g. subcategory:tv
