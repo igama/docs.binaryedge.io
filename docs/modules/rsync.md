@@ -32,8 +32,8 @@ curl -v -L https://api.binaryedge.io/v1/tasks -d '{"type":"scan", "options":[{"t
 ### Contents of the fields:
 
 * modules - List of modules (folders) on the RSYNC server
-  * status - Status of the access to the module
-  * module - Name of the module
+    * status - Status of the access to the module
+    * module - Name of the module
 * status - General status of the access to the RSYNC server
 * banner - Server banner, if any
 * version - RSYNC protocol version

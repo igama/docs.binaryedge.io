@@ -2,7 +2,7 @@
 
 The Bluekeep module attempts to determine if an RDP server is vulnerable to the Bluekeep vulnerability.
 
-## RDP Request Example
+## Bluekeep Request Example
 
 ```
 curl -v -L https://api.binaryedge.io/v1/tasks -d '{"type":"scan", "options":[{"targets":["X.X.X.X"], "ports":[{"port":3389, "protocol":"tcp", "modules":["bluekeep"]}]}]}' -H "X-Token:<Token>"
@@ -10,7 +10,7 @@ curl -v -L https://api.binaryedge.io/v1/tasks -d '{"type":"scan", "options":[{"t
 
 ## Schema
 
-### RDP Event Schema
+### Bluekeep Event Schema
 
 ```json
 {
@@ -28,7 +28,7 @@ curl -v -L https://api.binaryedge.io/v1/tasks -d '{"type":"scan", "options":[{"t
 * status - Result status of the Bluekeep check
 * reason - Reason why the status was identified as such
 
-## RDP Event Example
+## Bluekeep Event Example
 
 ```json
 {
