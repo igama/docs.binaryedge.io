@@ -52,9 +52,12 @@
  | CVE-2019-15107 | Command injection vulnerability on Webmin through 1.920 |
  | CYBERGREEN | The CyberGreen Institute is a global non-profit and collaborative organization conducting activities focused on helping to improve the health of the global Cyber Ecosystem |
  | CYMRU | http://www.team-cymru.com |
+ | DAHUA_DVR_SCANNER | Scanning for Dahua DVR devices |
+ | DAHUA_NVR_SCANNER | Scanning for Dahua NVR devices |
  | DRDA_SCANNER | DRDA Protocol Scanner |
  | DFIND_SCANNER | Scanner using ZmEu vulnerability scanner |
  | DICT_SCANNER | Dictionary Network Protocol |
+ | DIGI_DISCOVERY_SCANNER | Scanning for Digi Device Discovery |
  | DLINK_SCANNER | Scanning for DLink vulnerabilities |
  | DNS_SCANNER | The Domain Name System is a hierarchical and decentralized naming system for computers, services, or other resources connected to the Internet or a private network |
  | DNS_SD_SCANNER | Scanning for DNS Service Discovery |
@@ -126,6 +129,7 @@
  | KUDELSKI-NAGRA | Internet wide scanner https://www.nagra.com/ |
  | KUMOFS_SCANNER | Kumofs is a simple and fast distributed key-value store | 
  | LANDESK_SCANNER | Scanning for Landesk software |
+ | LINUX_BACKDOOR_SCANNER | Scanning for Linux backdoors |
  | LINUXSAMPLER_SCANNER | LinuxSampler Control Protocol Scanner |
  | LDAP_SCANNER | Scanning for LDAP protocol |
  | LPD_SCANNER | Line Printer Daemon protocol |
@@ -166,6 +170,7 @@
  | PCWORX_SCANNER | Scanning for PCWorx protocol | 
  | PEPPA | Peppa malware |
  | PERVASIVE_SQL_SCANNER | Pervasive PSQL is an ACID-compliant database management system (DBMS) developed by Pervasive Software | 
+ | PLC_SCANNER | Scanning for Programmable Logic Controllers | 
  | PHP_FPM | Scanning for PHP FastCGI Process Manager panels | 
  | PHPMYADMIN | Scanning for PHPMyAdmin panels |
  | POSTGRESQL_SCANNER | Scanning for PostgreSQL servers |
@@ -185,7 +190,9 @@
  | RADWARE_SCANNER | Scanning for Radware software https://www.radware.com/ | 
  | RANSOMWARE | General ransomware tag, when we cant classify the family | 
  | RAPID7 | Internet wide scanner https://www.rapid7.com/ | 
+ | RCONFIG_SCANNER | Scanning for rConfig network management tool |
  | RDP_SCANNER | Scanning for Remote Desktop Protocols | 
+ | RDS_SCANNER | Scanning for Microsoft Remote Desktop Services |
  | REALTEK_MINIIGD_UPNP | Scanning for Realtek SDK Miniigd UPnP command execution vulnerability |
  | REDIS_SCANNER | Scanning for exposed REDIS databases | 
  | RFB_SCANNER | Scanning for VNC Protocol |
