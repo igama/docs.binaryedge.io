@@ -98,7 +98,8 @@ Note: all requests are identified by Job ID and are shown in the stream window.
         * [/v1/query/domains/dns/{target}](#v1querydomainsdnstarget)
         * [/v1/query/domains/ip/{target}](#v1querydomainsiptarget)
         * [/v1/query/domains/search](#v1querydomainssearch)
-
+        * [/v1/query/domains/enumeration](#v1querydomainsenumeration)
+        * [/v1/query/domains/homoglyphs](#v1querydomainshomoglyphs)
     * [Sensors](#sensors)
         * [/v1/query/sensors/ip/{target}](#v1querysensorsiptarget)
         * [/v1/query/sensors/search](#v1querysensorssearch)
@@ -2257,6 +2258,843 @@ curl 'https://api.binaryedge.io/v1/query/domains/search?query=A:127.0.0.1' -H 'X
     "root": "vit.press",
     "MX": ["mail.vit.press"]
   }]
+}
+```
+
+#### /v1/query/domains/enumeration
+
+This endpoint attempts to enumerate subdomains from a larger dataset, the validate flag can be used to have all subdomains resolved on the fly and only those with DNS entries behind them returned:
+
+* domain
+
+*Parameters*
+
+* validate: [int] Forces all subdomains to be resolved on request and only live subdomains to be returned
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v1/query/domains/enumeration/binaryedge.io?validate=1' -H 'X-Token:API_TOKEN'
+```
+
+```json
+{
+  "query": "binaryedge.io",
+  "total": 54,
+  "events": [
+    {
+      "fqdn": "torrents.services.core.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.242.196"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "historical.services.dev.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.228.35"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "stream.api.dev.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "149.202.161.130"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "dataleaks.services.dev.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.242.196"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "blog.binaryedge.io",
+      "records": [
+        {
+          "type": "CNAME",
+          "answers": [
+            "binaryedge.ghost.io"
+          ]
+        },
+        {
+          "type": "A",
+          "answers": [
+            "104.18.130.189",
+            "104.18.128.189",
+            "104.18.132.189",
+            "104.18.131.189",
+            "104.18.129.189"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "myip.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "104.28.7.147",
+            "104.28.6.147"
+          ]
+        },
+        {
+          "type": "AAAA",
+          "answers": [
+            "2606:4700:30::681c:793",
+            "2606:4700:30::681c:693"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "meta.core.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "149.202.176.163"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "sinkhole.services.dev.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.228.35"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "dataleaks.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.242.196"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "beira.services.core.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.242.196"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "doublepulsar.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "104.28.7.147",
+            "104.28.6.147"
+          ]
+        },
+        {
+          "type": "AAAA",
+          "answers": [
+            "2606:4700:30::681c:793",
+            "2606:4700:30::681c:693"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "saas.services.dev.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.228.35"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "kibana.core.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "149.202.160.253"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "ci-02.core.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "217.182.143.239"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "sinkhole.services.core.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.242.196"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "geoip.services.core.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.242.196"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "reports.services.core.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "147.135.134.145"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "em.services.dev.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.228.35"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "portal.dev.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "149.202.185.76"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "api.dev.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "52.18.243.116"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "archive.core.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "149.202.184.117"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "snapshot.services.dev.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.228.35"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "account-dev.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "104.28.7.147",
+            "104.28.6.147"
+          ]
+        },
+        {
+          "type": "AAAA",
+          "answers": [
+            "2606:4700:30::681c:793",
+            "2606:4700:30::681c:693"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "account.portal.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "149.202.173.249"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "cve.services.core.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "217.182.141.1"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "ci.core.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "149.202.184.117"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "reports.services.dev.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.228.35"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "app.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "104.28.7.147",
+            "104.28.6.147"
+          ]
+        },
+        {
+          "type": "AAAA",
+          "answers": [
+            "2606:4700:30::681c:793",
+            "2606:4700:30::681c:693"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "domains.services.core.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.242.196"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "api.binaryedge.io",
+      "records": [
+        {
+          "type": "CNAME",
+          "answers": [
+            "prod-api-378072581.eu-west-1.elb.amazonaws.com"
+          ]
+        },
+        {
+          "type": "A",
+          "answers": [
+            "34.243.197.45",
+            "34.253.109.110"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "docs.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "104.28.7.147",
+            "104.28.6.147"
+          ]
+        },
+        {
+          "type": "AAAA",
+          "answers": [
+            "2606:4700:30::681c:793",
+            "2606:4700:30::681c:693"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "account.pistachio.dev.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.242.66"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "stream.api.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "149.202.174.24"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "geoip.services.dev.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.228.35"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "board.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.243.137"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "report.services.core.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.242.196"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "leaks.services.core.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.242.196"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "snapshot.services.core.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.242.196"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "saas.dev.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "149.202.185.76"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "www.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "104.28.7.147",
+            "104.28.6.147"
+          ]
+        },
+        {
+          "type": "AAAA",
+          "answers": [
+            "2606:4700:30::681c:793",
+            "2606:4700:30::681c:693"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "insurance.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "104.28.7.147",
+            "104.28.6.147"
+          ]
+        },
+        {
+          "type": "AAAA",
+          "answers": [
+            "2606:4700:30::681c:793",
+            "2606:4700:30::681c:693"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "register.core.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "217.182.143.239"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "portal.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "104.28.7.147",
+            "104.28.6.147"
+          ]
+        },
+        {
+          "type": "AAAA",
+          "answers": [
+            "2606:4700:30::681c:793",
+            "2606:4700:30::681c:693"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "app.beta.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "149.202.185.76"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "em.services.core.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.242.196"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "account.insurance.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "149.202.173.249"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "104.28.7.147",
+            "104.28.6.147"
+          ]
+        },
+        {
+          "type": "AAAA",
+          "answers": [
+            "2606:4700:30::681c:793",
+            "2606:4700:30::681c:693"
+          ]
+        },
+        {
+          "type": "MX",
+          "answers": [
+            "aspmx3.googlemail.com",
+            "alt2.aspmx.l.google.com",
+            "aspmx2.googlemail.com",
+            "aspmx.l.google.com",
+            "alt1.aspmx.l.google.com"
+          ]
+        },
+        {
+          "type": "NS",
+          "answers": [
+            "ines.ns.cloudflare.com",
+            "amir.ns.cloudflare.com"
+          ]
+        },
+        {
+          "type": "TXT",
+          "answers": [
+            "v=spf1 include:_spf.google.com include:sendgrid.net include:email.chargebee.com include:servers.mcsv.net ~all",
+            "google-site-verification=bhof7a1nmd90snoyjmz3bozznwpvsga6z9nn0fngyys"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "ise.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "104.28.7.147",
+            "104.28.6.147"
+          ]
+        },
+        {
+          "type": "AAAA",
+          "answers": [
+            "2606:4700:30::681c:793",
+            "2606:4700:30::681c:693"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "historical.services.core.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.242.196"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "errbit.core.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "149.202.170.1"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "ip.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "217.182.142.109"
+          ]
+        },
+        {
+          "type": "AAAA",
+          "answers": [
+            "2001:41d0:302:1000::7:90f2"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "domains.services.dev.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.228.35"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "cve.services.dev.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.228.35"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "beira.services.dev.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.228.35"
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### /v1/query/domains/homoglyphs
+
+This endpoint generates a list of homoglyphs for a base domain and will attempt to resolve all found upon request, if the validate flag isn't used the full list of homoglyphs is returned:
+
+* domain
+
+*Parameters*
+
+* validate: [int] Forces all homoglyphs to be resolved on request and only live homoglyphs to be returned
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v1/query/domains/homoglyphs/binaryedge.io?validate=1' -H 'X-Token:API_TOKEN'
+```
+
+```json
+{
+  "query": "binaryedge.io",
+  "total": 3,
+  "events": [
+    {
+      "homoglyph": "binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "104.28.7.147",
+            "104.28.6.147"
+          ]
+        },
+        {
+          "type": "AAAA",
+          "answers": [
+            "2606:4700:30::681c:793",
+            "2606:4700:30::681c:693"
+          ]
+        },
+        {
+          "type": "MX",
+          "answers": [
+            "aspmx3.googlemail.com",
+            "aspmx2.googlemail.com",
+            "alt2.aspmx.l.google.com",
+            "aspmx.l.google.com",
+            "alt1.aspmx.l.google.com"
+          ]
+        },
+        {
+          "type": "NS",
+          "answers": [
+            "ines.ns.cloudflare.com",
+            "amir.ns.cloudflare.com"
+          ]
+        },
+        {
+          "type": "TXT",
+          "answers": [
+            "v=spf1 include:_spf.google.com include:sendgrid.net include:email.chargebee.com include:servers.mcsv.net ~all",
+            "google-site-verification=bhof7a1nmd90snoyjmz3bozznwpvsga6z9nn0fngyys"
+          ]
+        }
+      ]
+    },
+    {
+      "homoglyph": "binaryed.ge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "193.223.78.230"
+          ]
+        }
+      ]
+    },
+    {
+      "homoglyph": "binarye.dge.io",
+      "records": [
+        {
+          "type": "MX",
+          "answers": [
+            "in2-smtp.messagingengine.com",
+            "in1-smtp.messagingengine.com"
+          ]
+        }
+      ]
+    }
+  ]
 }
 ```
 
