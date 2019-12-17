@@ -98,7 +98,8 @@ Note: all requests are identified by Job ID and are shown in the stream window.
         * [/v1/query/domains/dns/{target}](#v1querydomainsdnstarget)
         * [/v1/query/domains/ip/{target}](#v1querydomainsiptarget)
         * [/v1/query/domains/search](#v1querydomainssearch)
-
+        * [/v1/query/domains/enumeration](#v1querydomainsenumeration)
+        * [/v1/query/domains/homoglyphs](#v1querydomainshomoglyphs)
     * [Sensors](#sensors)
         * [/v1/query/sensors/ip/{target}](#v1querysensorsiptarget)
         * [/v1/query/sensors/search](#v1querysensorssearch)
@@ -2257,6 +2258,155 @@ curl 'https://api.binaryedge.io/v1/query/domains/search?query=A:127.0.0.1' -H 'X
     "root": "vit.press",
     "MX": ["mail.vit.press"]
   }]
+}
+```
+
+#### /v1/query/domains/enumeration
+
+This endpoint attempts to enumerate subdomains from a larger dataset, the validate flag can be used to have all subdomains resolved on the fly and only those with DNS entries behind them returned:
+
+* domain
+
+*Parameters*
+
+* validate: [int] Forces all subdomains to be resolved on request and only live subdomains to be returned
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v1/query/domains/enumeration/binaryedge.io?validate=1' -H 'X-Token:API_TOKEN'
+```
+
+```json
+{
+  "query": "binaryedge.io",
+  "total": 54,
+  "events": [
+    {
+      "fqdn": "torrents.services.core.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.242.196"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "cve.services.dev.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.228.35"
+          ]
+        }
+      ]
+    },
+    {
+      "fqdn": "beira.services.dev.binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "167.114.228.35"
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### /v1/query/domains/homoglyphs
+
+This endpoint generates a list of homoglyphs for a base domain and will attempt to resolve all found upon request, if the validate flag isn't used the full list of homoglyphs is returned:
+
+* domain
+
+*Parameters*
+
+* validate: [int] Forces all homoglyphs to be resolved on request and only live homoglyphs to be returned
+
+*Output*
+
+```shell
+curl 'https://api.binaryedge.io/v1/query/domains/homoglyphs/binaryedge.io?validate=1' -H 'X-Token:API_TOKEN'
+```
+
+```json
+{
+  "query": "binaryedge.io",
+  "total": 3,
+  "events": [
+    {
+      "homoglyph": "binaryedge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "104.28.7.147",
+            "104.28.6.147"
+          ]
+        },
+        {
+          "type": "AAAA",
+          "answers": [
+            "2606:4700:30::681c:793",
+            "2606:4700:30::681c:693"
+          ]
+        },
+        {
+          "type": "MX",
+          "answers": [
+            "aspmx3.googlemail.com",
+            "aspmx2.googlemail.com",
+            "alt2.aspmx.l.google.com",
+            "aspmx.l.google.com",
+            "alt1.aspmx.l.google.com"
+          ]
+        },
+        {
+          "type": "NS",
+          "answers": [
+            "ines.ns.cloudflare.com",
+            "amir.ns.cloudflare.com"
+          ]
+        },
+        {
+          "type": "TXT",
+          "answers": [
+            "v=spf1 include:_spf.google.com include:sendgrid.net include:email.chargebee.com include:servers.mcsv.net ~all",
+            "google-site-verification=bhof7a1nmd90snoyjmz3bozznwpvsga6z9nn0fngyys"
+          ]
+        }
+      ]
+    },
+    {
+      "homoglyph": "binaryed.ge.io",
+      "records": [
+        {
+          "type": "A",
+          "answers": [
+            "193.223.78.230"
+          ]
+        }
+      ]
+    },
+    {
+      "homoglyph": "binarye.dge.io",
+      "records": [
+        {
+          "type": "MX",
+          "answers": [
+            "in2-smtp.messagingengine.com",
+            "in1-smtp.messagingengine.com"
+          ]
+        }
+      ]
+    }
+  ]
 }
 ```
 
