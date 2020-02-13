@@ -343,6 +343,36 @@ Search by leaf certificate's SPKI subject fingerprint.
 
     e.g. ssl.cert.spki_subject_fingerprint:"d0:0f:ae:7c:ae:5d:c8:b9:37:38:fb:b3:5f:6a:24:cc:e9:51:71:ca:ba:21:3f:73:c5:cd:f6:bc:5b:bf:03:1e"
 
+### cert.public_key_info.sha256_fingerprint: (string)
+Search by leaf certificate's public key sha256 fingerprint.
+
+    e.g. ssl.cert.public_key_info.sha256_fingerprint:"49:b9:ad:c1:63:70:df:e4:2d:73:0d:7b:91:f8:29:4a:78:58:d6:aa:48:53:67:ae:38:f1:48:b0:d6:5a:0f:d6"
+
+### cert.public_key_info.modulus: (string)
+Search by leaf certificate's public key modulus.
+
+    e.g. ssl.cert.public_key_info.modulus:"b5:65:1d:bf:3b:51:22:7e:cb:b3:db:45:d1:b1:94:e2:c1:5f:d3:69:2a:a3:cf:57:62:0e:53:05:2f:b0:d1:44:08:20:cc:fa:20:e6:0f:02:65:5d:90:82:67:65:d7:3b:d6:1e:84:a3:0d:68:c3:6a:af:6d:36:b3:8e:c5:0f:73:14:41:ec:ab:9f:de:23:d2:f8:9f:6a:20:bb:85:f0:80:33:83:43:2c:c5:7c:bb:92:d6:96:e1:ed:ad:33:1a:db:2d:73:53:07:d2:a1:52:eb:71:e6:7f:eb:f0:00:ac:9c:7d:0d:2f:91:0e:01:62:d6:d6:44:49:07:58:3e:38:78:81:05:f0:0c:d7:51:40:d7:b9:ac:22:c0:4f:5d:fa:16:d6:53:60:db:e6:c4:b1:e4:97:80:5f:65:4a:83:33:b2:13:36:57:e6:b3:9d:aa:38:08:6f:b5:fb:d4:ce:13:eb:70:d5:55:bd:3a:7c:11:f0:9e:c0:9b:83:b5:a1:48:9b:92:3c:28:65:6f:09:17:46:ee:f8:27:61:63:45:98:a7:1c:93:0f:fc:84:e4:92:ca:a5:58:db:0e:9b:75:76:9a:1e:3c:8c:5c:71:23:e1:6b:cd:96:f8:a3:39:ee:de:ba:57:e0:92:30:0e:a4:78:4e:64:96:eb:56:66:c6:1a:3d"
+
+### cert.public_key_info.algorithm: (string)
+Search by leaf certificate's public key algorithm.
+
+    e.g. ssl.cert.public_key_info.algorithm:rsa
+
+### cert.public_key_info.key_size: (integer)
+Search by leaf certificate's public key key size.
+
+    e.g. ssl.cert.public_key_info.key_size:2048
+
+### cert.public_key_info.exponent: (integer)
+Search by leaf certificate's public key exponent.
+
+    e.g. ssl.cert.public_key_info.exponent:65537
+
+### cert.public_key_info.curve: (string)
+Search by leaf certificate's public key curve.
+
+    e.g. ssl.cert.public_key_info.curve:secp384r1
+
 ### cert.subject.commonName: (string)
 Search by leaf certificate subject's Common Name.
 
